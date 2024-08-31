@@ -1,7 +1,14 @@
 package pl.yummy.infrastructure.configuration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
+import pl.yummy.infrastructure.database.entity.*;
 
 import java.util.Map;
 
@@ -20,4 +27,58 @@ public class HibernateUtil {
             Map.entry(Environment.FORMAT_SQL, false)
     );
 
+    private static final Map<String, Object> HIKARI_CP_SETTINGS = Map.ofEntries(
+            Map.entry("hibernate.hikari.connectionTimeout", "20000"),
+            Map.entry("hibernate.hikari.minimumIdle", "10"),
+            Map.entry("hibernate.hikari.maximumPoolSize", "20"),
+            Map.entry("hibernate.hikari.idleTimeout", "300000")
+    );
+
+    private static final SessionFactory sessionFactory = loadSessionFactory();
+
+    private static SessionFactory loadSessionFactory() {
+        try {
+            StandardServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(HIBERNATE_SETTINGS)
+                    .applySettings(HIKARI_CP_SETTINGS)
+                    .build();
+
+            Metadata metadata = new MetadataSources(standardServiceRegistry)
+                    .addAnnotatedClass(AddressEntity.class)
+                    .addAnnotatedClass(CourierEntity.class)
+                    .addAnnotatedClass(CustomerEntity.class)
+                    .addAnnotatedClass(DeliveryRouteEntity.class)
+                    .addAnnotatedClass(DestinationEntity.class)
+                    .addAnnotatedClass(FoodCategoryEntity.class)
+                    .addAnnotatedClass(MenuItemEntity.class)
+                    .addAnnotatedClass(OrderingItemServiceEntity.class)
+                    .addAnnotatedClass(OrderingServiceRequestEntity.class)
+                    .addAnnotatedClass(OwnerEntity.class)
+                    .addAnnotatedClass(ReceiptEntity.class)
+                    .addAnnotatedClass(RestaurantEntity.class)
+                    .getMetadataBuilder()
+                    .build();
+
+            return metadata.getSessionFactoryBuilder().build();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static void closeSessionFactory() {
+        try {
+            sessionFactory.close();
+        } catch (Throwable ex) {
+            log.error("Exception while closing session factory", ex);
+        }
+    }
+
+    public static Session getSession() {
+        try {
+            return sessionFactory.openSession();
+        } catch (Throwable ex) {
+            log.error("Exception while opening session", ex);
+        }
+        return null;
+    }
 }
