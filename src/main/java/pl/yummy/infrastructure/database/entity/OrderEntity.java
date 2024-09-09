@@ -18,6 +18,7 @@ public class OrderEntity {
     private OffsetDateTime estimatedDeliveryTime;
     private OffsetDateTime deliveryDateTime;
     private Boolean invoiceRequired;
+    private CourierEntity courier;
 
 
     private OrderItemEntity orderItem;
