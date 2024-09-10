@@ -22,11 +22,10 @@ public class BillingInformationEntity {
     @Column(name = "billing_information_id")
     private Integer billingInformationId;
 
-
-    @Column(name = "company_name")
+    @Column(name = "company_name", unique = true)
     private String companyName;
 
-    @Column(name = "vat_number")
+    @Column(name = "vat_number", unique = true)
     private String vatNumber;
 
     @Column(name = "company_address")
