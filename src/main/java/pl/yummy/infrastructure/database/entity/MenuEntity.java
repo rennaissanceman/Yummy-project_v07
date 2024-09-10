@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import java.time.OffsetDateTime;
 
-public class Menu {
+public class MenuEntity {
 
     private Integer menuId;
     private RestaurantEntity restaurant;
