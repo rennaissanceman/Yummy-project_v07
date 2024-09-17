@@ -2,10 +2,10 @@ package pl.yummy.infrastructure.database.entity;
 
 import java.time.OffsetDateTime;
 
-public class MenuEntity {
+public class zMenuEntity {
 
     private Integer menuId;
-    private RestaurantEntity restaurant;
+    private zRestaurantEntity restaurant;
     private String menuName;
     private String description;
     private Boolean isActive;

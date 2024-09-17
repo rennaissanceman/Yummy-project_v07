@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "billing_information")
-public class BillingInformationEntity {
+public class zBillingInformationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,9 +42,9 @@ public class BillingInformationEntity {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private CustomerEntity customer;
+    private zCustomerEntity customer;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "billingInformation")
-    private Set<InvoiceEntity> invoices;
+    private Set<zInvoiceEntity> invoices;
 
 }

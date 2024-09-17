@@ -2,11 +2,11 @@ package pl.yummy.infrastructure.database.entity;
 
 import java.math.BigDecimal;
 
-public class DeliveryAreaEntity {
+public class zDeliveryAreaEntity {
 
     private Integer deliveryAreaId;
-    private RestaurantEntity restaurant;
-    private AvailableStreetEntity availableStreet;
+    private zRestaurantEntity restaurant;
+    private zAvailableStreetEntity availableStreet;
     private BigDecimal deliveryFee;
     private BigDecimal minOrderAmount;
     private Boolean isActive;

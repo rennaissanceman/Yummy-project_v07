@@ -3,7 +3,7 @@ package pl.yummy.infrastructure.database.entity;
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 
-public class CourierEntity {
+public class zCourierEntity {
 
     private Integer courierId;
     private String name;
@@ -20,5 +20,5 @@ public class CourierEntity {
     private OffsetDateTime updatedAt;
 
 
-    private DeliveryEntity delivery;
+    private zDeliveryEntity delivery;
 }

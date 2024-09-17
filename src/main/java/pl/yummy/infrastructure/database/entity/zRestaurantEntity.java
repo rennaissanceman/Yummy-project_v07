@@ -3,7 +3,6 @@ package pl.yummy.infrastructure.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -18,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "restaurant")
-public class RestaurantEntity {
+public class zRestaurantEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +32,11 @@ public class RestaurantEntity {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    private AddressEntity address;
+    private zAddressEntity address;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
-    private OwnerEntity owner;
+    private zOwnerEntity owner;
 
     @Column(name = "phone", unique = true)
     private String phone;
@@ -70,12 +69,12 @@ public class RestaurantEntity {
     private OffsetDateTime updatedAt;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private MenuEntity menu;
+    private zMenuEntity menu;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<OrderEntity> order;
+    private Set<zOrderEntity> order;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<DeliveryAreaEntity> deliveryAreas;
+    private Set<zDeliveryAreaEntity> deliveryAreas;
 
 }

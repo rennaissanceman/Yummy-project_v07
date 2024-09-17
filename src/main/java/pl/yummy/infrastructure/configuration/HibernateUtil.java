@@ -44,18 +44,18 @@ public class HibernateUtil {
                     .build();
 
             Metadata metadata = new MetadataSources(standardServiceRegistry)
-                    .addAnnotatedClass(AddressEntity.class)
-                    .addAnnotatedClass(CourierEntity.class)
-                    .addAnnotatedClass(CustomerEntity.class)
+                    .addAnnotatedClass(zAddressEntity.class)
+                    .addAnnotatedClass(zCourierEntity.class)
+                    .addAnnotatedClass(zCustomerEntity.class)
                     .addAnnotatedClass(DeliveryRouteEntity.class)
                     .addAnnotatedClass(DestinationEntity.class)
-                    .addAnnotatedClass(FoodCategoryEntity.class)
-                    .addAnnotatedClass(MenuItemEntity.class)
+                    .addAnnotatedClass(zFoodCategoryEntity.class)
+                    .addAnnotatedClass(zMenuItemEntity.class)
                     .addAnnotatedClass(OrderingItemServiceEntity.class)
                     .addAnnotatedClass(OrderingServiceRequestEntity.class)
-                    .addAnnotatedClass(OwnerEntity.class)
-                    .addAnnotatedClass(ReceiptEntity.class)
-                    .addAnnotatedClass(RestaurantEntity.class)
+                    .addAnnotatedClass(zOwnerEntity.class)
+                    .addAnnotatedClass(zReceiptEntity.class)
+                    .addAnnotatedClass(zRestaurantEntity.class)
                     .getMetadataBuilder()
                     .build();
 

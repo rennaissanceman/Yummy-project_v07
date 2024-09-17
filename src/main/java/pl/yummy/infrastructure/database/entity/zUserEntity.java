@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import java.time.OffsetDateTime;
 
-public class UserEntity {
+public class zUserEntity {
 
     private Integer userId;
     private String email;

@@ -3,8 +3,6 @@ package pl.yummy.infrastructure.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -16,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "available_street")
-public class AvailableStreetEntity {
+public class zAvailableStreetEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +31,7 @@ public class AvailableStreetEntity {
     private String postalCode;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "availableStreet")
-    private Set<DeliveryAreaEntity> deliveryAreas;
+    private Set<zDeliveryAreaEntity> deliveryAreas;
 
 
 

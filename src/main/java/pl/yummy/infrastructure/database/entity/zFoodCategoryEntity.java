@@ -2,11 +2,11 @@ package pl.yummy.infrastructure.database.entity;
 
 import java.time.OffsetDateTime;
 
-public class FoodCategoryEntity {
+public class zFoodCategoryEntity {
 
     private Integer foodCategoryId;
     private String foodCategoryName;
-    private RestaurantEntity restaurant;
+    private zRestaurantEntity restaurant;
     private String description;
     private String cuisineType;
     private Integer displayOrder;
