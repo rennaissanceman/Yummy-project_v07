@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "restaurant")
-public class zRestaurantEntity {
+public class RestaurantEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +32,11 @@ public class zRestaurantEntity {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    private zAddressEntity address;
+    private AddressEntity address;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
-    private zOwnerEntity owner;
+    private OwnerEntity owner;
 
     @Column(name = "phone", unique = true)
     private String phone;
@@ -69,10 +69,10 @@ public class zRestaurantEntity {
     private OffsetDateTime updatedAt;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private zMenuEntity menu;
+    private MenuEntity menu;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<zOrderEntity> order;
+    private Set<OrderEntity> order;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<zDeliveryAreaEntity> deliveryAreas;

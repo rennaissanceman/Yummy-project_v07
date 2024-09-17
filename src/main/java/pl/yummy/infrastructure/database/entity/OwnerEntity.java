@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "owner")
-public class zOwnerEntity {
+public class OwnerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,5 +44,5 @@ public class zOwnerEntity {
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
-    private Set<zRestaurantEntity> restaurant;
+    private Set<RestaurantEntity> restaurant;
 }

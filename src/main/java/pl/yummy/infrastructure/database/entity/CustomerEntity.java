@@ -1,12 +1,12 @@
 package pl.yummy.infrastructure.database.entity;
 
-public class zCustomerEntity {
+public class CustomerEntity {
 
     private Integer customerId;
     private String customerType;
     private String email;
     private String phoneNumber;
-    private zAddressEntity address;
+    private AddressEntity address;
     private String name;
     private String surname;
     private String companyName;
@@ -14,9 +14,9 @@ public class zCustomerEntity {
     private String updatedAt;
 
 
-    private zOrderEntity order;
-    private zDeliveryEntity delivery;
-    private zInvoiceEntity invoice;
-    private zBillingInformationEntity billingInformation;
+    private OrderEntity order;
+    private DeliveryEntity delivery;
+    private InvoiceEntity invoice;
+    private BillingInformationEntity billingInformation;
 
 }

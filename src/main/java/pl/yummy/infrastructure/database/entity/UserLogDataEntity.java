@@ -2,15 +2,11 @@ package pl.yummy.infrastructure.database.entity;
 
 import java.time.OffsetDateTime;
 
-public class zUserEntity {
+public class UserLogDataEntity {
 
-    private Integer userId;
-    private String email;
+    private Integer userLogDataEntityId;
+    private String passwordHash;
     private String salt;
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private String role;
     private Boolean isActive;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
@@ -19,4 +15,6 @@ public class zUserEntity {
     private OffsetDateTime lockedUntil;
     private String passwordResetToken;
     private String passwordResetExpiration;
+
+
 }

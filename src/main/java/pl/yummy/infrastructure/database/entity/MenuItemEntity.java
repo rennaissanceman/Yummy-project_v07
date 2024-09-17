@@ -3,7 +3,7 @@ package pl.yummy.infrastructure.database.entity;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-public class zMenuItemEntity {
+public class MenuItemEntity {
 
     private Integer menuItemId;
     private String itemName;
@@ -22,6 +22,6 @@ public class zMenuItemEntity {
 
 
 //    private RestaurantEntity restaurant;
-    private zOrderItemEntity orderItem;
+    private OrderItemEntity orderItem;
 
 }

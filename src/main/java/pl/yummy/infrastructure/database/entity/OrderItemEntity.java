@@ -2,11 +2,11 @@ package pl.yummy.infrastructure.database.entity;
 
 import java.math.BigDecimal;
 
-public class zOrderItemEntity {
+public class OrderItemEntity {
 
     private Integer orderItemId;
-    private zOrderEntity order;
-    private zMenuItemEntity menuItem;
+    private OrderEntity order;
+    private MenuItemEntity menuItem;
     private String itemName;
     private Integer quantity;
     private BigDecimal unitPrice;

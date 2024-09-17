@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "address")
-public class zAddressEntity {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,13 +35,13 @@ public class zAddressEntity {
     private String streetNumber;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
-    private zCustomerEntity customer;
+    private CustomerEntity customer;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
-    private zOrderEntity order;
+    private OrderEntity order;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
-    private zRestaurantEntity restaurant;
+    private RestaurantEntity restaurant;
 
 
 }

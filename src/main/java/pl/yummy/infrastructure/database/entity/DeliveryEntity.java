@@ -3,16 +3,16 @@ package pl.yummy.infrastructure.database.entity;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-public class zDeliveryEntity {
+public class DeliveryEntity {
 
     private Integer deliveryId;
-    private zOrderEntity order;
-    private zCustomerEntity customer;
+    private OrderEntity order;
+    private CustomerEntity customer;
     private OffsetDateTime deliveryStartDateTime;
     private OffsetDateTime estimatedDeliveryTime;
     private OffsetDateTime actualDeliveryDateTime;
     private String deliveryStatus;
-    private zCourierEntity courier;
+    private CourierEntity courier;
     private String deliveryNotes;
     private BigDecimal deliveryFee;
 }

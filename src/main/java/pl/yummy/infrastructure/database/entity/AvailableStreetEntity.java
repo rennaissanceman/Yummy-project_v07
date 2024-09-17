@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "available_street")
-public class zAvailableStreetEntity {
+public class AvailableStreetEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
