@@ -1,20 +1,21 @@
 package pl.yummy.infrastructure.database.entity;
 
+import pl.yummy.infrastructure.database.entity.enums.FoodCategory;
+
 import java.time.OffsetDateTime;
 
 public class FoodEntity {
 
-    private Integer foodCategoryId;
-    private String foodCategoryName;
-    private RestaurantEntity restaurant;
+    private Integer foodId;
+    private String foodName;
     private String description;
-    private String cuisineType;
+    private FoodCategory foodCategory;
     private Integer displayOrder;
-/*    private String dietType;*/
     private Boolean isActive;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
     private String imageURL;
+    private RestaurantEntity restaurant;
 
 
 

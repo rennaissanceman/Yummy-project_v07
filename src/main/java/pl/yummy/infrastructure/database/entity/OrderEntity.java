@@ -6,24 +6,17 @@ import java.time.OffsetDateTime;
 public class OrderEntity {
 
     private Integer orderId;
+    private String orderNumber;
     private CustomerEntity customer;
     private RestaurantEntity restaurant;
     private OffsetDateTime orderDateTime;
     private String orderStatus;
-    private BigDecimal totalAmount;
-    private AddressEntity address;
     private String orderDescription;
-    private String paymentMethod;
-    private String paymentStatus;
+    private BigDecimal totalAmount;
+    private RestaurantAvailableStreetEntity restaurantAvailableStreet;
+    private DeliveryAddressEntity deliveryAddress;
     private OffsetDateTime estimatedDeliveryTime;
-    private OffsetDateTime deliveryDateTime;
-    private Boolean invoiceRequired;
-    private CourierEntity courier;
-
-
-    private OrderItemEntity orderItem;
-
-    private DeliveryEntity delivery;
+    private OffsetDateTime deliveryTime;
 
 
 }

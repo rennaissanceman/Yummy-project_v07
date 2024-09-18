@@ -11,5 +11,5 @@ public class MenuEntity {
     private Boolean isActive;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
-    private Integer displayOrder;
+
 }

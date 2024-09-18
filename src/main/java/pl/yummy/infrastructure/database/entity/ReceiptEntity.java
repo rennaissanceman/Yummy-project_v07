@@ -13,8 +13,7 @@ public class ReceiptEntity {
     private BigDecimal netAmount;
     private BigDecimal taxAmount;
     private BigDecimal taxRate;
-    private String paymentMethod;
-    private String paymentStatus;
+    private PaymentEntity payment;
     private String notes;
 
 }

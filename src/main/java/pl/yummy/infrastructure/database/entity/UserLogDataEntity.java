@@ -16,5 +16,4 @@ public class UserLogDataEntity {
     private String passwordResetToken;
     private String passwordResetExpiration;
 
-
 }

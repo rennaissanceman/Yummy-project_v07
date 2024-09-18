@@ -8,8 +8,8 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "billingInformationId")
-@ToString(of =
-        {"billingInformationId", "customer", "companyName", "vatNumber", "companyAddress", "city", "postalCode", "country"})
+
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

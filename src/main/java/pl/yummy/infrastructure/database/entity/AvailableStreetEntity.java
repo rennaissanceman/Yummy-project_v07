@@ -21,14 +21,9 @@ public class AvailableStreetEntity {
     @Column(name = "available_street_id")
     private Integer availableStreetId;
 
-    @Column(name = "available_street_name")
-    private String availableStreetName;
 
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "postal_code")
-    private String postalCode;
+    private String availableStreet;
+    private String availableCity;
 
 
 

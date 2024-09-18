@@ -6,10 +6,9 @@ import java.time.OffsetDateTime;
 public class MenuItemEntity {
 
     private Integer menuItemId;
-    private String itemName;
-//    private FoodCategoryEntity foodCategory;
     private String description;
     private BigDecimal price;
+    private FoodEntity food;
     private Boolean isAvailable;
     private Integer preparationTime;
     private String imageURL;
@@ -18,10 +17,7 @@ public class MenuItemEntity {
     private String ingredients;
     private Integer calories;
     private String dietType;
+    private String portionWeight;
 
-
-
-//    private RestaurantEntity restaurant;
-    private OrderItemEntity orderItem;
 
 }

@@ -38,11 +38,9 @@ public class RestaurantEntity {
     @JoinColumn(name = "owner_id")
     private OwnerEntity owner;
 
-    @Column(name = "phone", unique = true)
-    private String phone;
 
-    @Column(name = "email", unique = true)
-    private String email;
+    private ContactDetailsEntity contactDetails;
+
 
     @Column(name = "website", unique = true)
     private String website;
@@ -59,8 +57,8 @@ public class RestaurantEntity {
     @Column(name = "rating_count")
     private Integer ratingCount;
 
-    @Column(name = "url", unique = true)
-    private String url;
+    @Column(name = "logoURL", unique = true)
+    private String logoURL;
 
     @Column(name = "created_at")
     private OffsetDateTime createdAt;
@@ -68,13 +66,15 @@ public class RestaurantEntity {
     @Column(name = "updated_at")
     private OffsetDateTime updatedAt;
 
+
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private MenuEntity menu;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<OrderEntity> order;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<zDeliveryAreaEntity> deliveryAreas;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+//    private Set<DeliveryAreaEntity> deliveryAreas;
 
 }
