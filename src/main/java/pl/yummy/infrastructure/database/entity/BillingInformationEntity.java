@@ -22,30 +22,16 @@ public class BillingInformationEntity {
     @Column(name = "billing_information_id")
     private Integer billingInformationId;
 
-
-    @Column(name = "company_name", unique = true)
-    private String companyName;
-
-    @Column(name = "vat_number", unique = true)
-    private String vatNumber;
-
-    @Column(name = "company_address")
-    private String companyAddress;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "postal_code")
-    private String postalCode;
-
-    @Column(name = "country")
-    private String country;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
+    private String companyName;
+    private String vatNumber;
+    private AddressEntity address;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "billingInformation")
-    private Set<InvoiceEntity> invoices;
+
+
+
+
+
+
 
 }

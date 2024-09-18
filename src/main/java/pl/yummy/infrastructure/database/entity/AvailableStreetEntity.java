@@ -30,8 +30,7 @@ public class AvailableStreetEntity {
     @Column(name = "postal_code")
     private String postalCode;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "availableStreet")
-    private Set<zDeliveryAreaEntity> deliveryAreas;
+
 
 
 
