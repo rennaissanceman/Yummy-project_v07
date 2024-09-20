@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "availableStreetId")
-@ToString(of = {"availableStreetId", "availableStreetName", "city", "postalCode"})
+@ToString(of = {"availableStreetId", "availableStreet", "availableCity"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,18 +21,14 @@ public class AvailableStreetEntity {
     @Column(name = "available_street_id")
     private Integer availableStreetId;
 
-
+    @Column(name = "available_street")
     private String availableStreet;
+
+    @Column(name = "available_city")
     private String availableCity;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_street")
+    private Set<RestaurantAvailableStreetEntity> restaurantAvailableStreets;
 
 
-
-
-/*    public void addServiceRequest(CarServiceRequestEntity carServiceRequestEntity) {
-        if (Objects.isNull(carServiceRequests)) {
-            this.carServiceRequests = new HashSet<>();
-        }
-        carServiceRequests.add(carServiceRequestEntity);
-    }*/
 }
