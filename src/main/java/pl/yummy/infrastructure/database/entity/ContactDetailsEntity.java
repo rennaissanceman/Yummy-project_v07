@@ -16,7 +16,7 @@ import pl.yummy.infrastructure.database.entity.enums.ContactType;
 public class ContactDetailsEntity {
 
 
-    @Column(name = "contact_detailsId")
+    @Column(name = "contact_details_id")
     private Integer contactDetailsId;
 
     @Column(name = "contact_type")

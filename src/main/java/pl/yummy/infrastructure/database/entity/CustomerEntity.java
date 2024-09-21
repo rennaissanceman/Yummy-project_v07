@@ -17,20 +17,20 @@ import java.util.Set;
 public class CustomerEntity {
 
 
-    @Column(name = "customerId")
+    @Column(name = "customer_id")
     private Integer customerId;
 
-    @Column(name = "customerNumber", nullable = false, unique = true)
+    @Column(name = "customer_number", nullable = false, unique = true)
     private String customerNumber;
 
-    @Column(name = "isCompany", nullable = false)
+    @Column(name = "is_company", nullable = false)
     private Boolean isCompany;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_details_id")
     private ContactDetailsEntity contactDetails;
 
-    @Column(name = "wantInvoice", nullable = false)
+    @Column(name = "want_invoice", nullable = false)
     private Boolean wantInvoice;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

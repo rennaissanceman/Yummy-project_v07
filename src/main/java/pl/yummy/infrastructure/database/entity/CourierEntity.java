@@ -20,10 +20,10 @@ import java.util.Set;
 public class CourierEntity {
 
 
-    @Column(name = "courierId")
+    @Column(name = "courier_id")
     private Integer courierId;
 
-    @Column(name = "courierNumber", nullable = false, unique = true)
+    @Column(name = "courier_number", nullable = false, unique = true)
     private String courierNumber;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -37,16 +37,16 @@ public class CourierEntity {
     @Column(name = "vehicleType", nullable = false)
     private String vehicleType;
 
-    @Column(name = "vehicleRegistrationNumber", nullable = false, unique = true)
+    @Column(name = "vehicle_registration_number", nullable = false, unique = true)
     private String vehicleRegistrationNumber;
 
-    @Column(name = "averageRatings", nullable = false)
+    @Column(name = "average_ratings", nullable = false)
     private Double averageRatings;
 
-    @Column(name = "deliveryCount", nullable = false)
+    @Column(name = "delivery_count", nullable = false)
     private Integer deliveryCount;
 
-    @Column(name = "hireDate", nullable = false)
+    @Column(name = "hire_date", nullable = false)
     private OffsetTime hireDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier")

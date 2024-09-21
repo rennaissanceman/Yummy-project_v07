@@ -14,9 +14,5 @@ public class OrderEntity {
     private String orderDescription;
     private BigDecimal totalAmount;
     private RestaurantAvailableStreetEntity restaurantAvailableStreet;
-    private DeliveryAddressEntity deliveryAddress;
-    private OffsetDateTime estimatedDeliveryTime;
-    private OffsetDateTime deliveryTime;
-
 
 }
