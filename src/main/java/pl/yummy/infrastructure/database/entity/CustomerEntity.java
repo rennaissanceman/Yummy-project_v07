@@ -16,7 +16,8 @@ import java.util.Set;
 @Table(name = "customer")
 public class CustomerEntity {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private Integer customerId;
 

@@ -19,7 +19,8 @@ import java.time.OffsetDateTime;
 @Table(name = "invoice")
 public class InvoiceEntity {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invoice_id")
     private Integer invoiceId;
 

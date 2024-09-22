@@ -15,7 +15,8 @@ import pl.yummy.infrastructure.database.entity.enums.ContactType;
 @Table(name = "contact_details")
 public class ContactDetailsEntity {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_details_id")
     private Integer contactDetailsId;
 

@@ -19,7 +19,8 @@ import java.util.Set;
 @Table(name = "courier")
 public class CourierEntity {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "courier_id")
     private Integer courierId;
 

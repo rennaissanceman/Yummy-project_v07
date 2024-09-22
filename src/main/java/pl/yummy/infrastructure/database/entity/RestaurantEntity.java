@@ -10,7 +10,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "restaurantId")
 @ToString(of = {
-        "restaurantId", "restaurantName", "description", "address", "owner", "phone", "email", "website",
+        "restaurantId", "restaurantName", "description", "address", "owner", "contactDetails", "website",
         "openingHours", "cuisineType", "averageRating", "ratingCount", "createdAt", "updatedAt"})
 @Builder
 @NoArgsConstructor
@@ -34,13 +34,13 @@ public class RestaurantEntity {
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
     private OwnerEntity owner;
 
-
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_details_id")
     private ContactDetailsEntity contactDetails;
-
 
     @Column(name = "website", unique = true)
     private String website;
@@ -60,21 +60,20 @@ public class RestaurantEntity {
     @Column(name = "logoURL", unique = true)
     private String logoURL;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updatedAt;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private Set<RestaurantAvailableStreetEntity> restaurantAvailableStreets;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private Set<FoodEntity> foods;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private MenuEntity menu;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    private Set<OrderEntity> order;
-
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-//    private Set<DeliveryAreaEntity> deliveryAreas;
 
 }

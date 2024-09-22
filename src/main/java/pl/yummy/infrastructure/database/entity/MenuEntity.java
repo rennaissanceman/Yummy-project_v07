@@ -17,7 +17,8 @@ import java.util.Set;
 @Table(name = "menu")
 public class MenuEntity {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "menu_id")
     private Integer menuId;
 

@@ -20,7 +20,8 @@ import java.util.Set;
 @Table(name = "food")
 public class FoodEntity {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "food_id")
     private Integer foodId;
 

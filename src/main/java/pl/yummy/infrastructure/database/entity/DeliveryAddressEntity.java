@@ -13,9 +13,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "deliveryAddress")
+@Table(name = "delivery_address")
 public class DeliveryAddressEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "delivery_address_id")
     private Integer deliveryAddressId;
 
