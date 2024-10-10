@@ -61,6 +61,6 @@ public class UserLogDataEntity {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user_log_data")
     private CourierEntity courier;
-    dfdfd
+
 
 }
