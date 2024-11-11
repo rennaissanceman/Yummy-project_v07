@@ -20,7 +20,7 @@ public class UserLogDataEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_log_data_id")
-    private Integer userLogDataIdd;
+    private Integer userLogDataId;
 
     @Column(name = "password_hash")
     private String passwordHash;
