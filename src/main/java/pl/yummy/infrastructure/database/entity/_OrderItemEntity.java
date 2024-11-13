@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @Table(name = "order_item")
-public class OrderItemEntity {
+public class _OrderItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +23,11 @@ public class OrderItemEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    private _OrderEntity order;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "menu_id")
-    private MenuEntity menu;
+    private _MenuEntity menu;
 
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;

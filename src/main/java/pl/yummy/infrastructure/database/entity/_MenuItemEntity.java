@@ -18,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "menu_item")
-public class MenuItemEntity {
+public class _MenuItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +36,11 @@ public class MenuItemEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "food_id")
-    private FoodEntity food;
+    private _FoodEntity food;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "menu_id")
-    private MenuEntity menu;
+    private _MenuEntity menu;
 
     @Column(name = "isAvailable", nullable = false)
     private Boolean isAvailable;
@@ -70,6 +70,6 @@ public class MenuItemEntity {
     private String portionWeight;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu_item")
-    private Set<OrderItemEntity> orderItems;
+    private Set<_OrderItemEntity> orderItems;
 
 }

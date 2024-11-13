@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "available_street")
-public class AvailableStreetEntity {
+public class _AvailableStreetEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class AvailableStreetEntity {
     private String availableCity;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_street")
-    private Set<RestaurantAvailableStreetEntity> restaurantAvailableStreets;
+    private Set<_RestaurantAvailableStreetEntity> restaurantAvailableStreets;
 
 
 }

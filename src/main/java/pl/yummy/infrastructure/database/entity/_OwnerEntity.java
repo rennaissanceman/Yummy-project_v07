@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "owner")
-public class OwnerEntity {
+public class _OwnerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +24,12 @@ public class OwnerEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_details_id")
-    private ContactDetailsEntity contactDetails;
+    private _ContactDetailsEntity contactDetails;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_log_data_id")
-    private UserLogDataEntity userLogData;
+    private _UserLogDataEntity userLogData;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private Set<RestaurantEntity> restaurants;
+    private Set<_RestaurantEntity> restaurants;
 }
