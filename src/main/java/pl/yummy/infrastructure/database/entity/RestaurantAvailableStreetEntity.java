@@ -14,21 +14,23 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "restaurant_available_street")
-public class _RestaurantAvailableStreetEntity {
+public class RestaurantAvailableStreetEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurant_available_street_id")
     private Integer restaurantAvailableStreetId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
-    private _RestaurantEntity restaurant;
+    private RestaurantEntity restaurant;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "available_street_id")
-    private _AvailableStreetEntity availableStreet;
+    private AvailableStreetEntity availableStreet;
+
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant_available_street")
-    private Set<_OrderEntity> orders;
+    private Set<OrderEntity> orders;
 }

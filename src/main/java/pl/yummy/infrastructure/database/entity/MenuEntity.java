@@ -15,16 +15,16 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "menu")
-public class _MenuEntity {
+public class MenuEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "menu_id")
     private Integer menuId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
-    private _RestaurantEntity restaurant;
+    private RestaurantEntity restaurant;
 
     @Column(name = "menu_name", nullable = false, unique = true)
     private String menuName;
@@ -41,7 +41,12 @@ public class _MenuEntity {
     @Column(name = "updated_at")
     private OffsetDateTime updatedAt;
 
+
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
-    private Set<_MenuItemEntity> menuItems;
+    private Set<MenuItemEntity> menuItems;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
+    private Set<OrderEntity> orders;
 
 }

@@ -3,8 +3,6 @@ package pl.yummy.infrastructure.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @EqualsAndHashCode(of = "deliveryAddressId")
@@ -14,24 +12,22 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "delivery_address")
-public class _DeliveryAddressEntity {
+public class DeliveryAddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "delivery_address_id")
     private Integer deliveryAddressId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private _CustomerEntity customer;
+    private CustomerEntity customer;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
-    private _AddressEntity address;
+    private AddressEntity address;
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "delivery_address")
-    private Set<_OrderEntity> orders;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "delivery_address")
-    private _DeliveryEntity delivery;
+    private DeliveryEntity deliveries;
 }

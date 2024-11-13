@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "invoice")
-public class _InvoiceEntity {
+public class InvoiceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class _InvoiceEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private _OrderEntity order;
+    private OrderEntity order;
 
     @Column(name = "issue_date", nullable = false)
     private OffsetDateTime issueDate;
@@ -48,11 +48,11 @@ public class _InvoiceEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")
-    private _PaymentEntity payment;
+    private PaymentEntity payment;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_information_id")
-    private _BillingInformationEntity billingInformation;
+    private BillingInformationEntity billingInformation;
 
     @Column(name = "notes")
     private String notes;

@@ -15,7 +15,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "user_log_data")
-public class _UserLogDataEntity {
+public class UserLogDataEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,13 +54,13 @@ public class _UserLogDataEntity {
 
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user_log_data")
-    private _OwnerEntity owner;
+    private OwnerEntity owner;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user_log_data")
-    private _CustomerEntity customer;
+    private CustomerEntity customer;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user_log_data")
-    private _CourierEntity courier;
+    private CourierEntity courier;
 
 
 }

@@ -13,7 +13,7 @@ import pl.yummy.infrastructure.database.entity.enums.ContactType;
 @AllArgsConstructor
 @Entity
 @Table(name = "contact_details")
-public class _ContactDetailsEntity {
+public class ContactDetailsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,10 @@ public class _ContactDetailsEntity {
     @Column(name = "corporate_name", unique = true)
     private String corporateName;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
     @Column(name = "phone", nullable = false, unique = true)
@@ -39,15 +39,16 @@ public class _ContactDetailsEntity {
     private String email;
 
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact_details")
-    private _OwnerEntity owner;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact_details")
-    private _CourierEntity courier;
+    private OwnerEntity owner;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact_details")
-    private _CustomerEntity customer;
+    private CourierEntity courier;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact_details")
-    private _RestaurantEntity restaurant;
+    private CustomerEntity customer;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "contact_details")
+    private RestaurantEntity restaurant;
 }

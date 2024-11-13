@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "order")
-public class _OrderEntity {
+public class OrderEntity {
 
 
     @Column(name = "order_id")
@@ -28,11 +28,11 @@ public class _OrderEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    private _CustomerEntity customer;
+    private CustomerEntity customer;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "menu_id")
-    private _MenuEntity menu;
+    private MenuEntity menu;
 
     @Column(name = "order_date_time", nullable = false)
     private OffsetDateTime orderDateTime;
@@ -48,20 +48,20 @@ public class _OrderEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_available_id")
-    private _RestaurantAvailableStreetEntity restaurantAvailableStreet;
+    private RestaurantAvailableStreetEntity restaurantAvailableStreet;
 
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "order_id")
-    private _InvoiceEntity invoice;
+    private InvoiceEntity invoice;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "order_id")
-    private _ReceiptEntity receipt;
+    private ReceiptEntity receipt;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "order_id")
-    private _DeliveryEntity delivery;
+    private DeliveryEntity delivery;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order_id")
-    private Set<_OrderItemEntity> orderItems;
+    private Set<OrderItemEntity> orderItems;
 
 
 }

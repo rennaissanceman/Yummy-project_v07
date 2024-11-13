@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "delivery")
-public class _DeliveryEntity {
+public class DeliveryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,15 +29,15 @@ public class _DeliveryEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private _OrderEntity order;
+    private OrderEntity order;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "courier_id")
-    private _CourierEntity courier;
+    private CourierEntity courier;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_address_id")
-    private _DeliveryAddressEntity deliveryAddress;
+    private DeliveryAddressEntity deliveryAddress;
 
     @Column(name = "delivery_start_date_time")
     private OffsetDateTime deliveryStartDateTime;

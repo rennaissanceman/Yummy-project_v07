@@ -18,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "food")
-public class _FoodEntity {
+public class FoodEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,12 +51,10 @@ public class _FoodEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id")
-    private _RestaurantEntity restaurant;
+    private RestaurantEntity restaurant;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
-    private Set<_MenuItemEntity> menuItems;
+    private Set<MenuItemEntity> menuItems;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
-    private Set<_OrderItemEntity> orderItems;
 
 }

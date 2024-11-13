@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "payment")
-public class _PaymentEntity {
+public class PaymentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +36,12 @@ public class _PaymentEntity {
     @Column(name = "payment_date_time", nullable = false)
     private OffsetDateTime paymentDateTime;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment")
-    private _InvoiceEntity invoice;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment")
-    private _ReceiptEntity receipt;
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment")
+    private InvoiceEntity invoice;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment")
+    private ReceiptEntity receipt;
 
 
 }
