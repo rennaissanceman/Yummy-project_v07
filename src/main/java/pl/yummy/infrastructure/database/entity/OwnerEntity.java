@@ -32,6 +32,8 @@ public class OwnerEntity {
 
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<RestaurantEntity> restaurants;
+
+
 }
