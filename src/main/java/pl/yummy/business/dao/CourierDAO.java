@@ -1,11 +1,11 @@
 package pl.yummy.business.dao;
 
-import pl.yummy.infrastructure.database.entity.CourierEntity;
+import pl.yummy.infrastructure.database.entity.ZCourierEntity;
 
 import java.util.Optional;
 
 public interface CourierDAO {
 
-    Optional<CourierEntity> findByName(String surname);
+    Optional<ZCourierEntity> findByName(String surname);
 
 }

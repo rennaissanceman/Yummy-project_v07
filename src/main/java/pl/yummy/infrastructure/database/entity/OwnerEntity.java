@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "ownerId")
-@ToString(of = {"ownerId", "contactDetails", "userLogData"})
+@ToString(of = {"ownerId", "ownerNumber", "userAuth"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,21 +19,23 @@ public class OwnerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "owner_id")
+    @Column(name = "owner_id", unique = true, nullable = false)
     private Integer ownerId;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_details_id")
-    private ContactDetailsEntity contactDetails;
+    @Column(name = "owner_number", unique = true, nullable = false)
+    private String ownerNumber;
+
+    @Column(name = "owner_name", unique = true, nullable = false)
+    private String ownerName;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_log_data_id")
-    private UserLogDataEntity userLogData;
+    @JoinColumn(name = "user_auth")
+    private UserAuthEntity userAuth;
 
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade = CascadeType.ALL)
-    private Set<RestaurantEntity> restaurants;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+    private Set<ZRestaurantEntity> restaurants;
 
 
 }

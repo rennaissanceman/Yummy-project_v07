@@ -15,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "menu")
-public class MenuEntity {
+public class ZMenuEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class MenuEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
-    private RestaurantEntity restaurant;
+    private ZRestaurantEntity restaurant;
 
     @Column(name = "menu_name", nullable = false, unique = true)
     private String menuName;
@@ -44,9 +44,9 @@ public class MenuEntity {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
-    private Set<MenuItemEntity> menuItems;
+    private Set<ZMenuItemEntity> menuItems;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
-    private Set<OrderEntity> orders;
+    private Set<ZOrderEntity> orders;
 
 }

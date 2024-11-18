@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "payment")
-public class PaymentEntity {
+public class ZPaymentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +38,10 @@ public class PaymentEntity {
 
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment")
-    private InvoiceEntity invoice;
+    private ZInvoiceEntity invoice;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment")
-    private ReceiptEntity receipt;
+    private ZReceiptEntity receipt;
 
 
 }

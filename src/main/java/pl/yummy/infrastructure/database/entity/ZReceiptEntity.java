@@ -16,7 +16,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "receipt")
-public class ReceiptEntity {
+public class ZReceiptEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class ReceiptEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    private ZOrderEntity order;
 
     @Column(name = "issue_date")
     private OffsetDateTime issueDate;
@@ -47,7 +47,7 @@ public class ReceiptEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")
-    private PaymentEntity payment;
+    private ZPaymentEntity payment;
 
     @Column(name = "notes")
     private String notes;

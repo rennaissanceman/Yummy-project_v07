@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "courier")
-public class CourierEntity {
+public class ZCourierEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,11 @@ public class CourierEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_details_id")
-    private ContactDetailsEntity contactDetails;
+    private ZContactDetailsEntity contactDetails;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_log_data_id")
-    private UserLogDataEntity userLogData;
+    private UserAuthEntity userLogData;
 
     @Column(name = "vehicleType", nullable = false)
     private String vehicleType;
@@ -51,6 +51,6 @@ public class CourierEntity {
     private OffsetTime hireDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier")
-    private Set<DeliveryEntity> deliveries;
+    private Set<ZDeliveryEntity> deliveries;
 
 }
