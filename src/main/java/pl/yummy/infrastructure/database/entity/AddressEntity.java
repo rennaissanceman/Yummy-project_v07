@@ -6,13 +6,13 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "addressId")
-@ToString(of = {"addressId", "country", "city", "postalCode", "street"})
+@ToString(of = {"addressId", "country", "city", "postalCode", "street", "streetNumber"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "address")
-public class ZAddressEntity {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +31,19 @@ public class ZAddressEntity {
     @Column(name = "street", nullable = false)
     private String street;
 
+    @Column(name = "street_number", nullable = false)
+    private String streetNumber;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address")
-    private ZDeliveryAddressEntity deliveryAddress;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
-    private ZRestaurantEntity restaurant;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
+    private RestaurantEntity restaurant;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
+    private AvailableDeliveryAreaEntity availableDeliveryArea;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address", cascade = CascadeType.ALL)
+    private CustomerAddressEntity deliveryAddress;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address", cascade = CascadeType.ALL)
     private BillingInformationEntity billingInformation;
 }

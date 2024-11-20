@@ -10,14 +10,14 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "courierId")
 @ToString(of = {
-        "courierId", "courierNumber", "contactDetails", "userLogData", "vehicleType", "vehicleRegistrationNumber",
-        "averageRatings", "deliveryCount", "hireDate"})
+        "courierId", "courierNumber", "courierName", "courierSurname", "userAuthId", "vehicleType",
+        "vehicleRegistrationNumber", "averageRatings", "deliveryCount", "hireDate"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "courier")
-public class ZCourierEntity {
+public class CourierEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,15 @@ public class ZCourierEntity {
     @Column(name = "courier_number", nullable = false, unique = true)
     private String courierNumber;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_details_id")
-    private ZContactDetailsEntity contactDetails;
+    @Column(name = "courier_name", nullable = false)
+    private String courierName;
+
+    @Column(name = "courier_surname", nullable = false)
+    private String courierSurname;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_log_data_id")
-    private UserAuthEntity userLogData;
+    @JoinColumn(name = "user_auth_id")
+    private UserAuthEntity userAuthId;
 
     @Column(name = "vehicleType", nullable = false)
     private String vehicleType;
@@ -50,7 +52,9 @@ public class ZCourierEntity {
     @Column(name = "hire_date", nullable = false)
     private OffsetTime hireDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier")
-    private Set<ZDeliveryEntity> deliveries;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier", cascade = CascadeType.ALL)
+    private Set<DeliveryEntity> deliveries;
 
 }

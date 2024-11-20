@@ -2,6 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.yummy.infrastructure.database.entity.enums.DeliveryStatus;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -10,14 +11,14 @@ import java.time.OffsetDateTime;
 @Setter
 @EqualsAndHashCode(of = "deliveryId")
 @ToString(of = {
-        "deliveryId", "deliveryNumber", "order", "courier", "deliveryAddress","deliveryStartDateTime",
-        "estimatedDeliveryTime", "deliveryStatus", "deliveryNotes", "deliveryTime","deliveryFee"})
+        "deliveryId", "deliveryNumber", "orderId", "availableDeliveryAreaId", "courierId","deliveryStatus",
+        "starTime", "endTime", "estimatedDeliveryTime", "actualDeliveryDateTime","deliveryFee", "deliveryNotes"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "delivery")
-public class ZDeliveryEntity {
+public class DeliveryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,18 +30,24 @@ public class ZDeliveryEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private ZOrderEntity order;
+    private OrderEntity orderId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "available_delivery_area_id")
+    private AvailableDeliveryAreaEntity availableDeliveryAreaId;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "courier_id")
-    private ZCourierEntity courier;
+    private CourierEntity courierId;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "delivery_address_id")
-    private ZDeliveryAddressEntity deliveryAddress;
+    @Column(name = "delivery_status")
+    private DeliveryStatus deliveryStatus;
 
-    @Column(name = "delivery_start_date_time")
-    private OffsetDateTime deliveryStartDateTime;
+    @Column(name = "start_time")
+    private OffsetDateTime starTime;
+
+    @Column(name = "end_time")
+    private OffsetDateTime endTime;
 
     @Column(name = "estimated_delivery_time")
     private OffsetDateTime estimatedDeliveryTime;
@@ -48,15 +55,10 @@ public class ZDeliveryEntity {
     @Column(name = "actual_delivery_date_time")
     private OffsetDateTime actualDeliveryDateTime;
 
-    @Column(name = "delivery_status")
-    private String deliveryStatus;
+    @Column(name = "delivery_fee")
+    private BigDecimal deliveryFee;
 
     @Column(name = "delivery_notes")
     private String deliveryNotes;
 
-    @Column(name = "delivery_time")
-    private OffsetDateTime deliveryTime;
-
-    @Column(name = "delivery_fee")
-    private BigDecimal deliveryFee;
 }

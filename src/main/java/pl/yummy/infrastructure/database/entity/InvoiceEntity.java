@@ -11,13 +11,13 @@ import java.time.OffsetDateTime;
 @EqualsAndHashCode(of = "invoiceId")
 @ToString(of = {
         "invoiceId", "invoiceNumber", "order", "issueDate", "saleDate", "totalAmount", "netAmount", "taxRate",
-        "payment", "billingInformation", "notes", "dueDate", "issuerSignature"})
+        "taxAmount", "payment", "billingInformation", "notes", "dueDate", "issuerSignature"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "invoice")
-public class ZInvoiceEntity {
+public class InvoiceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class ZInvoiceEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private ZOrderEntity order;
+    private OrderEntity order;
 
     @Column(name = "issue_date", nullable = false)
     private OffsetDateTime issueDate;
@@ -43,12 +43,15 @@ public class ZInvoiceEntity {
     @Column(name = "net_amount", nullable = false)
     private BigDecimal netAmount;
 
+    @Column(name = "tax_amount", nullable = false)
+    private BigDecimal taxAmount;
+
     @Column(name = "tax_rate", nullable = false)
     private BigDecimal taxRate;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")
-    private ZPaymentEntity payment;
+    private PaymentEntity payment;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_information_id")

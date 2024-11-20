@@ -8,26 +8,26 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "orderItemId")
-@ToString(of = {"orderItemId", "order", "menu", "itemName", "quantity", "unitPrice", "totalPrice", "itemNotes"})
+@ToString(of = {"orderItemId", "orderId", "menuId", "itemName", "quantity", "unitPrice", "totalPrice", "itemNotes"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "order_item")
-public class ZOrderItemEntity {
+public class OrderItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Integer orderItemId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private ZOrderEntity order;
+    private OrderEntity orderId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "menu_id")
-    private ZMenuEntity menu;
+    private MenuEntity menuId;
 
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;

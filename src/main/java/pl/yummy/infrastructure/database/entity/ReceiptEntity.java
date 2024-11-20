@@ -9,23 +9,26 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "receiptId")
-@ToString(of = {"receiptId", "order", "issueDate", "saleDate", "totalAmount", "netAmount", "taxAmount", "taxRate",
-        "payment", "notes"})
+@ToString(of = {"receiptId", "receiptNumber", "order", "issueDate", "saleDate", "totalAmount", "netAmount", "taxAmount",
+        "taxRate", "payment", "notes"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "receipt")
-public class ZReceiptEntity {
+public class ReceiptEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "receipt_id")
     private Integer receiptId;
 
+    @Column(name = "receipt_number", nullable = false, unique = true)
+    private String receiptNumber;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private ZOrderEntity order;
+    private OrderEntity order;
 
     @Column(name = "issue_date")
     private OffsetDateTime issueDate;
@@ -47,7 +50,7 @@ public class ZReceiptEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")
-    private ZPaymentEntity payment;
+    private PaymentEntity payment;
 
     @Column(name = "notes")
     private String notes;
