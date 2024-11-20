@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "paymentId")
-@ToString(of = {"paymentId", "orderId", "paymentMethodId","amount", "paymentStatus", "transactionId", "createdAt", "updatedAt"})
+@ToString(of = {"paymentId", "orderId", "paymentMethod","amount", "paymentStatus", "transactionId", "createdAt", "updatedAt"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class PaymentEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_method_Id")
-    private PaymentMethod paymentMethodId;
+    private PaymentMethod paymentMethod;
 
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;

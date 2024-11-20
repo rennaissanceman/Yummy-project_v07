@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "orderId")
-@ToString(of = {"orderId", "orderNumber", "customerId", "menuId", "orderDateTime", "orderStatus", "orderDescription",
+@ToString(of = {"orderId", "orderNumber", "customer", "menu", "orderDateTime", "orderStatus", "orderDescription",
         "totalAmount", "availableDeliveryAreaId", "customerAddressId"})
 @Builder
 @NoArgsConstructor
@@ -29,11 +29,11 @@ public class OrderEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    private CustomerEntity customerId;
+    private CustomerEntity customer;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "menu_id")
-    private MenuEntity menuId;
+    private MenuEntity menu;
 
     @Column(name = "order_date_time", nullable = false)
     private OffsetDateTime orderDateTime;

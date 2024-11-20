@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "menuId")
-@ToString(of = {"menuId", "restaurantId", "menuName", "description", "validFrom", "validTo", "createdAt", "updatedAt"})
+@ToString(of = {"menuId", "restaurant", "menuName", "description", "validFrom", "validTo", "createdAt", "updatedAt"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class MenuEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id")
-    private RestaurantEntity restaurantId;
+    private RestaurantEntity restaurant;
 
     @Column(name = "menu_name", nullable = false, unique = true)
     private String menuName;

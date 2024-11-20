@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "orderItemId")
-@ToString(of = {"orderItemId", "orderId", "menuId", "itemName", "quantity", "unitPrice", "totalPrice", "itemNotes"})
+@ToString(of = {"orderItemId", "order", "menu", "itemName", "quantity", "unitPrice", "totalPrice", "itemNotes"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,11 +23,11 @@ public class OrderItemEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private OrderEntity orderId;
+    private OrderEntity order;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "menu_id")
-    private MenuEntity menuId;
+    private MenuEntity menu;
 
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;

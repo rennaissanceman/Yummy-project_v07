@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 @Setter
 @EqualsAndHashCode(of = "deliveryId")
 @ToString(of = {
-        "deliveryId", "deliveryNumber", "orderId", "availableDeliveryAreaId", "courierId","deliveryStatus",
+        "deliveryId", "deliveryNumber", "order", "availableDeliveryArea", "courier","deliveryStatus",
         "starTime", "endTime", "estimatedDeliveryTime", "actualDeliveryDateTime","deliveryFee", "deliveryNotes"})
 @Builder
 @NoArgsConstructor
@@ -30,15 +30,15 @@ public class DeliveryEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
-    private OrderEntity orderId;
+    private OrderEntity order;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "available_delivery_area_id")
-    private AvailableDeliveryAreaEntity availableDeliveryAreaId;
+    private AvailableDeliveryAreaEntity availableDeliveryArea;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "courier_id")
-    private CourierEntity courierId;
+    private CourierEntity courier;
 
     @Column(name = "delivery_status")
     private DeliveryStatus deliveryStatus;

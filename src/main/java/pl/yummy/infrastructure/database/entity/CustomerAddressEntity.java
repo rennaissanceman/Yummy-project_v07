@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "customerAddressId")
-@ToString(of = {"customerAddressId", "customerId", "availableDeliveryAreaId", "isDefault"})
+@ToString(of = {"customerAddressId", "customer", "availableDeliveryArea", "address", "isDefault"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,15 +23,15 @@ public class CustomerAddressEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
-    private CustomerEntity customerId;
+    private CustomerEntity customer;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "available_delivery_area_id")
-    private AvailableDeliveryAreaEntity availableDeliveryAreaId;
+    private AvailableDeliveryAreaEntity availableDeliveryArea;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    private AddressEntity addressId;
+    private AddressEntity address;
 
     @Column(name = "is_default", nullable = false)
     private Boolean isDefault;

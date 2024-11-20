@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "customerId")
-@ToString(of = {"customerId", "customerNumber", "isCompany", "companyName", "customerName", "customerSurname", "userAuthId"})
+@ToString(of = {"customerId", "customerNumber", "isCompany", "companyName", "customerName", "customerSurname", "userAuth"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,7 +38,7 @@ public class CustomerEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_auth_id")
-    private UserAuthEntity userAuthId;
+    private UserAuthEntity userAuth;
 
 
 

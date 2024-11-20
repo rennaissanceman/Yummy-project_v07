@@ -10,7 +10,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "courierId")
 @ToString(of = {
-        "courierId", "courierNumber", "courierName", "courierSurname", "userAuthId", "vehicleType",
+        "courierId", "courierNumber", "courierName", "courierSurname", "userAuth", "vehicleType",
         "vehicleRegistrationNumber", "averageRatings", "deliveryCount", "hireDate"})
 @Builder
 @NoArgsConstructor
@@ -35,7 +35,7 @@ public class CourierEntity {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_auth_id")
-    private UserAuthEntity userAuthId;
+    private UserAuthEntity userAuth;
 
     @Column(name = "vehicleType", nullable = false)
     private String vehicleType;
