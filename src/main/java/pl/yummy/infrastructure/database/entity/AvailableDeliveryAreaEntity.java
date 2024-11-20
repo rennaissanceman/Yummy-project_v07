@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "availableDeliveryAreaId")
-@ToString(of = {"availableDeliveryArea", "restaurant", "address"})
+@ToString(of = {"availableDeliveryAreaId", "restaurant", "address"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +19,7 @@ public class AvailableDeliveryAreaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "available_delivery_area_id")
-    private Integer availableDeliveryArea;
+    private Integer availableDeliveryAreaId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id")

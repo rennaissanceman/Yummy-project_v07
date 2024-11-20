@@ -35,15 +35,15 @@ public class AddressEntity {
     private String streetNumber;
 
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
     private RestaurantEntity restaurant;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
     private AvailableDeliveryAreaEntity availableDeliveryArea;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address")
     private CustomerAddressEntity deliveryAddress;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "address")
     private BillingInformationEntity billingInformation;
 }

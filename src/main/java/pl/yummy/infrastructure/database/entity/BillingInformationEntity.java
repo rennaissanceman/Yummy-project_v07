@@ -39,13 +39,4 @@ public class BillingInformationEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "billing_information", cascade = CascadeType.ALL)
     private Set<InvoiceEntity> invoices;
 
-
-
-
-
-
-
-
-
-
 }

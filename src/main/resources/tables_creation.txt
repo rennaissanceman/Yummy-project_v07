@@ -1,0 +1,40 @@
+CREATE TABLE address (
+    address_id SERIAL PRIMARY KEY,
+    country VARCHAR NOT NULL,
+    city VARCHAR NOT NULL,
+    postal_code VARCHAR NOT NULL,
+    street VARCHAR NOT NULL,
+    street_number VARCHAR NOT NULL
+);
+
+CREATE TABLE available_delivery_area (
+    available_delivery_area_id SERIAL PRIMARY KEY,
+    restaurant_id INTEGER,
+    address_id INTEGER,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id) ON DELETE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES address(address_id) ON DELETE CASCADE
+);
+
+CREATE TABLE billing_information (
+    billing_information_id SERIAL PRIMARY KEY,
+    customer_id INTEGER,
+    company_name VARCHAR NOT NULL UNIQUE,
+    vat_number VARCHAR NOT NULL UNIQUE,
+    address_id INTEGER,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES address(address_id) ON DELETE CASCADE
+);
+
+CREATE TABLE courier (
+    courier_id SERIAL PRIMARY KEY,
+    courier_number VARCHAR NOT NULL UNIQUE,
+    courier_name VARCHAR NOT NULL,
+    courier_surname VARCHAR NOT NULL,
+    user_auth_id INTEGER,
+    vehicle_type VARCHAR NOT NULL,
+    vehicle_registration_number VARCHAR NOT NULL UNIQUE,
+    average_ratings DOUBLE PRECISION NOT NULL,
+    delivery_count INTEGER NOT NULL,
+    hire_date TIME WITH TIME ZONE NOT NULL,
+    FOREIGN KEY (user_auth_id) REFERENCES user_auth(user_auth_id) ON DELETE CASCADE
+);
