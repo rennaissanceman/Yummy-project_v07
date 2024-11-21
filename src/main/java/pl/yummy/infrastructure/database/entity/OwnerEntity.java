@@ -28,12 +28,12 @@ public class OwnerEntity {
     @Column(name = "owner_name", unique = true, nullable = false)
     private String ownerName;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_auth_id")
     private UserAuthEntity userAuth;
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     private Set<RestaurantEntity> restaurants;
 
 

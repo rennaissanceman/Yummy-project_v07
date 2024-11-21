@@ -20,7 +20,7 @@ public class UserAuthEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_auth_id", nullable = false, unique = true)
+    @Column(name = "user_auth_id")
     private Integer userAuthId;
 
     @Column(name = "phone", nullable = false, unique = true)
@@ -42,13 +42,13 @@ public class UserAuthEntity {
     private OffsetDateTime updatedAt;
     
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user_auth", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user_auth", cascade = CascadeType.ALL)
     private OwnerEntity owner;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user_auth", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user_auth", cascade = CascadeType.ALL)
     private CustomerEntity customer;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user_auth", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user_auth", cascade = CascadeType.ALL)
     private CourierEntity courier;
 
 

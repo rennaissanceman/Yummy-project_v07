@@ -21,15 +21,15 @@ public class CustomerAddressEntity {
     @Column(name = "delivery_address_id")
     private Integer customerAddressId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "available_delivery_area_id")
     private AvailableDeliveryAreaEntity availableDeliveryArea;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
@@ -37,6 +37,6 @@ public class CustomerAddressEntity {
     private Boolean isDefault;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_address", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_address")
     private Set<OrderEntity> orders;
 }

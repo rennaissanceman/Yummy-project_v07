@@ -21,21 +21,21 @@ public class AvailableDeliveryAreaEntity {
     @Column(name = "available_delivery_area_id")
     private Integer availableDeliveryAreaId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
     private Set<CustomerAddressEntity> customerAddresses;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
     private Set<OrderEntity> orders;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
     private Set<DeliveryEntity> deliveries;
 }

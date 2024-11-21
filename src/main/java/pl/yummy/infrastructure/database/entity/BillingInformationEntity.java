@@ -21,7 +21,7 @@ public class BillingInformationEntity {
     @Column(name = "billing_information_id")
     private Integer billingInformationId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 
@@ -31,12 +31,12 @@ public class BillingInformationEntity {
     @Column(name = "vat_number", nullable = false, unique = true)
     private String vatNumber;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "billing_information", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "billing_information")
     private Set<InvoiceEntity> invoices;
 
 }

@@ -22,7 +22,7 @@ public class MenuEntity {
     @Column(name = "menu_id")
     private Integer menuId;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     private RestaurantEntity restaurant;
 
@@ -49,7 +49,7 @@ public class MenuEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu", cascade = CascadeType.ALL)
     private Set<MenuItemEntity> menuItems;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
     private Set<OrderEntity> orders;
 
 }

@@ -28,15 +28,15 @@ public class DeliveryEntity {
     @Column(name = "delivery_number", nullable = false, unique = true)
     private String deliveryNumber;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "available_delivery_area_id")
     private AvailableDeliveryAreaEntity availableDeliveryArea;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "courier_id")
     private CourierEntity courier;
 

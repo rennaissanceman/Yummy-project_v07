@@ -41,6 +41,6 @@ public class PaymentMethod {
     private OffsetDateTime updatedAt;
 
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment_method", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment_method")
     private PaymentEntity payment;
 }

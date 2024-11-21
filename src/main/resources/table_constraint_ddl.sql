@@ -1,16 +1,17 @@
 CREATE TABLE address (
-    address_id SERIAL PRIMARY KEY,
-    country VARCHAR NOT NULL,
-    city VARCHAR NOT NULL,
-    postal_code VARCHAR NOT NULL,
-    street VARCHAR NOT NULL,
-    street_number VARCHAR NOT NULL
+    address_id          SERIAL          NOT NULL,
+    country             VARCHAR(32)     NOT NULL,
+    city                VARCHAR(32)     NOT NULL,
+    postal_code         VARCHAR(32)     NOT NULL,
+    street              VARCHAR(32)     NOT NULL,
+    PRIMARY KEY (address_id)
 );
 
 CREATE TABLE available_delivery_area (
-    available_delivery_area_id SERIAL PRIMARY KEY,
-    restaurant_id INTEGER,
-    address_id INTEGER,
+    available_delivery_area_id      SERIAL  NOT NULL,
+    restaurant_id                   INT     NOT NULL,
+    address_id                      INT     NOT NULL,
+    PRIMARY KEY (available_delivery_area_id)
     FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id) ON DELETE CASCADE,
     FOREIGN KEY (address_id) REFERENCES address(address_id) ON DELETE CASCADE
 );

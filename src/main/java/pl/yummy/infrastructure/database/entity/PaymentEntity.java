@@ -23,11 +23,11 @@ public class PaymentEntity {
     @Column(name = "paymentId")
     private Integer paymentId;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private OrderEntity orderId;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_method_Id")
     private PaymentMethod paymentMethod;
 
@@ -47,10 +47,10 @@ public class PaymentEntity {
     private OffsetDateTime updatedAt;
 
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment")
     private InvoiceEntity invoice;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "payment")
     private ReceiptEntity receipt;
 
 

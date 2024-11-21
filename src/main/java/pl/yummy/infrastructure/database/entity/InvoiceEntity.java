@@ -27,7 +27,7 @@ public class InvoiceEntity {
     @Column(name = "invoice_number", nullable = false, unique = true)
     private String invoiceNumber;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
@@ -49,11 +49,11 @@ public class InvoiceEntity {
     @Column(name = "tax_rate", nullable = false)
     private BigDecimal taxRate;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")
     private PaymentEntity payment;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "billing_information_id")
     private BillingInformationEntity billingInformation;
 

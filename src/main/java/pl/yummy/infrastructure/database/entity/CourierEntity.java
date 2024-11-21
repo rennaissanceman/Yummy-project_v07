@@ -33,7 +33,7 @@ public class CourierEntity {
     @Column(name = "courier_surname", nullable = false)
     private String courierSurname;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_auth_id")
     private UserAuthEntity userAuth;
 
@@ -54,7 +54,7 @@ public class CourierEntity {
 
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier")
     private Set<DeliveryEntity> deliveries;
 
 }

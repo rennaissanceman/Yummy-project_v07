@@ -26,7 +26,7 @@ public class ReceiptEntity {
     @Column(name = "receipt_number", nullable = false, unique = true)
     private String receiptNumber;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
@@ -48,7 +48,7 @@ public class ReceiptEntity {
     @Column(name = "tax_rate")
     private BigDecimal taxRate;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")
     private PaymentEntity payment;
 

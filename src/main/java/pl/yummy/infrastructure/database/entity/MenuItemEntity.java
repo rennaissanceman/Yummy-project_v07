@@ -29,7 +29,7 @@ public class MenuItemEntity {
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_id")
     private MenuEntity menuId;
 
@@ -70,7 +70,7 @@ public class MenuItemEntity {
     private OffsetDateTime updatedAt;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu_item", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu_item")
     private Set<OrderItemEntity> orderItems;
 
 }
