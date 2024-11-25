@@ -38,5 +38,5 @@ public class CustomerAddressEntity {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_address")
-    private Set<OrderEntity> orders;
+    private Set<OrdersEntity> orders;
 }

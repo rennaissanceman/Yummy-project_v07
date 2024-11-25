@@ -50,6 +50,6 @@ public class MenuEntity {
     private Set<MenuItemEntity> menuItems;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu")
-    private Set<OrderEntity> orders;
+    private Set<OrdersEntity> orders;
 
 }

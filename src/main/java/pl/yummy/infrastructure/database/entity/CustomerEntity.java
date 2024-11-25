@@ -49,6 +49,6 @@ public class CustomerEntity {
     private Set<CustomerAddressEntity> customerAddresses;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
-    private Set<OrderEntity> orders;
+    private Set<OrdersEntity> orders;
 
 }

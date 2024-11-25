@@ -28,7 +28,7 @@ public class ReceiptEntity {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    private OrdersEntity order;
 
     @Column(name = "issue_date")
     private OffsetDateTime issueDate;

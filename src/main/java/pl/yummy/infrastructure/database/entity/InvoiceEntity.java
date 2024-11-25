@@ -29,7 +29,7 @@ public class InvoiceEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    private OrdersEntity order;
 
     @Column(name = "issue_date", nullable = false)
     private OffsetDateTime issueDate;

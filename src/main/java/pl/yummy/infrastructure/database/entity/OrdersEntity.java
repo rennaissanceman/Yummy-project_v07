@@ -17,8 +17,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order")
-public class OrderEntity {
+@Table(name = "orders")
+public class OrdersEntity {
 
 
     @Column(name = "order_id")
@@ -56,19 +56,19 @@ public class OrderEntity {
     private CustomerAddressEntity customerAddressId;
 
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "orders", cascade = CascadeType.ALL)
     private PaymentEntity payment;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "orders")
     private InvoiceEntity invoice;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "orders")
     private ReceiptEntity receipt;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "orders", cascade = CascadeType.ALL)
     private DeliveryEntity delivery;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders", cascade = CascadeType.ALL)
     private Set<OrderItemEntity> orderItems;
 
 

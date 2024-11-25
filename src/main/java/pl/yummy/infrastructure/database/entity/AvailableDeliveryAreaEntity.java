@@ -34,7 +34,7 @@ public class AvailableDeliveryAreaEntity {
     private Set<CustomerAddressEntity> customerAddresses;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
-    private Set<OrderEntity> orders;
+    private Set<OrdersEntity> orders;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
     private Set<DeliveryEntity> deliveries;
