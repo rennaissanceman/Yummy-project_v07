@@ -35,6 +35,7 @@ public class PaymentEntity {
     private BigDecimal amount;
 
     @Column(name = "payment_status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
     @Column(name = "transaction_id")

@@ -39,6 +39,7 @@ public class OrdersEntity {
     private OffsetDateTime orderDateTime;
 
     @Column(name = "order_status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
     @Column(name = "order_description")

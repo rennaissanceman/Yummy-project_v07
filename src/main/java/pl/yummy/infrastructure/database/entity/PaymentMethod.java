@@ -31,7 +31,8 @@ public class PaymentMethod {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @Column(name = "payment_method_status")
+    @Column(name = "payment_method_status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentMethodStatus paymentMethodStatus;
 
     @Column(name = "created_at")
