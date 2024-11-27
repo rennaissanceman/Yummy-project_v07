@@ -1,6 +1,6 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
-public enum OrderStatus {
+public enum OrdersStatus {
 
 
     PENDING("Order is pending approval"),   // Zamówienie zostało złożone, oczekuje na potwierdzenie.
@@ -17,7 +17,7 @@ public enum OrderStatus {
 
     private final String description;
 
-    OrderStatus(String description) {
+    OrdersStatus(String description) {
         this.description = description;
     }
 

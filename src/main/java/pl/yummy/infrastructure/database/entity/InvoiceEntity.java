@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 @Setter
 @EqualsAndHashCode(of = "invoiceId")
 @ToString(of = {
-        "invoiceId", "invoiceNumber", "order", "issueDate", "saleDate", "totalAmount", "netAmount", "taxRate",
+        "invoiceId", "invoiceNumber", "orders", "issueDate", "saleDate", "totalAmount", "netAmount", "taxRate",
         "taxAmount", "payment", "billingInformation", "notes", "dueDate", "issuerSignature"})
 @Builder
 @NoArgsConstructor
@@ -28,8 +28,8 @@ public class InvoiceEntity {
     private String invoiceNumber;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private OrdersEntity order;
+    @JoinColumn(name = "orders_id")
+    private OrdersEntity orders;
 
     @Column(name = "issue_date", nullable = false)
     private OffsetDateTime issueDate;

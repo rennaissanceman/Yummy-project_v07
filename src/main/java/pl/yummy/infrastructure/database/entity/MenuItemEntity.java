@@ -71,6 +71,6 @@ public class MenuItemEntity {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu_item")
-    private Set<OrderItemEntity> orderItems;
+    private Set<OrdersItemEntity> ordersItems;
 
 }

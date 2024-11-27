@@ -7,23 +7,23 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "orderItemId")
-@ToString(of = {"orderItemId", "order", "menu", "itemName", "quantity", "unitPrice", "totalPrice", "itemNotes"})
+@EqualsAndHashCode(of = "ordersItemId")
+@ToString(of = {"ordersItemId", "orders", "menu", "itemName", "quantity", "unitPrice", "totalPrice", "itemNotes"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "order_item")
-public class OrderItemEntity {
+@Table(name = "orders_item")
+public class OrdersItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_item_id")
-    private Integer orderItemId;
+    @Column(name = "orders_item_id")
+    private Integer ordersItemId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
-    private OrdersEntity order;
+    @JoinColumn(name = "orders_id")
+    private OrdersEntity orders;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")

@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.yummy.infrastructure.database.entity.enums.OrderStatus;
+import pl.yummy.infrastructure.database.entity.enums.OrdersStatus;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -10,8 +10,8 @@ import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode(of = "orderId")
-@ToString(of = {"orderId", "orderNumber", "customer", "menu", "orderDateTime", "orderStatus", "orderDescription",
+@EqualsAndHashCode(of = "ordersId")
+@ToString(of = {"ordersId", "ordersNumber", "customer", "menu", "ordersDateTime", "ordersStatus", "ordersDescription",
         "totalAmount", "availableDeliveryAreaId", "customerAddressId"})
 @Builder
 @NoArgsConstructor
@@ -21,11 +21,11 @@ import java.util.Set;
 public class OrdersEntity {
 
 
-    @Column(name = "order_id")
-    private Integer orderId;
+    @Column(name = "orders_id")
+    private Integer ordersId;
 
-    @Column(name = "order_number", nullable = false, unique = true)
-    private String orderNumber;
+    @Column(name = "orders_number", nullable = false, unique = true)
+    private String ordersNumber;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
@@ -35,15 +35,15 @@ public class OrdersEntity {
     @JoinColumn(name = "menu_id")
     private MenuEntity menu;
 
-    @Column(name = "order_date_time", nullable = false)
-    private OffsetDateTime orderDateTime;
+    @Column(name = "orders_date_time", nullable = false)
+    private OffsetDateTime ordersDateTime;
 
     @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus;
+    private OrdersStatus ordersStatus;
 
-    @Column(name = "order_description")
-    private String orderDescription;
+    @Column(name = "orders_description")
+    private String ordersDescription;
 
     @Column(name = "total_amount", nullable = false)
     private BigDecimal totalAmount;
@@ -70,7 +70,7 @@ public class OrdersEntity {
     private DeliveryEntity delivery;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders", cascade = CascadeType.ALL)
-    private Set<OrderItemEntity> orderItems;
+    private Set<OrdersItemEntity> ordersItems;
 
 
 }

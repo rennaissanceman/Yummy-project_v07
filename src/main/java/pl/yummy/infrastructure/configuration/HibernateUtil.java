@@ -55,7 +55,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(MenuEntity.class)
                     .addAnnotatedClass(MenuItemEntity.class)
                     .addAnnotatedClass(OrdersEntity.class)
-                    .addAnnotatedClass(OrderItemEntity.class)
+                    .addAnnotatedClass(OrdersItemEntity.class)
                     .addAnnotatedClass(OwnerEntity.class)
                     .addAnnotatedClass(PaymentEntity.class)
                     .addAnnotatedClass(PaymentMethod.class)
