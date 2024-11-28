@@ -1,3 +1,29 @@
+DROP TABLE IF EXISTS orders_item CASCADE;
+DROP TABLE IF EXISTS menu_item CASCADE;
+DROP TABLE IF EXISTS receipt CASCADE;
+DROP TABLE IF EXISTS invoice CASCADE;
+DROP TABLE IF EXISTS billing_information CASCADE;
+DROP TABLE IF EXISTS delivery CASCADE;
+DROP TABLE IF EXISTS payment CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS customer_address CASCADE;
+DROP TABLE IF EXISTS menu CASCADE;
+DROP TABLE IF EXISTS available_delivery_area CASCADE;
+DROP TABLE IF EXISTS restaurant CASCADE;
+DROP TABLE IF EXISTS courier CASCADE;
+DROP TABLE IF EXISTS customer CASCADE;
+DROP TABLE IF EXISTS owner CASCADE;
+DROP TABLE IF EXISTS payment_method CASCADE;
+DROP TABLE IF EXISTS address CASCADE;
+DROP TABLE IF EXISTS user_auth CASCADE;
+DROP TYPE IF EXISTS payment_status CASCADE;
+DROP TYPE IF EXISTS payment_method_status CASCADE;
+DROP TYPE IF EXISTS order_status CASCADE;
+DROP TYPE IF EXISTS diet_type CASCADE;
+DROP TYPE IF EXISTS delivery_status CASCADE;
+DROP TYPE IF EXISTS cuisine_type CASCADE;
+
+
 CREATE TYPE cuisine_type AS ENUM (
     'ITALIAN',
     'CHINESE',
@@ -252,24 +278,6 @@ CREATE TABLE customer_address (
             REFERENCES address(address_id) ON DELETE CASCADE
 );
 
-CREATE TABLE payment (
-    payment_id          SERIAL          NOT NULL,
-    orders_id           INT             NOT NULL,
-    payment_method_id   INT             NULL,
-    amount              NUMERIC(10, 2)  NOT NULL,
-    payment_status      VARCHAR(50)     NOT NULL,
-    transaction_id      VARCHAR(255)    NULL,
-    created_at          TIMESTAMP WITH TIME ZONE NOT NULL,
-    updated_at          TIMESTAMP WITH TIME ZONE NOT NULL,
-    PRIMARY KEY (payment_id),
-    CONSTRAINT fk_payment_orders
-        FOREIGN KEY (orders_id)
-            REFERENCES orders(orders_id) ON DELETE SET NULL,
-    CONSTRAINT fk_payment_method
-        FOREIGN KEY (payment_method_id)
-            REFERENCES payment_method(payment_method_id) ON DELETE SET NULL
-);
-
 CREATE TABLE orders (
     orders_id                  SERIAL          NOT NULL,
     orders_number              VARCHAR(255)    NOT NULL,
@@ -297,6 +305,25 @@ CREATE TABLE orders (
             REFERENCES customer_address(delivery_address_id) ON DELETE SET NULL
 );
 
+CREATE TABLE payment (
+    payment_id          SERIAL          NOT NULL,
+    orders_id           INT             NOT NULL,
+    payment_method_id   INT             NULL,
+    amount              NUMERIC(10, 2)  NOT NULL,
+    payment_status      VARCHAR(50)     NOT NULL,
+    transaction_id      VARCHAR(255)    NULL,
+    created_at          TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at          TIMESTAMP WITH TIME ZONE NOT NULL,
+    PRIMARY KEY (payment_id),
+    CONSTRAINT fk_payment_orders
+        FOREIGN KEY (orders_id)
+            REFERENCES orders(orders_id) ON DELETE SET NULL,
+    CONSTRAINT fk_payment_method
+        FOREIGN KEY (payment_method_id)
+            REFERENCES payment_method(payment_method_id) ON DELETE SET NULL
+);
+
+
 CREATE TABLE delivery (
     delivery_id                  SERIAL          NOT NULL,
     delivery_number              VARCHAR(32)     NOT NULL,
@@ -321,6 +348,23 @@ CREATE TABLE delivery (
     CONSTRAINT fk_delivery_courier
         FOREIGN KEY (courier_id)
             REFERENCES courier(courier_id) ON DELETE SET NULL
+);
+
+CREATE TABLE billing_information (
+    billing_information_id SERIAL          NOT NULL,
+    customer_id            INT             NULL,
+    company_name           VARCHAR(32)     NOT NULL,
+    vat_number             VARCHAR(32)     NOT NULL,
+    address_id             INT             NOT NULL,
+    PRIMARY KEY (billing_information_id),
+    UNIQUE (company_name),
+    UNIQUE (vat_number),
+    CONSTRAINT fk_billing_information_customer
+        FOREIGN KEY (customer_id)
+            REFERENCES customer(customer_id) ON DELETE SET NULL,
+    CONSTRAINT fk_billing_information_address
+        FOREIGN KEY (address_id)
+            REFERENCES address(address_id) ON DELETE CASCADE
 );
 
 CREATE TABLE invoice (
@@ -373,24 +417,6 @@ CREATE TABLE receipt (
             REFERENCES payment(payment_id) ON DELETE SET NULL
 );
 
-CREATE TABLE orders_item (
-    orders_item_id   SERIAL          NOT NULL,
-    orders_id        INT             NULL,
-    menu_item_id     INT             NULL,
-    item_name        VARCHAR(255)    NOT NULL,
-    quantity         INT             NOT NULL,
-    unit_price       NUMERIC(10, 2)  NOT NULL,
-    total_price      NUMERIC(10, 2)  NOT NULL,
-    item_notes       TEXT            NULL,
-    PRIMARY KEY (orders_item_id),
-    UNIQUE (item_name),
-    CONSTRAINT fk_orders_item_orders
-        FOREIGN KEY (orders_id)
-            REFERENCES orders(orders_id) ON DELETE CASCADE,
-    CONSTRAINT fk_orders_item_menu
-        FOREIGN KEY (menu_id)
-            REFERENCES menu(menu_id) ON DELETE SET NULL
-);
 
 CREATE TABLE menu_item (
     menu_item_id        SERIAL          NOT NULL,
@@ -416,19 +442,21 @@ CREATE TABLE menu_item (
             REFERENCES menu(menu_id) ON DELETE CASCADE
 );
 
-CREATE TABLE billing_information (
-    billing_information_id SERIAL          NOT NULL,
-    customer_id            INT             NULL,
-    company_name           VARCHAR(32)     NOT NULL,
-    vat_number             VARCHAR(32)     NOT NULL,
-    address_id             INT             NOT NULL,
-    PRIMARY KEY (billing_information_id),
-    UNIQUE (company_name),
-    UNIQUE (vat_number),
-    CONSTRAINT fk_billing_information_customer
-        FOREIGN KEY (customer_id)
-            REFERENCES customer(customer_id) ON DELETE SET NULL,
-    CONSTRAINT fk_billing_information_address
-        FOREIGN KEY (address_id)
-            REFERENCES address(address_id) ON DELETE CASCADE
+CREATE TABLE orders_item (
+    orders_item_id   SERIAL          NOT NULL,
+    orders_id        INT             NULL,
+    menu_item_id     INT             NULL,
+    item_name        VARCHAR(255)    NOT NULL,
+    quantity         INT             NOT NULL,
+    unit_price       NUMERIC(10, 2)  NOT NULL,
+    total_price      NUMERIC(10, 2)  NOT NULL,
+    item_notes       TEXT            NULL,
+    PRIMARY KEY (orders_item_id),
+    UNIQUE (item_name),
+    CONSTRAINT fk_orders_item_orders
+        FOREIGN KEY (orders_id)
+            REFERENCES orders(orders_id) ON DELETE CASCADE,
+    CONSTRAINT fk_orders_item_menu
+        FOREIGN KEY (menu_item_id)
+            REFERENCES menu_item(menu_item_id) ON DELETE SET NULL
 );
