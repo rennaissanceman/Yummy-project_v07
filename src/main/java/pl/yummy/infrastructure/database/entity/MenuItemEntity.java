@@ -39,7 +39,8 @@ public class MenuItemEntity {
     @Column(name = "is_available", nullable = false)
     private Boolean isAvailable;
 
-    @Column(name = "diet_type")
+    @Column(name = "diet_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private DietType dietType;
 
     @Column(name = "calories")

@@ -1,7 +1,16 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
 public enum PaymentStatus {
+    PENDING,
+    COMPLETED,
+    FAILED,
+    CANCELLED,
+    REFUNDED,
+    CHARGEBACK,
+    IN_PROGRESS,
+    EXPIRED
 
+    /*
     PENDING("Payment is awaiting confirmation"),                 // Oczekuje na zatwierdzenie (np. płatność online w toku).
     COMPLETED("Payment has been successfully completed"),        // Płatność zakończona pomyślnie.
     FAILED("Payment failed due to an error"),                    // Płatność nie powiodła się (np. brak środków).
@@ -20,4 +29,6 @@ public enum PaymentStatus {
     public String getDescription() {
         return description;
     }
+
+     */
 }

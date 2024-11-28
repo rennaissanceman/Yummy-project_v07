@@ -2,7 +2,17 @@ package pl.yummy.infrastructure.database.entity.enums;
 
 public enum DeliveryStatus {
 
+    PENDING,
+    ASSIGNED,
+    PICKED_UP,
+    IN_TRANSIT,
+    DELIVERED,
+    FAILED_DELIVERY,
+    RETURNED,
+    CANCELLED
 
+
+    /*
     PENDING("Delivery is awaiting assignment to a courier"),               // Dostawa oczekuje na przypisanie kuriera.
     ASSIGNED("Courier has been assigned to the delivery"),                 // Kurier został przypisany do dostawy.
     PICKED_UP("Courier has picked up the order from the restaurant"),      // Kurier odebrał zamówienie z restauracji.
@@ -11,6 +21,7 @@ public enum DeliveryStatus {
     FAILED_DELIVERY("Delivery failed (e.g., customer was not available)"), // Dostawa nie powiodła się.
     RETURNED("Order was returned (e.g., customer refused delivery)"),      // Zamówienie zostało zwrócone.
     CANCELLED("Delivery has been cancelled");                              // Dostawa została anulowana.
+
 
     private final String description;
 
@@ -21,6 +32,8 @@ public enum DeliveryStatus {
     public String getDescription() {
         return description;
     }
+
+     */
 /*
     PENDING,                    // Zamówienie złożone, ale jeszcze nieprzyjęte przez restaurację.
     CONFIRMED,                  // Restauracja zaakceptowała zamówienie i rozpoczęła przygotowanie.

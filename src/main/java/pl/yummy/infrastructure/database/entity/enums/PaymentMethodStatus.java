@@ -1,7 +1,16 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
 public enum PaymentMethodStatus {
+    ACTIVE,
+    INACTIVE,
+    PENDING_APPROVAL,
+    SUSPENDED,
+    DEPRECATED,
+    UNDER_MAINTENANCE,
+    REMOVED
 
+
+    /*
     ACTIVE("The payment method is active and available for use"),          // Metoda płatności jest aktywna i można jej używać.
     INACTIVE("The payment method is inactive and cannot be used"),         // Metoda płatności jest nieaktywna i nie można jej używać.
     PENDING_APPROVAL("The payment method is pending approval"),            // Metoda płatności oczekuje na zatwierdzenie (np. przez administratora).
@@ -19,4 +28,6 @@ public enum PaymentMethodStatus {
     public String getDescription() {
         return description;
     }
+
+     */
 }

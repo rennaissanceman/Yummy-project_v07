@@ -24,12 +24,12 @@ public class PaymentEntity {
     private Integer paymentId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orders_id")
+    @JoinColumn(name = "orders_id", nullable = false)
     private OrdersEntity orders;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_method_Id")
-    private PaymentMethod paymentMethod;
+    private PaymentMethodEntity paymentMethod;
 
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;

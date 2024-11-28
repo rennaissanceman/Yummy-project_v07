@@ -40,7 +40,8 @@ public class DeliveryEntity {
     @JoinColumn(name = "courier_id")
     private CourierEntity courier;
 
-    @Column(name = "delivery_status")
+    @Column(name = "delivery_status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
 
     @Column(name = "start_time")

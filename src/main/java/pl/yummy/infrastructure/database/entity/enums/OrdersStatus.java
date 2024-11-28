@@ -1,8 +1,20 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
 public enum OrdersStatus {
+    PENDING,
+    CONFIRMED,
+    PREPARING,
+    READY_FOR_PICKUP,
+    OUT_FOR_DELIVERY,
+    DELIVERED,
+    CANCELLED_BY_CUSTOMER,
+    CANCELLED_BY_RESTAURANT,
+    FAILED_DELIVERY,
+    RETURNED,
+    REFUNDED
 
 
+    /*
     PENDING("Order is pending approval"),   // Zamówienie zostało złożone, oczekuje na potwierdzenie.
     CONFIRMED("Order has been confirmed"),  // Zamówienie zostało potwierdzone przez restaurację.
     PREPARING("Order is being prepared"),   // Restauracja przygotowuje zamówienie.
@@ -24,4 +36,6 @@ public enum OrdersStatus {
     public String getDescription() {
         return description;
     }
+
+     */
 }

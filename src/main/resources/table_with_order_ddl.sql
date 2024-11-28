@@ -1,3 +1,101 @@
+CREATE TYPE cuisine_type AS ENUM (
+    'ITALIAN',
+    'CHINESE',
+    'INDIAN',
+    'AMERICAN',
+    'MEXICAN',
+    'THAI',
+    'JAPANESE',
+    'SPANISH',
+    'FRENCH',
+    'GREEK',
+    'POLISH',
+    'KOREAN',
+    'VIETNAMESE',
+    'AFRICAN',
+    'MIDDLEEASTERN',
+    'RUSSIAN',
+    'BRAZILIAN',
+    'PERUVIAN',
+    'VEGETARIAN',
+    'VEGAN',
+    'GLUTENFREE',
+    'LACTOSEFREE',
+    'HALAL',
+    'KOSHER',
+    'KETO',
+    'FUSION',
+    'FASTFOOD',
+    'DESSERTS',
+    'SEAFOOD',
+    'BBQGRIL'
+);
+
+CREATE TYPE delivery_status AS ENUM (
+    'PENDING',
+    'ASSIGNED',
+    'PICKED_UP',
+    'IN_TRANSIT',
+    'DELIVERED',
+    'FAILED_DELIVERY',
+    'RETURNED',
+    'CANCELLED'
+);
+
+CREATE TYPE diet_type AS ENUM (
+    'VEGETARIAN',
+    'VEGAN',
+    'GLUTEN_FREE',
+    'LACTOSE_FREE',
+    'KETO',
+    'PALEO',
+    'HALAL',
+    'KOSHER',
+    'LOW_CARB',
+    'HIGH_PROTEIN',
+    'PESCATARIAN',
+    'RAW_FOOD',
+    'MEDITERRANEAN',
+    'DIABETIC',
+    'LOW_SODIUM'
+);
+
+CREATE TYPE order_status AS ENUM (
+    'PENDING',
+    'CONFIRMED',
+    'PREPARING',
+    'READY_FOR_PICKUP',
+    'OUT_FOR_DELIVERY',
+    'DELIVERED',
+    'CANCELLED_BY_CUSTOMER',
+    'CANCELLED_BY_RESTAURANT',
+    'FAILED_DELIVERY',
+    'RETURNED',
+    'REFUNDED'
+);
+
+CREATE TYPE payment_method_status AS ENUM (
+    'ACTIVE',
+    'INACTIVE',
+    'PENDING_APPROVAL',
+    'SUSPENDED',
+    'DEPRECATED',
+    'UNDER_MAINTENANCE',
+    'REMOVED'
+);
+
+CREATE TYPE payment_status AS ENUM (
+    'PENDING',
+    'COMPLETED',
+    'FAILED',
+    'CANCELLED',
+    'REFUNDED',
+    'CHARGEBACK',
+    'IN_PROGRESS',
+    'EXPIRED'
+);
+
+
 CREATE TABLE user_auth (
     user_auth_id    SERIAL          NOT NULL,
     phone           VARCHAR(50)     NOT NULL,
@@ -80,19 +178,19 @@ CREATE TABLE courier (
 );
 
 CREATE TABLE restaurant (
-    restaurant_id     SERIAL          NOT NULL,
-    restaurant_name   VARCHAR(255)    NOT NULL,
-    owner_id          INT             NULL,
-    address_id        INT             NOT NULL,
-    phone             VARCHAR(50)     NOT NULL,
-    email             VARCHAR(255)    NOT NULL,
-    website           VARCHAR(255)    NULL,
-    opening_hours     TEXT            NULL,
-    cuisine_type      VARCHAR(50)     NULL,
+    restaurant_id     SERIAL           NOT NULL,
+    restaurant_name   VARCHAR(255)     NOT NULL,
+    owner_id          INT              NULL,
+    address_id        INT              NOT NULL,
+    phone             VARCHAR(50)      NOT NULL,
+    email             VARCHAR(255)     NOT NULL,
+    website           VARCHAR(255)     NULL,
+    opening_hours     TEXT             NULL,
+    cuisine_type      VARCHAR(50)      NOT NULL,
     average_rating    DOUBLE PRECISION NULL,
-    rating_count      INT             NULL,
-    description       TEXT            NULL,
-    logo_url          VARCHAR(255)    NULL,
+    rating_count      INT              NULL,
+    description       TEXT             NULL,
+    logo_url          VARCHAR(255)     NULL,
     PRIMARY KEY (restaurant_id),
     UNIQUE (restaurant_name),
     UNIQUE (phone),
@@ -156,7 +254,7 @@ CREATE TABLE customer_address (
 
 CREATE TABLE payment (
     payment_id          SERIAL          NOT NULL,
-    order_id            INT             NULL,
+    orders_id           INT             NOT NULL,
     payment_method_id   INT             NULL,
     amount              NUMERIC(10, 2)  NOT NULL,
     payment_status      VARCHAR(50)     NOT NULL,
@@ -164,28 +262,28 @@ CREATE TABLE payment (
     created_at          TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at          TIMESTAMP WITH TIME ZONE NOT NULL,
     PRIMARY KEY (payment_id),
-    CONSTRAINT fk_payment_order
-        FOREIGN KEY (order_id)
-            REFERENCES orders(order_id) ON DELETE SET NULL,
+    CONSTRAINT fk_payment_orders
+        FOREIGN KEY (orders_id)
+            REFERENCES orders(orders_id) ON DELETE SET NULL,
     CONSTRAINT fk_payment_method
         FOREIGN KEY (payment_method_id)
             REFERENCES payment_method(payment_method_id) ON DELETE SET NULL
 );
 
 CREATE TABLE orders (
-    order_id                  SERIAL          NOT NULL,
-    order_number              VARCHAR(255)    NOT NULL,
-    customer_id               INT             NULL,
-    menu_id                   INT             NULL,
-    order_date_time           TIMESTAMP WITH TIME ZONE NOT NULL,
-    order_status              VARCHAR(50)     NOT NULL,
-    order_description         TEXT            NULL,
-    total_amount              NUMERIC(10, 2)  NOT NULL,
+    orders_id                  SERIAL          NOT NULL,
+    orders_number              VARCHAR(255)    NOT NULL,
+    customer_id                INT             NULL,
+    menu_id                    INT             NULL,
+    orders_date_time           TIMESTAMP WITH TIME ZONE NOT NULL,
+    orders_status              VARCHAR(50)     NOT NULL,
+    orders_description         TEXT            NULL,
+    total_amount               NUMERIC(10, 2)  NOT NULL,
     available_delivery_area_id INT            NULL,
-    customer_address_id       INT             NULL,
-    PRIMARY KEY (order_id),
-    UNIQUE (order_number),
-    CONSTRAINT fk_order_customer
+    customer_address_id        INT             NULL,
+    PRIMARY KEY (orders_id),
+    UNIQUE (orders_number),
+    CONSTRAINT fk_orders_customer
         FOREIGN KEY (customer_id)
             REFERENCES customer(customer_id) ON DELETE SET NULL,
     CONSTRAINT fk_order_menu
@@ -202,10 +300,10 @@ CREATE TABLE orders (
 CREATE TABLE delivery (
     delivery_id                  SERIAL          NOT NULL,
     delivery_number              VARCHAR(32)     NOT NULL,
-    order_id                     INT             NULL,
+    orders_id                    INT             NULL,
     available_delivery_area_id   INT             NULL,
     courier_id                   INT             NULL,
-    delivery_status              VARCHAR(32)     NULL,
+    delivery_status              VARCHAR(32)     NOT NULL,
     start_time                   TIMESTAMP WITH TIME ZONE NULL,
     end_time                     TIMESTAMP WITH TIME ZONE NULL,
     estimated_delivery_time      TIMESTAMP WITH TIME ZONE NULL,
@@ -214,9 +312,9 @@ CREATE TABLE delivery (
     delivery_notes               TEXT            NULL,
     PRIMARY KEY (delivery_id),
     UNIQUE (delivery_number),
-    CONSTRAINT fk_delivery_order
-        FOREIGN KEY (order_id)
-            REFERENCES orders(order_id) ON DELETE SET NULL,
+    CONSTRAINT fk_delivery_orders
+        FOREIGN KEY (orders_id)
+            REFERENCES orders(orders_id) ON DELETE SET NULL,
     CONSTRAINT fk_delivery_area
         FOREIGN KEY (available_delivery_area_id)
             REFERENCES available_delivery_area(available_delivery_area_id) ON DELETE SET NULL,
@@ -228,7 +326,7 @@ CREATE TABLE delivery (
 CREATE TABLE invoice (
     invoice_id              SERIAL          NOT NULL,
     invoice_number          VARCHAR(32)     NOT NULL,
-    order_id                INT             NULL,
+    orders_id                INT             NULL,
     issue_date              TIMESTAMP WITH TIME ZONE NOT NULL,
     sale_date               TIMESTAMP WITH TIME ZONE NOT NULL,
     total_amount            NUMERIC(10, 2)  NOT NULL,
@@ -242,9 +340,9 @@ CREATE TABLE invoice (
     issuer_signature        VARCHAR(255)    NOT NULL,
     PRIMARY KEY (invoice_id),
     UNIQUE (invoice_number),
-    CONSTRAINT fk_invoice_order
-        FOREIGN KEY (order_id)
-            REFERENCES orders(order_id) ON DELETE SET NULL,
+    CONSTRAINT fk_invoice_orders
+        FOREIGN KEY (orders_id)
+            REFERENCES orders(orders_id) ON DELETE SET NULL,
     CONSTRAINT fk_invoice_payment
         FOREIGN KEY (payment_id)
             REFERENCES payment(payment_id) ON DELETE SET NULL,
@@ -256,7 +354,7 @@ CREATE TABLE invoice (
 CREATE TABLE receipt (
     receipt_id      SERIAL          NOT NULL,
     receipt_number  VARCHAR(255)    NOT NULL,
-    order_id        INT             NULL,
+    orders_id        INT             NULL,
     issue_date      TIMESTAMP WITH TIME ZONE NULL,
     sale_date       TIMESTAMP WITH TIME ZONE NULL,
     total_amount    NUMERIC(10, 2)  NULL,
@@ -267,29 +365,29 @@ CREATE TABLE receipt (
     notes           TEXT            NULL,
     PRIMARY KEY (receipt_id),
     UNIQUE (receipt_number),
-    CONSTRAINT fk_receipt_order
-        FOREIGN KEY (order_id)
-            REFERENCES orders(order_id) ON DELETE SET NULL,
+    CONSTRAINT fk_receipt_orders
+        FOREIGN KEY (orders_id)
+            REFERENCES orders(orders_id) ON DELETE SET NULL,
     CONSTRAINT fk_receipt_payment
         FOREIGN KEY (payment_id)
             REFERENCES payment(payment_id) ON DELETE SET NULL
 );
 
-CREATE TABLE order_item (
-    order_item_id    SERIAL          NOT NULL,
-    order_id         INT             NULL,
-    menu_id          INT             NULL,
+CREATE TABLE orders_item (
+    orders_item_id   SERIAL          NOT NULL,
+    orders_id        INT             NULL,
+    menu_item_id     INT             NULL,
     item_name        VARCHAR(255)    NOT NULL,
     quantity         INT             NOT NULL,
     unit_price       NUMERIC(10, 2)  NOT NULL,
     total_price      NUMERIC(10, 2)  NOT NULL,
     item_notes       TEXT            NULL,
-    PRIMARY KEY (order_item_id),
+    PRIMARY KEY (orders_item_id),
     UNIQUE (item_name),
-    CONSTRAINT fk_order_item_order
-        FOREIGN KEY (order_id)
-            REFERENCES orders(order_id) ON DELETE CASCADE,
-    CONSTRAINT fk_order_item_menu
+    CONSTRAINT fk_orders_item_orders
+        FOREIGN KEY (orders_id)
+            REFERENCES orders(orders_id) ON DELETE CASCADE,
+    CONSTRAINT fk_orders_item_menu
         FOREIGN KEY (menu_id)
             REFERENCES menu(menu_id) ON DELETE SET NULL
 );
@@ -300,7 +398,7 @@ CREATE TABLE menu_item (
     menu_id             INT             NULL,
     description         TEXT            NULL,
     is_available        BOOLEAN         NOT NULL,
-    diet_type           VARCHAR(50)     NULL,
+    diet_type           VARCHAR(50)     NOT NULL,
     calories            INT             NULL,
     ingredients         TEXT            NULL,
     portion_weight      VARCHAR(50)     NULL,

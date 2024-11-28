@@ -48,7 +48,8 @@ public class RestaurantEntity {
     @Column(name = "opening_hours")
     private String openingHours;
 
-    @Column(name = "cuisine_type")
+    @Column(name = "cuisine_type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private CuisineType cuisineType;
 
     @Column(name = "average_rating")
