@@ -26,7 +26,7 @@ public class OrdersItemEntity {
     private OrdersEntity orders;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "menu_item_id")
     private MenuItemEntity menuItem;
 
     @Column(name = "item_name", nullable = false, unique = true)
