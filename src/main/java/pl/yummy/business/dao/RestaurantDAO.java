@@ -3,12 +3,26 @@ package pl.yummy.business.dao;
 import pl.yummy.infrastructure.database.entity.RestaurantEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestaurantDAO {
-    RestaurantEntity findById(Long id); // Znajdź restaurację po ID
-    List<RestaurantEntity> findAll(); // Pobierz wszystkie restauracje
-    List<RestaurantEntity> findByCuisineType(String cuisineType); // Znajdź restauracje po typie kuchni
-    void save(RestaurantEntity restaurant); // Zapisz lub zaktualizuj restaurację
-    void deleteById(Long id); // Usuń restaurację
-}
 
+    /* CRUD */
+    /* create */
+    RestaurantEntity createRestaurant(RestaurantEntity restaurant);
+
+    /* read */
+    Optional<RestaurantEntity> findRestaurantById(Long id);
+    List<RestaurantEntity> findRestaurantsByCuisineType(String cuisineType);
+    List<RestaurantEntity> findRestaurantsByCity(String city);
+    List<RestaurantEntity> findRestaurantsByStreet(String street);
+
+    List<RestaurantEntity> getAllRestaurants();
+
+    /* update */
+    void updateRestaurant(RestaurantEntity restaurant);
+
+    /* delete */
+    void deleteRestaurant(Long restaurantId);
+
+}
