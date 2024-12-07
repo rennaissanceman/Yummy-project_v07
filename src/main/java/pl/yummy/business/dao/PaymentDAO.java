@@ -5,6 +5,13 @@ import pl.yummy.infrastructure.database.entity.PaymentEntity;
 import java.util.List;
 
 public interface PaymentDAO {
+
+    /* CRUD */
+    /* create */
+    /* read */
+    /* update */
+    /* delete */
+
     PaymentEntity findById(Long id); // Znajdź płatność po ID
     List<PaymentEntity> findByCustomerId(Long customerId); // Znajdź płatności klienta
     List<PaymentEntity> findByStatus(String status); // Znajdź płatności po statusie

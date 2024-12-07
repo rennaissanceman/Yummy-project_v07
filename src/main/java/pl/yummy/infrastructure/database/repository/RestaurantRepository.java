@@ -145,6 +145,5 @@ public class RestaurantRepository implements RestaurantDAO {
                     .setParameter("restaurant_id", restaurantId)
                     .executeUpdate();
         }
-
     }
 }

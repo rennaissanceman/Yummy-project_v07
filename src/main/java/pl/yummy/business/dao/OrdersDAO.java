@@ -5,6 +5,13 @@ import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import java.util.List;
 
 public interface OrdersDAO {
+
+    /* CRUD */
+    /* create */
+    /* read */
+    /* update */
+    /* delete */
+
     OrdersEntity findById(Long id); // Znajdź zamówienie po ID
     List<OrdersEntity> findByCustomerId(Long customerId); // Znajdź zamówienia klienta
     List<OrdersEntity> findByStatus(String status); // Znajdź zamówienia po statusie

@@ -6,6 +6,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CourierDAO {
+
+    /* CRUD */
+    /* create */
+    /* read */
+    /* update */
+    /* delete */
+
+
     CourierEntity findById(Long id); // Znajdź kuriera po ID
     List<CourierEntity> findAvailableCouriers(); // Znajdź kurierów dostępnych do dostawy
     void save(CourierEntity courier); // Zapisz lub zaktualizuj kuriera
