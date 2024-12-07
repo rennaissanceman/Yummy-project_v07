@@ -13,11 +13,11 @@ public interface RestaurantDAO {
 
     /* read */
     Optional<RestaurantEntity> findRestaurantById(Long id);
-    List<RestaurantEntity> findRestaurantsByCuisineType(String cuisineType);
+    List<RestaurantEntity> findRestaurantsByCuisineType(List<String> cuisineTypes);
     List<RestaurantEntity> findRestaurantsByCity(String city);
     List<RestaurantEntity> findRestaurantsByStreet(String street);
 
-    List<RestaurantEntity> getAllRestaurants();
+    List<RestaurantEntity> findAllRestaurants();
 
     /* update */
     void updateRestaurant(RestaurantEntity restaurant);
