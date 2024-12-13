@@ -3,19 +3,24 @@ package pl.yummy.business.dao;
 import pl.yummy.infrastructure.database.entity.DeliveryEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DeliveryDAO {
 
     /* CRUD */
     /* create */
-    /* read */
-    /* update */
-    /* delete */
+    DeliveryEntity createDelivery(DeliveryEntity delivery);
 
-    DeliveryEntity findById(Long id); // Znajdź dostawę po ID
-    List<DeliveryEntity> findByCourierId(Long courierId); // Znajdź dostawy obsługiwane przez kuriera
-    List<DeliveryEntity> findPendingDeliveries(); // Znajdź oczekujące dostawy
-    void save(DeliveryEntity delivery); // Zapisz lub zaktualizuj dostawę
-    void deleteById(Long id); // Usuń dostawę
+    /* read */
+    Optional<DeliveryEntity> findDeliveryById(Long deliveryId);
+    Optional<DeliveryEntity> findDeliveryByOrderId(Long orderId);
+    Optional<DeliveryEntity> findDeliveryByCourierId(Long courierId);
+    List<DeliveryEntity> findDeliveriesByStatus(List<String> deliveryStatus);
+
+    /* update */
+    DeliveryEntity updateDelivery(DeliveryEntity delivery);
+
+    /* delete */
+    void deleteDelivery(Long deliveryId);
 }
 

@@ -3,19 +3,25 @@ package pl.yummy.business.dao;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrdersDAO {
 
     /* CRUD */
     /* create */
-    /* read */
-    /* update */
-    /* delete */
+    OrdersEntity createOrders(OrdersEntity order);
 
-    OrdersEntity findById(Long id); // Znajdź zamówienie po ID
-    List<OrdersEntity> findByCustomerId(Long customerId); // Znajdź zamówienia klienta
-    List<OrdersEntity> findByStatus(String status); // Znajdź zamówienia po statusie
-    void save(OrdersEntity order); // Zapisz lub zaktualizuj zamówienie
-    void deleteById(Long id); // Usuń zamówienie
+    /* read */
+    Optional<OrdersEntity> findOrdersById(Long ordersId);
+
+    List<OrdersEntity> findOrdersByCustomerId(Long customerId);
+
+    /* update */
+    void updateOrder(OrdersEntity order);
+
+
+    /* delete */
+    void deleteOrder(Long id);
+
 }
 

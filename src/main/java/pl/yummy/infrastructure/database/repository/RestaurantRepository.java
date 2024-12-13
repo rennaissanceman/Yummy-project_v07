@@ -52,7 +52,7 @@ public class RestaurantRepository implements RestaurantDAO {
                 throw new RuntimeException("Session is null");
             }
             session.beginTransaction();
-            Collection<CuisineType> enumCuisineTypes = cuisineTypes.stream()
+            List<CuisineType> enumCuisineTypes = cuisineTypes.stream()
                     .map(type -> CuisineType.valueOf(type.toUpperCase()))
                     .toList();
             String queryHQL = "SELECT r FROM RestaurantEntity r WHERE r.cuisineType IN :cuisineTypes";

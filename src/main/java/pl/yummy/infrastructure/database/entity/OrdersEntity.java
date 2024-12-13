@@ -27,7 +27,7 @@ public class OrdersEntity {
     @Column(name = "orders_number", nullable = false, unique = true)
     private String ordersNumber;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 

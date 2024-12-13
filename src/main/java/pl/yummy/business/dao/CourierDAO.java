@@ -9,15 +9,19 @@ public interface CourierDAO {
 
     /* CRUD */
     /* create */
+    CourierEntity createCourier(CourierEntity courier);
+
     /* read */
+    Optional<CourierEntity> findCourierById(Long courierId);
+    List<CourierEntity> findAvailableCouriers();
+    List<CourierEntity> findAvailableCouriersByRestaurant(Long restaurantId);
+    List<CourierEntity> findAllCouriers();
+
     /* update */
+    CourierEntity updateCourier(CourierEntity courier);
+
     /* delete */
+    void deleteCourier(Long courierId);
 
-
-    CourierEntity findById(Long id); // Znajdź kuriera po ID
-    List<CourierEntity> findAvailableCouriers(); // Znajdź kurierów dostępnych do dostawy
-    void save(CourierEntity courier); // Zapisz lub zaktualizuj kuriera
-    void deleteById(Long id); // Usuń kuriera
-    List<CourierEntity> findByDeliveryArea(String area); // Znajdź kurierów w danym regionie
 }
 

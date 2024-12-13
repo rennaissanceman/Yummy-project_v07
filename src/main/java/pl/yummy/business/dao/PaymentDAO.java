@@ -3,19 +3,23 @@ package pl.yummy.business.dao;
 import pl.yummy.infrastructure.database.entity.PaymentEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PaymentDAO {
 
     /* CRUD */
     /* create */
-    /* read */
-    /* update */
-    /* delete */
+    PaymentEntity createPayment(PaymentEntity payment);
 
-    PaymentEntity findById(Long id); // Znajdź płatność po ID
-    List<PaymentEntity> findByCustomerId(Long customerId); // Znajdź płatności klienta
-    List<PaymentEntity> findByStatus(String status); // Znajdź płatności po statusie
-    void save(PaymentEntity payment); // Zapisz lub zaktualizuj płatność
-    void deleteById(Long id); // Usuń płatność
+    /* read */
+    Optional<PaymentEntity> findPaymentById(Long paymentId);
+    Optional<PaymentEntity> findPaymentByOrder(Long ordersId);
+    List<PaymentEntity> findPaymentByStatus(List<String> paymentStatus);
+
+    /* update */
+    PaymentEntity updatePayment(PaymentEntity payment);
+
+    /* delete */
+    void deletePayment(Long paymentId);
 }
 

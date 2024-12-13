@@ -22,7 +22,13 @@ DROP TYPE IF EXISTS order_status CASCADE;
 DROP TYPE IF EXISTS diet_type CASCADE;
 DROP TYPE IF EXISTS delivery_status CASCADE;
 DROP TYPE IF EXISTS cuisine_type CASCADE;
+DROP TYPE IF EXISTS courier_status CASCADE;
 
+CREATE TYPE cuisine_type AS ENUM (
+    'AVAILABLE',
+    'BUSY',
+    'INACTIVE'
+);
 
 CREATE TYPE cuisine_type AS ENUM (
     'ITALIAN',
