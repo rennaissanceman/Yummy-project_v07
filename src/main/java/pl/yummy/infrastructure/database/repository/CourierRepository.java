@@ -62,23 +62,6 @@ public class CourierRepository implements CourierDAO {
         }
     }
 
-    public List<CourierEntity> findCouriersByRestaurant(Integer restaurantId) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery(
-                            "SELECT DISTINCT c " +
-                                    "FROM CourierEntity c " +
-                                    "JOIN c.deliveries d " +
-                                    "JOIN d.availableDeliveryArea a " +
-                                    "WHERE a.restaurant.restaurantId = :restaurantId", CourierEntity.class)
-                    .setParameter("restaurantId", restaurantId)
-                    .list();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error finding couriers by restaurant", e);
-        }
-    }
-
-
     @Override
     public List<CourierEntity> findAvailableCouriersByRestaurant(Long restaurantId) {
         try (Session session = HibernateUtil.getSession()){
