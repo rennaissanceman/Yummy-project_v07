@@ -2,19 +2,29 @@ package pl.yummy.business.dao;
 
 import pl.yummy.infrastructure.database.entity.InvoiceEntity;
 
+import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface InvoiceDAO {
 
     /* CRUD */
     /* create */
-    /* read */
-    /* update */
-    /* delete */
+    InvoiceEntity createInvoice(InvoiceEntity invoice);
 
-    InvoiceEntity findById(Long id); // Znajdź fakturę po ID
-    List<InvoiceEntity> findByCustomerId(Long customerId); // Znajdź faktury klienta
-    void save(InvoiceEntity invoice); // Zapisz lub zaktualizuj fakturę
-    void deleteById(Long id); // Usuń fakturę
+    /* read */
+    Optional<InvoiceEntity> findInvoiceById(Long invoiceId);
+    List<InvoiceEntity> findInvoicesByOrderId(Long ordersId);
+
+    List<InvoiceEntity> findInvoicesByDueDate(OffsetDateTime dueDate);
+    List<InvoiceEntity> findInvoicesWithinDateRange(OffsetDateTime startDate, OffsetDateTime endDate);
+    List<InvoiceEntity> findAllInvoices();
+
+    /* update */
+    InvoiceEntity updateInvoice(InvoiceEntity invoice);
+
+    /* delete */
+    void deleteInvoice(Long invoiceId);
+
 }
 
