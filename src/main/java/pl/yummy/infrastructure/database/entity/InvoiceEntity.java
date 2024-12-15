@@ -65,6 +65,4 @@ public class InvoiceEntity {
 
     @Column(name = "issuer_signature", nullable = false)
     private String issuerSignature;
-
-
 }

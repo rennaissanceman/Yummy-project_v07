@@ -15,7 +15,7 @@ public interface InvoiceDAO {
     /* read */
     Optional<InvoiceEntity> findInvoiceById(Long invoiceId);
     List<InvoiceEntity> findInvoicesByOrderId(Long ordersId);
-
+    List<InvoiceEntity> findInvoicesByCustomerId(Long customerId);
     List<InvoiceEntity> findInvoicesByDueDate(OffsetDateTime dueDate);
     List<InvoiceEntity> findInvoicesWithinDateRange(OffsetDateTime startDate, OffsetDateTime endDate);
     List<InvoiceEntity> findAllInvoices();

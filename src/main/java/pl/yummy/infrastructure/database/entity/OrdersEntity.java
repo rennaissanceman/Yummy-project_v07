@@ -71,6 +71,4 @@ public class OrdersEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders", cascade = CascadeType.ALL)
     private Set<OrdersItemEntity> ordersItems;
-
-
 }

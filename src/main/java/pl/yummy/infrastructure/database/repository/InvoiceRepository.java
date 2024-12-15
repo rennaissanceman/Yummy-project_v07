@@ -62,6 +62,26 @@ public class InvoiceRepository implements InvoiceDAO {
     }
 
     @Override
+    public List<InvoiceEntity> findInvoicesByCustomerId(Long customerId) {
+        try (Session session = HibernateUtil.getSession()){
+            if (Objects.isNull(session)) {
+                throw new RuntimeException("Session is null");
+            }
+            session.beginTransaction();
+            String queryHQL = "SELECT i FROM InvoiceEntity i " +
+                    "JOIN i.orders o " +
+                    "JOIN o.customer c " +
+                    "WHERE c.customerId = :customer_id";
+            List<InvoiceEntity> result = session.createQuery(queryHQL, InvoiceEntity.class)
+                    .setParameter("customer_id", customerId)
+                    .list();
+
+            session.getTransaction().commit();
+            return result;
+        }
+    }
+
+    @Override
     public List<InvoiceEntity> findInvoicesByDueDate(OffsetDateTime dueDate) {
         try (Session session = HibernateUtil.getSession()){
             if (Objects.isNull(session)) {
