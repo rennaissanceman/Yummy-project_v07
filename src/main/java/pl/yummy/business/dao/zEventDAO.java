@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXEventDAO {
+public interface zEventDAO {
 
     //Cel: Obsługa wydarzeń promocyjnych organizowanych przez restauracje.
     //Przykład użycia: Tworzenie i zarządzanie wydarzeniami specjalnymi, np. zniżkami na określone dni.

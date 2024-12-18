@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXCartDAO {
+public interface zCartDAO {
 
     //Cel: Zarządzanie koszykami zakupowymi klientów przed złożeniem zamówienia.
     //Przykład użycia: Przechowywanie informacji o aktualnych wyborach klientów.

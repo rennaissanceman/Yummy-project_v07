@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXReportingDAO {
+public interface zReportingDAO {
 
     //Cel: Generowanie raportów na podstawie danych aplikacji (zamówienia, klienci, restauracje).
     //Przykład użycia: Dostarczanie statystyk dla właścicieli restauracji lub administratorów aplikacji.

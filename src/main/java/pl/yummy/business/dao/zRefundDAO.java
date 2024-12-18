@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXRefundDAO {
+public interface zRefundDAO {
 
     //Cel: Zarządzanie zwrotami pieniędzy dla klientów.
     //Przykład użycia: Obsługa zwrotów w przypadku problemów z zamówieniem.

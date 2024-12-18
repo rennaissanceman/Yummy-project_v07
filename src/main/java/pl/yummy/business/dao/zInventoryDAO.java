@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXInventoryDAO {
+public interface zInventoryDAO {
 
     //Cel: Zarządzanie zapasami restauracji, w tym składnikami i dostępnością menu.
     //Przykład użycia: Monitorowanie stanu magazynowego produktów.

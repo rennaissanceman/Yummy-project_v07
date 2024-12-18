@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXReviewDAO {
+public interface zReviewDAO {
 
     //Cel: Obsługa recenzji i ocen restauracji, kurierów lub dań.
     //Przykład użycia: Gromadzenie opinii klientów, obliczanie średnich ocen dla restauracji lub menu.

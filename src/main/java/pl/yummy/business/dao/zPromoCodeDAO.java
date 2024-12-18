@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXPromoCodeDAO {
+public interface zPromoCodeDAO {
 
     //Cel: Obsługa kodów promocyjnych i rabatowych.
     //Przykład użycia: Tworzenie, edytowanie i walidacja kodów rabatowych dla zamówień.

@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface IXNotificationDAO {
+public interface zNotificationDAO {
 
     //Cel: Zarządzanie powiadomieniami dla użytkowników aplikacji (klientów, restauracji, kurierów).
     //Przykład użycia: Przechowywanie historii powiadomień (e-mail, SMS, push) wysyłanych do użytkowników.
