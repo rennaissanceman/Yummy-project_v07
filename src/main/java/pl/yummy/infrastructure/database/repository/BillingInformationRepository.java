@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class BillingInformation implements BillingInformationDAO {
+public class BillingInformationRepository implements BillingInformationDAO {
     @Override
     public BillingInformationEntity createBillingInformation(BillingInformationEntity billingInformation) {
         try (Session session = HibernateUtil.getSession()){
