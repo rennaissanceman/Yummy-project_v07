@@ -21,8 +21,11 @@ import java.util.Set;
 public class OrdersEntity {
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orders_id")
     private Integer ordersId;
+
 
     @Column(name = "orders_number", nullable = false, unique = true)
     private String ordersNumber;

@@ -29,7 +29,6 @@ public class AvailableDeliveryAreaEntity {
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
     private Set<CustomerAddressEntity> customerAddresses;
 

@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "menuItemId")
 @ToString(of = {
-        "menuItemId", "itemName", "menuId","description", "isAvailable", "dietType", "calories", "ingredients",
+        "menuItemId", "itemName", "menu","description", "isAvailable", "dietType", "calories", "ingredients",
         "portionWeight", "preparationTime", "price", "imageURL", "displayOrder","createdAt", "updatedAt"})
 @Builder
 @NoArgsConstructor
@@ -29,9 +29,9 @@ public class MenuItemEntity {
     @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menu_id")
-    private MenuEntity menuId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu")
+    private MenuEntity menu;
 
     @Column(name = "description")
     private String description;
