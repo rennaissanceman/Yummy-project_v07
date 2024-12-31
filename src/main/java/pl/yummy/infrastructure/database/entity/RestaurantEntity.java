@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import pl.yummy.infrastructure.database.entity.enums.CuisineType;
 
-import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Getter

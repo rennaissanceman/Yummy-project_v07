@@ -6,31 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerDAO {
-
-    /* CRUD */
-    /* create */
-
-    CustomerEntity createCustomer(CustomerEntity customer);
-
-    /* read */
-
-    Optional<CustomerEntity> findCustomerById(Long customerId);
-    Optional<CustomerEntity> findCustomerByEmail(String email);
-    Optional<CustomerEntity> findCustomerByPhone(String phone);
-    List<CustomerEntity> findCustomerByCompanyName(String companyName);
-    List<CustomerEntity> findCustomerBySurname(String customerSurname);
-    List<CustomerEntity> findCustomerByVatNumber(String vatNumber);
-    List<CustomerEntity> findCustomerByCity(String city);
-    List<CustomerEntity> findCustomerByStreet(String street);
-
-    List<CustomerEntity> findAllCustomers();
-
-    /* update */
-    void updateCustomer(CustomerEntity customer);
-
-    /* delete */
-    void deleteCustomer(Long customerId);
-
-
-
+        Optional<CustomerEntity> findById(Long customerId);
+        Optional<CustomerEntity> findByCustomerNumber(String customerNumber);
+        List<CustomerEntity> findAll();
+        CustomerEntity save(CustomerEntity customer);
+        void deleteById(Long customerId);
+        boolean existsById(Long customerId);
 }
