@@ -19,4 +19,11 @@ public class OrdersItem {
     BigDecimal unitPrice;
     BigDecimal totalPrice;
     String itemNotes;
+
+    public boolean isValid() {
+        return quantity != null && quantity > 0
+                && unitPrice != null && unitPrice.compareTo(BigDecimal.ZERO) > 0
+                && totalPrice != null && totalPrice.compareTo(BigDecimal.ZERO) > 0;
+    }
+
 }

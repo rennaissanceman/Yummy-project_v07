@@ -1,6 +1,7 @@
 package pl.yummy.domain;
 
 import lombok.*;
+import pl.yummy.domain.enums.PaymentStatusEnumDomain;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -27,4 +28,9 @@ public class Invoice {
     String notes;
     OffsetDateTime dueDate;
     String issuerSignature;
+
+    public boolean isPaid() {
+        return payment != null && payment.getPaymentStatus() == PaymentStatusEnumDomain.COMPLETED;
+    }
+
 }

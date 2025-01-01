@@ -18,4 +18,12 @@ public class Address {
     AvailableDeliveryArea availableDeliveryArea;
     CustomerAddress deliveryAddress;
     BillingInformation billingInformation;
+
+    public boolean isComplete() {
+        return country != null && !country.isBlank()
+                && city != null && !city.isBlank()
+                && postalCode != null && !postalCode.isBlank()
+                && street != null && !street.isBlank();
+    }
+
 }

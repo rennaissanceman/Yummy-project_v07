@@ -26,4 +26,9 @@ public class Courier {
     CourierStatusEnumDomain courierStatus;
     OffsetTime hireDate;
     Set<Delivery> deliveries;
+
+    public boolean isActiveCourier() {
+        return courierStatus == CourierStatusEnumDomain.AVAILABLE;
+    }
+
 }

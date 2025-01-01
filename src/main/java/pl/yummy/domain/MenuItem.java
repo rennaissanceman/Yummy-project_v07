@@ -31,4 +31,9 @@ public class MenuItem {
     OffsetDateTime createdAt;
     OffsetDateTime updatedAt;
     Set<OrdersItem> ordersItems;
+
+    public boolean isAvailable() {
+        return Boolean.TRUE.equals(isAvailable);
+    }
+
 }

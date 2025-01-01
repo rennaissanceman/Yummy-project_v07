@@ -17,4 +17,9 @@ public class CustomerAddress {
     Address address;
     Boolean isDefault;
     Set<Orders> orders;
+
+    public boolean isDefaultAddress() {
+        return Boolean.TRUE.equals(isDefault);
+    }
+
 }

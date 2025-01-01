@@ -17,4 +17,10 @@ public class BillingInformation {
     String vatNumber;
     Address address;
     Set<Invoice> invoices;
+
+    public boolean isCompanyBilling() {
+        return companyName != null && !companyName.isBlank()
+                && vatNumber != null && !vatNumber.isBlank();
+    }
+
 }

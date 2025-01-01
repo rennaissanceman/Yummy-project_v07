@@ -26,4 +26,20 @@ public class Delivery {
     OffsetDateTime actualDeliveryDateTime;
     BigDecimal deliveryFee;
     String deliveryNotes;
+
+    public boolean shouldBeDispatched() {
+        return orders != null
+                && availableDeliveryArea != null
+                && courier != null
+                && deliveryStatus == DeliveryStatusEnumDomain.PENDING
+                && starTime != null
+                && deliveryFee != null && deliveryFee.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public boolean isLate() {
+        return actualDeliveryDateTime != null && estimatedDeliveryTime != null
+                && actualDeliveryDateTime.isAfter(estimatedDeliveryTime);
+    }
+
+
 }

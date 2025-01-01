@@ -22,4 +22,11 @@ public class Menu {
     OffsetDateTime updatedAt;
     Set<MenuItem> menuItems;
     Set<Orders> orders;
+
+    public boolean isCurrentlyValid() {
+        OffsetDateTime now = OffsetDateTime.now();
+        return validFrom != null && validTo != null
+                && now.isAfter(validFrom) && now.isBefore(validTo);
+    }
+
 }

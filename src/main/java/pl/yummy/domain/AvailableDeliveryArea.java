@@ -17,4 +17,22 @@ public class AvailableDeliveryArea {
     Set<CustomerAddress> customerAddresses;
     Set<Orders> orders;
     Set<Delivery> deliveries;
+
+    public boolean shouldBeEnabledForDelivery() {
+        return restaurant != null
+                && address != null
+                && customerAddresses != null && !customerAddresses.isEmpty()
+                && orders != null && !orders.isEmpty()
+                && deliveries != null && !deliveries.isEmpty();
+    }
+
+    public boolean hasOrders() {
+        return orders != null && !orders.isEmpty();
+    }
+
+    public boolean hasDeliveries() {
+        return deliveries != null && !deliveries.isEmpty();
+    }
+
+
 }
