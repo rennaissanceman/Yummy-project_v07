@@ -1,4 +1,4 @@
 package pl.yummy.business.dao;
 
-public interface CustomerDAO {
+public interface UserAuthDAO {
 }
