@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface OrdersDAO {
 
-    // Niestandardowa metoda
-    List<OrdersEntity> findByCustomerId(Long customerId);
 }
