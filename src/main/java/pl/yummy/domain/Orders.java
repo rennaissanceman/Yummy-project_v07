@@ -45,7 +45,4 @@ public class Orders {
                 && payment != null && payment.getPaymentStatus() == PaymentStatusEnumDomain.IN_PROGRESS
                 && ordersStatus == OrdersStatusEnumDomain.PENDING;
     }
-
-
-
 }

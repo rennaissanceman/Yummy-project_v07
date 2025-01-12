@@ -16,4 +16,5 @@ public class Owner {
     String ownerName;
     UserAuth userAuth;
     Set<Restaurant> restaurants;
+
 }

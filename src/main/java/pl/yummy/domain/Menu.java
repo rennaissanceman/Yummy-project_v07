@@ -23,10 +23,13 @@ public class Menu {
     Set<MenuItem> menuItems;
     Set<Orders> orders;
 
+
     public boolean isCurrentlyValid() {
         OffsetDateTime now = OffsetDateTime.now();
         return validFrom != null && validTo != null
-                && now.isAfter(validFrom) && now.isBefore(validTo);
+                && now.isAfter(validFrom) && now.isBefore(validTo)
+                && restaurant != null
+                && menuItems != null && !menuItems.isEmpty();
     }
 
 }

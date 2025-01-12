@@ -40,6 +40,4 @@ public class Delivery {
         return actualDeliveryDateTime != null && estimatedDeliveryTime != null
                 && actualDeliveryDateTime.isAfter(estimatedDeliveryTime);
     }
-
-
 }

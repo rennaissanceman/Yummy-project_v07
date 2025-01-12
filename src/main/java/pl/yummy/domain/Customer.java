@@ -31,6 +31,4 @@ public class Customer {
     public boolean isCompany() {
         return isCompany != null && isCompany;
     }
-
-
 }

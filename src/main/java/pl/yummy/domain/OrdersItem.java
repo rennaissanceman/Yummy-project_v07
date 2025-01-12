@@ -25,5 +25,4 @@ public class OrdersItem {
                 && unitPrice != null && unitPrice.compareTo(BigDecimal.ZERO) > 0
                 && totalPrice != null && totalPrice.compareTo(BigDecimal.ZERO) > 0;
     }
-
 }

@@ -33,6 +33,4 @@ public class AvailableDeliveryArea {
     public boolean hasDeliveries() {
         return deliveries != null && !deliveries.isEmpty();
     }
-
-
 }
