@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode(of = "customerId")
 @ToString(of = {"customerId", "customerNumber", "customerName", "customerSurname", "email", "orders", "invoices"})
-public class CustomerActivityHistory {
+public class YummyCustomerActivityHistory {
 
     Integer customerId;
     String customerNumber;

@@ -12,6 +12,8 @@ import java.util.Objects;
 @Builder
 public class YummyOrderProcessingRequest {
 
+//    przechowuje dane potrzebne do zarządzania przetwarzaniem zamówień.
+
     // Dane zamówienia
     String orderId; // ID zamówienia
     String customerEmail; // Email klienta

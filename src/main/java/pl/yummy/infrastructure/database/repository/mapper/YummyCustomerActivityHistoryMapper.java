@@ -4,8 +4,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
-import pl.yummy.domain.CustomerActivityHistory;
-import pl.yummy.infrastructure.database.entity.*;
+import pl.yummy.domain.YummyCustomerActivityHistory;
+import pl.yummy.infrastructure.database.entity.CustomerEntity;
+import pl.yummy.infrastructure.database.entity.InvoiceEntity;
+import pl.yummy.infrastructure.database.entity.OrdersEntity;
+import pl.yummy.infrastructure.database.entity.OrdersItemEntity;
 import pl.yummy.infrastructure.database.repository.mapper.enums.OrdersStatusEnumMapper;
 import pl.yummy.infrastructure.database.repository.mapper.enums.PaymentStatusEnumMapper;
 
@@ -20,19 +23,19 @@ import java.util.stream.Collectors;
         OrdersStatusEnumMapper.class,
         PaymentStatusEnumMapper.class
 })
-public interface CustomerActivityHistoryMapper {
+public interface YummyCustomerActivityHistoryMapper {
 
     @Mapping(source = "customer.customerAddresses", target = "customerAddresses")
     @Mapping(source = "customer.orders", target = "orders", qualifiedByName = "mapOrders")
     @Mapping(source = "customer.invoices", target = "invoices", qualifiedByName = "mapInvoices")
     @Mapping(source = "customer.billingInformation", target = "billingInformation")
-    CustomerActivityHistory mapFromEntity(CustomerEntity customer);
+    YummyCustomerActivityHistory mapFromEntity(CustomerEntity customer);
 
 
     @Named("mapOrders")
-    default List<CustomerActivityHistory.OrderHistory> mapOrders(Set<OrdersEntity> orders) {
+    default List<YummyCustomerActivityHistory.OrderHistory> mapOrders(Set<OrdersEntity> orders) {
         return orders.stream()
-                .map(order -> CustomerActivityHistory.OrderHistory.builder()
+                .map(order -> YummyCustomerActivityHistory.OrderHistory.builder()
                         .orderId(order.getOrdersId())
                         .orderNumber(order.getOrdersNumber())
                         .orderDate(order.getOrdersDateTime())
@@ -43,9 +46,9 @@ public interface CustomerActivityHistoryMapper {
                 .collect(Collectors.toList());
     }
 
-    default List<CustomerActivityHistory.OrderHistory.OrderItemDetails> mapOrderItems(Set<OrdersItemEntity> items) {
+    default List<YummyCustomerActivityHistory.OrderHistory.OrderItemDetails> mapOrderItems(Set<OrdersItemEntity> items) {
         return items.stream()
-                .map(item -> CustomerActivityHistory.OrderHistory.OrderItemDetails.builder()
+                .map(item -> YummyCustomerActivityHistory.OrderHistory.OrderItemDetails.builder()
                         .itemId(item.getOrdersItemId())
                         .itemName(item.getItemName())
                         .quantity(item.getQuantity())
@@ -57,9 +60,9 @@ public interface CustomerActivityHistoryMapper {
 
 
     @Named("mapInvoices")
-    default List<CustomerActivityHistory.InvoiceDetails> mapInvoices(Set<InvoiceEntity> invoices) {
+    default List<YummyCustomerActivityHistory.InvoiceDetails> mapInvoices(Set<InvoiceEntity> invoices) {
         return invoices.stream()
-                .map(invoice -> CustomerActivityHistory.InvoiceDetails.builder()
+                .map(invoice -> YummyCustomerActivityHistory.InvoiceDetails.builder()
                         .invoiceId(invoice.getInvoiceId())
                         .invoiceNumber(invoice.getInvoiceNumber())
                         .totalAmount(invoice.getTotalAmount())

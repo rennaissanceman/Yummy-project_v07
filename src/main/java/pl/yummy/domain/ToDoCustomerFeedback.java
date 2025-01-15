@@ -3,9 +3,14 @@ package pl.yummy.domain;
 import lombok.Builder;
 import lombok.Value;
 
+
 @Value
 @Builder
-public class YummyMenuManagementRequest {
+public class ToDoCustomerFeedback {
+
+//  Cel: Obsługa żądań do zarządzania menu restauracji.
+
+//  Przydatne dla właścicieli restauracji, którzy chcą aktualizować swoje menu
 
     String restaurantName;
     String action; // "ADD", "UPDATE", "DELETE"

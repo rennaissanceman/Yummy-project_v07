@@ -4,33 +4,43 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.With;
 
-import java.time.OffsetDateTime;
-
 @With
 @Value
 @Builder
 public class YummyOrderRequest {
 
+//    klasa dotycząca żądania złożenia zamówienia
+
     // Dane klienta
     String customerName;
     String customerSurname;
-    String customerEmail;
     String customerPhone;
+    String customerEmail;
 
-    // Adres dostawy
-    String deliveryAddressStreet;
-    String deliveryAddressCity;
-    String deliveryAddressPostalCode;
-    String deliveryAddressCountry;
+    // Adres dostawy - dane z encji AddressEntity
+    String deliveryCountry;
+    String deliveryCity;
+    String deliveryPostalCode;
+    String deliveryStreet;
 
-    // Szczegóły zamówienia
-    String restaurantName;
+    // Szczegóły zamówienia - z encji MenuItemEntity
     String menuItemName;
     Integer quantity;
-    String paymentMethod;
+    String specialInstructions;
 
-    // Dodatkowe informacje
-    String orderNote; // Opcjonalna uwaga klienta (np. "bez sosu", "bez glutenu")
-    OffsetDateTime orderDate; // Czas złożenia zamówienia
-    Boolean isExpressDelivery; // Flaga wskazująca na szybką dostawę
+    // Dane restauracji - dane z encji RestaurantEntity
+    String restaurantName;
+    String restaurantPhone;
+    String restaurantEmail;
+
+    // Dane dostawcy - dane z encji CourierEntity
+    String courierName;
+    String courierSurname;
+    String courierVehicleType;
+
+    // Szczegóły płatności - dane z encji PaymentEntity i PaymentMethodEntity
+    String paymentMethodName;
+    String paymentStatus;
+    Double totalAmount;
+
 }
