@@ -1,14 +1,11 @@
 package pl.yummy.domain;
 
 import lombok.*;
-import pl.yummy.domain.enums.OrdersStatusEnumDomain;
-import pl.yummy.domain.enums.PaymentStatusEnumDomain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Set;
 
 @With
 @Value
