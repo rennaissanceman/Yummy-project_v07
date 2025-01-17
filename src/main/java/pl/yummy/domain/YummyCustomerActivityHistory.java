@@ -5,6 +5,7 @@ import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 import pl.yummy.domain.enums.PaymentStatusEnumDomain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Set;
@@ -13,59 +14,40 @@ import java.util.Set;
 @Value
 @Builder
 @EqualsAndHashCode(of = "customerId")
-@ToString(of = {"customerId", "customerNumber", "customerName", "customerSurname", "email", "orders", "invoices"})
+@ToString(of = {"customerId", "customerName", "customerSurname", "totalOrders", "totalSpent", "recentOrders"})
 public class YummyCustomerActivityHistory {
 
-    Integer customerId;
-    String customerNumber;
-    String customerName;
-    String customerSurname;
-    String email;
-    Set<CustomerAddress> customerAddresses;
-    List<OrderHistory> orders;
-    List<InvoiceDetails> invoices;
-    BillingInformation billingInformation;
+    Integer customerId; // Identyfikator klienta
+    String customerName; // Imię klienta
+    String customerSurname; // Nazwisko klienta
+    Integer totalOrders; // Całkowita liczba zamówień
+    BigDecimal totalSpent; // Łączna kwota wydana przez klienta
+    List<RecentOrder> recentOrders; // Lista ostatnich zamówień klienta
 
-
-
+    /**
+     * Klasa wewnętrzna reprezentująca dane jednego zamówienia w historii.
+     */
     @With
     @Value
     @Builder
     @EqualsAndHashCode(of = "orderId")
-    @ToString(of = {"orderId", "orderNumber", "orderDate", "status", "totalAmount"})
-    public static class OrderHistory {
-        Integer orderId;
-        String orderNumber;
-        OffsetDateTime orderDate;
-        OrdersStatusEnumDomain status;
-        BigDecimal totalAmount;
-        List<OrderItemDetails> items;
-
-
-        @With
-        @Value
-        @Builder
-        @EqualsAndHashCode(of = "itemId")
-        @ToString(of = {"itemId", "itemName", "quantity", "unitPrice", "totalPrice"})
-        public static class OrderItemDetails {
-            Integer itemId;
-            String itemName;
-            Integer quantity;
-            BigDecimal unitPrice;
-            BigDecimal totalPrice;
-        }
+    @ToString(of = {"orderId", "orderDate", "status", "amount"})
+    public static class RecentOrder {
+        Integer orderId; // Identyfikator zamówienia
+        OffsetDateTime orderDate; // Data zamówienia
+        String status; // Status zamówienia (np. PENDING, DELIVERED)
+        BigDecimal amount; // Kwota zamówienia
     }
 
-    @With
-    @Value
-    @Builder
-    @EqualsAndHashCode(of = "invoiceId")
-    @ToString(of = {"invoiceId", "invoiceNumber", "totalAmount", "paymentStatus", "issueDate"})
-    public static class InvoiceDetails {
-        Integer invoiceId;
-        String invoiceNumber;
-        BigDecimal totalAmount;
-        PaymentStatusEnumDomain paymentStatus;
-        OffsetDateTime issueDate;
+    /**
+     * Oblicza średnią wartość zamówień.
+     *
+     * @return średnia wartość zamówienia lub null, jeśli brak zamówień.
+     */
+    public BigDecimal calculateAverageOrderValue() {
+        if (totalOrders == null || totalOrders == 0 || totalSpent == null) {
+            return null;
+        }
+        return totalSpent.divide(BigDecimal.valueOf(totalOrders), 2, RoundingMode.HALF_UP);
     }
 }

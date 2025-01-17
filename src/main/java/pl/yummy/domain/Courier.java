@@ -30,5 +30,4 @@ public class Courier {
     public boolean isActiveCourier() {
         return courierStatus == CourierStatusEnumDomain.AVAILABLE;
     }
-
 }

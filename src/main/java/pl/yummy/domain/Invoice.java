@@ -32,5 +32,4 @@ public class Invoice {
     public boolean isPaid() {
         return payment != null && payment.getPaymentStatus() == PaymentStatusEnumDomain.COMPLETED;
     }
-
 }

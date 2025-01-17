@@ -35,5 +35,4 @@ public class MenuItem {
     public boolean isAvailable() {
         return Boolean.TRUE.equals(isAvailable);
     }
-
 }

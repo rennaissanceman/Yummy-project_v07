@@ -28,5 +28,4 @@ public class Payment {
     public boolean isSuccessful() {
         return paymentStatus == PaymentStatusEnumDomain.COMPLETED;
     }
-
 }

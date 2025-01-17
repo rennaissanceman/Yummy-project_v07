@@ -31,5 +31,4 @@ public class Menu {
                 && restaurant != null
                 && menuItems != null && !menuItems.isEmpty();
     }
-
 }

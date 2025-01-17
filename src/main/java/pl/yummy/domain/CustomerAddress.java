@@ -21,5 +21,4 @@ public class CustomerAddress {
     public boolean isDefaultAddress() {
         return Boolean.TRUE.equals(isDefault);
     }
-
 }

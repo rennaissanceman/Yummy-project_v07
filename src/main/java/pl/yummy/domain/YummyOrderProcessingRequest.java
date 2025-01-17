@@ -1,8 +1,9 @@
 package pl.yummy.domain;
 
-import lombok.Builder;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
+import pl.yummy.domain.enums.DeliveryStatusEnumDomain;
+import pl.yummy.domain.enums.OrdersStatusEnumDomain;
+import pl.yummy.domain.enums.PaymentStatusEnumDomain;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -10,26 +11,58 @@ import java.util.Objects;
 @With
 @Value
 @Builder
+@EqualsAndHashCode(of = "processingId")
+@ToString(of = {"processingId", "orders", "deliveryStatus", "paymentStatus", "processingStartTime", "processingEndTime"})
 public class YummyOrderProcessingRequest {
 
-//    przechowuje dane potrzebne do zarządzania przetwarzaniem zamówień.
+    Integer processingId; // Unikalny identyfikator procesu przetwarzania zamówienia
+    Orders orders; // Zamówienie, które jest przetwarzane
+    DeliveryStatusEnumDomain deliveryStatus; // Status dostawy zamówienia
+    PaymentStatusEnumDomain paymentStatus; // Status płatności zamówienia
+    OffsetDateTime processingStartTime; // Czas rozpoczęcia przetwarzania
+    OffsetDateTime processingEndTime; // Czas zakończenia przetwarzania
+    String processingNotes; // Notatki dotyczące procesu przetwarzania
 
-    // Dane zamówienia
-    String orderId; // ID zamówienia
-    String customerEmail; // Email klienta
-    String restaurantName; // Nazwa restauracji
-    String menuItemName; // Pozycja z menu
-    Integer quantity; // Ilość zamawianych pozycji
+    /**
+     * Sprawdza, czy zamówienie można przetwarzać.
+     *
+     * @return true, jeśli zamówienie ma odpowiedni status i spełnia warunki przetwarzania.
+     */
+    public boolean canProcess() {
+        return orders != null
+                && orders.getOrdersStatus() == OrdersStatusEnumDomain.PENDING
+                && orders.getPayment() != null
+                && orders.getPayment().getPaymentStatus() == PaymentStatusEnumDomain.IN_PROGRESS;
+    }
 
-    // Szczegóły przetwarzania
-    String courierName; // Imię kuriera
-    String courierStatus; // Status kuriera (np. "W drodze", "Dostarczono")
-    OffsetDateTime expectedDeliveryTime; // Przewidywany czas dostawy
-    String paymentStatus; // Status płatności (np. "Zapłacono", "Oczekuje")
-    Boolean isCompleted; // Flaga wskazująca, czy zamówienie zostało zrealizowane
+    /**
+     * Zaznacza zamówienie jako przetworzone.
+     *
+     * @return nowe przetwarzanie zaktualizowane o zakończony status.
+     */
+    public YummyOrderProcessingRequest markAsProcessed() {
+        return this.withDeliveryStatus(DeliveryStatusEnumDomain.DELIVERED)
+                .withProcessingEndTime(OffsetDateTime.now());
+    }
 
-    // Metoda pomocnicza do sprawdzania brakujących danych
-    public boolean isCourierNotAssigned() {
-        return Objects.isNull(courierName) || courierName.isBlank();
+    /**
+     * Oblicza czas przetwarzania zamówienia.
+     *
+     * @return czas przetwarzania w sekundach.
+     */
+    public long calculateProcessingTime() {
+        if (processingStartTime == null || processingEndTime == null) {
+            return 0;
+        }
+        return processingEndTime.toEpochSecond() - processingStartTime.toEpochSecond();
+    }
+
+    /**
+     * Sprawdza, czy płatność za zamówienie została zakończona.
+     *
+     * @return true, jeśli status płatności to COMPLETED.
+     */
+    public boolean isPaymentCompleted() {
+        return paymentStatus == PaymentStatusEnumDomain.COMPLETED;
     }
 }

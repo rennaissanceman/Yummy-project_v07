@@ -38,6 +38,4 @@ public class Restaurant {
     public Set<AvailableDeliveryArea> getAvailableDeliveryAreas() {
         return availableDeliveryAreas != null ? availableDeliveryAreas : new HashSet<>();
     }
-
-
 }

@@ -22,5 +22,4 @@ public class BillingInformation {
         return companyName != null && !companyName.isBlank()
                 && vatNumber != null && !vatNumber.isBlank();
     }
-
 }
