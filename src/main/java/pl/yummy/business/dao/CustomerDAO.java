@@ -7,27 +7,27 @@ import java.util.Optional;
 
 public interface CustomerDAO {
 
+    // Find a customer by their unique customer number
     Optional<Customer> findByCustomerNumber(String customerNumber);
-    List<Customer> findByIsCompanyTrue();
-    List<Customer> findByCustomerNameAndCustomerSurname(String name, String surname);
 
+    // Find all customers with a specific company name
     List<Customer> findByCompanyName(String companyName);
 
+    // Find all customers with a specific email
+    Optional<Customer> findByUserAuth_Email(String email);
+
+    // Find customers who are companies
+    List<Customer> findByIsCompanyTrue();
+
+    // Find customers by their last name
+    List<Customer> findByCustomerSurname(String surname);
+
+
+
     List<Customer> findCustomersWithOrders();
-
+    List<Customer> findByCustomerNameAndCustomerSurname(String name, String surname);
     List<Customer> findByOrderCountGreaterThan(Integer minimumOrders);
-
-
     List<Customer> findByIsCompany(Boolean isCompany);
     List<Customer> findByCustomerNameContainingIgnoreCase(String name);
-    List<Customer> findByOrdersNotEmpty();
 
-
-
-
-    List<Customer> findByCompanyStatus(Boolean isCompany);
-
-    List<Customer> findByName(String name);
-
-    List<Customer> findWithOrders();
 }

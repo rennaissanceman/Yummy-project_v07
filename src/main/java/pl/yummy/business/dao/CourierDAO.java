@@ -8,18 +8,21 @@ import java.util.Optional;
 
 public interface CourierDAO {
 
-    List<Courier> findByCourierStatus(CourierStatusEnumDomain status);
+    // Find a courier by their unique courier number
     Optional<Courier> findByCourierNumber(String courierNumber);
-    List<Courier> findByAverageRatingsGreaterThanEqual(Double minRating);
 
-    List<Courier> findAvailableCouriers();
+    // Find all couriers by their status
+    List<Courier> findByCourierStatus(CourierStatusEnumDomain courierStatus);
+
+    // Find couriers with average ratings greater than or equal to a specified value
+    List<Courier> findByAverageRatingsGreaterThanEqual(Double minimumRating);
+
+    // Find couriers hired after a specific date
+    List<Courier> findByHireDateAfter(java.time.OffsetDateTime hireDate);
+
+    // Find couriers by vehicle type
     List<Courier> findByVehicleType(String vehicleType);
 
-    List<Courier> findByAverageRatingsGreaterThan(Double rating);
 
 
-    List<Courier> findByStatus(CourierStatusEnumDomain status);
-
-
-    List<Courier> findByRatingsAbove(Double rating);
 }

@@ -5,25 +5,29 @@ import pl.yummy.domain.Restaurant;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface MenuDAO {
 
-    List<Menu> findByRestaurantId(Integer restaurantId);
+    // Find a menu by its unique name
+    Optional<Menu> findByMenuName(String menuName);
+
+    // Find all menus for a specific restaurant ID
+    List<Menu> findByRestaurant_RestaurantId(Long restaurantId);
+
+    // Find menus valid within a specific date range
     List<Menu> findByValidFromBeforeAndValidToAfter(OffsetDateTime startDate, OffsetDateTime endDate);
 
+    // Find menus created after a specific date
+    List<Menu> findByCreatedAtAfter(OffsetDateTime createdAt);
+
+    // Find menus by description containing a keyword
+    List<Menu> findByDescriptionContainingIgnoreCase(String keyword);
+
+
+
+
     List<Menu> findCurrentlyActiveMenus();
-    Menu findByName(String name);
-
-
-    List<Menu> findByRestaurant(Restaurant restaurant);
-    List<Menu> findByMenuNameContainingIgnoreCase(String menuName);
-
-
-
-
-    List<Menu> findValidMenus();
-
-
 
 
 }

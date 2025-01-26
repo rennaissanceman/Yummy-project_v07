@@ -10,26 +10,36 @@ import java.util.List;
 
 public interface DeliveryDAO {
 
-    List<Delivery> findByDeliveryStatus(DeliveryStatusEnumDomain status);
-    List<Delivery> findByCourierId(Integer courierId);
+    // Find all deliveries by a specific courier ID
+    List<Delivery> findByCourier_CourierId(Long courierId);
+
+    // Find all deliveries by their status
+    List<Delivery> findByDeliveryStatus(DeliveryStatusEnumDomain deliveryStatus);
+
+    // Find deliveries scheduled to start after a specific date
+    List<Delivery> findByStarTimeAfter(OffsetDateTime startTime);
+
+    // Find deliveries that are late (actual delivery time after estimated delivery time)
+    List<Delivery> findByActualDeliveryDateTimeAfterAndEstimatedDeliveryTimeIsNotNull(OffsetDateTime actualDeliveryDateTime);
+
+    // Find deliveries within a specific delivery area
+    List<Delivery> findByAvailableDeliveryArea_AvailableDeliveryAreaId(Integer deliveryAreaId);
+
+
+
+
+
     List<Delivery> findByEstimatedDeliveryTimeBeforeAndDeliveryStatus(OffsetDateTime time, DeliveryStatusEnumDomain status);
 
 
 
-    List<Delivery> findByStatus(String status);
-
     List<Delivery> findLateDeliveries();
-
-    List<Delivery> findByDeliveryAreaId(Integer deliveryAreaId);
 
 
     List<Delivery> findByCourier(Courier courier);
     List<Delivery> findByOrders(Orders orders);
-    List<Delivery> findByActualDeliveryDateTimeBefore(OffsetDateTime dateTime);
-    List<Delivery> findByEstimatedDeliveryTimeAfter(OffsetDateTime dateTime);
-
-    List<Delivery> findByStatus(DeliveryStatusEnumDomain status);
 
 
-    List<Delivery> findLateDeliveries(OffsetDateTime estimatedTime);
+
+
 }

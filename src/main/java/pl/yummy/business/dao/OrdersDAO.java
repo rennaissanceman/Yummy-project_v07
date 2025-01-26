@@ -4,34 +4,36 @@ import pl.yummy.domain.Customer;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface OrdersDAO {
 
-    List<Orders> findByCustomerId(Integer customerId);
-    List<Orders> findByOrdersStatus(OrdersStatusEnumDomain status);
-    List<Orders> findByTotalAmountGreaterThan(BigDecimal minAmount);
+    // Find an order by its unique order number
+    Optional<Orders> findByOrdersNumber(String ordersNumber);
+
+    // Find all orders for a specific customer ID
+    List<Orders> findByCustomer_CustomerId(Long customerId);
+
+    // Find all orders by status
+    List<Orders> findByOrdersStatus(OrdersStatusEnumDomain ordersStatus);
+
+    // Find orders created after a specific date
+    List<Orders> findByOrdersDateTimeAfter(OffsetDateTime dateTime);
+
+    // Find orders by total amount greater than or equal to a specified value
+    List<Orders> findByTotalAmountGreaterThanEqual(BigDecimal totalAmount);
 
 
 
-    List<Orders> findByStatus(String status);
-
-    List<Orders> findByDateRange(String startDate, String endDate);
-
-    List<Orders> findByDeliveryAreaId(Integer deliveryAreaId);
-
-
-    List<Orders> findByCustomer(Customer customer);
+    List<Orders> findByTotalAmountBetween(BigDecimal minAmount, BigDecimal maxAmount);
 
     List<Orders> findByOrdersDateTimeBetween(OffsetDateTime start, OffsetDateTime end);
 
+    List<Orders> findByDeliveryAreaId(Long deliveryAreaId);
 
-    List<Orders> findByStatus(OrdersStatusEnumDomain status);
-
-    List<Orders> findByDateRange(OffsetDateTime start, OffsetDateTime end);
-
-    List<Orders> findAboveAmount(BigDecimal amount);
 
 }

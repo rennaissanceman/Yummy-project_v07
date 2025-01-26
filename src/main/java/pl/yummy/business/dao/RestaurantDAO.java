@@ -8,8 +8,17 @@ import java.util.Optional;
 
 public interface RestaurantDAO {
 
-    Optional<Restaurant> findByRestaurantName(String name);
-    List<Restaurant> findByOwnerId(Integer ownerId);
+
+    // Find a restaurant by its name
+    Optional<Restaurant> findByRestaurantName(String restaurantName);
+
+    // Find all restaurants by a specific cuisine type
     List<Restaurant> findByCuisineType(CuisineTypeEnumDomain cuisineType);
+
+    // Find restaurants with a minimum average rating
+    List<Restaurant> findByAverageRatingGreaterThanEqual(Double minimumRating);
+
+    // Find restaurants owned by a specific owner ID
+    List<Restaurant> findByOwner_OwnerId(Integer ownerId);
 
 }
