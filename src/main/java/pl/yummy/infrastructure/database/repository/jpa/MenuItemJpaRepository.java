@@ -4,15 +4,34 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pl.yummy.domain.MenuItem;
+import pl.yummy.domain.enums.DietTypeEnumDomain;
 import pl.yummy.infrastructure.database.entity.MenuItemEntity;
 import pl.yummy.infrastructure.database.entity.enums.DietType;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MenuItemJpaRepository extends JpaRepository<MenuItemEntity, Long> {
 
+    // Find a menu item by its unique name
+    Optional<MenuItemEntity> findByItemName(String itemName);
+
+    // Find all menu items by a specific menu ID
+    List<MenuItemEntity> findByMenu_MenuId(Long menuId);
+
+    // Find all menu items by diet type
+    List<MenuItemEntity> findByDietType(DietTypeEnumDomain dietType);
+
+    // Find menu items that are currently available
+    List<MenuItemEntity> findByIsAvailableTrue();
+
+    // Find menu items containing a keyword in the description
+    List<MenuItemEntity> findByDescriptionContainingIgnoreCase(String keyword);
+
+  /*
     List<MenuItemEntity> findByAvailability(Boolean isAvailable);
     List<MenuItemEntity> findByDietType(DietType dietType);
     List<MenuItemEntity> findByMenuId(Long menuId);
@@ -22,4 +41,5 @@ public interface MenuItemJpaRepository extends JpaRepository<MenuItemEntity, Lon
 
     boolean existsByName(String itemName);
     long countByMenuId(Long menuId);
+    */
 }

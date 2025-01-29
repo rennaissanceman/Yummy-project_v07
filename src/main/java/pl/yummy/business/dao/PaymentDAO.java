@@ -13,7 +13,7 @@ public interface PaymentDAO {
     Optional<Payment> findByTransactionId(String transactionId);
 
     // Find all payments by a specific order ID
-    List<Payment> findByOrders_OrdersId(Integer ordersId);
+    List<Payment> findByOrders_OrdersId(Long ordersId);
 
     // Find all payments by their status
     List<Payment> findByPaymentStatus(PaymentStatusEnumDomain paymentStatus);

@@ -28,6 +28,7 @@ public interface OrdersDAO {
     List<Orders> findByTotalAmountGreaterThanEqual(BigDecimal totalAmount);
 
 
+/*
 
     List<Orders> findByTotalAmountBetween(BigDecimal minAmount, BigDecimal maxAmount);
 
@@ -35,5 +36,6 @@ public interface OrdersDAO {
 
     List<Orders> findByDeliveryAreaId(Long deliveryAreaId);
 
+*/
 
 }

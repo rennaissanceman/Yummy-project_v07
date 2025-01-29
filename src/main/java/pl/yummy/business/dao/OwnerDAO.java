@@ -17,5 +17,4 @@ public interface OwnerDAO {
     List<Owner> findByRestaurants_SizeGreaterThanEqual(Long minimumRestaurants);
 
 
-
 }

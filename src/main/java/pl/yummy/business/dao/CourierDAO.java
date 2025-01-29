@@ -23,6 +23,4 @@ public interface CourierDAO {
     // Find couriers by vehicle type
     List<Courier> findByVehicleType(String vehicleType);
 
-
-
 }

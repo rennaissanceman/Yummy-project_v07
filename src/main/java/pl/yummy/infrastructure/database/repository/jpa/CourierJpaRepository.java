@@ -4,17 +4,23 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pl.yummy.domain.enums.CourierStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.CourierEntity;
 
+import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CourierJpaRepository extends JpaRepository<CourierEntity, Long> {
 
-    // Niestandardowe metody
-    @Query("SELECT c FROM CourierEntity c WHERE c.available = true")
-    List<CourierEntity> findAvailableCouriers();
+    Optional<CourierEntity> findByCourierNumber(String courierNumber);
 
-    @Query("SELECT c FROM CourierEntity c WHERE c.available = true AND c.restaurant.id = :restaurantId")
-    List<CourierEntity> findAvailableCouriersByRestaurant(@Param("restaurantId") Long restaurantId);
+    List<CourierEntity> findByCourierStatus(CourierStatusEnumDomain courierStatus);
+
+    List<CourierEntity> findByAverageRatingsGreaterThanEqual(Double minimumRating);
+
+    List<CourierEntity> findByHireDateAfter(OffsetDateTime hireDate);
+
+    List<CourierEntity> findByVehicleType(String vehicleType);
 }

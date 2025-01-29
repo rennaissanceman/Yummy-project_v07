@@ -22,5 +22,4 @@ public interface ReceiptDAO {
 
     // Find receipts with specific notes
     List<Receipt> findByNotesContainingIgnoreCase(String keyword);
-
 }

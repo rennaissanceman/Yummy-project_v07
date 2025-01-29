@@ -29,13 +29,13 @@ public interface MenuItemDAO {
 
 
 
+/*
 
     List<MenuItem> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
 
     List<MenuItem> findByIsAvailable(Boolean isAvailable);
 
-
-
+*/
 
 
 }

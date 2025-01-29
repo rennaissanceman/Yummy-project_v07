@@ -29,10 +29,12 @@ public interface InvoiceDAO {
 
 
 
+/*
 
     List<Invoice> findByBillingInformationId(Integer billingInformationId);
     List<Invoice> findByIssueDateBetween(OffsetDateTime startDate, OffsetDateTime endDate);
 
+*/
 
 
 }

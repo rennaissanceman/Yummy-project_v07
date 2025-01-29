@@ -22,12 +22,4 @@ public interface CustomerDAO {
     // Find customers by their last name
     List<Customer> findByCustomerSurname(String surname);
 
-
-
-    List<Customer> findCustomersWithOrders();
-    List<Customer> findByCustomerNameAndCustomerSurname(String name, String surname);
-    List<Customer> findByOrderCountGreaterThan(Integer minimumOrders);
-    List<Customer> findByIsCompany(Boolean isCompany);
-    List<Customer> findByCustomerNameContainingIgnoreCase(String name);
-
 }

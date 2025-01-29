@@ -26,8 +26,9 @@ public interface MenuDAO {
 
 
 
-
+/*
     List<Menu> findCurrentlyActiveMenus();
+*/
 
 
 }

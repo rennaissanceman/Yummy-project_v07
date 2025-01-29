@@ -19,6 +19,6 @@ public interface RestaurantDAO {
     List<Restaurant> findByAverageRatingGreaterThanEqual(Double minimumRating);
 
     // Find restaurants owned by a specific owner ID
-    List<Restaurant> findByOwner_OwnerId(Integer ownerId);
+    List<Restaurant> findByOwner_OwnerId(Long ownerId);
 
 }

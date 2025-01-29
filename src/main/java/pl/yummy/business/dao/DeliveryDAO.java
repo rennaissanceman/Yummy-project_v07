@@ -28,17 +28,16 @@ public interface DeliveryDAO {
 
 
 
+/*
 
     List<Delivery> findByEstimatedDeliveryTimeBeforeAndDeliveryStatus(OffsetDateTime time, DeliveryStatusEnumDomain status);
 
-
-
     List<Delivery> findLateDeliveries();
-
 
     List<Delivery> findByCourier(Courier courier);
     List<Delivery> findByOrders(Orders orders);
 
+*/
 
 
 
