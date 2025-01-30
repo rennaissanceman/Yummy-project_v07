@@ -1,10 +1,8 @@
 package pl.yummy.business.dao;
 
-import pl.yummy.domain.Menu;
 import pl.yummy.domain.MenuItem;
 import pl.yummy.domain.enums.DietTypeEnumDomain;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 

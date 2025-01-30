@@ -1,10 +1,8 @@
 package pl.yummy.business.dao;
 
-import pl.yummy.domain.Customer;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 
-import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -26,6 +24,8 @@ public interface OrdersDAO {
 
     // Find orders by total amount greater than or equal to a specified value
     List<Orders> findByTotalAmountGreaterThanEqual(BigDecimal totalAmount);
+
+    List<Orders> findOrdersWithoutDelivery();
 
 
 /*

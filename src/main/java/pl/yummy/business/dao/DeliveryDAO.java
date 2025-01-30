@@ -1,8 +1,6 @@
 package pl.yummy.business.dao;
 
-import pl.yummy.domain.Courier;
 import pl.yummy.domain.Delivery;
-import pl.yummy.domain.Orders;
 import pl.yummy.domain.enums.DeliveryStatusEnumDomain;
 
 import java.time.OffsetDateTime;

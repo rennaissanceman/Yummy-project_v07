@@ -1,15 +1,10 @@
 package pl.yummy.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.yummy.domain.MenuItem;
 import pl.yummy.domain.enums.DietTypeEnumDomain;
 import pl.yummy.infrastructure.database.entity.MenuItemEntity;
-import pl.yummy.infrastructure.database.entity.enums.DietType;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 

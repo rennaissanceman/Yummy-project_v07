@@ -1,7 +1,6 @@
 package pl.yummy.business.dao;
 
 import pl.yummy.domain.Invoice;
-import pl.yummy.domain.Payment;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

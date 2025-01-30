@@ -54,4 +54,12 @@ public class OrdersRepository implements OrdersDAO {
                 .map(mapper::mapFromEntity)
                 .toList();
     }
+
+
+    @Override
+    public List<Orders> findOrdersWithoutDelivery() {
+        return ordersJpaRepository.findOrdersWithoutDelivery().stream()
+                .map(mapper::mapFromEntity)
+                .toList();
+    }
 }

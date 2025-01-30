@@ -1,8 +1,6 @@
 package pl.yummy.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.yummy.domain.enums.CourierStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.CourierEntity;
@@ -23,4 +21,5 @@ public interface CourierJpaRepository extends JpaRepository<CourierEntity, Long>
     List<CourierEntity> findByHireDateAfter(OffsetDateTime hireDate);
 
     List<CourierEntity> findByVehicleType(String vehicleType);
+
 }

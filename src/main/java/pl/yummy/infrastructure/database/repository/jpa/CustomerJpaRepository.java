@@ -2,7 +2,6 @@ package pl.yummy.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.yummy.domain.Customer;
 import pl.yummy.infrastructure.database.entity.CustomerEntity;
 
 import java.util.List;
@@ -17,4 +16,6 @@ public interface CustomerJpaRepository extends JpaRepository<CustomerEntity, Lon
     Optional<CustomerEntity> findByUserAuth_Email(String email);
     List<CustomerEntity> findByIsCompanyTrue();
     List<CustomerEntity> findByCustomerSurname(String surname);
+
+    boolean existBy
 }
