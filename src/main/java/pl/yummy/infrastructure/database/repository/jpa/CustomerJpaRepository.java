@@ -17,5 +17,4 @@ public interface CustomerJpaRepository extends JpaRepository<CustomerEntity, Lon
     List<CustomerEntity> findByIsCompanyTrue();
     List<CustomerEntity> findByCustomerSurname(String surname);
 
-    boolean existBy
 }
