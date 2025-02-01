@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.yummy.infrastructure.database.entity.enums.PaymentMethodStatus;
+import pl.yummy.infrastructure.database.entity.enums.PaymentMethodStatusEnumEntity;
 
 import java.time.OffsetDateTime;
 
@@ -33,7 +33,7 @@ public class PaymentMethodEntity {
 
     @Column(name = "payment_method_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private PaymentMethodStatus paymentMethodStatus;
+    private PaymentMethodStatusEnumEntity paymentMethodStatus;
 
     @Column(name = "created_at")
     private OffsetDateTime createdAt;

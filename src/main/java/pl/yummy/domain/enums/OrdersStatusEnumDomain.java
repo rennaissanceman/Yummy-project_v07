@@ -8,6 +8,7 @@ public enum OrdersStatusEnumDomain {
     READY_FOR_PICKUP,
     OUT_FOR_DELIVERY,
     DELIVERED,
+    PAID,
     CANCELLED_BY_CUSTOMER,
     CANCELLED_BY_RESTAURANT,
     FAILED_DELIVERY,

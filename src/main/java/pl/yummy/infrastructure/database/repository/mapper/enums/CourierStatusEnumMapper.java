@@ -4,13 +4,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import pl.yummy.domain.enums.CourierStatusEnumDomain;
-import pl.yummy.infrastructure.database.entity.enums.CourierStatus;
+import pl.yummy.infrastructure.database.entity.enums.CourierStatusEnumEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CourierStatusEnumMapper {
 
     @Named("toDomain")
-    static CourierStatusEnumDomain toDomain(CourierStatus status) {
+    static CourierStatusEnumDomain toDomain(CourierStatusEnumEntity status) {
         if (status == null) {
             return null;
         }
@@ -27,17 +27,17 @@ public interface CourierStatusEnumMapper {
     }
 
     @Named("toEntity")
-    static CourierStatus toEntity(CourierStatusEnumDomain status) {
+    static CourierStatusEnumEntity toEntity(CourierStatusEnumDomain status) {
         if (status == null) {
             return null;
         }
         switch (status) {
             case AVAILABLE:
-                return CourierStatus.AVAILABLE;
+                return CourierStatusEnumEntity.AVAILABLE;
             case BUSY:
-                return CourierStatus.BUSY;
+                return CourierStatusEnumEntity.BUSY;
             case INACTIVE:
-                return CourierStatus.INACTIVE;
+                return CourierStatusEnumEntity.INACTIVE;
             default:
                 throw new IllegalArgumentException("Unknown CourierStatusEnumDomain: " + status);
         }

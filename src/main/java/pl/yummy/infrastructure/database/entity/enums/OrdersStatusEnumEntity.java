@@ -1,12 +1,13 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
-public enum OrdersStatus {
+public enum OrdersStatusEnumEntity {
     PENDING,
     CONFIRMED,
     PREPARING,
     READY_FOR_PICKUP,
     OUT_FOR_DELIVERY,
     DELIVERED,
+    PAID,
     CANCELLED_BY_CUSTOMER,
     CANCELLED_BY_RESTAURANT,
     FAILED_DELIVERY,

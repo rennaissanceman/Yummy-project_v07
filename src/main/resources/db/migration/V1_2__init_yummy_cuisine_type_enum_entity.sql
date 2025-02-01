@@ -1,4 +1,4 @@
-CREATE TYPE cuisine_type AS ENUM (
+CREATE TYPE cuisine_type_enum_entity AS ENUM (
     'ITALIAN',
     'CHINESE',
     'INDIAN',

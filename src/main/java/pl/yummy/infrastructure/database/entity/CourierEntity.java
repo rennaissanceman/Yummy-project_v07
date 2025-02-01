@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.yummy.infrastructure.database.entity.enums.CourierStatus;
+import pl.yummy.infrastructure.database.entity.enums.CourierStatusEnumEntity;
 
 import java.time.OffsetTime;
 import java.util.Set;
@@ -52,7 +52,7 @@ public class CourierEntity {
 
     @Column(name = "courier_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private CourierStatus courierStatus;
+    private CourierStatusEnumEntity courierStatus;
 
     @Column(name = "hire_date", nullable = false)
     private OffsetTime hireDate;

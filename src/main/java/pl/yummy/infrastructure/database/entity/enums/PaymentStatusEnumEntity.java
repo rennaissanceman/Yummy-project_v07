@@ -1,6 +1,6 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
-public enum PaymentStatus {
+public enum PaymentStatusEnumEntity {
     PENDING,
     COMPLETED,
     FAILED,

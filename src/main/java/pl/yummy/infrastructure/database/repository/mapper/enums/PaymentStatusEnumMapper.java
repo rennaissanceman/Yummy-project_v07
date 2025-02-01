@@ -4,13 +4,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 import pl.yummy.domain.enums.PaymentStatusEnumDomain;
-import pl.yummy.infrastructure.database.entity.enums.PaymentStatus;
+import pl.yummy.infrastructure.database.entity.enums.PaymentStatusEnumEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PaymentStatusEnumMapper {
 
     @Named("toDomain")
-    static PaymentStatusEnumDomain toDomain(PaymentStatus paymentStatus) {
+    static PaymentStatusEnumDomain toDomain(PaymentStatusEnumEntity paymentStatus) {
         if (paymentStatus == null) {
             return null;
         }
@@ -18,10 +18,10 @@ public interface PaymentStatusEnumMapper {
     }
 
     @Named("toEntity")
-    static PaymentStatus toEntity(PaymentStatusEnumDomain paymentStatusEnumDomain) {
+    static PaymentStatusEnumEntity toEntity(PaymentStatusEnumDomain paymentStatusEnumDomain) {
         if (paymentStatusEnumDomain == null) {
             return null;
         }
-        return PaymentStatus.valueOf(paymentStatusEnumDomain.name());
+        return PaymentStatusEnumEntity.valueOf(paymentStatusEnumDomain.name());
     }
 }

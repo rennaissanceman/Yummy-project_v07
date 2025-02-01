@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.yummy.infrastructure.database.entity.enums.DeliveryStatus;
+import pl.yummy.infrastructure.database.entity.enums.DeliveryStatusEnumEntity;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -42,7 +42,7 @@ public class DeliveryEntity {
 
     @Column(name = "delivery_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DeliveryStatus deliveryStatus;
+    private DeliveryStatusEnumEntity deliveryStatus;
 
     @Column(name = "start_time")
     private OffsetDateTime starTime;

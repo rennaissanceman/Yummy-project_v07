@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.yummy.infrastructure.database.entity.enums.CuisineType;
+import pl.yummy.infrastructure.database.entity.enums.CuisineTypeEnumEntity;
 
 import java.util.Set;
 
@@ -49,7 +49,7 @@ public class RestaurantEntity {
 
     @Column(name = "cuisine_type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private CuisineType cuisineType;
+    private CuisineTypeEnumEntity cuisineType;
 
     @Column(name = "average_rating")
     private Double averageRating;

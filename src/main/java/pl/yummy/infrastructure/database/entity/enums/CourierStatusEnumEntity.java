@@ -1,7 +1,6 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
-public enum CourierStatus {
-
+public enum CourierStatusEnumEntity {
     AVAILABLE,
     BUSY,
     INACTIVE

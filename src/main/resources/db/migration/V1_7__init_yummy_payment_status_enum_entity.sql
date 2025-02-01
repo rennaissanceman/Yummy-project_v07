@@ -1,4 +1,4 @@
-CREATE TYPE payment_status AS ENUM (
+CREATE TYPE payment_status_enum_entity AS ENUM (
     'PENDING',
     'COMPLETED',
     'FAILED',

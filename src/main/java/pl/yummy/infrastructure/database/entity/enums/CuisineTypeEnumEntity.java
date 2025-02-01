@@ -1,6 +1,6 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
-public enum CuisineType {
+public enum CuisineTypeEnumEntity {
     ITALIAN,
     CHINESE,
     INDIAN,

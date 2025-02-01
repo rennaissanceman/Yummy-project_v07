@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface CourierJpaRepository extends JpaRepository<CourierEntity, Long> {
 
+    Optional<CourierEntity> findFirstByCourierStatus(CourierStatusEnumDomain status);
+
     Optional<CourierEntity> findByCourierNumber(String courierNumber);
 
     List<CourierEntity> findByCourierStatus(CourierStatusEnumDomain courierStatus);

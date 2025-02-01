@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.yummy.infrastructure.database.entity.enums.DietType;
+import pl.yummy.infrastructure.database.entity.enums.DietTypeEnumEntity;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -41,7 +41,7 @@ public class MenuItemEntity {
 
     @Column(name = "diet_type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private DietType dietType;
+    private DietTypeEnumEntity dietType;
 
     @Column(name = "calories")
     private Integer calories;

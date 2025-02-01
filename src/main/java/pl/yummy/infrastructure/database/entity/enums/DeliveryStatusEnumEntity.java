@@ -1,6 +1,6 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
-public enum DeliveryStatus {
+public enum DeliveryStatusEnumEntity {
 
     PENDING,
     ASSIGNED,

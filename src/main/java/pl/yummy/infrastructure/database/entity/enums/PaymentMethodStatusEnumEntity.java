@@ -1,6 +1,6 @@
 package pl.yummy.infrastructure.database.entity.enums;
 
-public enum PaymentMethodStatus {
+public enum PaymentMethodStatusEnumEntity {
     ACTIVE,
     INACTIVE,
     PENDING_APPROVAL,

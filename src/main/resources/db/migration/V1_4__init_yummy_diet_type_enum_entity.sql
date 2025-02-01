@@ -1,4 +1,4 @@
-CREATE TYPE diet_type AS ENUM (
+CREATE TYPE diet_type_enum_entity AS ENUM (
     'VEGETARIAN',
     'VEGAN',
     'GLUTEN_FREE',

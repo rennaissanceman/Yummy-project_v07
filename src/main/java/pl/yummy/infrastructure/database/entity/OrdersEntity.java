@@ -2,7 +2,7 @@ package pl.yummy.infrastructure.database.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import pl.yummy.infrastructure.database.entity.enums.OrdersStatus;
+import pl.yummy.infrastructure.database.entity.enums.OrdersStatusEnumEntity;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -43,7 +43,7 @@ public class OrdersEntity {
 
     @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private OrdersStatus ordersStatus;
+    private OrdersStatusEnumEntity ordersStatus;
 
     @Column(name = "orders_description")
     private String ordersDescription;

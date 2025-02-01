@@ -7,7 +7,7 @@ import org.mapstruct.ReportingPolicy;
 import pl.yummy.domain.Courier;
 import pl.yummy.domain.enums.CourierStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.CourierEntity;
-import pl.yummy.infrastructure.database.entity.enums.CourierStatus;
+import pl.yummy.infrastructure.database.entity.enums.CourierStatusEnumEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {
         UserAuthEntityMapper.class
@@ -26,7 +26,7 @@ public interface CourierEntityMapper {
 
 
     @Named("mapStatus")
-    static CourierStatusEnumDomain mapStatus(CourierStatus status) {
+    static CourierStatusEnumDomain mapStatus(CourierStatusEnumEntity status) {
         if (status == null) {
             return null;
         }
@@ -39,14 +39,14 @@ public interface CourierEntityMapper {
     }
 
     @Named("mapStatusReverse")
-    static CourierStatus mapStatusReverse(CourierStatusEnumDomain status) {
+    static CourierStatusEnumEntity mapStatusReverse(CourierStatusEnumDomain status) {
         if (status == null) {
             return null;
         }
         switch (status) {
-            case AVAILABLE: return CourierStatus.AVAILABLE;
-            case BUSY: return CourierStatus.BUSY;
-            case INACTIVE: return CourierStatus.INACTIVE;
+            case AVAILABLE: return CourierStatusEnumEntity.AVAILABLE;
+            case BUSY: return CourierStatusEnumEntity.BUSY;
+            case INACTIVE: return CourierStatusEnumEntity.INACTIVE;
             default: throw new IllegalArgumentException("Unknown CourierStatus: " + status);
 
         }
