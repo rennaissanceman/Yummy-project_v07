@@ -2,8 +2,8 @@ package pl.yummy.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.yummy.domain.enums.CuisineTypeEnumDomain;
 import pl.yummy.infrastructure.database.entity.RestaurantEntity;
+import pl.yummy.infrastructure.database.entity.enums.CuisineTypeEnumEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantEntity,
     Optional<RestaurantEntity> findByRestaurantName(String restaurantName);
 
     // Find all restaurants by a specific cuisine type
-    List<RestaurantEntity> findByCuisineType(CuisineTypeEnumDomain cuisineType);
+    List<RestaurantEntity> findByCuisineType(CuisineTypeEnumEntity cuisineType);
 
     // Find restaurants with a minimum average rating
     List<RestaurantEntity> findByAverageRatingGreaterThanEqual(Double minimumRating);

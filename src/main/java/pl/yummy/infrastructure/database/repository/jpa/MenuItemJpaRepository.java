@@ -2,8 +2,8 @@ package pl.yummy.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.yummy.domain.enums.DietTypeEnumDomain;
 import pl.yummy.infrastructure.database.entity.MenuItemEntity;
+import pl.yummy.infrastructure.database.entity.enums.DietTypeEnumEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +18,7 @@ public interface MenuItemJpaRepository extends JpaRepository<MenuItemEntity, Lon
     List<MenuItemEntity> findByMenu_MenuId(Long menuId);
 
     // Find all menu items by diet type
-    List<MenuItemEntity> findByDietType(DietTypeEnumDomain dietType);
+    List<MenuItemEntity> findByDietType(DietTypeEnumEntity dietType);
 
     // Find menu items that are currently available
     List<MenuItemEntity> findByIsAvailableTrue();

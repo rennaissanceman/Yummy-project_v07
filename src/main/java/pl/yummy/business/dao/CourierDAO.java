@@ -3,6 +3,7 @@ package pl.yummy.business.dao;
 import pl.yummy.domain.Courier;
 import pl.yummy.domain.enums.CourierStatusEnumDomain;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public interface CourierDAO {
     List<Courier> findByAverageRatingsGreaterThanEqual(Double minimumRating);
 
     // Find couriers hired after a specific date
-    List<Courier> findByHireDateAfter(java.time.OffsetDateTime hireDate);
+    List<Courier> findByHireDateAfter(OffsetDateTime hireDate);
 
     // Find couriers by vehicle type
     List<Courier> findByVehicleType(String vehicleType);

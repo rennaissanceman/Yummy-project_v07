@@ -9,30 +9,32 @@ import pl.yummy.infrastructure.database.repository.mapper.OwnerEntityMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
 public class OwnerRepository implements OwnerDAO {
 
     private final OwnerJpaRepository ownerJpaRepository;
-    private final OwnerEntityMapper mapper;
+    private final OwnerEntityMapper ownerEntityMapper;
 
     @Override
     public Optional<Owner> findByOwnerNumber(String ownerNumber) {
         return ownerJpaRepository.findByOwnerNumber(ownerNumber)
-                .map(mapper::mapFromEntity);
+                .map(ownerEntityMapper::mapFromEntity);
     }
 
     @Override
     public Optional<Owner> findByOwnerName(String ownerName) {
         return ownerJpaRepository.findByOwnerName(ownerName)
-                .map(mapper::mapFromEntity);
+                .map(ownerEntityMapper::mapFromEntity);
     }
 
     @Override
     public List<Owner> findByRestaurants_SizeGreaterThanEqual(Long minimumRestaurants) {
-        return ownerJpaRepository.findByRestaurants_SizeGreaterThanEqual(minimumRestaurants).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return ownerJpaRepository.findByRestaurants_SizeGreaterThanEqual(minimumRestaurants)
+                .stream()
+                .map(ownerEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 }

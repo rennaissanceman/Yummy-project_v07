@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
+import pl.yummy.infrastructure.database.entity.enums.OrdersStatusEnumEntity;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -35,7 +35,7 @@ public interface OrdersJpaRepository extends JpaRepository<OrdersEntity, Long> {
                     "ordersItems"
             }
     )
-    List<OrdersEntity> findByOrdersStatus(OrdersStatusEnumDomain ordersStatus);
+    List<OrdersEntity> findByOrdersStatus(OrdersStatusEnumEntity ordersStatus);
 
     // Find orders created after a specific date
     List<OrdersEntity> findByOrdersDateTimeAfter(OffsetDateTime dateTime);
@@ -70,7 +70,7 @@ public interface OrdersJpaRepository extends JpaRepository<OrdersEntity, Long> {
     """)
     int updateOrderStatus(
             @Param("ordersId") Long ordersId,
-            @Param("status") OrdersStatusEnumDomain status
+            @Param("status") OrdersStatusEnumEntity status
     );
 
 /*

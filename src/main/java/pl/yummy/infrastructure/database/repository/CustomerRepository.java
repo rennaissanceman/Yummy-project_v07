@@ -9,45 +9,49 @@ import pl.yummy.infrastructure.database.repository.mapper.CustomerEntityMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
 public class CustomerRepository implements CustomerDAO {
 
     private final CustomerJpaRepository customerJpaRepository;
-    private final CustomerEntityMapper mapper;
+    private final CustomerEntityMapper customerEntityMapper;
 
     @Override
     public Optional<Customer> findByCustomerNumber(String customerNumber) {
         return customerJpaRepository.findByCustomerNumber(customerNumber)
-                .map(mapper::mapFromEntity);
+                .map(customerEntityMapper::mapFromEntity);
     }
 
     @Override
     public List<Customer> findByCompanyName(String companyName) {
-        return customerJpaRepository.findByCompanyName(companyName).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return customerJpaRepository.findByCompanyName(companyName)
+                .stream()
+                .map(customerEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Customer> findByUserAuth_Email(String email) {
         return customerJpaRepository.findByUserAuth_Email(email)
-                .map(mapper::mapFromEntity);
+                .map(customerEntityMapper::mapFromEntity);
     }
 
     @Override
     public List<Customer> findByIsCompanyTrue() {
-        return customerJpaRepository.findByIsCompanyTrue().stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return customerJpaRepository.findByIsCompanyTrue()
+                .stream()
+                .map(customerEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Customer> findByCustomerSurname(String surname) {
-        return customerJpaRepository.findByCustomerSurname(surname).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return customerJpaRepository.findByCustomerSurname(surname)
+                .stream()
+                .map(customerEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
 }

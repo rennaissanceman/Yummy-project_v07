@@ -6,4 +6,6 @@ import pl.yummy.domain.Payment;
 public interface OrderProcessingDAO {
 
     void processOrderPayment(Orders orders, Payment payment);
+
+//    zarządza procesowaniem zamówień
 }

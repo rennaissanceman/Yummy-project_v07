@@ -21,7 +21,7 @@ public interface DeliveryDAO {
     List<Delivery> findByActualDeliveryDateTimeAfterAndEstimatedDeliveryTimeIsNotNull(OffsetDateTime actualDeliveryDateTime);
 
     // Find deliveries within a specific delivery area
-    List<Delivery> findByAvailableDeliveryArea_AvailableDeliveryAreaId(Integer deliveryAreaId);
+    List<Delivery> findByAvailableDeliveryArea_AvailableDeliveryAreaId(Long deliveryAreaId);
 
 
 

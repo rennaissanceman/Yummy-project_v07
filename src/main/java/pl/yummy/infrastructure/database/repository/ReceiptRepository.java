@@ -10,45 +10,50 @@ import pl.yummy.infrastructure.database.repository.mapper.ReceiptEntityMapper;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
 public class ReceiptRepository implements ReceiptDAO {
 
     private final ReceiptJpaRepository receiptJpaRepository;
-    private final ReceiptEntityMapper mapper;
+    private final ReceiptEntityMapper receiptEntityMapper;
 
     @Override
     public Optional<Receipt> findByReceiptNumber(String receiptNumber) {
         return receiptJpaRepository.findByReceiptNumber(receiptNumber)
-                .map(mapper::mapFromEntity);
+                .map(receiptEntityMapper::mapFromEntity);
     }
 
     @Override
     public List<Receipt> findByOrders_OrdersId(Integer ordersId) {
-        return receiptJpaRepository.findByOrders_OrdersId(ordersId).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return receiptJpaRepository.findByOrders_OrdersId(ordersId)
+                .stream()
+                .map(receiptEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Receipt> findByIssueDateAfter(OffsetDateTime issueDate) {
-        return receiptJpaRepository.findByIssueDateAfter(issueDate).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return receiptJpaRepository.findByIssueDateAfter(issueDate)
+                .stream()
+                .map(receiptEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Receipt> findByTotalAmountGreaterThanEqual(Double totalAmount) {
-        return receiptJpaRepository.findByTotalAmountGreaterThanEqual(totalAmount).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return receiptJpaRepository.findByTotalAmountGreaterThanEqual(totalAmount)
+                .stream()
+                .map(receiptEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Receipt> findByNotesContainingIgnoreCase(String keyword) {
-        return receiptJpaRepository.findByNotesContainingIgnoreCase(keyword).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return receiptJpaRepository.findByNotesContainingIgnoreCase(keyword)
+                .stream()
+                .map(receiptEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 }

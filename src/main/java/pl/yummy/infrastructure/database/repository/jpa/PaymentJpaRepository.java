@@ -2,8 +2,8 @@ package pl.yummy.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.yummy.domain.enums.PaymentStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.PaymentEntity;
+import pl.yummy.infrastructure.database.entity.enums.PaymentStatusEnumEntity;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -20,7 +20,7 @@ public interface PaymentJpaRepository extends JpaRepository<PaymentEntity, Long>
     List<PaymentEntity> findByOrders_OrdersId(Long ordersId);
 
     // Find all payments by their status
-    List<PaymentEntity> findByPaymentStatus(PaymentStatusEnumDomain paymentStatus);
+    List<PaymentEntity> findByPaymentStatus(PaymentStatusEnumEntity paymentStatus);
 
     // Find payments made after a specific date
     List<PaymentEntity> findByCreatedAtAfter(OffsetDateTime createdAt);

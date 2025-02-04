@@ -51,4 +51,9 @@ public interface CourierEntityMapper {
 
         }
     }
+
+
+    default Class<CourierStatusEnumEntity> getCourierStatusEntityClass() {
+        return CourierStatusEnumEntity.class;
+    }
 }

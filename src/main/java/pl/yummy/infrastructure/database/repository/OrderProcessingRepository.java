@@ -7,19 +7,17 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.OrderProcessingDAO;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.Payment;
-import pl.yummy.domain.enums.CourierStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.CourierEntity;
 import pl.yummy.infrastructure.database.entity.DeliveryEntity;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import pl.yummy.infrastructure.database.entity.PaymentEntity;
-import pl.yummy.infrastructure.database.entity.enums.CourierStatusEnumEntity;
-import pl.yummy.infrastructure.database.entity.enums.DeliveryStatusEnumEntity;
-import pl.yummy.infrastructure.database.entity.enums.OrdersStatusEnumEntity;
 import pl.yummy.infrastructure.database.repository.jpa.CourierJpaRepository;
 import pl.yummy.infrastructure.database.repository.jpa.DeliveryJpaRepository;
 import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 import pl.yummy.infrastructure.database.repository.jpa.PaymentJpaRepository;
+import pl.yummy.infrastructure.database.repository.mapper.CourierEntityMapper;
 import pl.yummy.infrastructure.database.repository.mapper.DeliveryEntityMapper;
+import pl.yummy.infrastructure.database.repository.mapper.OrdersEntityMapper;
 import pl.yummy.infrastructure.database.repository.mapper.PaymentEntityMapper;
 
 import java.util.Optional;
@@ -33,8 +31,10 @@ public class OrderProcessingRepository implements OrderProcessingDAO {
     private final DeliveryJpaRepository deliveryJpaRepository;
     private final CourierJpaRepository courierJpaRepository;
 
+    private final OrdersEntityMapper ordersEntityMapper;
     private final PaymentEntityMapper paymentEntityMapper;
     private final DeliveryEntityMapper deliveryEntityMapper;
+    private final CourierEntityMapper courierEntityMapper;
 
     @Override
     @Transactional
@@ -45,28 +45,24 @@ public class OrderProcessingRepository implements OrderProcessingDAO {
         // Obsługa płatności
         PaymentEntity paymentEntity = paymentEntityMapper.mapToEntity(payment);
         paymentEntity.setOrders(ordersEntity);
-        paymentJpaRepository.save(paymentEntity);
+        paymentJpaRepository.saveAndFlush(paymentEntity);
 
-        // Aktualizacja statusu zamówienia na "PAID"
-        ordersEntity.setOrdersStatus(OrdersStatusEnumEntity.PAID);
-        ordersJpaRepository.save(ordersEntity);
+        // Aktualizacja statusu zamówienia
+        ordersEntity.setOrdersStatus(orders.getOrdersStatus());
+        ordersJpaRepository.saveAndFlush(ordersEntity);
 
-        // Tworzenie dostawy dla zamówienia
+        // Tworzenie dostawy
         DeliveryEntity deliveryEntity = new DeliveryEntity();
         deliveryEntity.setOrders(ordersEntity);
-        deliveryEntity.setDeliveryStatus(DeliveryStatusEnumEntity.PENDING);
-        deliveryJpaRepository.save(deliveryEntity);
+        deliveryEntity.setDeliveryStatus(orders.getDelivery().getDeliveryStatus());
+        deliveryJpaRepository.saveAndFlush(deliveryEntity);
 
         // Przypisanie kuriera
-        Optional<CourierEntity> availableCourier = courierJpaRepository.findFirstByCourierStatus(CourierStatusEnumDomain.AVAILABLE);
+        Optional<CourierEntity> availableCourier = courierJpaRepository.findFirstByCourierStatus(orders.getCourier().getCourierStatus());
 
         availableCourier.ifPresent(courier -> {
             deliveryEntity.setCourier(courier);
-            deliveryEntity.setDeliveryStatus(DeliveryStatusEnumEntity.ASSIGNED);
-            courier.setCourierStatus(CourierStatusEnumEntity.BUSY);
-            courierJpaRepository.save(courier);
+            deliveryJpaRepository.saveAndFlush(deliveryEntity);
         });
-
-        deliveryJpaRepository.save(deliveryEntity);
     }
 }

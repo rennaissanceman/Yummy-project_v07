@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import pl.yummy.domain.Payment;
 import pl.yummy.infrastructure.database.entity.PaymentEntity;
+import pl.yummy.infrastructure.database.entity.enums.PaymentStatusEnumEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PaymentEntityMapper {
@@ -20,4 +21,8 @@ public interface PaymentEntityMapper {
     @Mapping(target = "invoice", ignore = true)
     @Mapping(target = "receipt", ignore = true)
     PaymentEntity mapToEntity(Payment domain);
+
+    default Class<PaymentStatusEnumEntity> getPaymentStatusEntityClass() {
+        return PaymentStatusEnumEntity.class;
+    }
 }

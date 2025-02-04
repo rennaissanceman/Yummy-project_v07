@@ -11,45 +11,56 @@ import pl.yummy.infrastructure.database.repository.mapper.CourierEntityMapper;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
 public class CourierRepository implements CourierDAO {
 
     private final CourierJpaRepository courierJpaRepository;
-    private final CourierEntityMapper mapper;
+    private final CourierEntityMapper courierEntityMapper;
 
     @Override
     public Optional<Courier> findByCourierNumber(String courierNumber) {
         return courierJpaRepository.findByCourierNumber(courierNumber)
-                .map(mapper::mapFromEntity);
+                .map(courierEntityMapper::mapFromEntity);
     }
 
     @Override
     public List<Courier> findByCourierStatus(CourierStatusEnumDomain courierStatus) {
-        return courierJpaRepository.findByCourierStatus(courierStatus).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        // Przekształcamy status domenowy na status encji – zakładamy, że nazwy enumów są zgodne.
+        return courierJpaRepository.findByCourierStatus(
+                        Enum.valueOf(
+                                courierEntityMapper.getCourierStatusEntityClass(),
+                                courierStatus.name()
+                        )
+                )
+                .stream()
+                .map(courierEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Courier> findByAverageRatingsGreaterThanEqual(Double minimumRating) {
-        return courierJpaRepository.findByAverageRatingsGreaterThanEqual(minimumRating).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return courierJpaRepository.findByAverageRatingsGreaterThanEqual(minimumRating)
+                .stream()
+                .map(courierEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Courier> findByHireDateAfter(OffsetDateTime hireDate) {
-        return courierJpaRepository.findByHireDateAfter(hireDate).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return courierJpaRepository.findByHireDateAfter(hireDate)
+                .stream()
+                .map(courierEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Courier> findByVehicleType(String vehicleType) {
-        return courierJpaRepository.findByVehicleType(vehicleType).stream()
-                .map(mapper::mapFromEntity)
-                .toList();
+        return courierJpaRepository.findByVehicleType(vehicleType)
+                .stream()
+                .map(courierEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 }
