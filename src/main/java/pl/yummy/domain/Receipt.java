@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
         "taxRate", "payment", "notes"})
 public class Receipt {
 
-    Integer receiptId;
+    Long receiptId;
     String receiptNumber;
     Orders orders;
     OffsetDateTime issueDate;

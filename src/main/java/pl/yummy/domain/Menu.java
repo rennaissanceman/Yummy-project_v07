@@ -12,7 +12,7 @@ import java.util.Set;
 @ToString(of = {"menuId", "restaurant", "menuName", "description", "validFrom", "validTo", "createdAt", "updatedAt"})
 public class Menu {
 
-    Integer menuId;
+    Long menuId;
     Restaurant restaurant;
     String menuName;
     String description;

@@ -11,7 +11,7 @@ import java.util.Set;
 @ToString(of = {"billingInformationId", "customer", "companyName", "vatNumber", "address"})
 public class BillingInformation {
 
-    Integer billingInformationId;
+    Long billingInformationId;
     Customer customer;
     String companyName;
     String vatNumber;

@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 @ToString(of = {"paymentId", "orders", "paymentMethod", "amount", "paymentStatus", "transactionId", "createdAt", "updatedAt"})
 public class Payment {
 
-    Integer paymentId;
+    Long paymentId;
     Orders orders;
     PaymentMethodStatusEnumDomain paymentMethod;
     BigDecimal amount;

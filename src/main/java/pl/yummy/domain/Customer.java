@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString(of = {"customerId", "customerNumber", "isCompany", "companyName", "customerName", "customerSurname", "userAuth"})
 public class Customer {
 
-    Integer customerId;
+    Long customerId;
     String customerNumber;
     Boolean isCompany;
     String companyName;

@@ -9,7 +9,7 @@ import lombok.*;
 @ToString(of = {"addressId", "country", "city", "postalCode", "street"})
 public class Address {
 
-    Integer addressId;
+    Long addressId;
     String country;
     String city;
     String postalCode;

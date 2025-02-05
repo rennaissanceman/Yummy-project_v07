@@ -11,7 +11,7 @@ import java.util.Set;
 @ToString(of = {"ownerId", "ownerNumber", "userAuth"})
 public class Owner {
 
-    Integer ownerId;
+    Long ownerId;
     String ownerNumber;
     String ownerName;
     UserAuth userAuth;

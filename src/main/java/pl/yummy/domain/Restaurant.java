@@ -15,7 +15,7 @@ import java.util.Set;
         "openingHours", "cuisineType", "averageRating", "ratingCount", "description", "logoURL"})
 public class Restaurant {
 
-    Integer restaurantId;
+    Long restaurantId;
     String restaurantName;
     Owner owner;
     Address address;

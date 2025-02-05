@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.yummy.business.dao.PaymentDAO;
 import pl.yummy.domain.Payment;
 import pl.yummy.domain.enums.PaymentStatusEnumDomain;
-import pl.yummy.infrastructure.database.entity.enums.PaymentStatusEnumEntity;
 import pl.yummy.infrastructure.database.repository.jpa.PaymentJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.PaymentEntityMapper;
 

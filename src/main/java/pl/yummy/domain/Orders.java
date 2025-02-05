@@ -18,7 +18,7 @@ import java.util.Set;
         "totalAmount", "availableDeliveryAreaId", "customerAddressId"})
 public class Orders {
 
-    Integer ordersId;
+    Long ordersId;
     String ordersNumber;
     Customer customer;
     Menu menu;
@@ -46,3 +46,4 @@ public class Orders {
                 && ordersStatus == OrdersStatusEnumDomain.PENDING;
     }
 }
+

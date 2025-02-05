@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @ToString(of = {"ordersItemId", "orders", "menuItem", "itemName", "quantity", "unitPrice", "totalPrice", "itemNotes"})
 public class OrdersItem {
 
-    Integer ordersItemId;
+    Long ordersItemId;
     Orders orders;
     MenuItem menuItem;
     String itemName;

@@ -14,7 +14,7 @@ import java.util.Set;
         "vehicleRegistrationNumber", "averageRatings", "deliveryCount", "hireDate"})
 public class Courier {
 
-    Integer courierId;
+    Long courierId;
     String courierNumber;
     String courierName;
     String courierSurname;

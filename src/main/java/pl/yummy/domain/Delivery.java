@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
         "starTime", "endTime", "estimatedDeliveryTime", "actualDeliveryDateTime", "deliveryFee", "deliveryNotes"})
 public class Delivery {
 
-    Integer deliveryId;
+    Long deliveryId;
     String deliveryNumber;
     Orders orders;
     AvailableDeliveryArea availableDeliveryArea;

@@ -11,7 +11,7 @@ import java.util.Set;
 @ToString(of = {"availableDeliveryAreaId", "restaurant", "address"})
 public class AvailableDeliveryArea {
 
-    Integer availableDeliveryAreaId;
+    Long availableDeliveryAreaId;
     Restaurant restaurant;
     Address address;
     Set<CustomerAddress> customerAddresses;

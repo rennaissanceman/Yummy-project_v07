@@ -11,7 +11,7 @@ import java.util.Set;
 @ToString(of = {"customerAddressId", "customer", "availableDeliveryArea", "address", "isDefault"})
 public class CustomerAddress {
 
-    Integer customerAddressId;
+    Long customerAddressId;
     Customer customer;
     AvailableDeliveryArea availableDeliveryArea;
     Address address;

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.yummy.business.dao.MenuItemDAO;
 import pl.yummy.domain.MenuItem;
 import pl.yummy.domain.enums.DietTypeEnumDomain;
-import pl.yummy.infrastructure.database.entity.enums.DietTypeEnumEntity;
 import pl.yummy.infrastructure.database.repository.jpa.MenuItemJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.MenuItemEntityMapper;
 

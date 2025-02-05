@@ -12,7 +12,7 @@ import java.time.OffsetDateTime;
 @ToString(of = {"paymentMethodId", "paymentMethodName", "description", "isActive", "paymentMethodStatus", "createdAt", "updatedAt"})
 public class PaymentMethod {
 
-    Integer paymentMethodId;
+    Long paymentMethodId;
     String paymentMethodName;
     String description;
     Boolean isActive;

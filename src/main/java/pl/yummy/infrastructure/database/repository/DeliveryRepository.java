@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.yummy.business.dao.DeliveryDAO;
 import pl.yummy.domain.Delivery;
 import pl.yummy.domain.enums.DeliveryStatusEnumDomain;
-import pl.yummy.infrastructure.database.entity.enums.DeliveryStatusEnumEntity;
 import pl.yummy.infrastructure.database.repository.jpa.DeliveryJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.DeliveryEntityMapper;
 

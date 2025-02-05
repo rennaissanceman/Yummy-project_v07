@@ -15,7 +15,7 @@ import java.util.Set;
         "portionWeight", "preparationTime", "price", "imageURL", "displayOrder", "createdAt", "updatedAt"})
 public class MenuItem {
 
-    Integer menuItemId;
+    Long menuItemId;
     String itemName;
     Menu menu;
     String description;

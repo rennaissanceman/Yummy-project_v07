@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
         "taxAmount", "payment", "billingInformation", "notes", "dueDate", "issuerSignature"})
 public class Invoice {
 
-    Integer invoiceId;
+    Long invoiceId;
     String invoiceNumber;
     Orders orders;
     OffsetDateTime issueDate;

@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 @ToString(of = {"userAuthId", "phone", "email", "passwordHash", "salt", "createdAt", "updatedAt"})
 public class UserAuth {
 
-    Integer userAuthId;
+    Long userAuthId;
     String phone;
     String email;
     String passwordHash;
