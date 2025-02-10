@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.PaymentProcessingDAO;
+import pl.yummy.business.dao.YPaymentProcessingDAO;
 import pl.yummy.domain.Payment;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import pl.yummy.infrastructure.database.entity.PaymentEntity;
@@ -15,7 +15,7 @@ import pl.yummy.infrastructure.database.repository.jpa.PaymentJpaRepository;
 
 @Repository
 @AllArgsConstructor
-public class PaymentProcessingRepository implements PaymentProcessingDAO {
+public class YPaymentProcessingRepository implements YPaymentProcessingDAO {
 
     private final PaymentJpaRepository paymentJpaRepository;
     private final OrdersJpaRepository ordersJpaRepository;

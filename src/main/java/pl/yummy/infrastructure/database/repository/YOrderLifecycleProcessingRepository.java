@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.OrderLifecycleProcessingDAO;
+import pl.yummy.business.dao.YOrderLifecycleProcessingDAO;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import pl.yummy.infrastructure.database.entity.enums.DeliveryStatusEnumEntity;
@@ -14,7 +14,7 @@ import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 
 @Repository
 @AllArgsConstructor
-public class OrderLifecycleProcessingRepository implements OrderLifecycleProcessingDAO {
+public class YOrderLifecycleProcessingRepository implements YOrderLifecycleProcessingDAO {
 
     private final OrdersJpaRepository ordersJpaRepository;
     private final DeliveryJpaRepository deliveryJpaRepository;

@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "ordersId")
 @ToString(of = {"ordersId", "ordersNumber", "customer", "menu", "ordersDateTime", "ordersStatus", "ordersDescription",
-        "totalAmount", "availableDeliveryAreaId", "customerAddressId"})
+        "totalAmount", "ordersRating", "availableDeliveryAreaId", "customerAddressId"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -50,6 +50,9 @@ public class OrdersEntity {
 
     @Column(name = "total_amount", nullable = false)
     private BigDecimal totalAmount;
+
+    @Column(name = "orders_rating")
+    private Integer ordersRating;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "available_delivery_area_id")

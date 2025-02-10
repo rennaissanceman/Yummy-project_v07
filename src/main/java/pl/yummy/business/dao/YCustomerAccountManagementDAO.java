@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface CustomerAccountManagementDAO {
+public interface YCustomerAccountManagementDAO {
 
     void resetPassword(Long userId, String newPassword);
 

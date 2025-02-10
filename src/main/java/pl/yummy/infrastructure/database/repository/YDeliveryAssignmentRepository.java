@@ -4,7 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.DeliveryAssignmentDAO;
+import pl.yummy.business.dao.YDeliveryAssignmentDAO;
 import pl.yummy.infrastructure.database.entity.CourierEntity;
 import pl.yummy.infrastructure.database.entity.DeliveryEntity;
 import pl.yummy.infrastructure.database.entity.enums.CourierStatusEnumEntity;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class DeliveryAssignmentRepository implements DeliveryAssignmentDAO {
+public class YDeliveryAssignmentRepository implements YDeliveryAssignmentDAO {
 
     private final DeliveryJpaRepository deliveryJpaRepository;
     private final CourierJpaRepository courierJpaRepository;

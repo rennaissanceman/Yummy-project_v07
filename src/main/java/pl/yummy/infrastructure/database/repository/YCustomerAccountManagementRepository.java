@@ -3,12 +3,12 @@ package pl.yummy.infrastructure.database.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.CustomerAccountManagementDAO;
+import pl.yummy.business.dao.YCustomerAccountManagementDAO;
 import pl.yummy.infrastructure.database.repository.jpa.UserAuthJpaRepository;
 
 @Repository
 @AllArgsConstructor
-public class CustomerAccountManagementRepository implements CustomerAccountManagementDAO {
+public class YCustomerAccountManagementRepository implements YCustomerAccountManagementDAO {
 
     private final UserAuthJpaRepository userAuthJpaRepository;
 

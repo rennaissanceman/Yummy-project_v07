@@ -2,7 +2,7 @@ package pl.yummy.business.dao;
 
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 
-public interface OrderLifecycleProcessingDAO {
+public interface YOrderLifecycleProcessingDAO {
 
 /*
 Obsługa pełnego cyklu życia zamówienia

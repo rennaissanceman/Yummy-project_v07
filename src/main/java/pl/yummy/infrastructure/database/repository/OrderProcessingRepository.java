@@ -73,4 +73,5 @@ public class OrderProcessingRepository implements OrderProcessingDAO {
         // Następnie wykonujemy podstawowy proces przetwarzania zamówienia (z kurierem)
         process(order, courier);
     }
+
 }

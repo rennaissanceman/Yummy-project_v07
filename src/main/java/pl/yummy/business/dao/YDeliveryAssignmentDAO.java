@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-public interface DeliveryAssignmentDAO {
+public interface YDeliveryAssignmentDAO {
 
     /*
     Zarządzanie przypisywaniem dostawców

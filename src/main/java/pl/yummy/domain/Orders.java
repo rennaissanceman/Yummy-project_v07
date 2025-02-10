@@ -15,7 +15,7 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode(of = "ordersId")
 @ToString(of = {"ordersId", "ordersNumber", "customer", "menu", "ordersDateTime", "ordersStatus", "ordersDescription",
-        "totalAmount", "availableDeliveryAreaId", "customerAddressId"})
+        "totalAmount", "ordersRating", "availableDeliveryAreaId", "customerAddressId"})
 public class Orders {
 
     Long ordersId;
@@ -26,6 +26,7 @@ public class Orders {
     OrdersStatusEnumDomain ordersStatus;
     String ordersDescription;
     BigDecimal totalAmount;
+    Integer ordersRating;
     AvailableDeliveryArea availableDeliveryAreaId;
     CustomerAddress customerAddressId;
     Payment payment;

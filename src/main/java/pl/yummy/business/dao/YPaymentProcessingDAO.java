@@ -2,7 +2,7 @@ package pl.yummy.business.dao;
 
 import pl.yummy.domain.Payment;
 
-public interface PaymentProcessingDAO {
+public interface YPaymentProcessingDAO {
 
     /*
     Obsługa procesów płatności
