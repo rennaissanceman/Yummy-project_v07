@@ -19,24 +19,34 @@ public class OrderRequest {
 
     //    DTO do składania zamówienia – zawiera tylko niezbędne dane
 
-    String ordersNumber;  // Może być generowany
-    Customer customer;
-    Menu menu;
-    OffsetDateTime ordersDateTime;
-    String ordersDescription;
-    BigDecimal totalAmount;
-    AvailableDeliveryArea availableDeliveryArea;
-    CustomerAddress customerAddress;
-    Set<OrderItemRequest> ordersItems;
+    Integer ordersId;               // Opcjonalny – ID zamówienia, jeśli istnieje (np. przy aktualizacji)
+    String ordersNumber;            // Numer zamówienia
+    Customer customer;              // Dane klienta
+    Menu menu;                      // Menu wybrane przez klienta
+    OffsetDateTime ordersDateTime;  // Data i czas zamówienia
+    String ordersDescription;       // Opis zamówienia (opcjonalnie)
+    BigDecimal totalAmount;         // Całkowita kwota zamówienia
+    AvailableDeliveryArea availableDeliveryArea; // Obszar dostawy
+    CustomerAddress customerAddress;             // Adres klienta
+    Set<OrderItemRequest> ordersItems;           // Lista pozycji zamówienia
 
     @With
     @Value
     @Builder
     public static class OrderItemRequest {
-        Long menuItemId;
-        Integer quantity;
-        BigDecimal unitPrice;
-        BigDecimal totalPrice;
-        String itemNotes;
+        Integer ordersItemId; // Opcjonalnie – ID pozycji, gdy aktualizujemy istniejącą
+        Long menuItemId;      // ID pozycji menu
+        Integer quantity;     // Ilość
+        BigDecimal unitPrice; // Cena jednostkowa
+        BigDecimal totalPrice;// Łączna cena za tę pozycję
+        String itemNotes;     // Uwagi do pozycji
+    }
+
+    public boolean isValidOrder() {
+        return customer != null
+                && availableDeliveryArea != null
+                && customerAddress != null
+                && ordersItems != null && !ordersItems.isEmpty()
+                && totalAmount != null && totalAmount.compareTo(BigDecimal.ZERO) > 0;
     }
 }

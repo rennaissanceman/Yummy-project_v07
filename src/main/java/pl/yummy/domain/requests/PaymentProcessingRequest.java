@@ -3,6 +3,7 @@ package pl.yummy.domain.requests;
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
+import pl.yummy.domain.enums.PaymentMethodStatusEnumDomain;
 
 import java.math.BigDecimal;
 
@@ -11,8 +12,9 @@ import java.math.BigDecimal;
 @Builder
 public class PaymentProcessingRequest {
 
+    Long orderId;
     String orderNumber;
-    String paymentMethod; // Można użyć również enumu
+    PaymentMethodStatusEnumDomain paymentMethod; // Można użyć również enumu
     BigDecimal amount;
     String transactionId; // Opcjonalne – np. jeśli przekazywane przez system płatności
     String comment;       // Dodatkowy komentarz, jeśli potrzebny

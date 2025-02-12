@@ -14,9 +14,9 @@ public class RestaurantManagementRequest {
 
     //    DTO do zarządzania restauracją – uproszczone wejście, bez metod walidacyjnych
 
-    Integer restaurantId;
-    Integer ownerId;
-    Integer newOwnerId; // Opcjonalnie – gdy następuje zmiana właściciela
+    Integer restaurantId;             // ID restauracji
+    Integer ownerId;                  // ID aktualnego właściciela
+    Integer newOwnerId;               // Opcjonalnie – nowy właściciel (jeśli następuje zmiana)
     RestaurantDetailsInput restaurantDetails;
     List<MenuItemInput> menuItems;
     List<DeliveryAddressInput> deliveryAddresses;
@@ -39,7 +39,7 @@ public class RestaurantManagementRequest {
     @Value
     @Builder
     public static class MenuItemInput {
-        Integer menuItemId;
+        Integer menuItemId;      // Jeśli null, oznacza nową pozycję
         String itemName;
         java.math.BigDecimal price;
         Boolean isAvailable;
@@ -52,7 +52,7 @@ public class RestaurantManagementRequest {
     @Value
     @Builder
     public static class DeliveryAddressInput {
-        Integer addressId;
+        Integer addressId;       // Jeśli null, nowy adres
         String country;
         String city;
         String postalCode;
@@ -63,7 +63,7 @@ public class RestaurantManagementRequest {
     @Value
     @Builder
     public static class CustomerReviewInput {
-        Integer reviewId;
+        Integer reviewId;        // Jeśli null, nowa opinia
         Integer customerId;
         Integer restaurantId;
         Integer rating;

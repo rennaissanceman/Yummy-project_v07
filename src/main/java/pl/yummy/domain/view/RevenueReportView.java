@@ -14,6 +14,7 @@ import java.time.OffsetDateTime;
 public class RevenueReportView {
 
     // Tworzy raport finansowy dla danego okresu, restauracji lub całego systemu.
+    //  Raport finansowy – adaptacja YummyRevenueReport
 
     Integer reportId; // ID raportu
     OffsetDateTime startDate; // Data rozpoczęcia raportu
@@ -30,5 +31,3 @@ public class RevenueReportView {
         return totalRevenue.divide(BigDecimal.valueOf(totalOrders), 2, RoundingMode.HALF_UP);
     }
 }
-
-    //  Raport finansowy – adaptacja YummyRevenueReport

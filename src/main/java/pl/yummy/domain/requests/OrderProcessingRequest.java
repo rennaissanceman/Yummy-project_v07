@@ -31,10 +31,10 @@ public class OrderProcessingRequest {
     Boolean done;               // flaga oznaczająca, czy operacja została zakończona
 
     // Uproszczony DTO do inicjowania procesu przetwarzania zamówienia – bez metod obliczeniowych
-    DeliveryStatusEnumDomain desiredDeliveryStatus;
-    PaymentStatusEnumDomain desiredPaymentStatus;
-    OffsetDateTime processingStartTime;
-    String processingNotes;
+    DeliveryStatusEnumDomain desiredDeliveryStatus; // Docelowy status dostawy
+    PaymentStatusEnumDomain desiredPaymentStatus;   // Docelowy status płatności
+    OffsetDateTime processingStartTime;          // Czas rozpoczęcia przetwarzania
+    String processingNotes;                      // Notatki dotyczące przetwarzania
 
     public boolean itemNotIncluded() {
         return Objects.isNull(getOrderItemIdentifier())

@@ -1,14 +1,17 @@
-package pl.yummy.business.dao;
+package pl.yummy.business.dao.processing;
 
 import pl.yummy.domain.Payment;
+import pl.yummy.domain.requests.PaymentProcessingRequest;
 
-public interface YPaymentProcessingDAO {
+public interface PaymentProcessingDAO {
 
     /*
     Obsługa procesów płatności
     Cel: Zarządzanie płatnościami, np. autoryzacja, zwroty, zmiany statusu.
 
     */
+
+    void processPayment(PaymentProcessingRequest request);
 
     void processPayment(Long orderId, Payment payment);
 

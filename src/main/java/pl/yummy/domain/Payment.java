@@ -24,6 +24,7 @@ public class Payment {
     OffsetDateTime updatedAt;
     Invoice invoice;
     Receipt receipt;
+    String comment;
 
     public boolean isSuccessful() {
         return paymentStatus == PaymentStatusEnumDomain.COMPLETED;

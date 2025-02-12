@@ -1,10 +1,10 @@
-package pl.yummy.infrastructure.database.repository;
+package pl.yummy.infrastructure.database.repository.processing;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.YOrderLifecycleProcessingDAO;
+import pl.yummy.business.dao.processing.OrderLifecycleProcessingDAO;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import pl.yummy.infrastructure.database.entity.enums.DeliveryStatusEnumEntity;
@@ -14,7 +14,7 @@ import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 
 @Repository
 @AllArgsConstructor
-public class YOrderLifecycleProcessingRepository implements YOrderLifecycleProcessingDAO {
+public class OrderLifecycleProcessingRepository implements OrderLifecycleProcessingDAO {
 
     private final OrdersJpaRepository ordersJpaRepository;
     private final DeliveryJpaRepository deliveryJpaRepository;
@@ -49,5 +49,19 @@ public class YOrderLifecycleProcessingRepository implements YOrderLifecycleProce
     - Możliwość anulowania zamówień i aktualizacji ich statusów.
 
     Obsługa pełnego cyklu zamówienia  --> Aktualizacja statusu, anulowanie zamówień
+
+    Zakres odpowiedzialności:
+    - Odpowiada za pełen cykl życia zamówienia.
+    - Umożliwia aktualizację statusu zamówienia (metoda updateOrderStatus):
+    - Pobiera encję zamówienia na podstawie identyfikatora.
+    - Uaktualnia status zamówienia zgodnie z przekazanym nowym stanem (np. zmiana statusu z „PENDING” na „CONFIRMED”).
+    - Umożliwia anulowanie zamówienia (metoda cancelOrder):
+    - Ustawia status zamówienia na CANCELLED_BY_CUSTOMER.
+    - Dodatkowo, jeżeli zamówieniu przypisana jest dostawa, repozytorium wyszukuje tę dostawę i ustawia jej status na CANCELLED.
+
+    Kluczowe elementy:
+    - Wykorzystuje OrdersJpaRepository do operacji na zamówieniach oraz DeliveryJpaRepository do operacji na dostawach.
+    - Metody są opakowane w transakcje (adnotacja @Transactional), co gwarantuje spójność operacji przy
+    aktualizacji stanu zamówienia oraz ewentualnej dostawy.
     */
 }
