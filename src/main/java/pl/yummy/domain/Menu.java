@@ -7,7 +7,7 @@ import java.util.Set;
 
 @With
 @Value
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(of = "menuId")
 @ToString(of = {"menuId", "restaurant", "menuName", "description", "validFrom", "validTo", "createdAt", "updatedAt"})
 public class Menu {

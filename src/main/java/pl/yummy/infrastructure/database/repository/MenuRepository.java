@@ -3,7 +3,10 @@ package pl.yummy.infrastructure.database.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.yummy.business.dao.MenuDAO;
+import pl.yummy.domain.Customer;
 import pl.yummy.domain.Menu;
+import pl.yummy.infrastructure.database.entity.CustomerEntity;
+import pl.yummy.infrastructure.database.entity.MenuEntity;
 import pl.yummy.infrastructure.database.repository.jpa.MenuJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.MenuEntityMapper;
 
@@ -56,5 +59,12 @@ public class MenuRepository implements MenuDAO {
                 .stream()
                 .map(menuEntityMapper::mapFromEntity)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Menu save(Menu menu) {
+        MenuEntity toSave = menuEntityMapper.mapToEntity(menu);
+        MenuEntity saved = menuJpaRepository.save(toSave);
+        return menuEntityMapper.mapFromEntity(saved);
     }
 }

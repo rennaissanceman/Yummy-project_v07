@@ -1,9 +1,9 @@
-package pl.yummy.infrastructure.database.repository.processing;
+package pl.yummy.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.processing.OrderProcessingDAO;
+import pl.yummy.business.dao.ProcessingOrderProcessingDAO;
 import pl.yummy.domain.Courier;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.OrdersItem;
@@ -22,7 +22,7 @@ import java.util.Objects;
 
 @Repository
 @AllArgsConstructor
-public class OrderProcessingRepository implements OrderProcessingDAO {
+public class ProcessingOrderProcessingRepository implements ProcessingOrderProcessingDAO {
 
     private final OrdersJpaRepository ordersJpaRepository;
     private final CourierJpaRepository courierJpaRepository;

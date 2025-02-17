@@ -3,8 +3,11 @@ package pl.yummy.infrastructure.database.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.yummy.business.dao.OrdersDAO;
+import pl.yummy.domain.Menu;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
+import pl.yummy.infrastructure.database.entity.MenuEntity;
+import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import pl.yummy.infrastructure.database.entity.enums.OrdersStatusEnumEntity;
 import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.OrdersEntityMapper;
@@ -70,5 +73,12 @@ public class OrdersRepository implements OrdersDAO {
                 .stream()
                 .map(ordersEntityMapper::mapFromEntity)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Orders save(Orders orders) {
+        OrdersEntity toSave = ordersEntityMapper.mapToEntity(orders);
+        OrdersEntity saved = ordersJpaRepository.save(toSave);
+        return ordersEntityMapper.mapFromEntity(saved);
     }
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.yummy.business.dao.CustomerDAO;
 import pl.yummy.domain.Customer;
+import pl.yummy.infrastructure.database.entity.CustomerEntity;
 import pl.yummy.infrastructure.database.repository.jpa.CustomerJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.CustomerEntityMapper;
 
@@ -52,6 +53,13 @@ public class CustomerRepository implements CustomerDAO {
                 .stream()
                 .map(customerEntityMapper::mapFromEntity)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Customer saveCustomer(Customer customer) {
+        CustomerEntity toSave = customerEntityMapper.mapToEntity(customer);
+        CustomerEntity saved = customerJpaRepository.save(toSave);
+        return customerEntityMapper.mapFromEntity(saved);
     }
 
 }

@@ -1,5 +1,6 @@
 package pl.yummy.business.dao;
 
+import pl.yummy.domain.Customer;
 import pl.yummy.domain.Menu;
 
 import java.time.OffsetDateTime;
@@ -23,6 +24,7 @@ public interface MenuDAO {
     // Find menus by description containing a keyword
     List<Menu> findByDescriptionContainingIgnoreCase(String keyword);
 
+    Menu save(Menu menu);
 
 
 /*

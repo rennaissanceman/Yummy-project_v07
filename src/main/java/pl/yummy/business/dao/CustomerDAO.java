@@ -22,4 +22,6 @@ public interface CustomerDAO {
     // Find customers by their last name
     List<Customer> findByCustomerSurname(String surname);
 
+    Customer saveCustomer(Customer customer);
+
 }

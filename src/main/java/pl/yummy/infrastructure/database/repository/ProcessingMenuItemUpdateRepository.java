@@ -1,16 +1,16 @@
-package pl.yummy.infrastructure.database.repository.processing;
+package pl.yummy.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.processing.MenuItemUpdateDAO;
+import pl.yummy.business.dao.ProcessingMenuItemUpdateDAO;
 import pl.yummy.domain.requests.MenuItemUpdateRequest;
 import pl.yummy.infrastructure.database.repository.jpa.MenuItemJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.MenuItemEntityMapper;
 
 @Repository
 @AllArgsConstructor
-public class MenuItemUpdateRepository implements MenuItemUpdateDAO {
+public class ProcessingMenuItemUpdateRepository implements ProcessingMenuItemUpdateDAO {
 
     /*
     Repozytorium aktualizujące dane pozycji w menu. Przyjmuje MenuItemUpdateRequest i aktualizuje odpowiednią encję w bazie.

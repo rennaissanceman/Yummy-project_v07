@@ -1,8 +1,8 @@
-package pl.yummy.business.dao.processing;
+package pl.yummy.business.dao;
 
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 
-public interface OrderLifecycleProcessingDAO {
+public interface ProcessingOrderLifecycleProcessingDAO {
 
 /*
 Obsługa pełnego cyklu życia zamówienia

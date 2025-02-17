@@ -1,8 +1,8 @@
-package pl.yummy.business.dao.processing;
+package pl.yummy.business.dao;
 
 import pl.yummy.domain.requests.OrderCancellationRequest;
 
-public interface OrderCancellationDAO {
+public interface ProcessingOrderCancellationDAO {
 
     void cancelOrder(OrderCancellationRequest request);
 }

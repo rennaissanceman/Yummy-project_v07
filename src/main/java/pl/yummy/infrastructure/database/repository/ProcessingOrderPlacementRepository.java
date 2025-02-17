@@ -1,9 +1,9 @@
-package pl.yummy.infrastructure.database.repository.processing;
+package pl.yummy.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.processing.OrderPlacementDAO;
+import pl.yummy.business.dao.ProcessingOrderPlacementDAO;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.requests.OrderPlacementRequest;
 import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
@@ -11,7 +11,7 @@ import pl.yummy.infrastructure.database.repository.mapper.OrdersEntityMapper;
 
 @Repository
 @AllArgsConstructor
-public class OrderPlacementRepository implements OrderPlacementDAO {
+public class ProcessingOrderPlacementRepository implements ProcessingOrderPlacementDAO {
 
     /*
     Repozytorium do składania zamówienia. Przyjmuje OrderPlacementRequest i tworzy nowe zamówienie

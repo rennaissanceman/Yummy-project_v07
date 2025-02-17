@@ -1,8 +1,8 @@
-package pl.yummy.business.dao.processing;
+package pl.yummy.business.dao;
 
 import pl.yummy.domain.requests.OrderPlacementRequest;
 
-public interface OrderPlacementDAO {
+public interface ProcessingOrderPlacementDAO {
 
     void placeOrder(OrderPlacementRequest request);
 }

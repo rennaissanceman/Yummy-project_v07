@@ -1,11 +1,10 @@
-package pl.yummy.business.dao.processing;
+package pl.yummy.business.dao;
 
 import pl.yummy.domain.Courier;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.OrdersItem;
-import pl.yummy.domain.Payment;
 
-public interface OrderProcessingDAO {
+public interface ProcessingOrderProcessingDAO {
 
     void process2(Orders orders, Courier courier, OrdersItem ordersItem);
 

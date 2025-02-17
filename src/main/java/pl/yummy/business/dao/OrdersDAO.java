@@ -27,6 +27,8 @@ public interface OrdersDAO {
 
     List<Orders> findOrdersWithoutDelivery();
 
+    Orders save(Orders orders);
+
 
 /*
 

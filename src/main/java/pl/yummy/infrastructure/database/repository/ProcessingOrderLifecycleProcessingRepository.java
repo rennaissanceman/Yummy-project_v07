@@ -1,10 +1,10 @@
-package pl.yummy.infrastructure.database.repository.processing;
+package pl.yummy.infrastructure.database.repository;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.processing.OrderLifecycleProcessingDAO;
+import pl.yummy.business.dao.ProcessingOrderLifecycleProcessingDAO;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import pl.yummy.infrastructure.database.entity.enums.DeliveryStatusEnumEntity;
@@ -14,7 +14,7 @@ import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 
 @Repository
 @AllArgsConstructor
-public class OrderLifecycleProcessingRepository implements OrderLifecycleProcessingDAO {
+public class ProcessingOrderLifecycleProcessingRepository implements ProcessingOrderLifecycleProcessingDAO {
 
     private final OrdersJpaRepository ordersJpaRepository;
     private final DeliveryJpaRepository deliveryJpaRepository;

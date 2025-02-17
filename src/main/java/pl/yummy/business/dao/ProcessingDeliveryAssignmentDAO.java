@@ -1,8 +1,8 @@
-package pl.yummy.business.dao.processing;
+package pl.yummy.business.dao;
 
 import pl.yummy.domain.requests.DeliveryAssignmentRequest;
 
-public interface DeliveryAssignmentDAO {
+public interface ProcessingDeliveryAssignmentDAO {
 
     /*
     Zarządzanie przypisywaniem dostawców

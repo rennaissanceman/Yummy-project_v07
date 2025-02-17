@@ -20,6 +20,7 @@ public class CourierRepository implements CourierDAO {
     private final CourierJpaRepository courierJpaRepository;
     private final CourierEntityMapper courierEntityMapper;
 
+
     @Override
     public Optional<Courier> findByCourierNumber(String courierNumber) {
         return courierJpaRepository.findByCourierNumber(courierNumber)

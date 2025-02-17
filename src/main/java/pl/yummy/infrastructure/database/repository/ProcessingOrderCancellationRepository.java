@@ -1,16 +1,16 @@
-package pl.yummy.infrastructure.database.repository.processing;
+package pl.yummy.infrastructure.database.repository;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.processing.OrderCancellationDAO;
+import pl.yummy.business.dao.ProcessingOrderCancellationDAO;
 import pl.yummy.domain.requests.OrderCancellationRequest;
 import pl.yummy.infrastructure.database.entity.enums.OrdersStatusEnumEntity;
 import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 
 @Repository
 @AllArgsConstructor
-public class OrderCancellationRepository implements OrderCancellationDAO {
+public class ProcessingOrderCancellationRepository implements ProcessingOrderCancellationDAO {
 
     /*
     Repozytorium do anulowania zamówienia. Przyjmuje OrderCancellationRequest i aktualizuje encję zamówienia,

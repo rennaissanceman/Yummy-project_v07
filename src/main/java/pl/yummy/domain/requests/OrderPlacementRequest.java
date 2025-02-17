@@ -14,6 +14,7 @@ public class OrderPlacementRequest {
 //    przenosi dane niezbędne do złożenia zamówienia (analogicznie do CarPurchaseRequest) zawierając informacje
 //    o kliencie, adresie oraz identyfikatory zamówienia i restauracji.
 
+
     String existingCustomerEmail;      // jeżeli klient już istnieje, może być wykorzystany jego email
     String customerName;
     String customerSurname;
@@ -25,4 +26,5 @@ public class OrderPlacementRequest {
     String customerAddressStreet;
     String orderNumber;                  // identyfikator zamówienia – analogicznie do carVin
     String restaurantIdentifier;         // identyfikator restauracji, np. analogicznie do salesmanPesel (identyfikacja sprzedawcy)
+
 }

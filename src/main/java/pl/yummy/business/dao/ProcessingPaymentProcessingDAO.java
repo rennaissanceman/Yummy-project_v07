@@ -1,9 +1,9 @@
-package pl.yummy.business.dao.processing;
+package pl.yummy.business.dao;
 
 import pl.yummy.domain.Payment;
 import pl.yummy.domain.requests.PaymentProcessingRequest;
 
-public interface PaymentProcessingDAO {
+public interface ProcessingPaymentProcessingDAO {
 
     /*
     Obsługa procesów płatności

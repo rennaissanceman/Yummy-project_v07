@@ -1,10 +1,10 @@
-package pl.yummy.infrastructure.database.repository.processing;
+package pl.yummy.infrastructure.database.repository;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.processing.DeliveryAssignmentDAO;
+import pl.yummy.business.dao.ProcessingDeliveryAssignmentDAO;
 import pl.yummy.domain.Delivery;
 import pl.yummy.domain.requests.DeliveryAssignmentRequest;
 import pl.yummy.infrastructure.database.entity.CourierEntity;
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class DeliveryAssignmentRepository implements DeliveryAssignmentDAO {
+public class ProcessingDeliveryAssignmentRepository implements ProcessingDeliveryAssignmentDAO {
 
     /*
     Repozytorium do przypisywania kuriera do zamówienia. Przyjmuje DeliveryAssignmentRequest i mapuje je na nowy

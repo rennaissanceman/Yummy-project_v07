@@ -1,10 +1,10 @@
-package pl.yummy.infrastructure.database.repository.processing;
+package pl.yummy.infrastructure.database.repository;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.processing.PaymentProcessingDAO;
+import pl.yummy.business.dao.ProcessingPaymentProcessingDAO;
 import pl.yummy.domain.Payment;
 import pl.yummy.domain.requests.PaymentProcessingRequest;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
@@ -19,7 +19,7 @@ import java.time.OffsetDateTime;
 
 @Repository
 @AllArgsConstructor
-public class PaymentProcessingRepository implements PaymentProcessingDAO {
+public class ProcessingPaymentProcessingRepository implements ProcessingPaymentProcessingDAO {
 
     /*
     Repozytorium to przyjmuje obiekt typu PaymentProcessingRequest (DTO wejściowe) i inicjuje proces płatności.

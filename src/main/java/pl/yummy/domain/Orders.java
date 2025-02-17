@@ -12,7 +12,7 @@ import java.util.Set;
 
 @With
 @Value
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(of = "ordersId")
 @ToString(of = {"ordersId", "ordersNumber", "customer", "menu", "ordersDateTime", "ordersStatus", "ordersDescription",
         "totalAmount", "ordersRating", "availableDeliveryAreaId", "customerAddressId"})
