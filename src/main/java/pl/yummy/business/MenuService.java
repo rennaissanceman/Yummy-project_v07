@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.MenuDAO;
 import pl.yummy.domain.Menu;
 import pl.yummy.domain.exception.NotFoundException;
-import pl.yummy.infrastructure.database.repository.jpa.MenuJpaRepository;
 
 import java.time.OffsetDateTime;
 import java.util.List;

@@ -1,6 +1,5 @@
 package pl.yummy.business.dao;
 
-import pl.yummy.domain.Customer;
 import pl.yummy.domain.Menu;
 
 import java.time.OffsetDateTime;
