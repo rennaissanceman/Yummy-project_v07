@@ -1,4 +1,4 @@
-package pl.yummy.domain.view;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -11,7 +11,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class OrderDetailsView {
+public class ViewOrderDetails {
 
     String orderNumber;
     OffsetDateTime ordersDateTime;

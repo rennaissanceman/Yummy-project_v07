@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -10,7 +10,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class RestaurantManagementRequest {
+public class RequestRestaurantManagement {
 
     //    DTO do zarządzania restauracją – uproszczone wejście, bez metod walidacyjnych
 

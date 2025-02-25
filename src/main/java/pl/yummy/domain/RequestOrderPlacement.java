@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -7,7 +7,7 @@ import lombok.With;
 @With
 @Value
 @Builder
-public class OrderPlacementRequest {
+public class RequestOrderPlacement {
 
 //    przenosi dane niezbędne do złożenia zamówienia, np. dane klienta, adres dostawy, numer zamówienia czy
 //    identyfikator restauracji

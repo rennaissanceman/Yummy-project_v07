@@ -1,4 +1,4 @@
-package pl.yummy.domain.view;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 @With
 @Value
 @Builder
-public class RevenueReportView {
+public class ViewRevenueReport {
 
     // Tworzy raport finansowy dla danego okresu, restauracji lub całego systemu.
     //  Raport finansowy – adaptacja YummyRevenueReport

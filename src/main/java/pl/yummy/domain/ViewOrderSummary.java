@@ -1,4 +1,4 @@
-package pl.yummy.domain.view;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 @With
 @Value
 @Builder
-public class OrderSummaryView {
+public class ViewOrderSummary {
 
     Integer orderId; // ID zamówienia
     String orderNumber; // Numer zamówienia

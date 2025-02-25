@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @With
 @Value
 @Builder
-public class MenuItemUpdateRequest {
+public class RequestMenuItemUpdate {
 
     Long menuItemId;
     Boolean isAvailable;

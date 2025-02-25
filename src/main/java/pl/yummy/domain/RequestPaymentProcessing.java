@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @With
 @Value
 @Builder
-public class PaymentProcessingRequest {
+public class RequestPaymentProcessing {
 
     Long orderId;
     String orderNumber;

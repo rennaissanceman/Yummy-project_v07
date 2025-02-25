@@ -1,4 +1,4 @@
-package pl.yummy.domain.view;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 @With
 @Value
 @Builder
-public class CustomerFeedbackView {
+public class ViewCustomerFeedback {
 
     // Reprezentuje opinie klientów o zamówieniach, restauracjach lub dostawcach.
 

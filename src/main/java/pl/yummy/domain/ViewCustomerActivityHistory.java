@@ -1,4 +1,4 @@
-package pl.yummy.domain.view;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -12,7 +12,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class CustomerActivityHistoryView {
+public class ViewCustomerActivityHistory {
 
     Integer customerId;            // Identyfikator klienta
     String customerName;           // Imię klienta

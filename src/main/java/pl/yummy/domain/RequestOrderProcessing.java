@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -12,7 +12,7 @@ import java.util.Objects;
 @With
 @Value
 @Builder
-public class OrderProcessingRequest {
+public class RequestOrderProcessing {
 
 //    zawiera informacje o realizacji zamówienia (np. identyfikator kuriera, numer zamówienia, informacje
 //    o konkretnej pozycji zamówienia, kod operacji przetwarzania, czas obsługi, komentarz oraz flagę ukończenia)

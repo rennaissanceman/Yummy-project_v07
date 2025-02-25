@@ -1,4 +1,4 @@
-package pl.yummy.domain.view;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -7,7 +7,7 @@ import lombok.With;
 @With
 @Value
 @Builder
-public class DeliveryPerformanceView {
+public class ViewDeliveryPerformance {
 
     // Reprezentuje statystyki i wydajność dostaw w aplikacji.
 

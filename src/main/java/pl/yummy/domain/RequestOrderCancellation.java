@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -7,7 +7,7 @@ import lombok.With;
 @With
 @Value
 @Builder
-public class OrderCancellationRequest {
+public class RequestOrderCancellation {
 
     String orderNumber;
     String cancellationReason;

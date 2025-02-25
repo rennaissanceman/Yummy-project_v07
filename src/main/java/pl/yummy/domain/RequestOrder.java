@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -15,7 +15,7 @@ import java.util.Set;
 @With
 @Value
 @Builder
-public class OrderRequest {
+public class RequestOrder {
 
     //    DTO do składania zamówienia – zawiera tylko niezbędne dane
 

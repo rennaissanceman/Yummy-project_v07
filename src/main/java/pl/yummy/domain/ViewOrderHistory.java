@@ -1,4 +1,4 @@
-package pl.yummy.domain.view;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.ToString;
@@ -15,7 +15,7 @@ import java.util.List;
 @Value
 @Builder
 @ToString(of = "orderNumber")
-public class OrderHistoryView {
+public class ViewOrderHistory {
 
     //OrderHistory reprezentuje historię realizacji konkretnego zamówienia.
 //     gromadzi historię realizacji zamówienia (podobnie jak CarHistory przechowuje historię serwisową samochodu)

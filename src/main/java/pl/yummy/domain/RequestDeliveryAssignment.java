@@ -1,4 +1,4 @@
-package pl.yummy.domain.requests;
+package pl.yummy.domain;
 
 import lombok.Builder;
 import lombok.Value;
@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 @With
 @Value
 @Builder
-public class DeliveryAssignmentRequest {
+public class RequestDeliveryAssignment {
 
     String orderNumber;
     String courierIdentifier;  // np. numer lub identyfikator kuriera
