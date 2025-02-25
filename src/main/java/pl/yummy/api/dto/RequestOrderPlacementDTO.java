@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestOrderPlacementRequestDTO {
+public class RequestOrderPlacementDTO {
 
 //    Na podstawie OrderPlacementRequest
     String existingCustomerEmail;

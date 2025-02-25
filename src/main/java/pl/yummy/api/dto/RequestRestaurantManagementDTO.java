@@ -11,7 +11,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class RequestRestaurantManagementRequestDTO {
+public class RequestRestaurantManagementDTO {
 
     Integer restaurantId;
     Integer ownerId;

@@ -11,7 +11,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class ViewRestaurantStatisticsViewDTO {
+public class ViewRestaurantStatisticsDTO {
 
     /*
      Model zbierający statystyki restauracji, np. łączną liczbę zamówień, przychody oraz najpopularniejsze pozycje menu.

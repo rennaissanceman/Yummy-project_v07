@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestOrderCancellationRequestDTO {
+public class RequestOrderCancellationDTO {
 
 //    Na podstawie OrderCancellationRequest
     String orderNumber;

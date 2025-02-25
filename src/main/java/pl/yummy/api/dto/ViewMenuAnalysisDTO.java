@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @With
 @Value
 @Builder
-public class ViewMenuAnalysisViewDTO {
+public class ViewMenuAnalysisDTO {
 
     /*
     Służy do analizy popularności poszczególnych pozycji w menu. Zawiera informacje o liczbie zamówień danej pozycji,

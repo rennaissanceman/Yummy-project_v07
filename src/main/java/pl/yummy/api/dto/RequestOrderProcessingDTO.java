@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestOrderProcessingRequestDTO {
+public class RequestOrderProcessingDTO {
 
 //    Na podstawie OrderProcessingRequest
     String courierIdentifier;

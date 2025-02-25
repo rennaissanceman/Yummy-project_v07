@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestPaymentProcessingRequestDTO {
+public class RequestPaymentProcessingDTO {
 
 //    Na podstawie PaymentProcessingRequest
     Long orderId;

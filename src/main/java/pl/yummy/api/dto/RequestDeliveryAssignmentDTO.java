@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestDeliveryAssignmentRequestDTO {
+public class RequestDeliveryAssignmentDTO {
 
 //    Na podstawie DeliveryAssignmentRequest
     String orderNumber;

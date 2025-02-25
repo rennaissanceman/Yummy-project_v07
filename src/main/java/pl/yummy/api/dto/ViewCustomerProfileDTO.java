@@ -10,7 +10,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class ViewCustomerProfileViewDTO {
+public class ViewCustomerProfileDTO {
 
     /*
      Model widoku profilu klienta, zawierający dane osobowe, domyślny adres oraz skrócony podgląd zamówień.

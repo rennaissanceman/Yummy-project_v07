@@ -12,7 +12,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class ViewCustomerActivityHistoryViewDTO {
+public class ViewCustomerActivityHistoryDTO {
 
     /*
      Reprezentuje historię aktywności klienta, wraz z listą ostatnich zamówień.

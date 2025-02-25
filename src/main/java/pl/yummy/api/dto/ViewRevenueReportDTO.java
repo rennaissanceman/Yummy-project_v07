@@ -11,7 +11,7 @@ import java.time.OffsetDateTime;
 @With
 @Value
 @Builder
-public class ViewRevenueReportViewDTO {
+public class ViewRevenueReportDTO {
 
     /*
      Model raportu finansowego – zawiera dane dotyczące przychodów oraz statystyk zamówień.

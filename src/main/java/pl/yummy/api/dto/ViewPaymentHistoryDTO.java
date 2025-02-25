@@ -11,7 +11,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class ViewPaymentHistoryViewDTO {
+public class ViewPaymentHistoryDTO {
 
     /*
     Agreguje historię płatności dla danego zamówienia lub klienta. Zawiera listę transakcji z datą, kwotą,

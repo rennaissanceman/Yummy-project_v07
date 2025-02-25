@@ -9,7 +9,7 @@ import java.time.OffsetDateTime;
 @With
 @Value
 @Builder
-public class ViewCustomerFeedbackViewDTO {
+public class ViewCustomerFeedbackDTO {
 
     /*
      Reprezentuje opinię klienta o restauracji lub zamówieniu.

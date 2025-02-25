@@ -11,7 +11,7 @@ import java.util.List;
 @With
 @Value
 @Builder
-public class ViewOrderDetailsViewDTO {
+public class ViewOrderDetailsDTO {
 
     /*
      Model szczegółów zamówienia – zawiera dane klienta, listę pozycji zamówienia oraz statusy.

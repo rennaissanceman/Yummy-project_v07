@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestCustomerRegistrationRequestDTO {
+public class RequestCustomerRegistrationDTO {
 
     /*
     (lub użyć bezpośrednio istniejącego CustomerRegistrationRequest) – zawiera dane rejestracyjne klienta.

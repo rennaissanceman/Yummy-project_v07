@@ -21,7 +21,7 @@ public class CustomerService {
     // Jeśli jest dostępny serwis obsługujący zamówienia, można go wstrzyknąć, np.
     // private final OrderService orderService;
 
-    /**
+    /*
      * Rejestruje nowego klienta poprzez zapisanie obiektu Customer w bazie.
      *
      * @param customer obiekt klienta do zarejestrowania
@@ -31,7 +31,7 @@ public class CustomerService {
         customerDAO.saveCustomer(customer);
     }
 
-    /**
+    /*
      * Wyszukuje klienta na podstawie adresu email.
      *
      * @param email adres email klienta
@@ -44,7 +44,7 @@ public class CustomerService {
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono klienta o adresie email: " + email));
     }
 
-    /**
+    /*
      * Buduje obiekt klienta na podstawie danych z żądania złożenia zamówienia i wystawionej faktury.
      * UWAGA: W tym przykładzie metoda buduje klienta bez powiązania z zamówieniami – w pełnej implementacji
      * można by wykorzystać OrderService do zbudowania obiektu zamówienia.
@@ -75,7 +75,7 @@ public class CustomerService {
                 .build();
     }
 
-    /**
+    /*
      * Aktualizuje dane klienta poprzez zapisanie zaktualizowanego obiektu Customer.
      *
      * @param customer klient, którego dane mają zostać zaktualizowane
@@ -85,7 +85,7 @@ public class CustomerService {
         customerDAO.saveCustomer(customer);
     }
 
-    /**
+    /*
      * Wyszukuje klienta na podstawie unikalnego numeru klienta.
      *
      * @param customerNumber unikalny numer klienta
@@ -98,7 +98,7 @@ public class CustomerService {
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono klienta o numerze: " + customerNumber));
     }
 
-    /**
+    /*
      * Pobiera listę klientów, którzy reprezentują firmy.
      *
      * @return lista klientów, dla których flaga isCompany jest ustawiona na true
@@ -108,7 +108,7 @@ public class CustomerService {
         return customerDAO.findByIsCompanyTrue();
     }
 
-    /**
+    /*
      * Wyszukuje klientów według nazwy firmy.
      *
      * @param companyName nazwa firmy
@@ -119,7 +119,7 @@ public class CustomerService {
         return customerDAO.findByCompanyName(companyName);
     }
 
-    /**
+    /*
      * Wyszukuje klientów na podstawie nazwiska.
      *
      * @param surname nazwisko klienta

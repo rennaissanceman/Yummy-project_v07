@@ -15,7 +15,7 @@ import java.util.List;
 @Value
 @Builder
 @ToString(of = "orderNumber")
-public class ViewOrderHistoryViewDTO {
+public class ViewOrderHistoryDTO {
 
     /*
     Prezentuje historię realizacji zamówienia, zawierając listę zdarzeń związanych z przetwarzaniem zamówienia,
