@@ -8,9 +8,12 @@ import pl.yummy.domain.PaymentMethod;
 import pl.yummy.domain.enums.PaymentMethodStatusEnumDomain;
 
 @Mapper(componentModel = "spring")
-public interface PaymentMethodMapper {
+public interface PaymentMethodMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "paymentMethodStatus", target = "paymentMethodStatus", qualifiedByName = "mapPaymentMethodStatus")
+    @Mapping(source = "paymentMethodStatus", target = "paymentMethodStatus", qualifiedByName = "mapPaymentMethodStatus")
+    @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "updatedAt", target = "updatedAt", qualifiedByName = "mapOffsetDateTimeToString")
     PaymentMethodDTO toDTO(PaymentMethod paymentMethod);
 
     @Named("mapPaymentMethodStatus")

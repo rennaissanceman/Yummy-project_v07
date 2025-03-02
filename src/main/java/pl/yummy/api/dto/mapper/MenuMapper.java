@@ -14,11 +14,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring", uses = {MenuItemMapper.class})
-public interface MenuMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class, MenuItemMapper.class})
+public interface MenuMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "restaurant.restaurantId", target = "restaurantId")
-    @Mapping(source = "menuItems", target = "menuItems", qualifiedByName = "mapMenuItems")
+    @Mapping(source = "validFrom", target = "validFrom", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "validTo", target = "validTo", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "updatedAt", target = "updatedAt", qualifiedByName = "mapOffsetDateTimeToString")
     MenuDTO toDTO(Menu menu);
 
     /*

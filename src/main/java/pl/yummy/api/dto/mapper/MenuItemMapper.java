@@ -7,11 +7,13 @@ import pl.yummy.api.dto.MenuItemDTO;
 import pl.yummy.domain.MenuItem;
 import pl.yummy.domain.enums.DietTypeEnumDomain;
 
-@Mapper(componentModel = "spring")
-public interface MenuItemMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface MenuItemMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "menu.menuId", target = "menuId")
     @Mapping(source = "dietType", target = "dietType", qualifiedByName = "mapDietType")
+    @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "updatedAt", target = "updatedAt", qualifiedByName = "mapOffsetDateTimeToString")
     MenuItemDTO toDTO(MenuItem menuItem);
 
     @Named("mapDietType")

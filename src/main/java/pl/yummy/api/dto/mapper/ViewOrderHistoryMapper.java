@@ -10,13 +10,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
-public interface ViewOrderHistoryMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface ViewOrderHistoryMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDTO")
+    @Mapping(source = "orderProcessingEvents.receivedDateTime", target = "orderProcessingEvents.receivedDateTime", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "orderProcessingEvents.completedDateTime", target = "orderProcessingEvents.completedDateTime", qualifiedByName = "mapOffsetDateTimeToString")
     ViewOrderHistoryDTO toDTO(ViewOrderHistory history);
 
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDomain")
+    @Mapping(source = "orderProcessingEvents.receivedDateTime", target = "orderProcessingEvents.receivedDateTime", qualifiedByName = "mapStringToOffsetDateTime")
+    @Mapping(source = "orderProcessingEvents.completedDateTime", target = "orderProcessingEvents.completedDateTime", qualifiedByName = "mapStringToOffsetDateTime")
     ViewOrderHistory toDomain(ViewOrderHistoryDTO dto);
 
     @Named("mapEventsToDTO")

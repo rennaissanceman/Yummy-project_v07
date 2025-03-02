@@ -11,7 +11,7 @@ import pl.yummy.domain.enums.CourierStatusEnumDomain;
 public interface CourierMapper {
 
     @Mapping(source = "courierStatus", target = "courierStatus", qualifiedByName = "mapCourierStatus")
-    CourierDTO toDTO( final Courier courier);
+    CourierDTO toDTO(final Courier courier);
 
     @Named("mapCourierStatus")
     default String mapCourierStatus(final CourierStatusEnumDomain courierStatus) {

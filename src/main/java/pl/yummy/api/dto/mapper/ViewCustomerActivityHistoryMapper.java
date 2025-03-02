@@ -10,10 +10,11 @@ import pl.yummy.domain.ViewCustomerActivityHistory;
 import java.util.List;
 import java.util.Optional;
 
-@Mapper(componentModel = "spring")
-public interface ViewCustomerActivityHistoryMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface ViewCustomerActivityHistoryMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "customerId", target = "customerId", qualifiedByName = "integerToLong")
+    @Mapping(source = "recentOrders.orderDate", target = "recentOrders.orderDate", qualifiedByName = "mapOffsetDateTimeToString")
     ViewCustomerActivityHistoryDTO toDTO(ViewCustomerActivityHistory history);
 
     @Mapping(source = "customerId", target = "customerId", qualifiedByName = "longToInteger")

@@ -4,21 +4,21 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import pl.yummy.api.dto.ViewOrderHistoryDTO;
-import pl.yummy.api.dto.ViewPaymentHistoryDTO;
 import pl.yummy.domain.ViewOrderHistory;
-import pl.yummy.domain.ViewPaymentHistory;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
-public interface ViewPaymentHistoryMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface ViewPaymentHistoryMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDTO")
+    @Mapping(source = "payments.paymentDate", target = "payments.paymentDate", qualifiedByName = "mapOffsetDateTimeToString")
     ViewOrderHistoryDTO toDTO(ViewOrderHistory viewOrderHistory);
 
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDomain")
+    @Mapping(source = "payments.paymentDate", target = "payments.paymentDate", qualifiedByName = "mapStringToOffsetDateTime")
     ViewOrderHistory toDomain(ViewOrderHistoryDTO dto);
 
     @Named("mapEventsToDTO")

@@ -20,4 +20,11 @@ public interface OffsetDateTimeMapper {
                 .map(odt -> odt.format(DATE_FORMAT))
                 .orElse(null);
     }
+
+    @Named("mapStringToOffsetDateTime")
+    default OffsetDateTime mapStringToOffsetDateTime(String dateTimeString) {
+        return Optional.ofNullable(dateTimeString)
+                .map(dt -> OffsetDateTime.parse(dt, DATE_FORMAT.withZone(ZoneOffset.UTC)))
+                .orElse(null);
+    }
 }

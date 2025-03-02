@@ -10,13 +10,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
-public interface ViewCustomerProfileMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface ViewCustomerProfileMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "orderSummaries", target = "orderSummaries", qualifiedByName = "mapOrderSummariesToDTO")
+    @Mapping(source = "orderSummaries.ordersDateTime", target = "orderSummaries.ordersDateTime", qualifiedByName = "mapOffsetDateTimeToString")
     ViewCustomerProfileDTO toDTO(ViewCustomerProfile profile);
 
     @Mapping(source = "orderSummaries", target = "orderSummaries", qualifiedByName = "mapOrderSummariesToDomain")
+    @Mapping(source = "orderSummaries.ordersDateTime", target = "orderSummaries.ordersDateTime", qualifiedByName = "mapStringToOffsetDateTime")
     ViewCustomerProfile toDomain(ViewCustomerProfileDTO dto);
 
     @Named("mapOrderSummariesToDTO")

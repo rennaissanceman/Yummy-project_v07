@@ -1,12 +1,16 @@
 package pl.yummy.api.dto.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import pl.yummy.api.dto.InvoiceDTO;
 import pl.yummy.domain.Invoice;
 
-@Mapper(componentModel = "spring")
-public interface InvoiceMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface InvoiceMapper extends OffsetDateTimeMapper{
 
+    @Mapping(source = "issueDate", target = "issueDate", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "saleDate", target = "saleDate", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "dueDate", target = "dueDate", qualifiedByName = "mapOffsetDateTimeToString")
     InvoiceDTO toDTO(Invoice invoice);
 }
 

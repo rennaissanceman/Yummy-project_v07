@@ -6,10 +6,11 @@ import org.mapstruct.Named;
 import pl.yummy.api.dto.ViewCustomerFeedbackDTO;
 import pl.yummy.domain.ViewCustomerFeedback;
 
-@Mapper(componentModel = "spring")
-public interface ViewCustomerFeedbackMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface ViewCustomerFeedbackMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "feedbackId", target = "feedbackId", qualifiedByName = "integerToLong")
+    @Mapping(source = "date", target = "date", qualifiedByName = "mapOffsetDateTimeToString")
     ViewCustomerFeedbackDTO toDTO(ViewCustomerFeedback feedback);
 
     @Mapping(source = "feedbackId", target = "feedbackId", qualifiedByName = "longToInteger")

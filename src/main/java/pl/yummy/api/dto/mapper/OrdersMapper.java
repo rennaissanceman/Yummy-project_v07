@@ -17,11 +17,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring",
-        uses = {CustomerMapper.class, PaymentMapper.class, InvoiceMapper.class, DeliveryMapper.class, OrderItemMapper.class})
-public interface OrdersMapper {
+        uses = {OffsetDateTimeMapper.class,
+                CustomerMapper.class,
+                PaymentMapper.class,
+                InvoiceMapper.class,
+                DeliveryMapper.class,
+                OrderItemMapper.class})
+public interface OrdersMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "menu.menuId", target = "menuId")
     @Mapping(source = "ordersStatus", target = "ordersStatus", qualifiedByName = "mapOrdersStatus")
+    @Mapping(source = "ordersDateTime", target = "ordersDateTime", qualifiedByName = "mapOffsetDateTimeToString")
     @Mapping(source = "availableDeliveryAreaId", target = "availableDeliveryAreaId", qualifiedByName = "mapAvailableDeliveryAreaId")
     @Mapping(source = "customerAddressId", target = "customerAddressId", qualifiedByName = "mapCustomerAddressId")
     @Mapping(source = "ordersItems", target = "ordersItems", qualifiedByName = "mapOrdersItems")

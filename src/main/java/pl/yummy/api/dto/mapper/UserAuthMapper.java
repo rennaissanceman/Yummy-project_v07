@@ -1,12 +1,15 @@
 package pl.yummy.api.dto.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import pl.yummy.api.dto.UserAuthDTO;
 import pl.yummy.domain.UserAuth;
 
-@Mapper(componentModel = "spring")
-public interface UserAuthMapper {
+@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+public interface UserAuthMapper extends OffsetDateTimeMapper{
 
+    @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "updatedAt", target = "updatedAt", qualifiedByName = "mapOffsetDateTimeToString")
     UserAuthDTO toDTO(UserAuth userAuth);
 }
 
