@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.ProcessingPaymentProcessingDAO;
 import pl.yummy.domain.Payment;
-import pl.yummy.domain.requests.PaymentProcessingRequest;
+import pl.yummy.domain.RequestPaymentProcessing;
 
 @Slf4j
 @Service
@@ -21,7 +21,7 @@ public class PaymentProcessingService {
      * @param request obiekt żądania przetwarzania płatności zawierający m.in. numer zamówienia, metodę płatności, kwotę itp.
      */
     @Transactional
-    public void processPayment(PaymentProcessingRequest request) {
+    public void processPayment(RequestPaymentProcessing request) {
         log.info("Rozpoczynam proces płatności dla zamówienia: {}", request.getOrderNumber());
         processingPaymentProcessingDAO.processPayment(request);
     }

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class RequestMenuItemUpdateDTO {
 
-//    Na podstawie MenuItemUpdateRequest
+//    Na podstawie RequestMenuItemUpdate
     Long menuItemId;
     Boolean isAvailable;
     BigDecimal price;

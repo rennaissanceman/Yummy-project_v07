@@ -1,6 +1,6 @@
 package pl.yummy.business.dao;
 
-import pl.yummy.domain.requests.DeliveryAssignmentRequest;
+import pl.yummy.domain.RequestDeliveryAssignment;
 
 public interface ProcessingDeliveryAssignmentDAO {
 
@@ -9,7 +9,7 @@ public interface ProcessingDeliveryAssignmentDAO {
     Cel: Obsługa logiki przypisywania kurierów do zamówień.
     */
 
-    void assignDelivery(DeliveryAssignmentRequest request);
+    void assignDelivery(RequestDeliveryAssignment request);
 
     void assignCourierToDelivery(Long deliveryId);
 

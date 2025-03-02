@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.CustomerDAO;
 import pl.yummy.domain.*;
 import pl.yummy.domain.exception.NotFoundException;
-import pl.yummy.domain.requests.OrderPlacementRequest;
 
 import java.util.HashSet;
 import java.util.List;
@@ -53,7 +52,7 @@ public class CustomerService {
      * @param invoice wystawiona faktura
      * @return nowy obiekt Customer
      */
-    public Customer buildCustomer(OrderPlacementRequest request, Invoice invoice) {
+    public Customer buildCustomer(RequestOrderPlacement request, Invoice invoice) {
         return Customer.builder()
                 .customerName(request.getCustomerName())
                 .customerSurname(request.getCustomerSurname())

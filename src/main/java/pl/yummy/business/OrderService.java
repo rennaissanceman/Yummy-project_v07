@@ -7,8 +7,6 @@ import pl.yummy.business.dao.OrdersDAO;
 import pl.yummy.domain.*;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 import pl.yummy.domain.exception.NotFoundException;
-import pl.yummy.domain.requests.OrderPlacementRequest;
-import pl.yummy.domain.requests.OrderProcessingRequest;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -30,7 +28,7 @@ public class OrderService {
      * @param restaurant obiekt restauracji, dla której składane jest zamówienie
      * @return nowo utworzone zamówienie
      */
-    public Orders buildOrder(OrderPlacementRequest request, Restaurant restaurant) {
+    public Orders buildOrder(RequestOrderPlacement request, Restaurant restaurant) {
         // Inicjujemy zamówienie tylko z podstawowymi danymi.
         return Orders.builder()
                 .ordersNumber(request.getOrderNumber())
@@ -79,7 +77,7 @@ public class OrderService {
      * @param request dane z żądania przetwarzania zamówienia
      * @return obiekt OrdersItem
      */
-    public OrdersItem buildOrderItem(OrderProcessingRequest request) {
+    public OrdersItem buildOrderItem(RequestOrderProcessing request) {
         BigDecimal unitPrice = BigDecimal.TEN; // przykładowa cena jednostkowa
         BigDecimal totalPrice = unitPrice.multiply(BigDecimal.valueOf(request.getOrderItemQuantity()));
         MenuItem menuItem = MenuItem.builder()

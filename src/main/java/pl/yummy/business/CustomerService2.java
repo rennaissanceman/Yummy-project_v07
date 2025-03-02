@@ -4,14 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.CustomerDAO;
-import pl.yummy.domain.Address;
-import pl.yummy.domain.BillingInformation;
-import pl.yummy.domain.Customer;
-import pl.yummy.domain.Invoice;
-import pl.yummy.domain.Orders;
-import pl.yummy.domain.UserAuth;
+import pl.yummy.domain.*;
 import pl.yummy.domain.exception.NotFoundException;
-import pl.yummy.domain.requests.OrderPlacementRequest;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -56,7 +50,7 @@ public class CustomerService2 {
      * @param invoice wystawiona faktura
      * @return nowy obiekt Customer
      */
-    public Customer buildCustomer(OrderPlacementRequest request, Invoice invoice) {
+    public Customer buildCustomer(RequestOrderPlacement request, Invoice invoice) {
         // Przykładowo budujemy zamówienie korzystając z OrderService.
         // W tym przykładzie zakładamy, że metoda buildOrder wymaga przekazania obiektu restauracji.
         // Dla uproszczenia przekazujemy null – w pełnej implementacji należałoby wyszukać restaurację.

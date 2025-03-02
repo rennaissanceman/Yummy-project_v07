@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.ProcessingDeliveryAssignmentDAO;
 import pl.yummy.domain.Delivery;
-import pl.yummy.domain.requests.DeliveryAssignmentRequest;
+import pl.yummy.domain.RequestDeliveryAssignment;
 import pl.yummy.infrastructure.database.entity.CourierEntity;
 import pl.yummy.infrastructure.database.entity.DeliveryEntity;
 import pl.yummy.infrastructure.database.entity.enums.CourierStatusEnumEntity;
@@ -38,7 +38,7 @@ public class ProcessingDeliveryAssignmentRepository implements ProcessingDeliver
 
     @Override
     @Transactional
-    public void assignDelivery(DeliveryAssignmentRequest request) {
+    public void assignDelivery(RequestDeliveryAssignment request) {
         // Mapujemy dane z requestu na domenowy obiekt Delivery.
         // (Przykładowo przyjmujemy, że numer zamówienia jest używany jako deliveryNumber.)
         Delivery delivery = Delivery.builder()

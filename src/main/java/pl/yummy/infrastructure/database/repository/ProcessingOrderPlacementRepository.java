@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.ProcessingOrderPlacementDAO;
 import pl.yummy.domain.Orders;
-import pl.yummy.domain.requests.OrderPlacementRequest;
+import pl.yummy.domain.RequestOrderPlacement;
 import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.OrdersEntityMapper;
 
@@ -23,7 +23,7 @@ public class ProcessingOrderPlacementRepository implements ProcessingOrderPlacem
 
     @Override
     @Transactional
-    public void placeOrder(OrderPlacementRequest request) {
+    public void placeOrder(RequestOrderPlacement request) {
         // Mapujemy dane z requestu do domenowego obiektu Orders.
         Orders order = Orders.builder()
                 .ordersNumber(request.getOrderNumber())

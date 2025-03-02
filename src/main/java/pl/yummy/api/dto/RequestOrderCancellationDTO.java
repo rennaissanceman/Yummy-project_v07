@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RequestOrderCancellationDTO {
 
-//    Na podstawie OrderCancellationRequest
+//    Na podstawie RequestOrderCancellation
     String orderNumber;
     String cancellationReason;
 }

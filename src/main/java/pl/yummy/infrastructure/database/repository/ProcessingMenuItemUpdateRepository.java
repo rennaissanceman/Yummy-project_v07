@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.ProcessingMenuItemUpdateDAO;
-import pl.yummy.domain.requests.MenuItemUpdateRequest;
+import pl.yummy.domain.RequestMenuItemUpdate;
 import pl.yummy.infrastructure.database.repository.jpa.MenuItemJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.MenuItemEntityMapper;
 
@@ -25,7 +25,7 @@ public class ProcessingMenuItemUpdateRepository implements ProcessingMenuItemUpd
 
     @Override
     @Transactional
-    public void updateMenuItem(MenuItemUpdateRequest request) {
+    public void updateMenuItem(RequestMenuItemUpdate request) {
         var menuItemEntity = menuItemJpaRepository.findById(request.getMenuItemId())
                 .orElseThrow(() -> new RuntimeException("Menu item not found: " + request.getMenuItemId()));
         menuItemEntity.setIsAvailable(request.getIsAvailable());

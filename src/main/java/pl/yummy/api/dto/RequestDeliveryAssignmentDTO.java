@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 public class RequestDeliveryAssignmentDTO {
 
-//    Na podstawie DeliveryAssignmentRequest
+//    Na podstawie RequestDeliveryAssignment
     String orderNumber;
     String courierIdentifier;
     OffsetDateTime assignmentDateTime;

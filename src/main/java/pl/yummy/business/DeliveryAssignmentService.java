@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.ProcessingDeliveryAssignmentDAO;
-import pl.yummy.domain.requests.DeliveryAssignmentRequest;
+import pl.yummy.domain.RequestDeliveryAssignment;
 
 @Slf4j
 @Service
@@ -22,7 +22,7 @@ public class DeliveryAssignmentService {
      *                datę przypisania oraz komentarz
      */
     @Transactional
-    public void assignDelivery(DeliveryAssignmentRequest request) {
+    public void assignDelivery(RequestDeliveryAssignment request) {
         log.info("Przypisywanie dostawy dla zamówienia: {}", request.getOrderNumber());
         processingDeliveryAssignmentDAO.assignDelivery(request);
     }

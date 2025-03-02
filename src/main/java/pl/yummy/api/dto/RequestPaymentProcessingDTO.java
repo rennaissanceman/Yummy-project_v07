@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class RequestPaymentProcessingDTO {
 
-//    Na podstawie PaymentProcessingRequest
+//    Na podstawie RequestPaymentProcessing
     Long orderId;
     String orderNumber;
     String paymentMethod;

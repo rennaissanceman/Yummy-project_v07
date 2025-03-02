@@ -9,11 +9,12 @@ import lombok.With;
 @Builder
 public class ViewDeliveryStatusOverview {
 
-    Integer deliveryAreaId;
-    String deliveryAreaName;
-    Integer totalDeliveries;
-    Integer lateDeliveries;
-    Integer successfulDeliveries;
+    Long deliveryAreaId;     // ID obszaru dostawy
+    String deliveryAreaName;    // Nazwa obszaru dostawy
+    Integer totalDeliveries;    // Łączna liczba dostaw
+    Double averageDeliveryTime; // Średni czas dostawy (w minutach)
+    Integer lateDeliveries;     // Liczba dostaw opóźnionych
+    Integer successfulDeliveries; // Liczba dostaw zakończonych sukcesem
     Integer inTransit;
 
 

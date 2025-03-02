@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RequestOrderProcessingDTO {
 
-//    Na podstawie OrderProcessingRequest
+//    Na podstawie RequestOrderProcessing
     String courierIdentifier;
     String orderNumber;
     String orderItemIdentifier;

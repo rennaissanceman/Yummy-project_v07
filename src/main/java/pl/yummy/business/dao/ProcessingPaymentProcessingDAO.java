@@ -1,7 +1,7 @@
 package pl.yummy.business.dao;
 
 import pl.yummy.domain.Payment;
-import pl.yummy.domain.requests.PaymentProcessingRequest;
+import pl.yummy.domain.RequestPaymentProcessing;
 
 public interface ProcessingPaymentProcessingDAO {
 
@@ -11,7 +11,7 @@ public interface ProcessingPaymentProcessingDAO {
 
     */
 
-    void processPayment(PaymentProcessingRequest request);
+    void processPayment(RequestPaymentProcessing request);
 
     void processPayment(Long orderId, Payment payment);
 

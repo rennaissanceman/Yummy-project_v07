@@ -25,5 +25,4 @@ public class Address {
                 && postalCode != null && !postalCode.isBlank()
                 && street != null && !street.isBlank();
     }
-
 }

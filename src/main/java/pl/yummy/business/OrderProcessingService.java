@@ -8,7 +8,7 @@ import pl.yummy.business.dao.ProcessingOrderProcessingDAO;
 import pl.yummy.domain.Courier;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.OrdersItem;
-import pl.yummy.domain.requests.OrderProcessingRequest;
+import pl.yummy.domain.RequestOrderProcessing;
 
 @Slf4j
 @Service
@@ -36,7 +36,7 @@ public class OrderProcessingService {
      * @param request dane przetwarzania zamówienia
      */
     @Transactional
-    public void processOrder(OrderProcessingRequest request) {
+    public void processOrder(RequestOrderProcessing request) {
         // Wyszukiwanie kuriera oraz aktywnego zamówienia
         Courier courier = courierService.findCourier(request.getCourierIdentifier());
         Orders order = orderService.findActiveOrder(request.getOrderNumber());

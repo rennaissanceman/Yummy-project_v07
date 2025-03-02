@@ -1,8 +1,8 @@
 package pl.yummy.business.dao;
 
-import pl.yummy.domain.requests.MenuItemUpdateRequest;
+import pl.yummy.domain.RequestMenuItemUpdate;
 
 public interface ProcessingMenuItemUpdateDAO {
 
-    void updateMenuItem(MenuItemUpdateRequest request);
+    void updateMenuItem(RequestMenuItemUpdate request);
 }

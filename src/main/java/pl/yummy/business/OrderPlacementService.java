@@ -2,11 +2,7 @@ package pl.yummy.business;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.yummy.domain.Customer;
-import pl.yummy.domain.Invoice;
-import pl.yummy.domain.Orders;
-import pl.yummy.domain.Restaurant;
-import pl.yummy.domain.requests.OrderPlacementRequest;
+import pl.yummy.domain.*;
 
 @Service
 @AllArgsConstructor
@@ -16,13 +12,13 @@ public class OrderPlacementService {
     private final CustomerService customerService;
     private final OrderService orderService;
 
-    public Invoice placeOrder(OrderPlacementRequest request) {
+    public Invoice placeOrder(RequestOrderPlacement request) {
         return request.getExistingCustomerEmail().isBlank()
                 ? processFirstTimeOrder(request)
                 : processReturningCustomerOrder(request);
     }
 
-    private Invoice processFirstTimeOrder(OrderPlacementRequest request) {
+    private Invoice processFirstTimeOrder(RequestOrderPlacement request) {
         // Znajdź restaurację na podstawie identyfikatora
         Restaurant restaurant = restaurantService.findRestaurant(request.getRestaurantIdentifier());
         // Zbuduj obiekt zamówienia na podstawie danych z requestu i restauracji
@@ -36,7 +32,7 @@ public class OrderPlacementService {
         return invoice;
     }
 
-    private Invoice processReturningCustomerOrder(OrderPlacementRequest request) {
+    private Invoice processReturningCustomerOrder(RequestOrderPlacement request) {
         Customer existingCustomer = customerService.findCustomer(request.getExistingCustomerEmail());
         Restaurant restaurant = restaurantService.findRestaurant(request.getRestaurantIdentifier());
         Orders order = orderService.buildOrder(request, restaurant);

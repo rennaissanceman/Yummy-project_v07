@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.ProcessingOrderCancellationDAO;
-import pl.yummy.domain.requests.OrderCancellationRequest;
+import pl.yummy.domain.RequestOrderCancellation;
 import pl.yummy.infrastructure.database.entity.enums.OrdersStatusEnumEntity;
 import pl.yummy.infrastructure.database.repository.jpa.OrdersJpaRepository;
 
@@ -25,7 +25,7 @@ public class ProcessingOrderCancellationRepository implements ProcessingOrderCan
 
     @Override
     @Transactional
-    public void cancelOrder(OrderCancellationRequest request) {
+    public void cancelOrder(RequestOrderCancellation request) {
         var ordersEntity = ordersJpaRepository.findByOrdersNumber(request.getOrderNumber())
                 .orElseThrow(() -> new RuntimeException("Order not found: " + request.getOrderNumber()));
         ordersEntity.setOrdersStatus(OrdersStatusEnumEntity.CANCELLED_BY_CUSTOMER);

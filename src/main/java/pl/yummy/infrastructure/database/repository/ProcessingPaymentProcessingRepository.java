@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.ProcessingPaymentProcessingDAO;
 import pl.yummy.domain.Payment;
-import pl.yummy.domain.requests.PaymentProcessingRequest;
+import pl.yummy.domain.RequestPaymentProcessing;
 import pl.yummy.infrastructure.database.entity.OrdersEntity;
 import pl.yummy.infrastructure.database.entity.PaymentEntity;
 import pl.yummy.infrastructure.database.entity.enums.OrdersStatusEnumEntity;
@@ -33,7 +33,7 @@ public class ProcessingPaymentProcessingRepository implements ProcessingPaymentP
 
     @Override
     @Transactional
-    public void processPayment(PaymentProcessingRequest request) {
+    public void processPayment(RequestPaymentProcessing request) {
         // Mapowanie danych z PaymentProcessingRequest na encję Payment
         Payment payment = Payment.builder()
                 .paymentId(request.getOrderId())

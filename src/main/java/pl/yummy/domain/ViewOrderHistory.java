@@ -4,8 +4,6 @@ import lombok.Builder;
 import lombok.ToString;
 import lombok.Value;
 import lombok.With;
-import pl.yummy.domain.Delivery;
-import pl.yummy.domain.Payment;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
