@@ -24,11 +24,11 @@ public interface MenuDAO {
     List<Menu> findByDescriptionContainingIgnoreCase(String keyword);
 
     Menu save(Menu menu);
-
+}
 
 /*
     List<Menu> findCurrentlyActiveMenus();
 */
 
 
-}
+

@@ -9,7 +9,7 @@ public enum PaymentMethodStatusEnumEntity {
     UNDER_MAINTENANCE,
     REMOVED
 
-
+}
     /*
     ACTIVE("The payment method is active and available for use"),          // Metoda płatności jest aktywna i można jej używać.
     INACTIVE("The payment method is inactive and cannot be used"),         // Metoda płatności jest nieaktywna i nie można jej używać.
@@ -30,4 +30,4 @@ public enum PaymentMethodStatusEnumEntity {
     }
 
      */
-}
+

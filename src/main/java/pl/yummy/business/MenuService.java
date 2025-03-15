@@ -24,6 +24,7 @@ public class MenuService {
      * @return Menu o podanej nazwie
      * @throws NotFoundException gdy menu o podanej nazwie nie zostanie znalezione
      */
+    @Transactional
     public Menu getMenuByName(String menuName) {
         return menuDAO.findByMenuName(menuName)
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono menu o nazwie: " + menuName));
@@ -35,6 +36,7 @@ public class MenuService {
      * @param restaurantId identyfikator restauracji
      * @return lista menu powiązanych z restauracją
      */
+    @Transactional
     public List<Menu> getMenusByRestaurant(Long restaurantId) {
         return menuDAO.findByRestaurant_RestaurantId(restaurantId);
     }
@@ -46,6 +48,7 @@ public class MenuService {
      * @param endDate końcowa data przedziału
      * @return lista menu ważnych w określonym okresie
      */
+    @Transactional
     public List<Menu> getMenusValidBetween(OffsetDateTime startDate, OffsetDateTime endDate) {
         return menuDAO.findByValidFromBeforeAndValidToAfter(startDate, endDate);
     }
@@ -56,6 +59,7 @@ public class MenuService {
      * @param createdAt data, po której menu zostały utworzone
      * @return lista menu utworzonych po podanej dacie
      */
+    @Transactional
     public List<Menu> getMenusCreatedAfter(OffsetDateTime createdAt) {
         return menuDAO.findByCreatedAtAfter(createdAt);
     }

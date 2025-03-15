@@ -24,7 +24,7 @@ public interface MenuItemDAO {
     // Find menu items containing a keyword in the description
     List<MenuItem> findByDescriptionContainingIgnoreCase(String keyword);
 
-
+}
 
 
 /*
@@ -35,5 +35,3 @@ public interface MenuItemDAO {
 
 */
 
-
-}

@@ -38,7 +38,7 @@ public class OrderProcessingService {
     @Transactional
     public void processOrder(RequestOrderProcessing request) {
         // Wyszukiwanie kuriera oraz aktywnego zamówienia
-        Courier courier = courierService.findCourier(request.getCourierIdentifier());
+        Courier courier = courierService.findByCourierNumber(request.getCourierIdentifier());
         Orders order = orderService.findActiveOrder(request.getOrderNumber());
 
         // Wybór metody przetwarzania na podstawie kodu operacji

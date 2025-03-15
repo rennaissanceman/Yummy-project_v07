@@ -9,7 +9,7 @@ public enum PaymentStatusEnumEntity {
     CHARGEBACK,
     IN_PROGRESS,
     EXPIRED
-
+}
     /*
     PENDING("Payment is awaiting confirmation"),                 // Oczekuje na zatwierdzenie (np. płatność online w toku).
     COMPLETED("Payment has been successfully completed"),        // Płatność zakończona pomyślnie.
@@ -31,4 +31,4 @@ public enum PaymentStatusEnumEntity {
     }
 
      */
-}
+

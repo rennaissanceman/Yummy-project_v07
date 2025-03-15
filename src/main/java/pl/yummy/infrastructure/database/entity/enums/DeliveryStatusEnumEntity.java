@@ -11,7 +11,7 @@ public enum DeliveryStatusEnumEntity {
     RETURNED,
     CANCELLED
 
-
+}
     /*
     PENDING("Delivery is awaiting assignment to a courier"),               // Dostawa oczekuje na przypisanie kuriera.
     ASSIGNED("Courier has been assigned to the delivery"),                 // Kurier został przypisany do dostawy.
@@ -51,4 +51,4 @@ public enum DeliveryStatusEnumEntity {
     OPTIONAL_REJECTED,          // Zamówienie odrzucone przez system lub restaurację (np. z powodu braku dostawców).
     OPTIONAL_CUSTOMER_NOT_FOUND // Nieudana dostawa z powodu błędnego adresu lub nieobecności klienta.
 */
-}
+

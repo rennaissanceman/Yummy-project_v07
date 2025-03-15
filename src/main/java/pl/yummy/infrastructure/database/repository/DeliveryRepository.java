@@ -10,6 +10,7 @@ import pl.yummy.infrastructure.database.repository.mapper.DeliveryEntityMapper;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -18,6 +19,26 @@ public class DeliveryRepository implements DeliveryDAO {
 
     private final DeliveryJpaRepository deliveryJpaRepository;
     private final DeliveryEntityMapper deliveryEntityMapper;
+
+    @Override
+    public Optional<Delivery> findById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Delivery> findAll() {
+        return null;
+    }
+
+    @Override
+    public Delivery save(Delivery delivery) {
+        return null;
+    }
+
+    @Override
+    public void delete(Delivery delivery) {
+
+    }
 
     @Override
     public List<Delivery> findByCourier_CourierId(Long courierId) {
@@ -61,5 +82,4 @@ public class DeliveryRepository implements DeliveryDAO {
                 .map(deliveryEntityMapper::mapFromEntity)
                 .collect(Collectors.toList());
     }
-
 }

@@ -62,4 +62,11 @@ public class CustomerRepository implements CustomerDAO {
         return customerEntityMapper.mapFromEntity(saved);
     }
 
+    @Override
+    public List<Customer> findAll() {
+        return customerJpaRepository.findAll()
+                .stream()
+                .map(customerEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
+    }
 }

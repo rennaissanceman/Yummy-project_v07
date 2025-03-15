@@ -24,7 +24,7 @@ public interface InvoiceDAO {
     // Find invoices by their due date
     List<Invoice> findByDueDate(OffsetDateTime dueDate);
 
-
+}
 
 
 
@@ -36,4 +36,4 @@ public interface InvoiceDAO {
 */
 
 
-}
+

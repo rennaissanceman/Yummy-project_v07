@@ -7,15 +7,18 @@ import pl.yummy.business.dao.CustomerDAO;
 import pl.yummy.domain.*;
 import pl.yummy.domain.exception.NotFoundException;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class CustomerService {
 
     private final CustomerDAO customerDAO;
+    private final OrderService orderService; // Zakładamy, że OrderService posiada metodę findOrdersByCustomer
 
     // Jeśli jest dostępny serwis obsługujący zamówienia, można go wstrzyknąć, np.
     // private final OrderService orderService;
@@ -31,6 +34,40 @@ public class CustomerService {
     }
 
     /*
+     * Metoda logowania klienta.
+     * Wyszukuje klienta po emailu, a następnie sprawdza, czy hasło przekazane w żądaniu
+     * zgadza się z zapisanym w obiekcie UserAuth.
+     *
+     * Zakładamy, że w klasie UserAuth hasło jest przechowywane w polu 'passwordHash'
+     * i dostępne przez metodę getPasswordHash().
+     *
+     * @param email adres email klienta
+     * @param password hasło klienta
+     * @return obiekt Customer, jeśli logowanie się powiodło
+     * @throws RuntimeException jeśli hasło jest niepoprawne
+     */
+    @Transactional
+    public Customer loginCustomer(String email, String password) {
+        // Wyszukiwanie klienta po emailu – jeśli nie znaleziono, metoda findCustomer wyrzuci NotFoundException.
+        Customer customer = findCustomer(email);
+
+        UserAuth userAuth = customer.getUserAuth();
+        // Weryfikacja hasła przy użyciu metody getPasswordHash(), która zwraca zapisane hasło (np. w postaci zaszyfrowanej).
+        if (userAuth == null || !userAuth.getPasswordHash().equals(password)) {
+            throw new RuntimeException("Błędne dane logowania");
+        }
+        return customer;
+    }
+
+
+    public Customer findCustomerByEmail(String email) {
+        // Pobranie klienta z bazy danych na podstawie emaila
+        return customerDAO.findByUserAuth_Email(email)
+                .orElseThrow(() -> new RuntimeException("Nie znaleziono klienta o podanym emailu"));
+    }
+
+
+    /*
      * Wyszukuje klienta na podstawie adresu email.
      *
      * @param email adres email klienta
@@ -42,6 +79,7 @@ public class CustomerService {
         return customerDAO.findByUserAuth_Email(email)
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono klienta o adresie email: " + email));
     }
+
 
     /*
      * Buduje obiekt klienta na podstawie danych z żądania złożenia zamówienia i wystawionej faktury.
@@ -83,6 +121,7 @@ public class CustomerService {
     public void updateCustomer(Customer customer) {
         customerDAO.saveCustomer(customer);
     }
+
 
     /*
      * Wyszukuje klienta na podstawie unikalnego numeru klienta.
@@ -127,6 +166,32 @@ public class CustomerService {
     @Transactional
     public List<Customer> findCustomersBySurname(String surname) {
         return customerDAO.findByCustomerSurname(surname);
+    }
+
+    /*
+     * Pobiera historię zamówień klienta na podstawie numeru klienta.
+     * W tej uproszczonej implementacji zamówienia są pobierane przy użyciu OrderService,
+     * a następnie mapowane na ViewOrderHistory, gdzie dla uproszczenia lista zdarzeń pozostaje pusta.
+     *
+     * @param customerNumber unikalny numer klienta
+     * @return lista historii zamówień
+     */
+    @Transactional
+    public List<ViewOrderHistory> getCustomerOrderHistory(String customerNumber) {
+        Customer customer = findCustomerByNumber(customerNumber);
+        List<Orders> ordersList = orderService.findOrdersByCustomer(customer.getCustomerId());
+        return ordersList.stream()
+                .map(order -> ViewOrderHistory.builder()
+                        .orderNumber(order.getOrdersNumber())
+                        // Przyjmujemy, że zdarzenia przetwarzania zostaną uzupełnione w przyszłości – na razie pusta lista
+                        .orderProcessingEvents(Collections.emptyList())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<Customer> getAllCustomers() {
+        return customerDAO.findAll();
     }
 }
 

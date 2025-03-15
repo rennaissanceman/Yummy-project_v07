@@ -70,5 +70,7 @@ public class RestaurantEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Set<MenuEntity> menus;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    private Set<FeedbackEntity> feedbacks;
 
 }

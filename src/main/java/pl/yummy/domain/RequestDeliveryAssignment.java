@@ -1,20 +1,22 @@
 package pl.yummy.domain;
 
-import lombok.Builder;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
 @With
 @Value
 @Builder
+@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class RequestDeliveryAssignment {
 
     String orderNumber;
     String courierIdentifier;  // np. numer lub identyfikator kuriera
     OffsetDateTime assignmentDateTime;
     String comment;            // Opcjonalnie – notatka dla kuriera
+
+
 }
 
 

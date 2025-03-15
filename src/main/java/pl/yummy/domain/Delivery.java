@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 
 @With
 @Value
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode(of = "deliveryId")
 @ToString(of = {"deliveryId", "deliveryNumber", "orders", "availableDeliveryArea", "courier", "deliveryStatus",
         "starTime", "endTime", "estimatedDeliveryTime", "actualDeliveryDateTime", "deliveryFee", "deliveryNotes"})

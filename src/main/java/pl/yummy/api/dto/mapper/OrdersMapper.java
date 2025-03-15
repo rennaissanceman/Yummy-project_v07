@@ -1,5 +1,6 @@
 package pl.yummy.api.dto.mapper;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -62,6 +63,16 @@ public interface OrdersMapper extends OffsetDateTimeMapper{
 
     // Delegowana metoda mapująca pojedynczy OrdersItem, której implementacja zostanie wygenerowana przez OrderItemMapper
     OrderItemDTO toOrderItemDTO(OrdersItem ordersItem);
+
+    // Metoda toDomain – mapowanie z OrdersDTO na Orders
+    @InheritInverseConfiguration(name = "toDTO")
+    @Mapping(source = "ordersStatus", target = "ordersStatus", qualifiedByName = "mapOrdersStatusToEnum")
+    Orders toDomain(OrdersDTO ordersDTO);
+
+    @Named("mapOrdersStatusToEnum")
+    default OrdersStatusEnumDomain mapOrdersStatusToEnum(String status) {
+        return status == null ? null : OrdersStatusEnumDomain.valueOf(status);
+    }
 }
 
     /*

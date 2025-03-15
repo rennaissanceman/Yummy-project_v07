@@ -14,7 +14,7 @@ public enum OrdersStatusEnumEntity {
     RETURNED,
     REFUNDED
 
-
+}
     /*
     PENDING("Order is pending approval"),   // Zamówienie zostało złożone, oczekuje na potwierdzenie.
     CONFIRMED("Order has been confirmed"),  // Zamówienie zostało potwierdzone przez restaurację.
@@ -39,4 +39,4 @@ public enum OrdersStatusEnumEntity {
     }
 
      */
-}
+

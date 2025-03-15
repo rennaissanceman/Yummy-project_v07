@@ -10,6 +10,7 @@ import pl.yummy.domain.exception.NotFoundException;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -17,30 +18,31 @@ public class CourierService {
 
     private final CourierDAO courierDAO;
 
-    /**
+    /*
      * Znajduje kuriera na podstawie unikalnego numeru kuriera.
      *
-     * @param courierIdentifier unikalny identyfikator (numer) kuriera
+     * @param courierNumber unikalny identyfikator (numer) kuriera
      * @return kurier, którego numer odpowiada podanemu identyfikatorowi
      * @throws NotFoundException gdy kurier nie zostanie znaleziony
      */
     @Transactional
-    public Courier findCourier(String courierIdentifier) {
-        return courierDAO.findByCourierNumber(courierIdentifier)
-                .orElseThrow(() -> new NotFoundException("Nie znaleziono kuriera o numerze: " + courierIdentifier));
+    public Courier findByCourierNumber(String courierNumber) {
+        return courierDAO.findByCourierNumber(courierNumber)
+                .orElseThrow(() -> new NotFoundException("Nie znaleziono kuriera o numerze: " + courierNumber));
     }
 
-    /**
+    /*
      * Pobiera listę wszystkich kurierów, których status to AVAILABLE.
      *
      * @return lista dostępnych kurierów
      */
     @Transactional
-    public List<Courier> findAvailableCouriers() {
+    public List<Courier> findByCourierStatus(CourierStatusEnumDomain status) {
         return courierDAO.findByCourierStatus(CourierStatusEnumDomain.AVAILABLE);
     }
 
-    /**
+
+    /*
      * Pobiera listę kurierów, których średnia ocena jest większa lub równa podanemu progowi.
      *
      * @param minimumRating minimalna średnia ocena, którą musi spełniać kurier
@@ -51,7 +53,7 @@ public class CourierService {
         return courierDAO.findByAverageRatingsGreaterThanEqual(minimumRating);
     }
 
-    /**
+    /*
      * Pobiera listę kurierów zatrudnionych po podanej dacie.
      *
      * @param hireDate data, po której zatrudnieni są kurierzy
@@ -62,7 +64,7 @@ public class CourierService {
         return courierDAO.findByHireDateAfter(hireDate);
     }
 
-    /**
+    /*
      * Pobiera listę kurierów korzystających z określonego typu pojazdu.
      *
      * @param vehicleType typ pojazdu, z którego korzysta kurier (np. "motocykl", "samochód")
@@ -94,4 +96,11 @@ public class CourierService {
     o konstruktorową injekcję zależności, co jest zgodne z dobrymi praktykami projektowymi.
 
     Takie podejście pozwala na spójne odwzorowanie logiki biznesowej z aplikacji cardealership w kontekście domeny Yummy.
+
+___________________________________________
+    Odpowiada za operacje związane z kurierami, np. wyszukiwanie kuriera po numerze, statusie, średniej ocenie,
+    dacie zatrudnienia czy typie pojazdu.
+    Wstrzykiwany komponent: CourierDAO.
+
+
     */

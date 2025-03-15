@@ -57,5 +57,4 @@ public class InvoiceRepository implements InvoiceDAO {
                 .map(invoiceEntityMapper::mapFromEntity)
                 .collect(Collectors.toList());
     }
-
 }

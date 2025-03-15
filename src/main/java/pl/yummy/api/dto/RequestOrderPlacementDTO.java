@@ -23,4 +23,21 @@ public class RequestOrderPlacementDTO {
     String customerAddressStreet;
     String orderNumber;
     String restaurantIdentifier;
+
+    // Metoda buildDefault() tworzy domyślną instancję DTO z pustymi wartościami.
+    public static RequestOrderPlacementDTO buildDefault() {
+        return RequestOrderPlacementDTO.builder()
+                .existingCustomerEmail("")
+                .customerName("")
+                .customerSurname("")
+                .customerPhone("")
+                .customerEmail("")
+                .customerAddressCountry("")
+                .customerAddressCity("")
+                .customerAddressPostalCode("")
+                .customerAddressStreet("")
+                .orderNumber("")
+                .restaurantIdentifier("")
+                .build();
+    }
 }

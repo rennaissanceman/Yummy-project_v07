@@ -27,9 +27,13 @@ public interface OrdersDAO {
 
     List<Orders> findOrdersWithoutDelivery();
 
+    List<Orders> findByOrdersDateTimeBetween(OffsetDateTime startDate, OffsetDateTime endDate);
+
     Orders save(Orders orders);
 
+    List<Orders> findAll();
 
+}
 /*
 
     List<Orders> findByTotalAmountBetween(BigDecimal minAmount, BigDecimal maxAmount);
@@ -40,4 +44,4 @@ public interface OrdersDAO {
 
 */
 
-}
+

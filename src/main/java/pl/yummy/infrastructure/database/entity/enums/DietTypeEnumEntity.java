@@ -17,7 +17,7 @@ public enum DietTypeEnumEntity {
     MEDITERRANEAN,
     DIABETIC,
     LOW_SODIUM
-
+}
 
     /*
     VEGETARIAN – Dieta wegetariańska (bez mięsa, ale z produktami pochodzenia zwierzęcego, np. jajkami, mlekiem).
@@ -37,4 +37,4 @@ public enum DietTypeEnumEntity {
     LOW_SODIUM – Dieta niskosodowa (o ograniczonej zawartości soli).
 
      */
-}
+

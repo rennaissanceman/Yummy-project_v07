@@ -62,4 +62,8 @@ public class CourierEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier")
     private Set<DeliveryEntity> deliveries;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "courier")
+    private Set<FeedbackEntity> feedbacks;
+
+
 }

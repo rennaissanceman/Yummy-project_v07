@@ -21,4 +21,6 @@ public interface RestaurantDAO {
     // Find restaurants owned by a specific owner ID
     List<Restaurant> findByOwner_OwnerId(Long ownerId);
 
+    List<Restaurant> findAll();
+
 }

@@ -24,4 +24,5 @@ public interface CustomerDAO {
 
     Customer saveCustomer(Customer customer);
 
+    List<Customer> findAll();
 }

@@ -18,10 +18,23 @@ public interface DeliveryMapper extends OffsetDateTimeMapper {
     @Mapping(source = "actualDeliveryDateTime", target = "actualDeliveryDateTime", qualifiedByName = "mapOffsetDateTimeToString")
     DeliveryDTO toDTO(Delivery delivery);
 
+    @Mapping(source = "deliveryStatus", target = "deliveryStatus", qualifiedByName = "mapStringToDeliveryStatus")
+    @Mapping(source = "starTime", target = "starTime", qualifiedByName = "mapStringToOffsetDateTime")
+    @Mapping(source = "endTime", target = "endTime", qualifiedByName = "mapStringToOffsetDateTime")
+    @Mapping(source = "estimatedDeliveryTime", target = "estimatedDeliveryTime", qualifiedByName = "mapStringToOffsetDateTime")
+    @Mapping(source = "actualDeliveryDateTime", target = "actualDeliveryDateTime", qualifiedByName = "mapStringToOffsetDateTime")
+    Delivery toDomain(DeliveryDTO deliveryDTO);
+
     @Named("mapDeliveryStatus")
     default String mapDeliveryStatus(DeliveryStatusEnumDomain deliveryStatus) {
         return deliveryStatus == null ? null : deliveryStatus.name();
     }
+
+    @Named("mapStringToDeliveryStatus")
+    default DeliveryStatusEnumDomain mapStringToDeliveryStatus(String status) {
+        return status == null ? null : DeliveryStatusEnumDomain.valueOf(status);
+    }
+}
     /*
     // Opcjonalnie: jeśli w przyszłości będziesz chciał mapować dodatkowe, wyliczane pola (np. isLate),
     // możesz dodać metodę domyślną, np.:
@@ -29,10 +42,9 @@ public interface DeliveryMapper extends OffsetDateTimeMapper {
     //     return delivery.isLate();
     // }
 
-     */
-}
 
-    /*
+
+
     Wyjaśnienie:
     - @Mapper(componentModel = "spring") – Mapper jest rejestrowany jako bean Springa, co umożliwia wstrzykiwanie
     go w innych komponentach.

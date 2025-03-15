@@ -1,9 +1,11 @@
 package pl.yummy.api.dto.mapper;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import pl.yummy.api.dto.PaymentDTO;
+import pl.yummy.domain.Orders;
 import pl.yummy.domain.Payment;
 import pl.yummy.domain.enums.PaymentMethodStatusEnumDomain;
 import pl.yummy.domain.enums.PaymentStatusEnumDomain;
@@ -26,6 +28,32 @@ public interface PaymentMapper {
     @Named("mapPaymentStatus")
     default String mapPaymentStatus(PaymentStatusEnumDomain paymentStatus) {
         return paymentStatus == null ? null : paymentStatus.name();
+    }
+
+    // Metoda odwrotna – mapuje PaymentDTO do Payment
+    @InheritInverseConfiguration(name = "toDTO")
+    @Mapping(target = "orders", source = "ordersId", qualifiedByName = "mapOrdersIdToOrders")
+    @Mapping(target = "paymentMethod", source = "paymentMethod", qualifiedByName = "mapPaymentMethodToEnum")
+    @Mapping(target = "paymentStatus", source = "paymentStatus", qualifiedByName = "mapPaymentStatusToEnum")
+    Payment toDomain(PaymentDTO paymentDTO);
+
+    @Named("mapOrdersIdToOrders")
+    default Orders mapOrdersIdToOrders(Long ordersId) {
+        if (ordersId == null) {
+            return null;
+        }
+        // Zakładamy, że Orders posiada buildera, który umożliwia ustawienie tylko identyfikatora
+        return Orders.builder().ordersId(ordersId).build();
+    }
+
+    @Named("mapPaymentMethodToEnum")
+    default PaymentMethodStatusEnumDomain mapPaymentMethodToEnum(String paymentMethod) {
+        return paymentMethod == null ? null : PaymentMethodStatusEnumDomain.valueOf(paymentMethod);
+    }
+
+    @Named("mapPaymentStatusToEnum")
+    default PaymentStatusEnumDomain mapPaymentStatusToEnum(String paymentStatus) {
+        return paymentStatus == null ? null : PaymentStatusEnumDomain.valueOf(paymentStatus);
     }
 }
 

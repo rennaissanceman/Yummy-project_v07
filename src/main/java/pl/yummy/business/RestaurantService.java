@@ -2,7 +2,9 @@ package pl.yummy.business;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.RestaurantDAO;
+import pl.yummy.domain.Customer;
 import pl.yummy.domain.Restaurant;
 import pl.yummy.domain.enums.CuisineTypeEnumDomain;
 import pl.yummy.domain.exception.NotFoundException;
@@ -23,6 +25,7 @@ public class RestaurantService {
      * @return Restaurant odpowiadająca podanej nazwie
      * @throws NotFoundException gdy restauracja nie zostanie znaleziona
      */
+    @Transactional
     public Restaurant findRestaurant(String restaurantIdentifier) {
         return restaurantDAO.findByRestaurantName(restaurantIdentifier)
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono restauracji: " + restaurantIdentifier));
@@ -34,6 +37,7 @@ public class RestaurantService {
      * @param cuisineType typ kuchni (np. ITALIAN, CHINESE)
      * @return lista restauracji, które oferują daną kuchnię
      */
+    @Transactional
     public List<Restaurant> getRestaurantsByCuisine(CuisineTypeEnumDomain cuisineType) {
         return restaurantDAO.findByCuisineType(cuisineType);
     }
@@ -44,6 +48,7 @@ public class RestaurantService {
      * @param minimumRating minimalna średnia ocena restauracji
      * @return lista restauracji spełniających warunek minimalnej oceny
      */
+    @Transactional
     public List<Restaurant> getRestaurantsWithMinimumRating(Double minimumRating) {
         return restaurantDAO.findByAverageRatingGreaterThanEqual(minimumRating);
     }
@@ -56,6 +61,11 @@ public class RestaurantService {
      */
     public List<Restaurant> getRestaurantsByOwner(Long ownerId) {
         return restaurantDAO.findByOwner_OwnerId(ownerId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Restaurant> getAllRestaurants() {
+        return restaurantDAO.findAll();
     }
 }
 

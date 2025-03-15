@@ -2,6 +2,7 @@ package pl.yummy.business;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.domain.*;
 
 @Service
@@ -18,6 +19,7 @@ public class OrderPlacementService {
                 : processReturningCustomerOrder(request);
     }
 
+    @Transactional
     private Invoice processFirstTimeOrder(RequestOrderPlacement request) {
         // Znajdź restaurację na podstawie identyfikatora
         Restaurant restaurant = restaurantService.findRestaurant(request.getRestaurantIdentifier());
@@ -32,6 +34,7 @@ public class OrderPlacementService {
         return invoice;
     }
 
+    @Transactional
     private Invoice processReturningCustomerOrder(RequestOrderPlacement request) {
         Customer existingCustomer = customerService.findCustomer(request.getExistingCustomerEmail());
         Restaurant restaurant = restaurantService.findRestaurant(request.getRestaurantIdentifier());

@@ -20,4 +20,16 @@ public class RequestPaymentProcessingDTO {
     BigDecimal amount;
     String transactionId;
     String comment;
+
+    // Metoda buildDefault tworzy instancję z domyślnymi wartościami
+    public static RequestPaymentProcessingDTO buildDefault() {
+        return RequestPaymentProcessingDTO.builder()
+                .orderId(null)
+                .orderNumber("")
+                .paymentMethod("")
+                .amount(BigDecimal.ZERO)
+                .transactionId("")
+                .comment("")
+                .build();
+    }
 }

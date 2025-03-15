@@ -9,6 +9,7 @@ import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 import pl.yummy.domain.exception.NotFoundException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +62,7 @@ public class OrderService {
      * @return zamówienie o statusie PENDING
      * @throws NotFoundException gdy zamówienie nie zostanie znalezione lub nie jest aktywne
      */
+    @Transactional(readOnly = true)
     public Orders findActiveOrder(String orderNumber) {
         Optional<Orders> optionalOrder = ordersDAO.findByOrdersNumber(orderNumber);
         if (optionalOrder.isEmpty() ||
@@ -124,6 +126,7 @@ public class OrderService {
      * @param customerId unikalny identyfikator klienta
      * @return lista zamówień powiązanych z klientem
      */
+    @Transactional(readOnly = true)
     public List<Orders> findOrdersByCustomer(Long customerId) {
         return ordersDAO.findByCustomer_CustomerId(customerId);
     }
@@ -134,6 +137,7 @@ public class OrderService {
      * @param status status zamówienia (np. PENDING, DELIVERED)
      * @return lista zamówień o podanym statusie
      */
+    @Transactional(readOnly = true)
     public List<Orders> findOrdersByStatus(OrdersStatusEnumDomain status) {
         return ordersDAO.findByOrdersStatus(status);
     }
@@ -144,6 +148,7 @@ public class OrderService {
      * @param dateTime data, po której zamówienia zostały utworzone
      * @return lista zamówień utworzonych po podanej dacie
      */
+    @Transactional(readOnly = true)
     public List<Orders> findOrdersCreatedAfter(OffsetDateTime dateTime) {
         return ordersDAO.findByOrdersDateTimeAfter(dateTime);
     }
@@ -154,6 +159,7 @@ public class OrderService {
      * @param totalAmount minimalna łączna wartość zamówienia
      * @return lista zamówień spełniających kryterium wartości
      */
+    @Transactional(readOnly = true)
     public List<Orders> findOrdersByTotalAmountGreaterThanEqual(BigDecimal totalAmount) {
         return ordersDAO.findByTotalAmountGreaterThanEqual(totalAmount);
     }
@@ -163,8 +169,45 @@ public class OrderService {
      *
      * @return lista zamówień bez dostawy
      */
+    @Transactional(readOnly = true)
     public List<Orders> findOrdersWithoutDelivery() {
         return ordersDAO.findOrdersWithoutDelivery();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Orders> getAllOrders() {
+        return ordersDAO.findAll();
+    }
+
+    /**
+     * Buduje raport przychodowy za podany okres.
+     *
+     * @param startDate początkowa data raportu
+     * @param endDate końcowa data raportu
+     * @return obiekt RevenueReport zawierający łączny przychód, liczbę zamówień i średnią wartość zamówienia
+     */
+    @Transactional
+    public ViewRevenueReport getRevenueReport(OffsetDateTime startDate, OffsetDateTime endDate) {
+        // Przykładowo pobieramy wszystkie zamówienia z określonego przedziału czasowego, które mają status DELIVERED
+        List<Orders> orders = ordersDAO.findByOrdersDateTimeBetween(startDate, endDate);
+
+        BigDecimal totalRevenue = orders.stream()
+                .map(Orders::getTotalAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        int totalOrders = orders.size();
+
+        BigDecimal averageOrderValue = totalOrders > 0
+                ? totalRevenue.divide(BigDecimal.valueOf(totalOrders), 2, RoundingMode.HALF_UP)
+                : BigDecimal.ZERO;
+
+        return ViewRevenueReport.builder()
+                .startDate(startDate)
+                .endDate(endDate)
+                .totalRevenue(totalRevenue)
+                .totalOrders(totalOrders)
+                .averageOrderValue(averageOrderValue)
+                .build();
     }
 }
 

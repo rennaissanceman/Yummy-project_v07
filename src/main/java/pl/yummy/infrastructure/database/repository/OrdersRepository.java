@@ -74,9 +74,25 @@ public class OrdersRepository implements OrdersDAO {
     }
 
     @Override
+    public List<Orders> findByOrdersDateTimeBetween(OffsetDateTime startDate, OffsetDateTime endDate) {
+        return ordersJpaRepository.findOrdersWithoutDelivery()
+                .stream()
+                .map(ordersEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Orders save(Orders orders) {
         OrdersEntity toSave = ordersEntityMapper.mapToEntity(orders);
         OrdersEntity saved = ordersJpaRepository.save(toSave);
         return ordersEntityMapper.mapFromEntity(saved);
+    }
+
+    @Override
+    public List<Orders> findAll() {
+        return ordersJpaRepository.findAll()
+                .stream()
+                .map(ordersEntityMapper::mapFromEntity)
+                .collect(Collectors.toList());
     }
 }
