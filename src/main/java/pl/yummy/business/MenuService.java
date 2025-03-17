@@ -125,4 +125,11 @@ public class MenuService {
 
     Implementacja MenuService dzieli odpowiedzialności: wyszukiwanie menu na podstawie różnych kryteriów
     oraz (opcjonalnie) operacje modyfikacji, co pozwala zachować spójność logiki biznesowej w aplikacji Yummy.
+
+    __________________________________________________________________________
+    MenuService
+
+    - Zarządza menu restauracji – wyszukiwanie menu po nazwie, według restauracji, okresu ważności, daty utworzenia
+    czy opisu; umożliwia zapis nowego menu.
+    - Wstrzykiwany komponent: MenuDAO.
     */

@@ -3,6 +3,7 @@ package pl.yummy.business;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.yummy.business.dao.OrderPlacementProcessingDAO;
 import pl.yummy.domain.*;
 
 @Service
@@ -12,15 +13,21 @@ public class OrderPlacementService {
     private final RestaurantService restaurantService;
     private final CustomerService customerService;
     private final OrderService orderService;
+    private final OrderPlacementProcessingDAO orderPlacementProcessingDAO;
 
-    public Invoice placeOrder(RequestOrderPlacement request) {
+
+    public void placeOrder(OrderPlacementRequest request) {
+        orderPlacementProcessingDAO.placeOrder(request);
+    }
+
+    public Invoice placeOrder(OrderPlacementRequest request) {
         return request.getExistingCustomerEmail().isBlank()
                 ? processFirstTimeOrder(request)
                 : processReturningCustomerOrder(request);
     }
 
     @Transactional
-    private Invoice processFirstTimeOrder(RequestOrderPlacement request) {
+    private Invoice processFirstTimeOrder(OrderPlacementRequest request) {
         // Znajdź restaurację na podstawie identyfikatora
         Restaurant restaurant = restaurantService.findRestaurant(request.getRestaurantIdentifier());
         // Zbuduj obiekt zamówienia na podstawie danych z requestu i restauracji
@@ -35,7 +42,7 @@ public class OrderPlacementService {
     }
 
     @Transactional
-    private Invoice processReturningCustomerOrder(RequestOrderPlacement request) {
+    private Invoice processReturningCustomerOrder(OrderPlacementRequest request) {
         Customer existingCustomer = customerService.findCustomer(request.getExistingCustomerEmail());
         Restaurant restaurant = restaurantService.findRestaurant(request.getRestaurantIdentifier());
         Orders order = orderService.buildOrder(request, restaurant);
@@ -53,4 +60,10 @@ public class OrderPlacementService {
     Cel:
     Obsługuje proces składania zamówienia. W zależności od tego, czy klient jest nowy, czy już istnieje,
     buduje obiekt zamówienia, tworzy fakturę oraz rejestruje lub aktualizuje dane klienta.
+
+    _______________________________________________________
+    OrderPlacementService
+
+    - Odpowiada za składanie zamówień (proces ich inicjacji).
+    - Wstrzykiwany komponent: ProcessingOrderPlacementDAO.
     */

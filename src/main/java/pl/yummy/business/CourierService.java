@@ -76,6 +76,7 @@ public class CourierService {
     }
 }
 
+
     /*
     4. CourierService
 
@@ -97,10 +98,11 @@ public class CourierService {
 
     Takie podejście pozwala na spójne odwzorowanie logiki biznesowej z aplikacji cardealership w kontekście domeny Yummy.
 
-___________________________________________
-    Odpowiada za operacje związane z kurierami, np. wyszukiwanie kuriera po numerze, statusie, średniej ocenie,
-    dacie zatrudnienia czy typie pojazdu.
-    Wstrzykiwany komponent: CourierDAO.
+    ___________________________________________
+    CourierService
 
+    - Odpowiada za operacje związane z kurierami, np. wyszukiwanie kuriera po numerze, statusie, średniej ocenie,
+    dacie zatrudnienia czy typie pojazdu.
+    - Wstrzykiwany komponent: CourierDAO.
 
     */

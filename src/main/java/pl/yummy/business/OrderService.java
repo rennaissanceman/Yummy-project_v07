@@ -21,6 +21,8 @@ public class OrderService {
 
     private final OrdersDAO ordersDAO;
 
+
+
     /**
      * Buduje nowe zamówienie na podstawie danych przekazanych w OrderPlacementRequest
      * oraz danych restauracji.
@@ -29,7 +31,7 @@ public class OrderService {
      * @param restaurant obiekt restauracji, dla której składane jest zamówienie
      * @return nowo utworzone zamówienie
      */
-    public Orders buildOrder(RequestOrderPlacement request, Restaurant restaurant) {
+    public Orders buildOrder(OrderPlacementRequest request, Restaurant restaurant) {
         // Inicjujemy zamówienie tylko z podstawowymi danymi.
         return Orders.builder()
                 .ordersNumber(request.getOrderNumber())
@@ -79,7 +81,7 @@ public class OrderService {
      * @param request dane z żądania przetwarzania zamówienia
      * @return obiekt OrdersItem
      */
-    public OrdersItem buildOrderItem(RequestOrderProcessing request) {
+    public OrdersItem buildOrderItem(OrderProcessingRequest request) {
         BigDecimal unitPrice = BigDecimal.TEN; // przykładowa cena jednostkowa
         BigDecimal totalPrice = unitPrice.multiply(BigDecimal.valueOf(request.getOrderItemQuantity()));
         MenuItem menuItem = MenuItem.builder()
@@ -187,7 +189,7 @@ public class OrderService {
      * @return obiekt RevenueReport zawierający łączny przychód, liczbę zamówień i średnią wartość zamówienia
      */
     @Transactional
-    public ViewRevenueReport getRevenueReport(OffsetDateTime startDate, OffsetDateTime endDate) {
+    public RevenueReportView getRevenueReport(OffsetDateTime startDate, OffsetDateTime endDate) {
         // Przykładowo pobieramy wszystkie zamówienia z określonego przedziału czasowego, które mają status DELIVERED
         List<Orders> orders = ordersDAO.findByOrdersDateTimeBetween(startDate, endDate);
 
@@ -201,7 +203,7 @@ public class OrderService {
                 ? totalRevenue.divide(BigDecimal.valueOf(totalOrders), 2, RoundingMode.HALF_UP)
                 : BigDecimal.ZERO;
 
-        return ViewRevenueReport.builder()
+        return RevenueReportView.builder()
                 .startDate(startDate)
                 .endDate(endDate)
                 .totalRevenue(totalRevenue)
@@ -237,4 +239,11 @@ public class OrderService {
 
     Taka implementacja OrderService pozwala na centralizację logiki biznesowej związanej z obsługą zamówień w aplikacji
     Yummy, analogicznie do rozwiązań zastosowanych w module car dealership.
+
+    _________________________________________________________________________________
+    MenuItemService
+
+    - Odpowiada za operacje na pozycjach w menu, np. wyszukiwanie pozycji po nazwie, dla danego menu, według typu diety,
+     dostępności oraz na podstawie opisu.
+    - Wstrzykiwany komponent: MenuItemDAO.
     */

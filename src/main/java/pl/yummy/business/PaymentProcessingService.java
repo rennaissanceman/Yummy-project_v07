@@ -4,16 +4,32 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.ProcessingPaymentProcessingDAO;
+import pl.yummy.business.dao.PaymentProcessingDAO;
 import pl.yummy.domain.Payment;
-import pl.yummy.domain.RequestPaymentProcessing;
+import pl.yummy.domain.PaymentProcessingRequest;
 
 @Slf4j
 @Service
 @AllArgsConstructor
 public class PaymentProcessingService {
 
-    private final ProcessingPaymentProcessingDAO processingPaymentProcessingDAO;
+    private final PaymentProcessingDAO paymentProcessingDAO;
+
+
+    private final PaymentProcessingDAO paymentProcessingDAO;
+
+
+    public void processPayment(PaymentProcessingRequest request) {
+        paymentProcessingDAO.processPayment(request);
+    }
+
+    public void processPayment(Long orderId, Payment payment) {
+        paymentProcessingDAO.processPayment(orderId, payment);
+    }
+
+    public void refundPayment(Long paymentId) {
+        paymentProcessingDAO.refundPayment(paymentId);
+    }
 
     /**
      * Inicjuje proces płatności na podstawie danych przekazanych w obiekcie PaymentProcessingRequest.
@@ -21,9 +37,9 @@ public class PaymentProcessingService {
      * @param request obiekt żądania przetwarzania płatności zawierający m.in. numer zamówienia, metodę płatności, kwotę itp.
      */
     @Transactional
-    public void processPayment(RequestPaymentProcessing request) {
+    public void processPayment(PaymentProcessingRequest request) {
         log.info("Rozpoczynam proces płatności dla zamówienia: {}", request.getOrderNumber());
-        processingPaymentProcessingDAO.processPayment(request);
+        paymentProcessingDAO.processPayment(request);
     }
 
     /**
@@ -35,7 +51,7 @@ public class PaymentProcessingService {
     @Transactional
     public void processPayment(Long orderId, Payment payment) {
         log.info("Rozpoczynam proces płatności dla zamówienia o ID: {}", orderId);
-        processingPaymentProcessingDAO.processPayment(orderId, payment);
+        paymentProcessingDAO.processPayment(orderId, payment);
     }
 
     /**
@@ -46,7 +62,7 @@ public class PaymentProcessingService {
     @Transactional
     public void refundPayment(Long paymentId) {
         log.info("Rozpoczynam procedurę zwrotu płatności dla płatności o ID: {}", paymentId);
-        processingPaymentProcessingDAO.refundPayment(paymentId);
+        paymentProcessingDAO.refundPayment(paymentId);
     }
 }
 
@@ -56,4 +72,10 @@ public class PaymentProcessingService {
     Cel:
     Obsługuje proces płatności – mapuje dane z PaymentProcessingRequest na obiekt domenowy Payment,
     zapisuje transakcję oraz umożliwia zwroty.
+
+    __________________________________________________
+    PaymentProcessingService
+
+    - Odpowiada za przetwarzanie płatności, autoryzację, zwroty oraz zmiany statusu płatności.
+    - Wstrzykiwany komponent: ProcessingPaymentProcessingDAO.
     */

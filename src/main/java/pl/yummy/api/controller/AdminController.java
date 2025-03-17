@@ -8,13 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.yummy.api.dto.CustomerDTO;
 import pl.yummy.api.dto.OrdersDTO;
 import pl.yummy.api.dto.RestaurantDTO;
-import pl.yummy.api.dto.ViewRevenueReportDTO;
-import pl.yummy.api.dto.ViewDeliveryStatusOverviewDTO;
+import pl.yummy.api.dto.RevenueReportViewDTO;
+import pl.yummy.api.dto.DeliveryStatusOverviewViewDTO;
 import pl.yummy.api.dto.mapper.CustomerMapper;
 import pl.yummy.api.dto.mapper.OrdersMapper;
 import pl.yummy.api.dto.mapper.RestaurantMapper;
-import pl.yummy.api.dto.mapper.ViewRevenueReportMapper;
-import pl.yummy.api.dto.mapper.ViewDeliveryStatusOverviewMapper;
+import pl.yummy.api.dto.mapper.RevenueReportViewMapper;
+import pl.yummy.api.dto.mapper.DeliveryStatusOverviewViewMapper;
 import pl.yummy.business.CustomerService;
 import pl.yummy.business.OrderService;
 import pl.yummy.business.RestaurantService;
@@ -48,8 +48,8 @@ public class AdminController {
     private final CustomerMapper customerMapper;
     private final RestaurantMapper restaurantMapper;
     private final OrdersMapper ordersMapper;
-    private final ViewRevenueReportMapper revenueReportMapper;
-    private final ViewDeliveryStatusOverviewMapper deliveryStatusOverviewMapper;
+    private final RevenueReportViewMapper revenueReportMapper;
+    private final DeliveryStatusOverviewViewMapper deliveryStatusOverviewMapper;
 
     /**
      * GET – Wyświetla listę wszystkich klientów.
@@ -107,7 +107,7 @@ public class AdminController {
         OffsetDateTime endDate = OffsetDateTime.parse(endDateStr, formatter);
         // Zakładamy, że OrderService posiada metodę getRevenueReport(OffsetDateTime, OffsetDateTime)
         var revenueReport = orderService.getRevenueReport(startDate, endDate);
-        ViewRevenueReportDTO reportDTO = revenueReportMapper.toDTO(revenueReport);
+        RevenueReportViewDTO reportDTO = revenueReportMapper.toDTO(revenueReport);
         Map<String, Object> model = Map.of("revenueReport", reportDTO);
         return new ModelAndView("admin_revenue_report", model);
     }
@@ -121,7 +121,7 @@ public class AdminController {
     public ModelAndView deliveryStatusOverview(@RequestParam("availableDeliveryAreaId") Long availableDeliveryAreaId) {
         // Zakładamy, że DeliveryService posiada metodę getDeliveryStatusOverview(Long)
         var overview = deliveryService.getDeliveryStatusOverview(availableDeliveryAreaId);
-        ViewDeliveryStatusOverviewDTO overviewDTO = deliveryStatusOverviewMapper.toDTO(overview);
+        DeliveryStatusOverviewViewDTO overviewDTO = deliveryStatusOverviewMapper.toDTO(overview);
         Map<String, Object> model = Map.of("deliveryStatusOverview", overviewDTO);
         return new ModelAndView("admin_delivery_status", model);
     }

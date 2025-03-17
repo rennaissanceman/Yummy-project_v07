@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.DeliveryDAO;
 import pl.yummy.domain.Address;
 import pl.yummy.domain.Delivery;
-import pl.yummy.domain.ViewDeliveryStatusOverview;
+import pl.yummy.domain.DeliveryStatusOverviewView;
 import pl.yummy.domain.enums.DeliveryStatusEnumDomain;
 import pl.yummy.domain.exception.NotFoundException;
 
@@ -21,7 +21,8 @@ public class DeliveryService {
 
     private final DeliveryDAO deliveryDAO;
 
-    /**
+
+    /*
      * Pobiera wszystkie dostawy.
      *
      * @return lista wszystkich dostaw
@@ -31,7 +32,7 @@ public class DeliveryService {
         return deliveryDAO.findAll();
     }
 
-    /**
+    /*
      * Znajduje dostawę o podanym unikalnym identyfikatorze.
      *
      * @param id unikalny identyfikator dostawy
@@ -44,7 +45,7 @@ public class DeliveryService {
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono dostawy o ID: " + id));
     }
 
-    /**
+    /*
      * Tworzy nową dostawę.
      * Jeśli numer dostawy nie został ustawiony, generowany jest unikalny numer.
      * Jeśli status dostawy nie został ustawiony, ustawiany jest domyślny status PENDING.
@@ -68,7 +69,7 @@ public class DeliveryService {
         return deliveryDAO.save(newDelivery);
     }
 
-    /**
+    /*
      * Aktualizuje istniejącą dostawę.
      * Wyszukuje istniejącą dostawę, a następnie tworzy nową instancję na podstawie poprzedniej,
      * z nadpisanymi polami pochodzącymi z przekazanego obiektu.
@@ -96,7 +97,7 @@ public class DeliveryService {
         return deliveryDAO.save(newDelivery);
     }
 
-    /**
+    /*
      * Usuwa dostawę o podanym unikalnym identyfikatorze.
      *
      * @param id unikalny identyfikator dostawy do usunięcia
@@ -107,7 +108,8 @@ public class DeliveryService {
         deliveryDAO.delete(existing);
     }
 
-    /**
+
+    /*
      * Pobiera dostawy przypisane do określonego kuriera.
      *
      * @param courierId identyfikator kuriera
@@ -118,7 +120,7 @@ public class DeliveryService {
         return deliveryDAO.findByCourier_CourierId(courierId);
     }
 
-    /**
+    /*
      * Pobiera dostawy o określonym statusie.
      *
      * @param status status dostawy (np. PENDING, DELIVERED)
@@ -129,7 +131,7 @@ public class DeliveryService {
         return deliveryDAO.findByDeliveryStatus(status);
     }
 
-    /**
+    /*
      * Pobiera dostawy, których data rozpoczęcia jest po podanej dacie.
      *
      * @param startTime data, po której dostawy mają się rozpocząć
@@ -140,7 +142,7 @@ public class DeliveryService {
         return deliveryDAO.findByStarTimeAfter(startTime);
     }
 
-    /**
+    /*
      * Pobiera dostawy, które są opóźnione – czyli ich rzeczywisty czas dostarczenia jest późniejszy niż planowany,
      * przy czym planowany czas musi być ustawiony.
      *
@@ -152,7 +154,7 @@ public class DeliveryService {
         return deliveryDAO.findByActualDeliveryDateTimeAfterAndEstimatedDeliveryTimeIsNotNull(actualDeliveryDateTime);
     }
 
-    /**
+    /*
      * Pobiera dostawy przypisane do określonego obszaru dostawy.
      *
      * @param availableDeliveryAreaId identyfikator obszaru dostawy
@@ -163,7 +165,7 @@ public class DeliveryService {
         return deliveryDAO.findByAvailableDeliveryArea_AvailableDeliveryAreaId(availableDeliveryAreaId);
     }
 
-    /**
+    /*
      * Przelicza opłatę dostawy na podstawie zadanych parametrów.
      * Przykładowa logika: nowa opłata = opłata bazowa + mnożnik.
      *
@@ -182,7 +184,7 @@ public class DeliveryService {
         return deliveryDAO.save(newDelivery);
     }
 
-    /**
+    /*
      * Generuje unikalny numer dostawy.
      *
      * @return unikalny numer dostawy
@@ -191,7 +193,7 @@ public class DeliveryService {
         return "DEL-" + System.currentTimeMillis();
     }
 
-    /**
+    /*
      * Pobiera statystyki dostaw dla danego obszaru dostawy.
      *
      * @param availableDeliveryAreaId identyfikator obszaru dostawy
@@ -199,7 +201,7 @@ public class DeliveryService {
      *         liczbę dostaw opóźnionych, zakończonych sukcesem i tych będących w tranzycie
      */
     @Transactional(readOnly = true)
-    public ViewDeliveryStatusOverview getDeliveryStatusOverview(Long availableDeliveryAreaId) {
+    public DeliveryStatusOverviewView getDeliveryStatusOverview(Long availableDeliveryAreaId) {
         // Pobieramy wszystkie dostawy dla danego obszaru
         List<Delivery> deliveries = deliveryDAO.findByAvailableDeliveryArea_AvailableDeliveryAreaId(availableDeliveryAreaId);
 
@@ -242,7 +244,7 @@ public class DeliveryService {
 
         double averageDeliveryTime = countDeliveryTime > 0 ? totalDeliveryTime / countDeliveryTime : 0;
 
-        return ViewDeliveryStatusOverview.builder()
+        return DeliveryStatusOverviewView.builder()
                 .deliveryAreaId(availableDeliveryAreaId)
                 .deliveryAreaName(deliveryAreaName)
                 .totalDeliveries(totalDeliveries)
@@ -253,3 +255,14 @@ public class DeliveryService {
                 .build();
     }
 }
+
+    /*
+    _____________________________________________________________________
+    DeliveryService
+
+    - Obsługuje operacje związane z dostawami, takie jak wyszukiwanie dostawy po identyfikatorze, statusie,
+    czasie rozpoczęcia, opóźnionych dostawach czy dostawach przypisanych do określonego obszaru;
+    umożliwia też zapisywanie i usuwanie dostaw.
+    - Wstrzykiwany komponent: DeliveryDAO.
+
+    */

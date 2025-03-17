@@ -7,12 +7,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.yummy.api.dto.PaymentDTO;
-import pl.yummy.api.dto.RequestPaymentProcessingDTO;
+import pl.yummy.api.dto.PaymentProcessingRequestDTO;
 import pl.yummy.api.dto.mapper.PaymentMapper;
-import pl.yummy.api.dto.mapper.RequestPaymentProcessingMapper;
+import pl.yummy.api.dto.mapper.PaymentProcessingRequestMapper;
 import pl.yummy.business.PaymentProcessingService;
 import pl.yummy.domain.Payment;
-import pl.yummy.domain.RequestPaymentProcessing;
+import pl.yummy.domain.PaymentProcessingRequest;
 
 import java.util.Map;
 
@@ -29,25 +29,25 @@ public class PaymentController {
     private static final String PAYMENT_PROCESS_BY_ORDER_CONFIRMATION = "/payment/processByOrderConfirmation";
 
     private final PaymentProcessingService paymentProcessingService;
-    private final RequestPaymentProcessingMapper requestPaymentProcessingMapper;
+    private final PaymentProcessingRequestMapper paymentProcessingRequestMapper;
     private final PaymentMapper paymentMapper;
 
     // GET – Wyświetla formularz przetwarzania płatności (domyślny).
     @GetMapping(PAYMENT_HOME)
     public ModelAndView showPaymentForm() {
-        Map<String, Object> model = Map.of("paymentForm", RequestPaymentProcessingDTO.buildDefault());
+        Map<String, Object> model = Map.of("paymentForm", PaymentProcessingRequestDTO.buildDefault());
         return new ModelAndView("payment_form", model);
     }
 
     // POST – Przetwarza płatność przy użyciu danych z RequestPaymentProcessingDTO.
     @PostMapping(PAYMENT_PROCESS)
     public ModelAndView processPayment(
-            @Valid @ModelAttribute("paymentForm") RequestPaymentProcessingDTO paymentDTO,
+            @Valid @ModelAttribute("paymentForm") PaymentProcessingRequestDTO paymentDTO,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("error");
         }
-        RequestPaymentProcessing request = requestPaymentProcessingMapper.toDomain(paymentDTO);
+        PaymentProcessingRequest request = paymentProcessingRequestMapper.toDomain(paymentDTO);
         paymentProcessingService.processPayment(request);
         Map<String, Object> model = Map.of("message", "Płatność została przetworzona pomyślnie");
         return new ModelAndView(PAYMENT_CONFIRMATION, model);

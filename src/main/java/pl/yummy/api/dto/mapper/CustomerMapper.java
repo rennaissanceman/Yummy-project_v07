@@ -4,8 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import pl.yummy.api.dto.CustomerAddressDTO;
 import pl.yummy.api.dto.CustomerDTO;
-import pl.yummy.api.dto.RequestCustomerRegistrationDTO;
-import pl.yummy.api.dto.RequestCustomerUpdateDTO;
+import pl.yummy.api.dto.CustomerRegistrationRequestDTO;
+import pl.yummy.api.dto.CustomerUpdateRequestDTO;
 import pl.yummy.domain.Customer;
 import pl.yummy.domain.CustomerAddress;
 
@@ -73,7 +73,7 @@ public interface CustomerMapper {
     @Mapping(target = "billingInformation", ignore = true)
     @Mapping(target = "customerAddresses", ignore = true)
     @Mapping(target = "orders", ignore = true)
-    Customer toDomain(RequestCustomerRegistrationDTO registrationDTO);
+    Customer toDomain(CustomerRegistrationRequestDTO registrationDTO);
 
     /*
      * Dodatkowa metoda domyślna mapująca listę CustomerAddressDTO na zbiór CustomerAddress.
@@ -96,11 +96,11 @@ public interface CustomerMapper {
 
 
     // Metoda dla aktualizacji profilu:
-    Customer toDomain(final RequestCustomerUpdateDTO updateDTO);
+    Customer toDomain(final CustomerUpdateRequestDTO updateDTO);
 
 
     // Metodę konwertująca obiekt domenowy na DTO aktualizacji
-    RequestCustomerUpdateDTO toUpdateDTO(Customer customer);
+    CustomerUpdateRequestDTO toUpdateDTO(Customer customer);
 }
 
     /*

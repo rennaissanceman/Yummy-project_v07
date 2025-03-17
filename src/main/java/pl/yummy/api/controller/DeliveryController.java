@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.yummy.api.dto.DeliveryDTO;
 import pl.yummy.domain.Delivery;
-import pl.yummy.domain.RequestDeliveryAssignment;
-import pl.yummy.domain.ViewDeliveryStatusOverview;
+import pl.yummy.domain.DeliveryAssignmentRequest;
+import pl.yummy.domain.DeliveryStatusOverviewView;
 import pl.yummy.domain.enums.DeliveryStatusEnumDomain;
 import pl.yummy.api.dto.mapper.DeliveryMapper;
 import pl.yummy.business.DeliveryAssignmentService;
@@ -188,7 +188,7 @@ public class DeliveryController {
     // GET – Wyświetlenie statystyk dostaw dla danego obszaru.
     @GetMapping(DELIVERY_STATUS_OVERVIEW)
     public String deliveryStatusOverview(@RequestParam("areaId") Long areaId, Model model) {
-        ViewDeliveryStatusOverview overview = deliveryService.getDeliveryStatusOverview(areaId);
+        DeliveryStatusOverviewView overview = deliveryService.getDeliveryStatusOverview(areaId);
         model.addAttribute("overview", overview);
         model.addAttribute("areaId", areaId);
         return "delivery_status_overview";
@@ -200,13 +200,13 @@ public class DeliveryController {
     @GetMapping(DELIVERY_ASSIGN)
     public String showDeliveryAssignmentForm(Model model) {
         // Zakładamy, że RequestDeliveryAssignment posiada konstruktor bezargumentowy
-        model.addAttribute("deliveryAssignment", new RequestDeliveryAssignment());
+        model.addAttribute("deliveryAssignment", new DeliveryAssignmentRequest());
         return "delivery_assignment_form";
     }
 
     // POST – Przetwarzanie formularza przypisania dostawy
     @PostMapping(DELIVERY_ASSIGN)
-    public String assignDelivery(@ModelAttribute("deliveryAssignment") RequestDeliveryAssignment request) {
+    public String assignDelivery(@ModelAttribute("deliveryAssignment") DeliveryAssignmentRequest request) {
         deliveryAssignmentService.assignDelivery(request);
         return "redirect:" + DELIVERY_LIST;
     }

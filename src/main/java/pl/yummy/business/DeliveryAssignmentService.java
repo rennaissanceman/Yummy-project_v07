@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.ProcessingDeliveryAssignmentDAO;
-import pl.yummy.domain.RequestDeliveryAssignment;
+import pl.yummy.business.dao.DeliveryAssignmentProcessingDAO;
+import pl.yummy.domain.DeliveryAssignmentRequest;
 
 @Slf4j
 @Service
 @AllArgsConstructor
 public class DeliveryAssignmentService {
 
-    private final ProcessingDeliveryAssignmentDAO processingDeliveryAssignmentDAO;
+    private final DeliveryAssignmentProcessingDAO deliveryAssignmentprocessingDAO;
 
     /**
      * Przypisuje dostawę do kuriera na podstawie danych zawartych w obiekcie żądania.
@@ -22,9 +22,9 @@ public class DeliveryAssignmentService {
      *                datę przypisania oraz komentarz
      */
     @Transactional
-    public void assignDelivery(RequestDeliveryAssignment request) {
+    public void assignDelivery(DeliveryAssignmentRequest request) {
         log.info("Przypisywanie dostawy dla zamówienia: {}", request.getOrderNumber());
-        processingDeliveryAssignmentDAO.assignDelivery(request);
+        deliveryAssignmentprocessingDAO.assignDelivery(request);
     }
 
     /**
@@ -36,7 +36,7 @@ public class DeliveryAssignmentService {
     @Transactional
     public void assignCourierToDelivery(Long deliveryId) {
         log.info("Przypisywanie kuriera do dostawy o ID: {}", deliveryId);
-        processingDeliveryAssignmentDAO.assignCourierToDelivery(deliveryId);
+        deliveryAssignmentprocessingDAO.assignCourierToDelivery(deliveryId);
     }
 }
 
@@ -46,4 +46,11 @@ public class DeliveryAssignmentService {
     Cel:
     Zarządza przypisywaniem dostępnych kurierów do dostaw. Na podstawie żądania (DeliveryAssignmentRequest)
     przypisuje kuriera do zamówienia.
+
+
+    ____________________________________________________________________
+    DeliveryAssignmentService
+
+    - Zarządza przypisywaniem kurierów do zamówień (przypisywanie dostaw) w oparciu o logikę biznesową.
+    - Wstrzykiwany komponent: ProcessingDeliveryAssignmentDAO.
     */

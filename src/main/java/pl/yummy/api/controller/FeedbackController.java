@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.yummy.api.dto.RequestCustomerFeedbackDTO;
-import pl.yummy.api.dto.ViewCustomerFeedbackDTO;
+import pl.yummy.api.dto.CustomerFeedbackRequestDTO;
+import pl.yummy.api.dto.CustomerFeedbackViewDTO;
 import pl.yummy.api.dto.mapper.FeedbackMapper;
 import pl.yummy.business.FeedbackService;
 
@@ -26,7 +26,7 @@ public class FeedbackController {
     // GET – Wyświetla listę opinii (feedback) dla restauracji lub klienta.
     @GetMapping(FEEDBACK_LIST)
     public ModelAndView listFeedback(@RequestParam("restaurantId") Long restaurantId) {
-        List<ViewCustomerFeedbackDTO> feedbackList = feedbackService
+        List<CustomerFeedbackViewDTO> feedbackList = feedbackService
                 .getFeedbackForRestaurant(restaurantId)
                 .stream()
                 .map(feedbackMapper::toDTO)
@@ -39,13 +39,13 @@ public class FeedbackController {
     @GetMapping(FEEDBACK_CREATE)
     public ModelAndView showFeedbackForm() {
         // Zakładamy, że RequestCustomerFeedbackDTO.buildDefault() tworzy domyślny obiekt.
-        Map<String, Object> model = Map.of("feedbackForm", RequestCustomerFeedbackDTO.buildDefault());
+        Map<String, Object> model = Map.of("feedbackForm", CustomerFeedbackRequestDTO.buildDefault());
         return new ModelAndView("feedback_form", model);
     }
 
     // POST – Zapisuje nową opinię.
     @PostMapping(FEEDBACK_SAVE)
-    public ModelAndView saveFeedback(@ModelAttribute("feedbackForm") RequestCustomerFeedbackDTO feedbackDTO) {
+    public ModelAndView saveFeedback(@ModelAttribute("feedbackForm") CustomerFeedbackRequestDTO feedbackDTO) {
         feedbackService.saveFeedback(feedbackMapper.toDomain(feedbackDTO));
         return new ModelAndView("redirect:" + FEEDBACK_LIST);
     }

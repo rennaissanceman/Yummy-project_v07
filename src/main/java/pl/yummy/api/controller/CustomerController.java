@@ -6,16 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.yummy.api.dto.RequestCustomerLoginDTO;
-import pl.yummy.api.dto.RequestCustomerRegistrationDTO;
-import pl.yummy.api.dto.RequestCustomerUpdateDTO;
+import pl.yummy.api.dto.CustomerLoginRequestDTO;
+import pl.yummy.api.dto.CustomerRegistrationRequestDTO;
+import pl.yummy.api.dto.CustomerUpdateRequestDTO;
 import pl.yummy.api.dto.CustomerDTO;
-import pl.yummy.api.dto.ViewOrderHistoryDTO;
+import pl.yummy.api.dto.OrderHistoryViewDTO;
 import pl.yummy.api.dto.mapper.CustomerMapper;
-import pl.yummy.api.dto.mapper.ViewOrderHistoryMapper;
+import pl.yummy.api.dto.mapper.OrderHistoryViewMapper;
 import pl.yummy.business.CustomerService;
 import pl.yummy.domain.Customer;
-import pl.yummy.domain.ViewOrderHistory;
+import pl.yummy.domain.OrderHistoryView;
 
 import java.util.List;
 import java.util.Map;
@@ -38,13 +38,13 @@ public class CustomerController {
 
     private final CustomerService customerService;
     private final CustomerMapper customerMapper;
-    private final ViewOrderHistoryMapper viewOrderHistoryMapper;
+    private final OrderHistoryViewMapper orderHistoryViewMapper;
 
     // GET – Wyświetlenie formularza rejestracji nowego klienta.
     @GetMapping(CUSTOMER_REGISTER)
     public ModelAndView showRegistrationForm() {
         Map<String, Object> model = Map.of(
-                "registrationDTO", RequestCustomerRegistrationDTO.buildDefault()
+                "registrationDTO", CustomerRegistrationRequestDTO.buildDefault()
         );
         return new ModelAndView("customer_register", model);
     }
@@ -52,7 +52,7 @@ public class CustomerController {
     // POST – Rejestracja nowego klienta.
     @PostMapping(CUSTOMER_REGISTER)
     public ModelAndView registerCustomer(
-            @Valid @ModelAttribute("registrationDTO") RequestCustomerRegistrationDTO registrationDTO,
+            @Valid @ModelAttribute("registrationDTO") CustomerRegistrationRequestDTO registrationDTO,
             BindingResult bindingResult) {
         // Sprawdzamy, czy podczas walidacji danych przesłanych z formularza wystąpiły błędy.
         if (bindingResult.hasErrors()) {
@@ -77,7 +77,7 @@ public class CustomerController {
     @GetMapping(CUSTOMER_LOGIN)
     public ModelAndView showLoginForm() {
         Map<String, Object> model = Map.of(
-                "loginDTO", RequestCustomerLoginDTO.buildDefault()
+                "loginDTO", CustomerLoginRequestDTO.buildDefault()
         );
         return new ModelAndView("customer_login", model);
     }
@@ -85,7 +85,7 @@ public class CustomerController {
     // POST – Logowanie klienta.
     @PostMapping(CUSTOMER_LOGIN)
     public ModelAndView loginCustomer(
-            @Valid @ModelAttribute("loginDTO") RequestCustomerLoginDTO loginDTO,
+            @Valid @ModelAttribute("loginDTO") CustomerLoginRequestDTO loginDTO,
             BindingResult bindingResult) {
         // Sprawdzamy, czy wystąpiły błędy walidacji danych logowania.
         if (bindingResult.hasErrors()) {
@@ -116,7 +116,7 @@ public class CustomerController {
     public ModelAndView showUpdateProfileForm(@RequestParam("customerNumber") String customerNumber) {
         Customer customer = customerService.findCustomerByNumber(customerNumber);
         // Zakładamy, że mapper posiada metodę konwertującą Customer do RequestCustomerUpdateDTO
-        RequestCustomerUpdateDTO updateDTO = customerMapper.toUpdateDTO(customer);
+        CustomerUpdateRequestDTO updateDTO = customerMapper.toUpdateDTO(customer);
         Map<String, Object> model = Map.of("updateDTO", updateDTO);
         return new ModelAndView("customer_update", model);
     }
@@ -124,7 +124,7 @@ public class CustomerController {
     // POST – Aktualizacja danych profilu klienta.
     @PostMapping(CUSTOMER_PROFILE_UPDATE)
     public ModelAndView updateCustomerProfile(
-            @Valid @ModelAttribute("updateDTO") RequestCustomerUpdateDTO updateDTO,
+            @Valid @ModelAttribute("updateDTO") CustomerUpdateRequestDTO updateDTO,
             BindingResult bindingResult) {
         // Sprawdzamy, czy dane przesłane z formularza aktualizacji profilu są poprawne.
         if (bindingResult.hasErrors()) {
@@ -140,9 +140,9 @@ public class CustomerController {
     // GET – Wyświetlenie historii zamówień klienta.
     @GetMapping(CUSTOMER_ORDERS)
     public ModelAndView getCustomerOrderHistory(@RequestParam("customerNumber") String customerNumber) {
-        List<ViewOrderHistory> orderHistoryList = customerService.getCustomerOrderHistory(customerNumber);
-        List<ViewOrderHistoryDTO> orderHistoryDTOs = orderHistoryList.stream()
-                .map(viewOrderHistoryMapper::toDTO)
+        List<OrderHistoryView> orderHistoryList = customerService.getCustomerOrderHistory(customerNumber);
+        List<OrderHistoryViewDTO> orderHistoryDTOs = orderHistoryList.stream()
+                .map(orderHistoryViewMapper::toDTO)
                 .collect(Collectors.toList());
         Map<String, Object> model = Map.of("orderHistoryDTOs", orderHistoryDTOs);
         return new ModelAndView("customer_orders", model);

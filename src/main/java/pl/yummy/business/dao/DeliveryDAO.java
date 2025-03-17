@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface DeliveryDAO {
 
 
-    /**
+    /*
      * Znajduje dostawę o podanym unikalnym identyfikatorze.
      *
      * @param id unikalny identyfikator dostawy
@@ -18,14 +18,14 @@ public interface DeliveryDAO {
      */
     Optional<Delivery> findById(Long id);
 
-    /**
+    /*
      * Pobiera listę wszystkich dostaw.
      *
      * @return lista wszystkich dostaw
      */
     List<Delivery> findAll();
 
-    /**
+    /*
      * Zapisuje nową lub zaktualizowaną dostawę.
      *
      * @param delivery obiekt dostawy do zapisania
@@ -33,7 +33,7 @@ public interface DeliveryDAO {
      */
     Delivery save(Delivery delivery);
 
-    /**
+    /*
      * Usuwa podaną dostawę.
      *
      * @param delivery obiekt dostawy do usunięcia

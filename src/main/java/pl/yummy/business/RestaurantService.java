@@ -17,7 +17,7 @@ public class RestaurantService {
 
     private final RestaurantDAO restaurantDAO;
 
-    /**
+    /*
      * Znajduje restaurację na podstawie unikalnego identyfikatora,
      * który w tym przypadku jest interpretowany jako nazwa restauracji.
      *
@@ -25,35 +25,35 @@ public class RestaurantService {
      * @return Restaurant odpowiadająca podanej nazwie
      * @throws NotFoundException gdy restauracja nie zostanie znaleziona
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public Restaurant findRestaurant(String restaurantIdentifier) {
         return restaurantDAO.findByRestaurantName(restaurantIdentifier)
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono restauracji: " + restaurantIdentifier));
     }
 
-    /**
+    /*
      * Pobiera listę restauracji o określonym typie kuchni.
      *
      * @param cuisineType typ kuchni (np. ITALIAN, CHINESE)
      * @return lista restauracji, które oferują daną kuchnię
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Restaurant> getRestaurantsByCuisine(CuisineTypeEnumDomain cuisineType) {
         return restaurantDAO.findByCuisineType(cuisineType);
     }
 
-    /**
+    /*
      * Pobiera listę restauracji, których średnia ocena jest większa lub równa podanemu minimalnemu ratingowi.
      *
      * @param minimumRating minimalna średnia ocena restauracji
      * @return lista restauracji spełniających warunek minimalnej oceny
      */
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Restaurant> getRestaurantsWithMinimumRating(Double minimumRating) {
         return restaurantDAO.findByAverageRatingGreaterThanEqual(minimumRating);
     }
 
-    /**
+    /*
      * Pobiera listę restauracji należących do właściciela o podanym identyfikatorze.
      *
      * @param ownerId unikalny identyfikator właściciela restauracji
@@ -79,4 +79,11 @@ public class RestaurantService {
     oraz umożliwia pobranie listy restauracji danej kuchni.
     - MenuService: wyszukuje aktualne menu restauracji,
     a także umożliwia aktualizację pozycji menu (analogicznie do MenuItemUpdateService).
+
+    ____________________________________________________________________
+    RestaurantService
+
+    - Odpowiada za zarządzanie restauracjami – wyszukiwanie restauracji po nazwie, typie kuchni, ocenie czy właścicielu
+    oraz pobieranie listy wszystkich restauracji.
+    - Wstrzykiwany komponent: RestaurantDAO.
     */

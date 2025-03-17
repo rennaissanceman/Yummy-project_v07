@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.ProcessingOrderLifecycleProcessingDAO;
+import pl.yummy.business.dao.OrderLifecycleProcessingDAO;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 
 @Slf4j
@@ -12,7 +12,7 @@ import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 @AllArgsConstructor
 public class OrderLifecycleService {
 
-    private final ProcessingOrderLifecycleProcessingDAO processingOrderLifecycleProcessingDAO;
+    private final OrderLifecycleProcessingDAO orderLifecycleProcessingDAO;
 
     /**
      * Aktualizuje status zamówienia na podstawie przekazanego identyfikatora oraz nowego statusu.
@@ -23,7 +23,7 @@ public class OrderLifecycleService {
     @Transactional
     public void updateOrderStatus(Long orderId, OrdersStatusEnumDomain newStatus) {
         log.info("Aktualizacja statusu zamówienia o ID {} na status: {}", orderId, newStatus);
-        processingOrderLifecycleProcessingDAO.updateOrderStatus(orderId, newStatus);
+        orderLifecycleProcessingDAO.updateOrderStatus(orderId, newStatus);
     }
 
     /**
@@ -34,7 +34,7 @@ public class OrderLifecycleService {
     @Transactional
     public void cancelOrder(Long orderId) {
         log.info("Anulowanie zamówienia o ID {}", orderId);
-        processingOrderLifecycleProcessingDAO.cancelOrder(orderId);
+        orderLifecycleProcessingDAO.cancelOrder(orderId);
     }
 }
 
@@ -43,4 +43,10 @@ public class OrderLifecycleService {
     Cel:
     Obsługuje pełny cykl życia zamówienia – aktualizację statusu, anulowanie zamówień
     oraz synchronizację statusów dostawy.
+
+    __________________________________________________________
+    OrderLifecycleService
+
+    - Zarządza cyklem życia zamówienia, czyli aktualizacją statusu zamówienia i jego ewentualnym anulowaniem.
+    - Wstrzykiwany komponent: ProcessingOrderLifecycleProcessingDAO.
     */

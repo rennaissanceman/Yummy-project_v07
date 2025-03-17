@@ -34,14 +34,5 @@ public interface OrdersDAO {
     List<Orders> findAll();
 
 }
-/*
-
-    List<Orders> findByTotalAmountBetween(BigDecimal minAmount, BigDecimal maxAmount);
-
-    List<Orders> findByOrdersDateTimeBetween(OffsetDateTime start, OffsetDateTime end);
-
-    List<Orders> findByDeliveryAreaId(Long deliveryAreaId);
-
-*/
 
 

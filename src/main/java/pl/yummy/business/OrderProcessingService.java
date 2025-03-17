@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.yummy.business.dao.ProcessingOrderProcessingDAO;
+import pl.yummy.business.dao.OrderProcessingDAO;
 import pl.yummy.domain.Courier;
 import pl.yummy.domain.Orders;
 import pl.yummy.domain.OrdersItem;
-import pl.yummy.domain.RequestOrderProcessing;
+import pl.yummy.domain.OrderProcessingRequest;
 
 @Slf4j
 @Service
@@ -17,8 +17,16 @@ public class OrderProcessingService {
 
     private final CourierService courierService;
     private final OrderService orderService;
-    private final ProcessingOrderProcessingDAO processingOrderProcessingDAO;
+    private final OrderProcessingDAO orderProcessingDAO;
     private final DeliveryAssignmentService deliveryAssignmentService;
+
+    public void processOrder(Orders order, Courier courier) {
+        orderProcessingDAO.process(order, courier);
+    }
+
+    public void processOrderWithItem(Orders order, Courier courier, OrdersItem ordersItem) {
+        orderProcessingDAO.process(order, courier, ordersItem);
+    }
 
     /**
      * Przetwarza zamówienie na podstawie żądania przetwarzania.
@@ -36,7 +44,7 @@ public class OrderProcessingService {
      * @param request dane przetwarzania zamówienia
      */
     @Transactional
-    public void processOrder(RequestOrderProcessing request) {
+    public void processOrder(OrderProcessingRequest request) {
         // Wyszukiwanie kuriera oraz aktywnego zamówienia
         Courier courier = courierService.findByCourierNumber(request.getCourierIdentifier());
         Orders order = orderService.findActiveOrder(request.getOrderNumber());
@@ -46,26 +54,26 @@ public class OrderProcessingService {
             // Użycie metody process2, która wymaga zawsze przekazania obiektu OrdersItem
             OrdersItem orderItem = orderService.buildOrderItem(request);
             log.info("Przetwarzanie zamówienia metodą process2");
-            processingOrderProcessingDAO.process2(order, courier, orderItem);
+            orderProcessingDAO.process2(order, courier, orderItem);
         } else if ("ALTERNATIVE3".equalsIgnoreCase(request.getProcessingCode())) {
             // Użycie metody process3 – zależnie od tego czy przekazano dane o pozycji
             if (request.itemNotIncluded()) {
                 log.info("Przetwarzanie zamówienia metodą process3 (bez pozycji)");
-                processingOrderProcessingDAO.process3(order, courier);
+                orderProcessingDAO.process3(order, courier);
             } else {
                 OrdersItem orderItem = orderService.buildOrderItem(request);
                 log.info("Przetwarzanie zamówienia metodą process3 (z pozycją)");
-                processingOrderProcessingDAO.process3(order, courier, orderItem);
+                orderProcessingDAO.process3(order, courier, orderItem);
             }
         } else {
             // Domyślne przetwarzanie – używamy metody process
             if (request.itemNotIncluded()) {
                 log.info("Przetwarzanie zamówienia metodą process (bez pozycji)");
-                processingOrderProcessingDAO.process(order, courier);
+                orderProcessingDAO.process(order, courier);
             } else {
                 OrdersItem orderItem = orderService.buildOrderItem(request);
                 log.info("Przetwarzanie zamówienia metodą process (z pozycją)");
-                processingOrderProcessingDAO.process(order, courier, orderItem);
+                orderProcessingDAO.process(order, courier, orderItem);
             }
         }
 
@@ -84,4 +92,10 @@ public class OrderProcessingService {
     Cel:
     Realizuje przetwarzanie zamówienia – pobiera aktywne zamówienie, wyszukuje dostępnego kuriera,
     przypisuje kuriera do dostawy oraz aktualizuje status zamówienia, gdy operacja zostanie zakończona.
+
+    _______________________________________________________
+    OrderProcessingService
+
+    - Realizuje kompleksowe procesowanie zamówień, w tym przypisywanie kurierów i obsługę poszczególnych pozycji zamówienia.
+    - Wstrzykiwany komponent: ProcessingOrderProcessingDAO.
     */

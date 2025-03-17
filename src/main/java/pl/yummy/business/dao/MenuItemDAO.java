@@ -25,13 +25,3 @@ public interface MenuItemDAO {
     List<MenuItem> findByDescriptionContainingIgnoreCase(String keyword);
 
 }
-
-
-/*
-
-    List<MenuItem> findByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice);
-
-    List<MenuItem> findByIsAvailable(Boolean isAvailable);
-
-*/
-

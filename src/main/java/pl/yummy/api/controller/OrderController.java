@@ -7,18 +7,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.yummy.api.dto.OrdersDTO;
-import pl.yummy.api.dto.RequestOrderPlacementDTO;
+import pl.yummy.api.dto.OrderPlacementRequestDTO;
 import pl.yummy.api.dto.mapper.OrdersMapper;
-import pl.yummy.api.dto.mapper.RequestOrderPlacementMapper;
+import pl.yummy.api.dto.mapper.OrderPlacementRequestMapper;
 import pl.yummy.business.OrderLifecycleService;
 import pl.yummy.business.OrderPlacementService;
 import pl.yummy.business.OrderProcessingService;
 import pl.yummy.business.OrderService;
 import pl.yummy.domain.Orders;
-import pl.yummy.domain.RequestOrderPlacement;
-import pl.yummy.domain.RequestOrderProcessing;
+import pl.yummy.domain.OrderPlacementRequest;
+import pl.yummy.domain.OrderProcessingRequest;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
-import pl.yummy.domain.ViewRevenueReport;
+import pl.yummy.domain.RevenueReportView;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -50,7 +50,7 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderPlacementService orderPlacementService;
     private final OrdersMapper ordersMapper;
-    private final RequestOrderPlacementMapper requestOrderPlacementMapper;
+    private final OrderPlacementRequestMapper orderPlacementRequestMapper;
     // Nowe serwisy
     private final OrderProcessingService orderProcessingService;
     private final OrderLifecycleService orderLifecycleService;
@@ -85,7 +85,7 @@ public class OrderController {
     @GetMapping(ORDER_PLACE)
     public ModelAndView showOrderPlacementForm() {
         // Używamy metody buildDefault() do utworzenia domyślnego obiektu DTO do składania zamówienia.
-        Map<String, Object> model = Map.of("orderPlacementDTO", RequestOrderPlacementDTO.buildDefault());
+        Map<String, Object> model = Map.of("orderPlacementDTO", OrderPlacementRequestDTO.buildDefault());
         // Zwracamy widok formularza "order_place" wraz z modelem.
         return new ModelAndView("order_place", model);
     }
@@ -93,7 +93,7 @@ public class OrderController {
     // POST – Składanie zamówienia.
     @PostMapping(ORDER_PLACE)
     public ModelAndView placeOrder(
-            @Valid @ModelAttribute("orderPlacementDTO") RequestOrderPlacementDTO requestDTO,
+            @Valid @ModelAttribute("orderPlacementDTO") OrderPlacementRequestDTO requestDTO,
             BindingResult bindingResult) {
         // Sprawdzamy, czy dane przesłane z formularza są poprawne.
         if (bindingResult.hasErrors()) {
@@ -101,7 +101,7 @@ public class OrderController {
             return new ModelAndView("error");
         }
         // Mapujemy DTO na obiekt domenowy.
-        RequestOrderPlacement domainRequest = requestOrderPlacementMapper.toDomain(requestDTO);
+        OrderPlacementRequest domainRequest = orderPlacementRequestMapper.toDomain(requestDTO);
         // Proces składania zamówienia – metoda placeOrder zwraca wystawioną fakturę.
         var invoice = orderPlacementService.placeOrder(domainRequest);
         // Przygotowujemy model danych z wystawioną fakturą.
@@ -176,7 +176,7 @@ public class OrderController {
                                       @RequestParam("endDate") String endDateStr) {
         OffsetDateTime startDate = OffsetDateTime.parse(startDateStr);
         OffsetDateTime endDate = OffsetDateTime.parse(endDateStr);
-        ViewRevenueReport report = orderService.getRevenueReport(startDate, endDate);
+        RevenueReportView report = orderService.getRevenueReport(startDate, endDate);
         Map<String, Object> model = Map.of("report", report, "startDate", startDateStr, "endDate", endDateStr);
         return new ModelAndView("order_revenue_report", model);
     }
@@ -206,7 +206,7 @@ public class OrderController {
     // POST – Przetwarzanie zamówienia na podstawie żądania przetwarzania.
     // Zakładamy, że dane formularza są wiązane do obiektu RequestOrderProcessing.
     @PostMapping(ORDER_PROCESS)
-    public ModelAndView processOrder(@ModelAttribute("orderProcessingRequest") RequestOrderProcessing request) {
+    public ModelAndView processOrder(@ModelAttribute("orderProcessingRequest") OrderProcessingRequest request) {
         orderProcessingService.processOrder(request);
         return new ModelAndView("redirect:" + ORDER_DETAILS + "?orderNumber=" + request.getOrderNumber());
     }

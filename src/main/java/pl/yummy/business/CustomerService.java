@@ -7,10 +7,7 @@ import pl.yummy.business.dao.CustomerDAO;
 import pl.yummy.domain.*;
 import pl.yummy.domain.exception.NotFoundException;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +16,7 @@ public class CustomerService {
 
     private final CustomerDAO customerDAO;
     private final OrderService orderService; // Zakładamy, że OrderService posiada metodę findOrdersByCustomer
+
 
     // Jeśli jest dostępny serwis obsługujący zamówienia, można go wstrzyknąć, np.
     // private final OrderService orderService;
@@ -90,7 +88,7 @@ public class CustomerService {
      * @param invoice wystawiona faktura
      * @return nowy obiekt Customer
      */
-    public Customer buildCustomer(RequestOrderPlacement request, Invoice invoice) {
+    public Customer buildCustomer(OrderPlacementRequest request, Invoice invoice) {
         return Customer.builder()
                 .customerName(request.getCustomerName())
                 .customerSurname(request.getCustomerSurname())
@@ -177,11 +175,11 @@ public class CustomerService {
      * @return lista historii zamówień
      */
     @Transactional
-    public List<ViewOrderHistory> getCustomerOrderHistory(String customerNumber) {
+    public List<OrderHistoryView> getCustomerOrderHistory(String customerNumber) {
         Customer customer = findCustomerByNumber(customerNumber);
         List<Orders> ordersList = orderService.findOrdersByCustomer(customer.getCustomerId());
         return ordersList.stream()
-                .map(order -> ViewOrderHistory.builder()
+                .map(order -> OrderHistoryView.builder()
                         .orderNumber(order.getOrdersNumber())
                         // Przyjmujemy, że zdarzenia przetwarzania zostaną uzupełnione w przyszłości – na razie pusta lista
                         .orderProcessingEvents(Collections.emptyList())
@@ -217,10 +215,12 @@ public class CustomerService {
     Cel:
     Zarządza rejestracją i wyszukiwaniem klientów. Umożliwia rejestrację nowego klienta (na podstawie danych
     z CustomerRegistrationRequest lub OrderPlacementRequest) oraz wyszukiwanie klienta po adresie e-mail.
-    */
 
-    /*
+    ________________________________________________________
+    CustomerService
 
-
+    - Zarządza danymi klientów, wyszukiwaniem klienta po numerze, emailu, nazwisku, firmie, zapisywaniem nowego klienta
+    oraz pobieraniem listy klientów.
+    - Wstrzykiwany komponent: CustomerDAO.
 
     */

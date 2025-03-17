@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import pl.yummy.api.dto.RequestCustomerLoginDTO;
-import pl.yummy.api.dto.RequestCustomerRegistrationDTO;
+import pl.yummy.api.dto.CustomerLoginRequestDTO;
+import pl.yummy.api.dto.CustomerRegistrationRequestDTO;
 import pl.yummy.api.dto.UserAuthDTO;
 import pl.yummy.api.dto.mapper.CustomerMapper;
 import pl.yummy.api.dto.mapper.UserAuthMapper;
@@ -34,14 +34,14 @@ public class AuthController {
     @GetMapping(AUTH_LOGIN)
     public ModelAndView showLoginForm() {
         // Używamy domyślnego konstruktora
-        RequestCustomerLoginDTO loginDTO = new RequestCustomerLoginDTO();
+        CustomerLoginRequestDTO loginDTO = new CustomerLoginRequestDTO();
         return new ModelAndView("auth_login", Map.of("loginDTO", loginDTO));
     }
 
     // POST – Obsługa logowania
     @PostMapping(AUTH_LOGIN)
     public ModelAndView login(
-            @Valid @ModelAttribute("loginDTO") RequestCustomerLoginDTO loginDTO,
+            @Valid @ModelAttribute("loginDTO") CustomerLoginRequestDTO loginDTO,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("auth_login", Map.of("loginDTO", loginDTO));
@@ -56,14 +56,14 @@ public class AuthController {
     // GET – Wyświetlenie formularza rejestracji
     @GetMapping(AUTH_REGISTER)
     public ModelAndView showRegistrationForm() {
-        RequestCustomerRegistrationDTO registrationDTO = new RequestCustomerRegistrationDTO();
+        CustomerRegistrationRequestDTO registrationDTO = new CustomerRegistrationRequestDTO();
         return new ModelAndView("auth_register", Map.of("registrationDTO", registrationDTO));
     }
 
     // POST – Obsługa rejestracji
     @PostMapping(AUTH_REGISTER)
     public ModelAndView register(
-            @Valid @ModelAttribute("registrationDTO") RequestCustomerRegistrationDTO registrationDTO,
+            @Valid @ModelAttribute("registrationDTO") CustomerRegistrationRequestDTO registrationDTO,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ModelAndView("auth_register", Map.of("registrationDTO", registrationDTO));
