@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Panel Admin - Klienci</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Lista Klientów</h1>
+    <table class="table table-striped mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.customerId}">1</td>
+            <td th:text="${customer.customerName}">Jan</td>
+            <td th:text="${customer.customerSurname}">Kowalski</td>
+            <td th:text="${customer.email}">jan.kowalski@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-info" th:href="@{/}">Powrót do strony głównej</a>
+</div>
+</body>
+</html>
+
+<!--3. Panel administracyjny (AdminController)-->
+<!--Lista klientów (CustomerDTO).-->
+<!--Szablon prezentujący listę klientów przekazaną przez kontroler (model „customers”).-->

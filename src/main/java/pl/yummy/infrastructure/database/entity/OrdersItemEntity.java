@@ -29,7 +29,7 @@ public class OrdersItemEntity {
     @JoinColumn(name = "menu_item_id")
     private MenuItemEntity menuItem;
 
-    @Column(name = "item_name", nullable = false, unique = true)
+    @Column(name = "item_name", nullable = false)
     private String itemName;
 
     @Column(name = "quantity", nullable = false)

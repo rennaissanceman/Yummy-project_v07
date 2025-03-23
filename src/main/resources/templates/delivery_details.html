@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Szczegóły Dostawy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Szczegóły Dostawy</h1>
+    <p>Numer: <span th:text="${deliveryDTO.deliveryNumber}">DEL001</span></p>
+    <p>Status: <span th:text="${deliveryDTO.deliveryStatus}">In Transit</span></p>
+    <p>Data rozpoczęcia: <span th:text="${#dates.format(deliveryDTO.starTime, 'dd-MM-yyyy HH:mm')}">01-01-2023 10:00</span></p>
+    <p>Data zakończenia: <span th:text="${#dates.format(deliveryDTO.endTime, 'dd-MM-yyyy HH:mm')}">01-01-2023 11:00</span></p>
+    <p>Opłata dostawy: <span th:text="${deliveryDTO.deliveryFee}">20.00</span></p>
+    <a class="btn btn-info" th:href="@{/delivery}">Powrót do listy</a>
+</div>
+</body>
+</html>
+<!--7. Dostawy (DeliveryController)-->
+<!--Szczegóły dostawy.-->

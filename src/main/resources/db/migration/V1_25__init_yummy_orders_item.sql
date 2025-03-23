@@ -8,7 +8,6 @@ CREATE TABLE orders_item (
     total_price      NUMERIC(10, 2)  NOT NULL,
     item_notes       TEXT            NULL,
     PRIMARY KEY (orders_item_id),
-    UNIQUE (item_name),
     CONSTRAINT fk_orders_item_orders
         FOREIGN KEY (orders_id)
             REFERENCES orders(orders_id) ON DELETE CASCADE,

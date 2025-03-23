@@ -16,9 +16,7 @@ public class OrderPlacementService {
     private final OrderPlacementProcessingDAO orderPlacementProcessingDAO;
 
 
-    public void placeOrder(OrderPlacementRequest request) {
-        orderPlacementProcessingDAO.placeOrder(request);
-    }
+
 
     public Invoice placeOrder(OrderPlacementRequest request) {
         return request.getExistingCustomerEmail().isBlank()

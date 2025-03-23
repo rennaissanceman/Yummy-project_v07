@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Lista Właścicieli Restauracji</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Lista Właścicieli Restauracji</h1>
+  <table class="table table-bordered mt-3">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Numer Właściciela</th>
+      <th>Imię</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="owner : ${owners}">
+      <td th:text="${owner.ownerId}">1</td>
+      <td th:text="${owner.ownerNumber}">OWN001</td>
+      <td th:text="${owner.ownerName}">Jan Nowak</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+<!--12. Właściciele restauracji (OwnerController)-->
+<!--Lista właścicieli (OwnerDTO).-->

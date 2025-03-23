@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.RestaurantDAO;
-import pl.yummy.domain.Customer;
 import pl.yummy.domain.Restaurant;
 import pl.yummy.domain.enums.CuisineTypeEnumDomain;
 import pl.yummy.domain.exception.NotFoundException;

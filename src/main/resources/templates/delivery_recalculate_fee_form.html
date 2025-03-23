@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Przelicz Opłatę Dostawy</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Przelicz Opłatę Dostawy</h1>
+  <form th:action="@{/delivery/recalculate-fee}" method="post">
+    <div class="mb-3">
+      <label for="deliveryId" class="form-label">ID Dostawy:</label>
+      <input type="number" id="deliveryId" name="deliveryId" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="baseFee" class="form-label">Podstawowa Opłata:</label>
+      <input type="text" id="baseFee" name="baseFee" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="multiplier" class="form-label">Współczynnik:</label>
+      <input type="text" id="multiplier" name="multiplier" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Przelicz</button>
+  </form>
+  <a class="btn btn-secondary mt-3" th:href="@{/delivery}">Powrót</a>
+</div>
+</body>
+</html>
+
+<!--7. Dostawy (DeliveryController)-->
+<!--Formularz do przeliczenia opłaty dostawy.
+Model: formularz niezbędnych danych – np. pola: deliveryId, baseFee, multiplier.-->

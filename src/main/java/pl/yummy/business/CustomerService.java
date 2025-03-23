@@ -7,6 +7,7 @@ import pl.yummy.business.dao.CustomerDAO;
 import pl.yummy.domain.*;
 import pl.yummy.domain.exception.NotFoundException;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -166,6 +167,45 @@ public class CustomerService {
         return customerDAO.findByCustomerSurname(surname);
     }
 
+    // Dodajemy metodę getCustomerActivityHistory, której wcześniej brakowało
+    /*
+     * GET – Pobiera historię aktywności klienta:
+     * sumuje łączną liczbę zamówień, łączny wydatek oraz wybiera ostatnie zamówienia (np. 5 najnowszych).
+     */
+    @Transactional
+    public List<CustomerActivityHistoryView> getCustomerActivityHistory(String customerNumber) {
+        Customer customer = findCustomerByNumber(customerNumber);
+        List<Orders> ordersList = orderService.findOrdersByCustomer(customer.getCustomerId());
+        int totalOrders = ordersList.size();
+        BigDecimal totalSpent = ordersList.stream()
+                .map(Orders::getTotalAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        // Sortujemy zamówienia malejąco według daty i wybieramy 5 najnowszych
+        List<Orders> sortedOrders = new ArrayList<>(ordersList);
+        sortedOrders.sort(Comparator.comparing(Orders::getOrdersDateTime).reversed());
+        List<CustomerActivityHistoryView.RecentOrder> recentOrders = sortedOrders.stream()
+                .limit(5)
+                .map(order -> CustomerActivityHistoryView.RecentOrder.builder()
+                        .orderId(order.getOrdersId().intValue()) // zakładamy konwersję Long->Integer
+                        .orderDate(order.getOrdersDateTime())
+                        .status(order.getOrdersStatus().name())
+                        .amount(order.getTotalAmount())
+                        .build())
+                .collect(Collectors.toList());
+
+        CustomerActivityHistoryView view = CustomerActivityHistoryView.builder()
+                .customerId(customer.getCustomerId().intValue())
+                .customerName(customer.getCustomerName())
+                .customerSurname(customer.getCustomerSurname())
+                .totalOrders(totalOrders)
+                .totalSpent(totalSpent)
+                .recentOrders(recentOrders)
+                .build();
+        return List.of(view);
+    }
+
+
     /*
      * Pobiera historię zamówień klienta na podstawie numeru klienta.
      * W tej uproszczonej implementacji zamówienia są pobierane przy użyciu OrderService,
@@ -191,6 +231,7 @@ public class CustomerService {
     public List<Customer> getAllCustomers() {
         return customerDAO.findAll();
     }
+
 }
 
     /*

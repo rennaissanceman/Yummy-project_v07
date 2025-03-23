@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dostawy Kuriera</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Dostawy dla Kuriera <span th:text="${courierId}">[ID]</span></h1>
+  <table class="table table-striped mt-3">
+    <thead class="table-dark">
+    <tr>
+      <th>ID Dostawy</th>
+      <th>Numer Dostawy</th>
+      <th>Status</th>
+      <th>Data Rozpoczęcia</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="delivery : ${deliveryDTOs}">
+      <td th:text="${delivery.deliveryId}">1</td>
+      <td th:text="${delivery.deliveryNumber}">DEL001</td>
+      <td th:text="${delivery.deliveryStatus}">In Transit</td>
+      <td th:text="${#dates.format(delivery.starTime, 'dd-MM-yyyy HH:mm')}">01-01-2023 10:00</td>
+    </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-info" th:href="@{/delivery}">Powrót do listy dostaw</a>
+</div>
+</body>
+</html>
+<!--7. Dostawy (DeliveryController)-->
+<!--Widok wyświetlający listę dostaw dla danego kuriera.
+Model: lista obiektów „deliveryDTOs” oraz identyfikator kuriera „courierId”.-->

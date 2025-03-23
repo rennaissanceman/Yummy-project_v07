@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Lista Restauracji</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Lista Restauracji</h1>
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>Nazwa</th>
+            <th>Adres</th>
+            <th>Telefon</th>
+            <th>Strona</th>
+            <th>Ocena</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="restaurant : ${restaurants}">
+            <td th:text="${restaurant.restaurantName}">Restauracja ABC</td>
+            <td th:text="${restaurant.address}">Ulica, Miasto</td>
+            <td th:text="${restaurant.phone}">123456789</td>
+            <td th:text="${restaurant.website}">www.abc.com</td>
+            <td th:text="${restaurant.averageRating}">4.5</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-info" th:href="@{/}">Powrót</a>
+</div>
+</body>
+</html>
+<!--15. Restauracje (RestaurantController)-->
+<!--Lista restauracji (dla filtracji po typie kuchni, ratingu czy właścicielu).-->

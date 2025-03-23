@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Rejestracja Klienta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Rejestracja Klienta</h1>
+    <form th:action="@{/customer/register}" th:object="${registrationDTO}" method="post">
+        <!-- Pola formularza podobne do auth_register -->
+        <div class="mb-3">
+            <label for="customerName" class="form-label">Imię:</label>
+            <input type="text" id="customerName" th:field="*{customerName}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="customerSurname" class="form-label">Nazwisko:</label>
+            <input type="text" id="customerSurname" th:field="*{customerSurname}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Hasło:</label>
+            <input type="password" id="password" th:field="*{password}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Telefon:</label>
+            <input type="text" id="phone" th:field="*{phone}" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Zarejestruj</button>
+    </form>
+    <a class="btn btn-secondary mt-3" th:href="@{/}">Powrót</a>
+</div>
+</body>
+</html>
+<!--6. Klient (CustomerController)-->
+<!--Rejestracja klienta.-->

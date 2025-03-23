@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Historia Aktywności Klienta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Historia Aktywności Klienta</h1>
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>Numer klienta</th>
+            <th>Imię i nazwisko</th>
+            <th>Łączna liczba zamówień</th>
+            <th>Łączne wydatki</th>
+            <th>Średnia wartość zamówienia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="history : ${historyList}">
+            <td th:text="${history.customerId}">1</td>
+            <td th:text="${history.customerName} + ' ' + ${history.customerSurname}">Jan Kowalski</td>
+            <td th:text="${history.totalOrders}">10</td>
+            <td th:text="${history.totalSpent}">1000</td>
+            <td th:text="${history.calculateAverageOrderValue()}">100</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-info" th:href="@{/}">Powrót do strony głównej</a>
+</div>
+</body>
+</html>
+<!--5. Analityka klientów (CustomerAnalyticsController)-->
+<!--Historia aktywności klienta (CustomerActivityHistoryViewDTO).-->

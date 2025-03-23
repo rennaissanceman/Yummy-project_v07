@@ -15,7 +15,6 @@ CREATE TABLE menu_item (
     created_at          TIMESTAMP WITH TIME ZONE NULL,
     updated_at          TIMESTAMP WITH TIME ZONE NULL,
     PRIMARY KEY (menu_item_id),
-    UNIQUE (item_name),
     UNIQUE (image_url),
     CONSTRAINT fk_menu_item_menu
         FOREIGN KEY (menu_id)

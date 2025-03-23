@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Szczegóły Kuriera</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Szczegóły Kuriera</h1>
+    <p>Numer: <span th:text="${courier.courierNumber}">C001</span></p>
+    <p>Imię i nazwisko: <span th:text="${courier.courierName} + ' ' + ${courier.courierSurname}">Jan Nowak</span></p>
+    <p>Pojazd: <span th:text="${courier.vehicleType}">Rower</span> – Rejestracja: <span th:text="${courier.vehicleRegistrationNumber}">XYZ123</span></p>
+    <p>Status: <span th:text="${courier.courierStatus}">Available</span></p>
+    <p>Data zatrudnienia: <span th:text="${#dates.format(courier.hireDate, 'dd-MM-yyyy')}">01-01-2023</span></p>
+    <a class="btn btn-info" th:href="@{/courier}">Powrót do listy kurierów</a>
+</div>
+</body>
+</html>
+
+<!--6. Klient (CustomerController)-->
+<!--customer_all.html, customer_companies.html, customer_by_company.html, customer_by_surname.html
+Szablony listujące klientów wg różnych kryteriów – analogiczne do wcześniejszych tabel, iterujących po listach
+przekazanych w modelu.-->

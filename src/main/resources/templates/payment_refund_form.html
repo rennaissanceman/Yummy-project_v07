@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Zwrot Płatności</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Zwrot Płatności</h1>
+    <form th:action="@{/payment/refund}" method="post">
+        <div class="mb-3">
+            <label for="paymentId" class="form-label">ID Płatności:</label>
+            <input type="number" id="paymentId" name="paymentId" class="form-control" required />
+        </div>
+        <!-- Jeśli potrzebne, można dodać dodatkowe pole, np. komentarz -->
+        <div class="mb-3">
+            <label for="refundComment" class="form-label">Komentarz (opcjonalnie):</label>
+            <textarea id="refundComment" name="refundComment" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Złóż wniosek o zwrot</button>
+    </form>
+    <a class="btn btn-secondary mt-3" th:href="@{/}">Powrót do strony głównej</a>
+</div>
+</body>
+</html>
+<!--13. Płatności (PaymentController oraz PaymentControllerExtension)-->
+<!--Formularz do zgłoszenia żądania zwrotu płatności.
+Kontroler powinien przyjmować parametr „paymentId” (oraz ewentualnie dodatkowe dane, jeśli potrzebne).-->

@@ -1,5 +1,5 @@
-CREATE TABLE car_dealership_user
-(
+-- Tabela użytkowników aplikacji Yummy
+CREATE TABLE yummy_user (
     user_id   SERIAL        NOT NULL,
     user_name VARCHAR(32)   NOT NULL,
     email     VARCHAR(32)   NOT NULL,
@@ -8,22 +8,22 @@ CREATE TABLE car_dealership_user
     PRIMARY KEY (user_id)
 );
 
-CREATE TABLE car_dealership_role
-(
+-- Tabela ról aplikacji Yummy
+CREATE TABLE yummy_role (
     role_id SERIAL      NOT NULL,
     role    VARCHAR(20) NOT NULL,
     PRIMARY KEY (role_id)
 );
 
-CREATE TABLE car_dealership_user_role
-(
-    user_id   INT      NOT NULL,
-    role_id   INT      NOT NULL,
+-- Tabela pośrednia dla relacji wiele-do-wielu między użytkownikami a rolami
+CREATE TABLE yummy_user_role (
+    user_id INT NOT NULL,
+    role_id INT NOT NULL,
     PRIMARY KEY (user_id, role_id),
-    CONSTRAINT fk_car_dealership_user_role_user
+    CONSTRAINT fk_yummy_user_role_user
         FOREIGN KEY (user_id)
-            REFERENCES car_dealership_user (user_id),
-    CONSTRAINT fk_car_dealership_user_role_role
+            REFERENCES yummy_user(user_id),
+    CONSTRAINT fk_yummy_user_role_role
         FOREIGN KEY (role_id)
-            REFERENCES car_dealership_role (role_id)
+            REFERENCES yummy_role(role_id)
 );

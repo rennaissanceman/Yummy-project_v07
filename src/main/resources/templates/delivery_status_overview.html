@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Przegląd Statusu Dostaw</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Przegląd Dostaw dla Obszaru ID: <span th:text="${areaId}">[Area ID]</span></h1>
+    <div class="card mt-3">
+        <div class="card-body">
+            <p>Nazwa obszaru: <span th:text="${overview.deliveryAreaName}">Obszar 1</span></p>
+            <p>Łączna liczba dostaw: <span th:text="${overview.totalDeliveries}">50</span></p>
+            <p>Średni czas dostawy: <span th:text="${overview.averageDeliveryTime}">30</span> minut</p>
+            <p>Dostawy opóźnione: <span th:text="${overview.lateDeliveries}">5</span></p>
+            <p>Dostawy zakończone sukcesem: <span th:text="${overview.successfulDeliveries}">40</span></p>
+            <p>Dostawy w trakcie: <span th:text="${overview.inTransit}">5</span></p>
+        </div>
+    </div>
+    <a class="btn btn-info mt-3" th:href="@{/delivery}">Powrót</a>
+</div>
+</body>
+</html>
+<!--7. Dostawy (DeliveryController)-->
+<!--Widok prezentujący statystyki dostaw dla danego obszaru.
+Model: obiekt „overview” zawierający pola takie jak deliveryAreaId, deliveryAreaName, totalDeliveries,
+averageDeliveryTime, lateDeliveries, successfulDeliveries, inTransit oraz parametr „areaId”.-->

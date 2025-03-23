@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Formularz Płatności</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Przetwarzanie Płatności</h1>
+    <form th:action="@{/payment/process}" th:object="${paymentForm}" method="post">
+        <div class="mb-3">
+            <label for="orderId" class="form-label">ID Zamówienia:</label>
+            <input type="number" id="orderId" th:field="*{orderId}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="paymentMethod" class="form-label">Metoda Płatności:</label>
+            <input type="text" id="paymentMethod" th:field="*{paymentMethod}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="amount" class="form-label">Kwota:</label>
+            <input type="text" id="amount" th:field="*{amount}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="transactionId" class="form-label">Transaction ID:</label>
+            <input type="text" id="transactionId" th:field="*{transactionId}" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="comment" class="form-label">Komentarz:</label>
+            <textarea id="comment" th:field="*{comment}" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Przetwórz Płatność</button>
+    </form>
+</div>
+</body>
+</html>
+<!--13. Płatności (PaymentController oraz PaymentControllerExtension)-->
+<!--Formularz przetwarzania płatności (PaymentProcessingRequestDTO).-->

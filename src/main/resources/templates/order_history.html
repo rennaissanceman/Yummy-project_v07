@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Historia Zamówień</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Historia Zamówień</h1>
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+        <tr>
+            <th>Numer Zamówienia</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Kwota</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${ordersDTOList}">
+            <td th:text="${order.orderNumber}">ORD001</td>
+            <td th:text="${#dates.format(order.ordersDateTime, 'dd-MM-yyyy HH:mm')}">01-01-2023 12:00</td>
+            <td th:text="${order.orderStatus}">Zakończone</td>
+            <td th:text="${order.totalAmount}">99.99</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-info" th:href="@{/}">Powrót</a>
+</div>
+</body>
+</html>
+<!--11. Zamówienia (OrderController)-->
+<!--Historia zamówień (OrdersDTO).-->

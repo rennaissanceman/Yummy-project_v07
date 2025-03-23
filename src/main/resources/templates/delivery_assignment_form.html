@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Przypisanie Dostawy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Przypisz Dostawę do Kuriera</h1>
+    <form th:action="@{/delivery/assign}" th:object="${deliveryAssignment}" method="post">
+        <div class="mb-3">
+            <label for="deliveryId" class="form-label">ID Dostawy:</label>
+            <input type="number" id="deliveryId" th:field="*{deliveryId}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="courierIdentifier" class="form-label">Numer Kuriera:</label>
+            <input type="text" id="courierIdentifier" th:field="*{courierIdentifier}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="assignmentDateTime" class="form-label">Data Przypisania:</label>
+            <input type="datetime-local" id="assignmentDateTime" th:field="*{assignmentDateTime}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="comment" class="form-label">Komentarz:</label>
+            <textarea id="comment" th:field="*{comment}" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Przypisz</button>
+    </form>
+    <a class="btn btn-secondary mt-3" th:href="@{/delivery}">Powrót</a>
+</div>
+</body>
+</html>
+<!--7. Dostawy (DeliveryController)-->
+<!--Formularz przypisania dostawy do kuriera.
+Model: obiekt formularza – „deliveryAssignment”. Pola przykładowe: deliveryId, courierIdentifier,
+assignmentDateTime, comment.-->

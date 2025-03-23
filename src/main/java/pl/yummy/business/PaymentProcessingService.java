@@ -16,21 +16,6 @@ public class PaymentProcessingService {
     private final PaymentProcessingDAO paymentProcessingDAO;
 
 
-    private final PaymentProcessingDAO paymentProcessingDAO;
-
-
-    public void processPayment(PaymentProcessingRequest request) {
-        paymentProcessingDAO.processPayment(request);
-    }
-
-    public void processPayment(Long orderId, Payment payment) {
-        paymentProcessingDAO.processPayment(orderId, payment);
-    }
-
-    public void refundPayment(Long paymentId) {
-        paymentProcessingDAO.refundPayment(paymentId);
-    }
-
     /**
      * Inicjuje proces płatności na podstawie danych przekazanych w obiekcie PaymentProcessingRequest.
      *

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Raport Przychodowy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Raport Przychodowy</h1>
+    <p>Okres: <span th:text="${startDate}">2023-01-01</span> - <span th:text="${endDate}">2023-01-31</span></p>
+    <div class="card mt-3">
+        <div class="card-body">
+            <p>Łączny przychód: <strong th:text="${revenueReport.totalRevenue}">10000</strong></p>
+            <p>Łączna liczba zamówień: <strong th:text="${revenueReport.totalOrders}">100</strong></p>
+            <p>Średnia wartość zamówienia: <strong th:text="${revenueReport.averageOrderValue}">100</strong></p>
+        </div>
+    </div>
+    <a class="btn btn-info mt-3" th:href="@{/}">Powrót do strony głównej</a>
+</div>
+</body>
+</html>
+
+<!--3. Panel administracyjny (AdminController)-->
+<!--Raport przychodowy (RevenueReportViewDTO).-->

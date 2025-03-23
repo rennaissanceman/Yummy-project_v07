@@ -13,7 +13,7 @@ public class HomeController {
 
     @RequestMapping(value = HOME, method = RequestMethod.GET)
     public String homePage() {
-        return "home"; // widok strony głównej (np. home.html)
+        return "home"; // widok strony głównej (np. 1home.html)
     }
 
 }

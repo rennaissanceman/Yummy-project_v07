@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Szczegóły Paragonu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Szczegóły Paragonu</h1>
+    <div class="card mt-3">
+        <div class="card-body">
+            <p>Numer paragonu: <strong th:text="${receiptDTO.receiptNumber}">REC001</strong></p>
+            <p>Data wystawienia: <span th:text="${#dates.format(receiptDTO.issueDate, 'dd-MM-yyyy')}">01-01-2023</span></p>
+            <p>Kwota całkowita: <span th:text="${receiptDTO.totalAmount}">199.99</span></p>
+            <p>Kwota netto: <span th:text="${receiptDTO.netAmount}">150.00</span></p>
+            <p>Kwota podatku: <span th:text="${receiptDTO.taxAmount}">49.99</span></p>
+            <p>Uwagi: <span th:text="${receiptDTO.notes}">Brak</span></p>
+        </div>
+    </div>
+    <a class="btn btn-info mt-3" th:href="@{/}">Powrót do strony głównej</a>
+</div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Szczegóły Paragonu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Szczegóły Paragonu</h1>
+    <div class="card mt-3">
+        <div class="card-body">
+            <p>Numer paragonu: <strong th:text="${receiptDTO.receiptNumber}">REC001</strong></p>
+            <p>ID paragonu: <span th:text="${receiptDTO.receiptId}">1</span></p>
+            <p>ID zamówienia: <span th:text="${receiptDTO.ordersId}">ORD001</span></p>
+            <p>Data wystawienia:
+                <span th:text="${#dates.format(receiptDTO.issueDate, 'dd-MM-yyyy')}">01-01-2023</span>
+            </p>
+            <p>Data sprzedaży:
+                <span th:text="${#dates.format(receiptDTO.saleDate, 'dd-MM-yyyy')}">01-01-2023</span>
+            </p>
+            <p>Kwota całkowita:
+                <span th:text="${receiptDTO.totalAmount}">199.99</span>
+            </p>
+            <p>Kwota netto:
+                <span th:text="${receiptDTO.netAmount}">150.00</span>
+            </p>
+            <p>Kwota podatku:
+                <span th:text="${receiptDTO.taxAmount}">49.99</span>
+            </p>
+            <p>Stawka podatku:
+                <span th:text="${receiptDTO.taxRate}">23%</span>
+            </p>
+            <p th:if="${receiptDTO.notes != null}">
+                Uwagi: <span th:text="${receiptDTO.notes}">Brak</span>
+            </p>
+        </div>
+    </div>
+    <a class="btn btn-info mt-3" th:href="@{/}">Powrót do strony głównej</a>
+</div>
+</body>
+</html>
+
+<!--9. Faktury i paragon (InvoiceController i ReceiptController)-->
+<!--Szczegóły paragonu (ReceiptDTO).-->

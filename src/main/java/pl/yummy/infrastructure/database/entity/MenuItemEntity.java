@@ -26,7 +26,7 @@ public class MenuItemEntity {
     @Column(name = "menuItemId")
     private Integer menuItemId;
 
-    @Column(name = "item_name", nullable = false, unique = true)
+    @Column(name = "item_name", nullable = false)
     private String itemName;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -10,7 +10,6 @@ import pl.yummy.domain.exception.NotFoundException;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor

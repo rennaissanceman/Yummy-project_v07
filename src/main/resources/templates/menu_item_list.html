@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Menu - Pozycje</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Pozycje Menu</h1>
+  <table class="table table-bordered mt-3">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Nazwa</th>
+      <th>Opis</th>
+      <th>Cena</th>
+      <th>Dostępność</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${menuItems}">
+      <td th:text="${item.menuItemId}">1</td>
+      <td th:text="${item.itemName}">Pizza</td>
+      <td th:text="${item.description}">Pyszna pizza</td>
+      <td th:text="${item.price}">29.99</td>
+      <td th:text="${item.isAvailable} ? 'Tak' : 'Nie'">Tak</td>
+    </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-info" th:href="@{/}">Powrót</a>
+</div>
+</body>
+</html>
+<!--10. Menu i pozycje w menu-->
+<!--Formularz aktualizacji pozycji menu (MenuItemUpdateRequestDTO).-->

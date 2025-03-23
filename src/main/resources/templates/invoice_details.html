@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Szczegóły Faktury</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Szczegóły Faktury</h1>
+    <div class="card mt-3">
+        <div class="card-body">
+            <p>Numer faktury: <strong th:text="${invoiceDTO.invoiceNumber}">INV001</strong></p>
+            <p>Data wystawienia:
+                <span th:text="${#dates.format(invoiceDTO.issueDate, 'dd-MM-yyyy')}">01-01-2023</span>
+            </p>
+            <p>Data sprzedaży:
+                <span th:text="${#dates.format(invoiceDTO.saleDate, 'dd-MM-yyyy')}">01-01-2023</span>
+            </p>
+            <p>Kwota całkowita:
+                <span th:text="${invoiceDTO.totalAmount}">1000.00</span>
+            </p>
+            <p>Kwota netto:
+                <span th:text="${invoiceDTO.netAmount}">800.00</span>
+            </p>
+            <p>Kwota podatku:
+                <span th:text="${invoiceDTO.taxAmount}">200.00</span>
+            </p>
+            <p>Stawka podatku:
+                <span th:text="${invoiceDTO.taxRate}">23%</span>
+            </p>
+            <p th:if="${invoiceDTO.dueDate != null}">
+                Termin płatności:
+                <span th:text="${#dates.format(invoiceDTO.dueDate, 'dd-MM-yyyy')}">15-01-2023</span>
+            </p>
+            <p th:if="${invoiceDTO.issuerSignature != null}">
+                Podpis wystawcy:
+                <span th:text="${invoiceDTO.issuerSignature}">Podpis</span>
+            </p>
+        </div>
+    </div>
+    <a class="btn btn-info mt-3" th:href="@{/}">Powrót do strony głównej</a>
+</div>
+</body>
+</html>
+<!--9. Faktury i paragon (InvoiceController i ReceiptController)-->
+<!--Szczegóły faktury (InvoiceDTO).-->
