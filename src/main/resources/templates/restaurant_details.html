@@ -1,22 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Szczegóły Restauracji</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restauracja - Szczegóły | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-4">
-    <h1>Szczegóły Restauracji</h1>
-    <p>Nazwa: <span th:text="${restaurant.restaurantName}">Restauracja ABC</span></p>
-    <p>Adres: <span th:text="${restaurant.address}">Ulica, Miasto</span></p>
-    <p>Telefon: <span th:text="${restaurant.phone}">123456789</span></p>
-    <p>Email: <span th:text="${restaurant.email}">abc@example.com</span></p>
-    <p>Strona: <span th:text="${restaurant.website}">www.abc.com</span></p>
-    <p>Godziny otwarcia: <span th:text="${restaurant.openingHours}">9-21</span></p>
-    <a class="btn btn-info" th:href="@{/}">Powrót</a>
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Yummy</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/restaurant/list">Lista Restauracji</a></li>
+                <li class="nav-item"><a class="nav-link" href="/auth/login">Logowanie</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Sekcja szczegółów restauracji -->
+<div class="container mt-5">
+    <div class="card mb-4">
+        <img src="path/to/restaurant-image.jpg" class="card-img-top" alt="Zdjęcie restauracji">
+        <div class="card-body">
+            <h2 class="card-title">Restauracja Bella Italia</h2>
+            <p class="card-text"><strong>Adres:</strong> ul. Włoska 5, Warszawa</p>
+            <p class="card-text"><strong>Telefon:</strong> 555-123-456</p>
+            <p class="card-text"><strong>Email:</strong> contact@bella-italia.pl</p>
+            <p class="card-text"><strong>Strona www:</strong> <a href="https://bella-italia.pl" target="_blank">bella-italia.pl</a></p>
+            <p class="card-text"><strong>Opis:</strong> Autentyczna kuchnia włoska, tradycyjne przepisy, świeże składniki.</p>
+            <p class="card-text"><strong>Kuchnia:</strong> Włoska</p>
+            <p class="card-text"><strong>Ocena:</strong> 4.5/5 (200 opinii)</p>
+        </div>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<!--15. Restauracje (RestaurantController)-->
-<!--Szczegóły restauracji (RestaurantDTO)-->

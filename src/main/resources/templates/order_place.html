@@ -1,28 +1,81 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Składanie Zamówienia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Złóż Zamówienie | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-4">
-    <h1>Składanie Zamówienia</h1>
-    <form th:action="@{/order/place}" th:object="${orderPlacementDTO}" method="post">
-        <!-- Przykładowe pola formularza -->
-        <div class="mb-3">
-            <label for="existingCustomerEmail" class="form-label">Email (dla istniejącego klienta):</label>
-            <input type="email" id="existingCustomerEmail" th:field="*{existingCustomerEmail}" class="form-control" />
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Yummy</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Strona główna</a></li>
+                <li class="nav-item"><a class="nav-link" href="/customer/profile">Profil</a></li>
+            </ul>
         </div>
-        <div class="mb-3">
-            <label for="customerName" class="form-label">Imię:</label>
-            <input type="text" id="customerName" th:field="*{customerName}" class="form-control" required />
+    </div>
+</nav>
+
+<!-- Sekcja składania zamówienia -->
+<div class="container mt-5">
+    <h1 class="mb-4">Złóż Zamówienie</h1>
+    <form action="/order/place" method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="existingCustomerEmail" class="form-label">Email (istniejącego klienta)</label>
+                <input type="email" class="form-control" id="existingCustomerEmail" name="existingCustomerEmail" placeholder="Wpisz email, jeśli masz już konto">
+            </div>
+            <div class="col-md-6">
+                <label for="customerName" class="form-label">Imię</label>
+                <input type="text" class="form-control" id="customerName" name="customerName" placeholder="Wpisz swoje imię" required>
+            </div>
+            <div class="col-md-6">
+                <label for="customerSurname" class="form-label">Nazwisko</label>
+                <input type="text" class="form-control" id="customerSurname" name="customerSurname" placeholder="Wpisz swoje nazwisko" required>
+            </div>
+            <div class="col-md-6">
+                <label for="customerPhone" class="form-label">Telefon</label>
+                <input type="text" class="form-control" id="customerPhone" name="customerPhone" placeholder="Podaj numer telefonu" required>
+            </div>
+            <div class="col-md-6">
+                <label for="customerEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="customerEmail" name="customerEmail" placeholder="Wpisz email" required>
+            </div>
+            <div class="col-md-6">
+                <label for="customerAddressCountry" class="form-label">Kraj</label>
+                <input type="text" class="form-control" id="customerAddressCountry" name="customerAddressCountry" placeholder="Podaj kraj" required>
+            </div>
+            <div class="col-md-4">
+                <label for="customerAddressCity" class="form-label">Miasto</label>
+                <input type="text" class="form-control" id="customerAddressCity" name="customerAddressCity" placeholder="Podaj miasto" required>
+            </div>
+            <div class="col-md-4">
+                <label for="customerAddressPostalCode" class="form-label">Kod pocztowy</label>
+                <input type="text" class="form-control" id="customerAddressPostalCode" name="customerAddressPostalCode" placeholder="Podaj kod" required>
+            </div>
+            <div class="col-md-4">
+                <label for="customerAddressStreet" class="form-label">Ulica</label>
+                <input type="text" class="form-control" id="customerAddressStreet" name="customerAddressStreet" placeholder="Podaj ulicę" required>
+            </div>
+            <div class="col-md-6">
+                <label for="orderNumber" class="form-label">Numer zamówienia</label>
+                <input type="text" class="form-control" id="orderNumber" name="orderNumber" placeholder="Wygenerowany numer zamówienia" readonly>
+            </div>
+            <div class="col-md-6">
+                <label for="restaurantIdentifier" class="form-label">Identyfikator restauracji</label>
+                <input type="text" class="form-control" id="restaurantIdentifier" name="restaurantIdentifier" placeholder="Wpisz nazwę restauracji" required>
+            </div>
         </div>
-        <!-- Kolejne pola dotyczące danych klienta i adresu -->
-        <button type="submit" class="btn btn-primary">Złóż Zamówienie</button>
+        <div class="mt-4 d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Złóż zamówienie</button>
+        </div>
     </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<!--11. Zamówienia (OrderController)-->
-<!--Formularz składania zamówienia (OrderPlacementRequestDTO).-->

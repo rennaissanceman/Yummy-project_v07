@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Szczegóły Paragonu | Yummy</title>
+    <title>Anulowanie Zamówienia | Yummy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="/">Yummy</a>
@@ -17,21 +18,20 @@
     </div>
 </nav>
 
+<!-- Formularz anulowania zamówienia -->
 <div class="container mt-5">
-    <h1>Szczegóły Paragonu</h1>
-    <div class="card mt-3">
-        <div class="card-header">
-            <h4>Numer paragonu: RCPT2025001</h4>
+    <h1>Anulowanie Zamówienia</h1>
+    <form action="/order/cancel" method="post">
+        <div class="mb-3">
+            <label for="orderId" class="form-label">ID Zamówienia</label>
+            <input type="text" class="form-control" id="orderId" name="orderId" placeholder="Wprowadź ID zamówienia" required>
         </div>
-        <div class="card-body">
-            <p><strong>Data wystawienia:</strong> 2025-03-10</p>
-            <p><strong>Łączna kwota:</strong> 100.00 PLN</p>
-            <p><strong>Kwota netto:</strong> 80.00 PLN</p>
-            <p><strong>Kwota VAT:</strong> 20.00 PLN</p>
-            <p><strong>Stopa VAT:</strong> 23%</p>
-            <p><strong>Notatki:</strong> Paragon wystawiony elektronicznie.</p>
+        <div class="mb-3">
+            <label for="cancellationReason" class="form-label">Powód anulowania</label>
+            <textarea class="form-control" id="cancellationReason" name="cancellationReason" rows="3" placeholder="Podaj powód anulowania zamówienia"></textarea>
         </div>
-    </div>
+        <button type="submit" class="btn btn-danger">Anuluj Zamówienie</button>
+    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

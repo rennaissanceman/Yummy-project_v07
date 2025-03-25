@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8" />
-    <title>Zwrot Płatności</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zwrot Płatności | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-4">
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/order/history">Historia Zamówień</a></li>
+            <li class="nav-item"><a class="nav-link" href="/customer/profile">Profil</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Formularz zwrotu płatności -->
+<div class="container mt-5">
     <h1>Zwrot Płatności</h1>
-    <form th:action="@{/payment/refund}" method="post">
+    <form action="/payment/refund" method="post">
         <div class="mb-3">
-            <label for="paymentId" class="form-label">ID Płatności:</label>
-            <input type="number" id="paymentId" name="paymentId" class="form-control" required />
+            <label for="paymentId" class="form-label">ID Płatności</label>
+            <input type="text" class="form-control" id="paymentId" name="paymentId" placeholder="Wprowadź ID płatności" required>
         </div>
-        <!-- Jeśli potrzebne, można dodać dodatkowe pole, np. komentarz -->
-        <div class="mb-3">
-            <label for="refundComment" class="form-label">Komentarz (opcjonalnie):</label>
-            <textarea id="refundComment" name="refundComment" class="form-control" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Złóż wniosek o zwrot</button>
+        <button type="submit" class="btn btn-danger">Dokonaj Zwrotu</button>
     </form>
-    <a class="btn btn-secondary mt-3" th:href="@{/}">Powrót do strony głównej</a>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<!--13. Płatności (PaymentController oraz PaymentControllerExtension)-->
-<!--Formularz do zgłoszenia żądania zwrotu płatności.
-Kontroler powinien przyjmować parametr „paymentId” (oraz ewentualnie dodatkowe dane, jeśli potrzebne).-->

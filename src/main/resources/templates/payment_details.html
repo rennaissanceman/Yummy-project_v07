@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pl">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Szczegóły Płatności</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Szczegóły Płatności | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-4">
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/order/history">Historia Zamówień</a></li>
+            <li class="nav-item"><a class="nav-link" href="/customer/profile">Profil</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Szczegóły płatności -->
+<div class="container mt-5">
     <h1>Szczegóły Płatności</h1>
-    <p>Transaction ID: <span th:text="${paymentDTO.transactionId}">TX123</span></p>
-    <p>Metoda: <span th:text="${paymentDTO.paymentMethod}">Karta</span></p>
-    <p>Kwota: <span th:text="${paymentDTO.amount}">100.00</span></p>
-    <p>Status: <span th:text="${paymentDTO.paymentStatus}">Completed</span></p>
-    <a class="btn btn-info" th:href="@{/}">Powrót</a>
+    <div class="card mt-3">
+        <div class="card-header">
+            <h4>ID Transakcji: TXN12345</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Metoda płatności:</strong> Karta</p>
+            <p><strong>Kwota:</strong> 75.00 PLN</p>
+            <p><strong>Status:</strong> Zatwierdzona</p>
+            <p><strong>Data:</strong> 2025-03-10 15:45</p>
+            <p><strong>Komentarz:</strong> Płatność dokonana online.</p>
+        </div>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<!--13. Płatności (PaymentController oraz PaymentControllerExtension)-->
-<!--Szczegóły płatności (PaymentDTO) – widok używany w PaymentControllerExtension.-->
