@@ -1,42 +1,66 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Restauracja - Szczegóły | Yummy</title>
+    <title>Szczegóły Restauracji | Yummy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Yummy</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/restaurant/list">Lista Restauracji</a></li>
-                <li class="nav-item"><a class="nav-link" href="/auth/login">Logowanie</a></li>
-            </ul>
-        </div>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}">Strona Główna</a></li>
+        </ul>
     </div>
 </nav>
 
-<!-- Sekcja szczegółów restauracji -->
+<!-- Szczegóły restauracji -->
 <div class="container mt-5">
+    <h1>Szczegóły Restauracji</h1>
     <div class="card mb-4">
-        <img src="path/to/restaurant-image.jpg" class="card-img-top" alt="Zdjęcie restauracji">
+        <div class="card-header">
+            <h4 th:text="${restaurant.restaurantName}">Nazwa Restauracji</h4>
+        </div>
         <div class="card-body">
-            <h2 class="card-title">Restauracja Bella Italia</h2>
-            <p class="card-text"><strong>Adres:</strong> ul. Włoska 5, Warszawa</p>
-            <p class="card-text"><strong>Telefon:</strong> 555-123-456</p>
-            <p class="card-text"><strong>Email:</strong> contact@bella-italia.pl</p>
-            <p class="card-text"><strong>Strona www:</strong> <a href="https://bella-italia.pl" target="_blank">bella-italia.pl</a></p>
-            <p class="card-text"><strong>Opis:</strong> Autentyczna kuchnia włoska, tradycyjne przepisy, świeże składniki.</p>
-            <p class="card-text"><strong>Kuchnia:</strong> Włoska</p>
-            <p class="card-text"><strong>Ocena:</strong> 4.5/5 (200 opinii)</p>
+            <!-- Logo restauracji, jeśli dostępny -->
+            <div th:if="${restaurant.logoURL != null}">
+                <img th:src="${restaurant.logoURL}" alt="Logo restauracji" class="img-fluid mb-3" style="max-height:150px;">
+            </div>
+            <p><strong>Unikalny identyfikator:</strong> <span th:text="${restaurant.restaurantIdentifier}">identyfikator</span></p>
+            <p>
+                <strong>Właściciel:</strong>
+                <span th:if="${restaurant.owner != null}" th:text="${restaurant.owner}">Informacje o właścicielu</span>
+                <span th:if="${restaurant.owner == null}">Brak danych</span>
+            </p>
+            <p>
+                <strong>Adres:</strong>
+                <span th:text="${restaurant.formattedAddress}">ul. Przykładowa 1, Miasto</span>
+            </p>
+            <p><strong>Telefon:</strong> <span th:text="${restaurant.phone}">+48 123456789</span></p>
+            <p><strong>Email:</strong> <span th:text="${restaurant.email}">kontakt@restauracja.pl</span></p>
+            <p><strong>Strona WWW:</strong> <a th:href="${restaurant.website}" th:text="${restaurant.website}">www.restauracja.pl</a></p>
+            <p><strong>Godziny otwarcia:</strong> <span th:text="${restaurant.openingHours}">10:00 - 22:00</span></p>
+            <p><strong>Typ kuchni:</strong> <span th:text="${restaurant.cuisineType}">ITALIAN</span></p>
+            <p>
+                <strong>Ocena:</strong>
+                <span th:text="${restaurant.averageRating}">4.5</span>
+                (<span th:text="${restaurant.ratingCount}">100</span> opinii)
+            </p>
+            <p th:if="${restaurant.description != null}">
+                <strong>Opis:</strong> <span th:text="${restaurant.description}">Opis restauracji...</span>
+            </p>
         </div>
     </div>
+    <a th:href="@{/}" class="btn btn-primary">Powrót do Strony Głównej</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<!--Uwagi:
+• W polu "Właściciel" możesz wyświetlić więcej informacji, jeśli obiekt OwnerDTO posiada np. nazwisko lub nazwę firmy.
+• Metoda getFormattedAddress() w DTO umożliwia odwołanie się do właściwości formattedAddress – Thymeleaf automatycznie
+korzysta z getterów, więc używamy ${restaurant.formattedAddress}.-->

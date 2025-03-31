@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Opóźnione Dostawy | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/delivery}">Powrót do listy</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Opóźnione Dostawy</h1>
+    <p>Rzeczywisty czas dostawy po: <span th:text="${actualDeliveryDateTime}">2025-03-01T10:30</span></p>
+    <table class="table table-striped" th:if="${deliveryDTOs != null and !#lists.isEmpty(deliveryDTOs)}">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Numer Dostawy</th>
+            <th>Status</th>
+            <th>Planowany Czas</th>
+            <th>Rzeczywisty Czas</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="delivery : ${deliveryDTOs}">
+            <td th:text="${delivery.deliveryId}">1</td>
+            <td th:text="${delivery.deliveryNumber}">DEL-123456</td>
+            <td th:text="${delivery.deliveryStatus}">IN_TRANSIT</td>
+            <td th:text="${delivery.estimatedDeliveryTime}">2025-03-01 10:25</td>
+            <td th:text="${delivery.actualDeliveryDateTime}">2025-03-01 10:35</td>
+            <td>
+                <a th:href="@{/delivery/details(id=${delivery.deliveryId})}" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${deliveryDTOs == null or #lists.isEmpty(deliveryDTOs)}">
+        <p>Brak opóźnionych dostaw.</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<!--8. delivery_late.html
+Lista dostaw opóźnionych.-->

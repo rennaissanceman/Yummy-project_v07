@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,33 +7,52 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Yummy</a>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/order/history">Historia Zamówień</a></li>
-            <li class="nav-item"><a class="nav-link" href="/customer/profile">Profil</a></li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Strona Główna</a>
+            </li>
         </ul>
     </div>
 </nav>
 
+<!-- Szczegóły paragonu -->
 <div class="container mt-5">
     <h1>Szczegóły Paragonu</h1>
-    <div class="card mt-3">
+    <div class="card">
         <div class="card-header">
-            <h4>Numer paragonu: RCPT2025001</h4>
+            <h4>Paragon numer: <span th:text="${receiptDTO.receiptNumber}">RCP123456</span></h4>
         </div>
         <div class="card-body">
-            <p><strong>Data wystawienia:</strong> 2025-03-10</p>
-            <p><strong>Łączna kwota:</strong> 100.00 PLN</p>
-            <p><strong>Kwota netto:</strong> 80.00 PLN</p>
-            <p><strong>Kwota VAT:</strong> 20.00 PLN</p>
-            <p><strong>Stopa VAT:</strong> 23%</p>
-            <p><strong>Notatki:</strong> Paragon wystawiony elektronicznie.</p>
+            <p><strong>ID Paragonu:</strong> <span th:text="${receiptDTO.receiptId}">1</span></p>
+            <p><strong>ID Zamówienia:</strong> <span th:text="${receiptDTO.ordersId}">100</span></p>
+            <p>
+                <strong>Data Wystawienia:</strong>
+                <span th:text="${#dates.format(receiptDTO.issueDate, 'yyyy-MM-dd HH:mm')}">2025-01-01 10:00</span>
+            </p>
+            <p>
+                <strong>Data Sprzedaży:</strong>
+                <span th:text="${#dates.format(receiptDTO.saleDate, 'yyyy-MM-dd HH:mm')}">2025-01-01 10:05</span>
+            </p>
+            <p><strong>Łączna Kwota:</strong> <span th:text="${receiptDTO.totalAmount}">150.00 PLN</span></p>
+            <p><strong>Kwota Netto:</strong> <span th:text="${receiptDTO.netAmount}">130.00 PLN</span></p>
+            <p><strong>Kwota Podatku:</strong> <span th:text="${receiptDTO.taxAmount}">20.00 PLN</span></p>
+            <p><strong>Stawka Podatkowa:</strong> <span th:text="${receiptDTO.taxRate}">0.23</span></p>
+            <p th:if="${receiptDTO.notes != null}">
+                <strong>Notatki:</strong> <span th:text="${receiptDTO.notes}">Przykładowa notatka</span>
+            </p>
         </div>
+    </div>
+    <div class="mt-4">
+        <a th:href="@{/}" class="btn btn-primary">Powrót do Strony Głównej</a>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<!--1. Szczegóły paragonu (endpoint: GET /receipt/details)-->

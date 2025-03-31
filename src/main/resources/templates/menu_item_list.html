@@ -1,54 +1,79 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Menu Restauracji | Yummy</title>
+    <title>Lista Pozycji Menu | Yummy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Yummy</a>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/menu-item/list">Menu</a></li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Strona Główna</a>
+            </li>
         </ul>
     </div>
 </nav>
 
-<!-- Lista pozycji w menu -->
-<div class="container mt-4">
-    <h1>Pozycje w Menu</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
-        <!-- Przykładowa karta pozycji -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="path/to/menu_item1.jpg" class="card-img-top" alt="Pizza Margherita">
-                <div class="card-body">
-                    <h5 class="card-title">Pizza Margherita</h5>
-                    <p class="card-text">Klasyczna pizza z sosem pomidorowym i mozzarellą.</p>
-                    <p class="card-text"><strong>Cena:</strong> 30.00 PLN</p>
-                </div>
-                <div class="card-footer">
-                    <a href="/menu-item-update/form?menuItemId=1" class="btn btn-sm btn-outline-primary">Edytuj</a>
-                </div>
+<div class="container mt-5">
+    <h1>Lista Pozycji Menu</h1>
+
+    <!-- Formularz filtrowania po typie diety -->
+    <form th:action="@{/menu-item/list}" method="get" class="mb-4">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <label for="dietType" class="col-form-label">Filtruj według typu diety:</label>
+            </div>
+            <div class="col-auto">
+                <select id="dietType" name="dietType" class="form-select">
+                    <option value="">Wszystkie</option>
+                    <option value="VEGETARIAN">Wegetariańskie</option>
+                    <option value="VEGAN">Wegańskie</option>
+                    <option value="GLUTEN_FREE">Bezglutenowe</option>
+                    <!-- Dodaj inne opcje zgodnie z definicjami DietTypeEnumDomain -->
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filtruj</button>
             </div>
         </div>
-        <!-- Kolejne pozycje w menu -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="path/to/menu_item2.jpg" class="card-img-top" alt="Spaghetti Carbonara">
-                <div class="card-body">
-                    <h5 class="card-title">Spaghetti Carbonara</h5>
-                    <p class="card-text">Makaron z kremowym sosem i boczkiem.</p>
-                    <p class="card-text"><strong>Cena:</strong> 35.00 PLN</p>
-                </div>
-                <div class="card-footer">
-                    <a href="/menu-item-update/form?menuItemId=2" class="btn btn-sm btn-outline-primary">Edytuj</a>
-                </div>
-            </div>
-        </div>
+    </form>
+
+    <!-- Tabela pozycji menu -->
+    <table class="table table-striped" th:if="${menuItems != null and !#lists.isEmpty(menuItems)}">
+        <thead class="table-dark">
+        <tr>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Cena</th>
+            <th>Typ diety</th>
+            <th>Data utworzenia</th>
+            <th>Data aktualizacji</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${menuItems}">
+            <td th:text="${item.itemName}">Pizza Margherita</td>
+            <td th:text="${item.description}">Pyszna pizza z mozzarellą</td>
+            <td th:text="${item.price}">25.00 PLN</td>
+            <td th:text="${item.dietType}">VEGETARIAN</td>
+            <td th:text="${item.createdAt}">2025-03-10 12:00</td>
+            <td th:text="${item.updatedAt}">2025-03-15 14:00</td>
+            <td>
+                <!-- Link do szczegółów pozycji menu; endpoint należy zaimplementować, jeśli chcesz wyświetlać szczegóły -->
+                <a th:href="@{'/menu-item/details/' + ${item.menuItemId}}" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${menuItems == null or #lists.isEmpty(menuItems)}">
+        <p>Brak dostępnych pozycji w menu.</p>
     </div>
 </div>
 

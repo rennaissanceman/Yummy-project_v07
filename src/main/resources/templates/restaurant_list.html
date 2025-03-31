@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,96 +10,62 @@
 <!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Yummy</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/restaurant/list">Lista Restauracji</a></li>
-                <li class="nav-item"><a class="nav-link" href="/restaurant/details?restaurantIdentifier=example">Szczegóły Restauracji</a></li>
-                <li class="nav-item"><a class="nav-link" href="/auth/login">Logowanie</a></li>
-            </ul>
-        </div>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Strona Główna</a>
+            </li>
+        </ul>
     </div>
 </nav>
 
-<!-- Główna zawartość -->
-<div class="container mt-4">
+<!-- Lista restauracji -->
+<div class="container mt-5">
     <h1>Lista Restauracji</h1>
-
-    <!-- Formularz filtrowania -->
-    <form class="row g-3 mb-4" action="/restaurant/list" method="get">
-        <div class="col-md-4">
-            <label for="cuisineType" class="form-label">Typ kuchni</label>
-            <select id="cuisineType" name="cuisineType" class="form-select">
-                <option selected>Wybierz...</option>
-                <option value="ITALIAN">Włoska</option>
-                <option value="JAPANESE">Japońska</option>
-                <option value="POLISH">Polska</option>
-                <!-- Dodaj inne opcje -->
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label for="minimumRating" class="form-label">Minimalna ocena</label>
-            <select id="minimumRating" name="minimumRating" class="form-select">
-                <option selected>Wybierz...</option>
-                <option value="3">3+</option>
-                <option value="4">4+</option>
-                <option value="4.5">4.5+</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label for="owner" class="form-label">Właściciel</label>
-            <input type="text" class="form-control" id="owner" name="owner" placeholder="Wpisz nazwę właściciela">
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Filtruj</button>
-        </div>
-    </form>
-
-    <!-- Lista restauracji prezentowana jako karty -->
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <!-- Restauracja 1 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="path/to/restaurant1.jpg" class="card-img-top" alt="Restauracja Bella Italia">
-                <div class="card-body">
-                    <h5 class="card-title">Restauracja Bella Italia</h5>
-                    <p class="card-text">Włoska kuchnia, autentyczne smaki, tradycyjne przepisy.</p>
+    <table class="table table-hover mt-4" th:if="${restaurants != null}">
+        <thead class="table-dark">
+        <tr>
+            <th>Logo</th>
+            <th>Nazwa</th>
+            <th>Typ kuchni</th>
+            <th>Ocena</th>
+            <th>Adres</th>
+            <th>Szczegóły</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="restaurant : ${restaurants}">
+            <td>
+                <div th:if="${restaurant.logoURL != null}">
+                    <img th:src="${restaurant.logoURL}" alt="Logo" style="max-height:50px;">
                 </div>
-                <div class="card-footer">
-                    <a href="/restaurant/details?restaurantIdentifier=bella-italia" class="btn btn-sm btn-primary">Zobacz szczegóły</a>
+                <div th:if="${restaurant.logoURL == null}">
+                    Brak logo
                 </div>
-            </div>
-        </div>
-        <!-- Restauracja 2 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="path/to/restaurant2.jpg" class="card-img-top" alt="Restauracja Sushi World">
-                <div class="card-body">
-                    <h5 class="card-title">Sushi World</h5>
-                    <p class="card-text">Japońskie specjały, świeże składniki, oryginalne sushi.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="/restaurant/details?restaurantIdentifier=sushi-world" class="btn btn-sm btn-primary">Zobacz szczegóły</a>
-                </div>
-            </div>
-        </div>
-        <!-- Restauracja 3 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="path/to/restaurant3.jpg" class="card-img-top" alt="Restauracja Polska Smakosz">
-                <div class="card-body">
-                    <h5 class="card-title">Polska Smakosz</h5>
-                    <p class="card-text">Tradycyjna polska kuchnia, regionalne potrawy, domowa atmosfera.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="/restaurant/details?restaurantIdentifier=polska-smakosz" class="btn btn-sm btn-primary">Zobacz szczegóły</a>
-                </div>
-            </div>
-        </div>
-        <!-- Dalsze karty restauracji -->
+            </td>
+            <td th:text="${restaurant.restaurantName}">Restauracja XYZ</td>
+            <td th:text="${restaurant.cuisineType}">ITALIAN</td>
+            <td>
+                <span th:text="${restaurant.averageRating}">4.2</span>
+                (<span th:text="${restaurant.ratingCount}">50</span>)
+            </td>
+            <td th:text="${restaurant.formattedAddress}">ul. Przykładowa 1, Miasto</td>
+            <td>
+                <a th:href="@{/restaurant/details(restaurantIdentifier=${restaurant.restaurantIdentifier})}" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${restaurants == null || #lists.isEmpty(restaurants)}">
+        <p>Brak restauracji spełniających kryteria.</p>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<!--Uwagi:
+• W widoku listy restauracji wykorzystujemy tabelę, w której każdy wiersz prezentuje logo, nazwę, typ kuchni,
+średnią ocenę (oraz liczbę opinii), adres oraz przycisk „Szczegóły”.
+• Link do widoku szczegółów wykorzystuje parametr restaurantIdentifier, dzięki czemu kontroler może pobrać
+pełne dane restauracji.-->

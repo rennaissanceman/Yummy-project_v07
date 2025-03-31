@@ -3,6 +3,7 @@ package pl.yummy.business.dao;
 import pl.yummy.domain.Feedback;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FeedbackDAO {
 
@@ -18,4 +19,6 @@ public interface FeedbackDAO {
     List<Feedback> findByRestaurant_RestaurantId(Long restaurantId);
 
     Feedback save(Feedback feedback);
+
+    Optional<Feedback> findById(Long feedbackId);
 }

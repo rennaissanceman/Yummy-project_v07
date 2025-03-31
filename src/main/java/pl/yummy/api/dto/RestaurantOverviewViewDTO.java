@@ -12,10 +12,8 @@ public class RestaurantOverviewViewDTO {
     /*
      Podstawowy model widoku restauracji – zawiera dane kontaktowe i statystyki.
      Prezentuje podstawowe dane restauracji, takie jak nazwa, sformatowany adres, dane kontaktowe
-     oraz kluczowe statystyki (np. średnia ocena, liczba zamówień). Umożliwia szybki podgląd najważniejszych informacji
-     o restauracji, np. na stronie głównej aplikacji lub w module zarządzania.
+     oraz kluczowe statystyki (np. średnia ocena, liczba zamówień).
      */
-
     String restaurantName;
     String address;      // sformatowany adres restauracji
     String phone;

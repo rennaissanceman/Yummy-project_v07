@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,20 +10,20 @@
 <!-- Pasek nawigacyjny panelu administracyjnego -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">Panel Administracyjny</a>
+        <a class="navbar-brand" th:href="@{/admin}">Panel Administracyjny</a>
         <div class="collapse navbar-collapse" id="adminNavbar">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="/admin/orders">Zamówienia</a></li>
-                <li class="nav-item"><a class="nav-link" href="/admin/customers">Klienci</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/orders}">Zamówienia</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/admin/customers}">Klienci</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Sekcja zamówień bez dostawy -->
+<!-- Zamówienia bez przypisanej dostawy -->
 <div class="container mt-5">
     <h1>Zamówienia bez przypisanej dostawy</h1>
-    <table class="table table-striped mt-4">
+    <table class="table table-striped mt-4" th:if="${ordersDTOList != null}">
         <thead class="table-dark">
         <tr>
             <th>Numer zamówienia</th>
@@ -34,21 +34,18 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Przykładowe dane -->
-        <tr>
-            <td>ORD005</td>
-            <td>2025-02-20 14:20</td>
-            <td>Maria Zalewska</td>
-            <td>60.00 PLN</td>
+        <tr th:each="order : ${ordersDTOList}">
+            <td th:text="${order.orderNumber}">ORD005</td>
+            <td th:text="${#dates.format(order.ordersDateTime, 'yyyy-MM-dd HH:mm')}">2025-02-20 14:20</td>
+            <td th:text="${order.clientName}">Maria Zalewska</td>
+            <td th:text="${order.totalAmount}">60.00 PLN</td>
             <td>
-                <a href="/order/details?orderNumber=ORD005" class="btn btn-sm btn-outline-primary">Szczegóły</a>
-                <a href="/delivery/assign?deliveryId=5" class="btn btn-sm btn-outline-success">Przypisz dostawcę</a>
+                <a th:href="@{/order/details(orderNumber=${order.orderNumber})}" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+                <a th:href="@{/delivery/assign(deliveryId=${order.deliveryId})}" class="btn btn-sm btn-outline-success">Przypisz dostawcę</a>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

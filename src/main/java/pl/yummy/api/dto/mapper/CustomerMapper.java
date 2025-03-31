@@ -101,6 +101,7 @@ public interface CustomerMapper {
 
     // Metodę konwertująca obiekt domenowy na DTO aktualizacji
     CustomerUpdateRequestDTO toUpdateDTO(Customer customer);
+
 }
 
     /*

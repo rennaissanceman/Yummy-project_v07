@@ -23,7 +23,6 @@ public class AuthController {
 
     private static final String AUTH_LOGIN = "/auth/login";
     private static final String AUTH_REGISTER = "/auth/register";
-    private static final String AUTH_PROFILE = "/auth/profile";
 
     private final CustomerService customerService;
     private final UserAuthMapper userAuthMapper;
@@ -34,7 +33,7 @@ public class AuthController {
     @GetMapping(AUTH_LOGIN)
     public ModelAndView showLoginForm() {
         // Używamy domyślnego konstruktora
-        CustomerLoginRequestDTO loginDTO = new CustomerLoginRequestDTO();
+        CustomerLoginRequestDTO loginDTO = CustomerLoginRequestDTO.buildDefault();
         return new ModelAndView("auth_login", Map.of("loginDTO", loginDTO));
     }
 

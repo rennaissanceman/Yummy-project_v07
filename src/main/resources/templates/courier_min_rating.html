@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kurierzy z oceną ≥ | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/courier}">Powrót do listy kurierów</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Kurierzy z oceną ≥ <span th:text="${minRating}">4.0</span></h1>
+    <table class="table table-striped" th:if="${couriers != null and !#lists.isEmpty(couriers)}">
+        <thead class="table-dark">
+        <tr>
+            <th>ID Kuriera</th>
+            <th>Numer Kuriera</th>
+            <th>Nazwa</th>
+            <th>Status</th>
+            <th>Data Zatrudnienia</th>
+            <th>Typ Pojazdu</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="courier : ${couriers}">
+            <td th:text="${courier.courierId}">1</td>
+            <td th:text="${courier.courierNumber}">CR-002</td>
+            <td th:text="${courier.courierName}">Anna Kowalska</td>
+            <td th:text="${courier.courierStatus}">AVAILABLE</td>
+            <td th:text="${#dates.format(courier.hireDate, 'yyyy-MM-dd')}">2025-02-01</td>
+            <td th:text="${courier.vehicleType}">Samochód</td>
+            <td>
+                <a th:href="@{/courier/details(courierNumber=${courier.courierNumber})}" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${couriers == null or #lists.isEmpty(couriers)}">
+        <p>Brak kurierów spełniających kryterium.</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<!--3. courier_min_rating.html
+Widok listy kurierów o średniej ocenie większej lub równej podanemu progowi (endpoint GET /courier/minRating).-->

@@ -3,6 +3,7 @@ package pl.yummy.api.dto.mapper;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
+import pl.yummy.api.dto.CustomerFeedbackRequestDTO;
 import pl.yummy.api.dto.FeedbackDTO;
 import pl.yummy.domain.Feedback;
 
@@ -17,4 +18,7 @@ public interface FeedbackMapper {
 
     @InheritInverseConfiguration
     Feedback toDomain(FeedbackDTO feedbackDTO);
+
+    // Dodajemy przeciążoną metodę dla CustomerFeedbackRequestDTO
+    Feedback toDomain(CustomerFeedbackRequestDTO requestDTO);
 }

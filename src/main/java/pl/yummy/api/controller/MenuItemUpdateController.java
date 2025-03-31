@@ -27,7 +27,7 @@ public class MenuItemUpdateController {
     /*
      * GET – Wyświetla formularz edycji pozycji menu.
      */
-    @GetMapping("/form")
+    @GetMapping(FORM)
     public ModelAndView showUpdateForm() {
         MenuItemUpdateRequestDTO dto = new MenuItemUpdateRequestDTO();
         return new ModelAndView("menu_item_update_form", Map.of("updateDTO", dto));
@@ -36,7 +36,7 @@ public class MenuItemUpdateController {
     /*
      * POST – Przetwarza aktualizację pozycji menu.
      */
-    @PostMapping("/submit")
+    @PostMapping(SUBMIT)
     public ModelAndView updateMenuItem(@ModelAttribute("updateDTO") MenuItemUpdateRequestDTO dto) {
         MenuItemUpdateRequest request = menuItemUpdateRequestMapper.toDomain(dto);
         menuItemUpdateService.updateMenuItem(request);

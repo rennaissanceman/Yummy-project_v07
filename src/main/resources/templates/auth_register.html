@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,28 +15,28 @@
                     <h3>Rejestracja</h3>
                 </div>
                 <div class="card-body">
-                    <form action="/auth/register" method="post">
+                    <form th:action="@{/auth/register}" method="post" th:object="${registrationDTO}">
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="customerName" class="form-label">Imię</label>
-                                <input type="text" class="form-control" id="customerName" name="customerName" placeholder="Twoje imię" required>
+                                <input type="text" class="form-control" id="customerName" th:field="*{customerName}" placeholder="Twoje imię" required>
                             </div>
                             <div class="col">
                                 <label for="customerSurname" class="form-label">Nazwisko</label>
-                                <input type="text" class="form-control" id="customerSurname" name="customerSurname" placeholder="Twoje nazwisko" required>
+                                <input type="text" class="form-control" id="customerSurname" th:field="*{customerSurname}" placeholder="Twoje nazwisko" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="podaj email" required>
+                            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="podaj email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Hasło</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="podaj hasło" required>
+                            <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="podaj hasło" required>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Telefon</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="podaj numer telefonu" required>
+                            <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="podaj numer telefonu" required>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Zarejestruj się</button>
@@ -44,7 +44,7 @@
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <small>Masz już konto? <a href="/auth/login">Zaloguj się!</a></small>
+                    <small>Masz już konto? <a th:href="@{/auth/login}">Zaloguj się!</a></small>
                 </div>
             </div>
         </div>

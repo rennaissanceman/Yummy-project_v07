@@ -24,10 +24,10 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
     private final InvoiceMapper invoiceMapper;
 
-    /**
+    /*
      * GET – Wyświetla szczegóły faktury na podstawie numeru faktury.
      */
-    @GetMapping("/details")
+    @GetMapping(DETAILS)
     public ModelAndView invoiceDetails(@RequestParam String invoiceNumber) {
         Invoice invoice = invoiceService.findByInvoiceNumber(invoiceNumber)
                 .orElseThrow(() -> new NotFoundException("Faktura nie znaleziona"));

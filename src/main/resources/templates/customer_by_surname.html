@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Klienci według Nazwiska | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Klienci o nazwisku: <span th:text="${surname}">Kowalski</span></h1>
+    <table class="table table-striped" th:if="${customerDTOs != null and !#lists.isEmpty(customerDTOs)}">
+        <thead class="table-dark">
+        <tr>
+            <th>Numer Klienta</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customerDTOs}">
+            <td th:text="${customer.customerNumber}">CUST-005</td>
+            <td th:text="${customer.customerName}">Piotr</td>
+            <td th:text="${customer.customerSurname}">Kowalski</td>
+            <td th:text="${customer.email}">piotr@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${customerDTOs == null or #lists.isEmpty(customerDTOs)}">
+        <p>Brak klientów o nazwisku <span th:text="${surname}">Kowalski</span>.</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<!--9. customer_by_surname.html
+Widok wyszukiwania klientów według nazwiska (model: customerDTOs oraz parametr surname).-->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,29 +10,31 @@
 <!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Yummy</a>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/customer/profile">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="/order/history">Historia Zamówień</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/customer/profile}">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/order/history}">Historia Zamówień</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- Sekcja szczegółów zamówienia -->
-<div class="container mt-5">
+<div class="container mt-5" th:object="${orderDTO}">
     <h1>Szczegóły Zamówienia</h1>
     <div class="card mb-4">
         <div class="card-header">
-            <h4>Numer zamówienia: ORD001</h4>
+            <h4>Numer zamówienia: <span th:text="*{orderNumber}">ORD001</span></h4>
         </div>
         <div class="card-body">
-            <p><strong>Data zamówienia:</strong> 2025-02-15 18:30</p>
-            <p><strong>Status:</strong> Zrealizowane</p>
-            <p><strong>Łączna kwota:</strong> 50.00 PLN</p>
+            <p><strong>Data zamówienia:</strong> <span th:text="${#dates.format(orderDTO.ordersDateTime, 'yyyy-MM-dd HH:mm')}">2025-02-15 18:30</span></p>
+            <p><strong>Status:</strong> <span th:text="*{orderStatus}">Zrealizowane</span></p>
+            <p><strong>Łączna kwota:</strong> <span th:text="*{totalAmount}">50.00 PLN</span></p>
+            <p><strong>Adres dostawy:</strong> <span th:text="*{deliveryAddress}">ul. Przykładowa 1, Warszawa</span></p>
         </div>
     </div>
+
     <h5>Pozycje zamówienia</h5>
     <table class="table table-bordered">
         <thead class="table-light">
@@ -44,23 +46,14 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Przykładowe dane pozycji zamówienia -->
-        <tr>
-            <td>Pizza Margherita</td>
-            <td>1</td>
-            <td>30.00 PLN</td>
-            <td>30.00 PLN</td>
-        </tr>
-        <tr>
-            <td>Cola 0,5l</td>
-            <td>1</td>
-            <td>20.00 PLN</td>
-            <td>20.00 PLN</td>
+        <tr th:each="item : ${orderDTO.orderItems}">
+            <td th:text="${item.itemName}">Pizza Margherita</td>
+            <td th:text="${item.quantity}">1</td>
+            <td th:text="${item.unitPrice}">30.00 PLN</td>
+            <td th:text="${item.totalPrice}">30.00 PLN</td>
         </tr>
         </tbody>
     </table>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

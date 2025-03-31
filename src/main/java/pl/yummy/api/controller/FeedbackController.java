@@ -11,6 +11,7 @@ import pl.yummy.api.dto.CustomerFeedbackRequestDTO;
 import pl.yummy.api.dto.FeedbackDTO;
 import pl.yummy.api.dto.mapper.FeedbackMapper;
 import pl.yummy.business.FeedbackService;
+import pl.yummy.domain.Feedback;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +53,37 @@ public class FeedbackController {
         feedbackService.saveFeedback(feedbackMapper.toDomain(feedbackDTO));
         return new ModelAndView("redirect:" + FEEDBACK_LIST);
     }
+
+    @PostMapping(FEEDBACK_SAVE)
+    public ModelAndView saveFeedback(@ModelAttribute("feedbackForm") CustomerFeedbackRequestDTO feedbackDTO) {
+        // Konwersja obiektu DTO na obiekt domenowy przy użyciu mappera
+        Feedback feedback = feedbackMapper.toDomain(feedbackDTO);
+        feedbackService.saveFeedback(feedback);
+        return new ModelAndView("redirect:" + FEEDBACK_LIST);
+    }
+
+    @GetMapping("/feedback/details")
+    public ModelAndView feedbackDetails(@RequestParam("feedbackId") Long feedbackId) {
+        // Przykładowo pobieramy opinię po jej ID
+        Feedback feedback = feedbackService.getFeedbackById(feedbackId);
+        FeedbackDTO feedbackDTO = feedbackMapper.toDTO(feedback);
+        return new ModelAndView("feedback_details", Map.of("feedback", feedbackDTO));
+    }
+
+    @GetMapping("/feedback/edit")
+    public ModelAndView editFeedback(@RequestParam("feedbackId") Long feedbackId) {
+        Feedback feedback = feedbackService.getFeedbackById(feedbackId);
+        FeedbackDTO feedbackDTO = feedbackMapper.toDTO(feedback);
+        return new ModelAndView("feedback_edit", Map.of("feedback", feedbackDTO));
+    }
+
+    @PostMapping("/feedback/edit")
+    public ModelAndView updateFeedback(@ModelAttribute("feedback") FeedbackDTO feedbackDTO) {
+        Feedback updatedFeedback = feedbackMapper.toDomain(feedbackDTO);
+        feedbackService.saveFeedback(updatedFeedback);
+        return new ModelAndView("redirect:" + FEEDBACK_LIST);
+    }
+
 }
 
     /*

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.yummy.business.dao.FeedbackDAO;
 import pl.yummy.domain.Feedback;
+import pl.yummy.domain.exception.NotFoundException;
 
 import java.util.List;
 
@@ -68,4 +69,11 @@ public class FeedbackService {
     public Feedback saveFeedback(Feedback feedback) {
         return feedbackDAO.save(feedback);
     }
+
+    @Transactional(readOnly = true)
+    public Feedback getFeedbackById(Long feedbackId) {
+        return feedbackDAO.findById(feedbackId)
+                .orElseThrow(() -> new NotFoundException("Nie znaleziono opinii o ID: " + feedbackId));
+    }
+
 }

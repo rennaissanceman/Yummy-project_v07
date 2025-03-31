@@ -43,7 +43,6 @@ public class RestaurantController {
      */
     @GetMapping(RESTAURANT_BY_CUISINE)
     public ModelAndView restaurantsByCuisine(@RequestParam("cuisineType") String cuisineType) {
-        // Konwertujemy typ kuchni ze Stringa do enuma
         CuisineTypeEnumDomain cuisineEnum = CuisineTypeEnumDomain.valueOf(cuisineType.toUpperCase());
         var restaurants = restaurantService.getRestaurantsByCuisine(cuisineEnum);
         Map<String, Object> model = Map.of("restaurants", restaurants);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,28 +10,47 @@
 <!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Yummy</a>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/order/history">Historia Zamówień</a></li>
-            <li class="nav-item"><a class="nav-link" href="/customer/profile">Profil</a></li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Strona Główna</a>
+            </li>
         </ul>
     </div>
 </nav>
 
-<!-- Szczegóły płatności -->
+<!-- Sekcja szczegółów płatności -->
 <div class="container mt-5">
     <h1>Szczegóły Płatności</h1>
-    <div class="card mt-3">
+    <div class="card">
         <div class="card-header">
-            <h4>ID Transakcji: TXN12345</h4>
+            <h4>
+                Transakcja:
+                <span th:if="${paymentDTO.transactionId != null}" th:text="${paymentDTO.transactionId}">TX123456</span>
+                <span th:if="${paymentDTO.transactionId == null}">Brak ID transakcji</span>
+            </h4>
         </div>
         <div class="card-body">
-            <p><strong>Metoda płatności:</strong> Karta</p>
-            <p><strong>Kwota:</strong> 75.00 PLN</p>
-            <p><strong>Status:</strong> Zatwierdzona</p>
-            <p><strong>Data:</strong> 2025-03-10 15:45</p>
-            <p><strong>Komentarz:</strong> Płatność dokonana online.</p>
+            <p><strong>ID Płatności:</strong> <span th:text="${paymentDTO.paymentId}">1</span></p>
+            <p><strong>ID Zamówienia:</strong> <span th:text="${paymentDTO.ordersId}">100</span></p>
+            <p><strong>Metoda Płatności:</strong> <span th:text="${paymentDTO.paymentMethod}">KARTA</span></p>
+            <p><strong>Kwota:</strong> <span th:text="${paymentDTO.amount}">100.00 PLN</span></p>
+            <p><strong>Status Płatności:</strong> <span th:text="${paymentDTO.paymentStatus}">Zrealizowana</span></p>
+            <p>
+                <strong>Data Utworzenia:</strong>
+                <span th:text="${#dates.format(paymentDTO.createdAt, 'yyyy-MM-dd HH:mm')}">2025-01-01 12:00</span>
+            </p>
+            <p>
+                <strong>Data Aktualizacji:</strong>
+                <span th:text="${#dates.format(paymentDTO.updatedAt, 'yyyy-MM-dd HH:mm')}">2025-01-01 12:05</span>
+            </p>
+            <p th:if="${paymentDTO.comment != null}">
+                <strong>Komunikat:</strong> <span th:text="${paymentDTO.comment}">Komentarz</span>
+            </p>
         </div>
+    </div>
+    <div class="mt-4">
+        <a th:href="@{/}" class="btn btn-primary">Powrót do Strony Głównej</a>
     </div>
 </div>
 

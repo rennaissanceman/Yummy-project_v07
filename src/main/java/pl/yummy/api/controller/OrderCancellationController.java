@@ -35,7 +35,7 @@ public class OrderCancellationController {
     /*
      * POST – Przetwarza anulowanie zamówienia.
      */
-    @PostMapping
+    @PostMapping(FORM)
     public ModelAndView cancelOrder(@ModelAttribute("cancelDTO") OrderCancellationRequestDTO dto) {
         OrderCancellationRequest request = orderCancellationRequestMapper.toDomain(dto);
         orderCancellationService.cancelOrder(request);

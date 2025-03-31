@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,17 +10,17 @@
 <!-- Pasek nawigacyjny panelu administracyjnego -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Panel Administracyjny</a>
+    <a class="navbar-brand" th:href="@{/admin}">Panel Administracyjny</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="adminNavbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="/admin/customers">Klienci</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin/restaurants">Restauracje</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin/orders">Zamówienia</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin/revenue-report">Raport przychodowy</a></li>
-        <li class="nav-item"><a class="nav-link" href="/admin/delivery-status">Status dostaw</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/admin/customers}">Klienci</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/admin/restaurants}">Restauracje</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/admin/orders}">Zamówienia</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/admin/revenue-report}">Raport przychodowy</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/admin/delivery-status}">Status dostaw</a></li>
       </ul>
     </div>
   </div>
@@ -37,7 +37,7 @@
       Lista Klientów
     </div>
     <div class="card-body">
-      <table class="table table-striped">
+      <table class="table table-striped" th:if="${customers != null and #lists.isNotEmpty(customers)}">
         <thead>
         <tr>
           <th>Numer klienta</th>
@@ -47,21 +47,17 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Przykładowe dane; w aplikacji dane będą dynamiczne -->
-        <tr>
-          <td>123</td>
-          <td>Jan Kowalski</td>
-          <td>jan@example.com</td>
-          <td>123-456-789</td>
-        </tr>
-        <tr>
-          <td>124</td>
-          <td>Anna Nowak</td>
-          <td>anna@example.com</td>
-          <td>987-654-321</td>
+        <tr th:each="customer : ${customers}">
+          <td th:text="${customer.customerNumber}">123</td>
+          <td th:text="${customer.customerName} + ' ' + ${customer.customerSurname}">Jan Kowalski</td>
+          <td th:text="${customer.email}">jan@example.com</td>
+          <td th:text="${customer.phone}">123-456-789</td>
         </tr>
         </tbody>
       </table>
+      <div th:if="${customers == null or #lists.isEmpty(customers)}">
+        <p>Brak klientów.</p>
+      </div>
     </div>
   </div>
 
@@ -71,7 +67,7 @@
       Lista Restauracji
     </div>
     <div class="card-body">
-      <table class="table table-striped">
+      <table class="table table-striped" th:if="${restaurants != null and #lists.isNotEmpty(restaurants)}">
         <thead>
         <tr>
           <th>Nazwa restauracji</th>
@@ -81,21 +77,17 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Przykładowe dane -->
-        <tr>
-          <td>Restauracja Bella Italia</td>
-          <td>ul. Włoska 5, Warszawa</td>
-          <td>555-123-456</td>
-          <td>contact@bella-italia.pl</td>
-        </tr>
-        <tr>
-          <td>Restauracja Sushi World</td>
-          <td>ul. Japońska 10, Warszawa</td>
-          <td>555-987-654</td>
-          <td>info@sushiworld.pl</td>
+        <tr th:each="restaurant : ${restaurants}">
+          <td th:text="${restaurant.restaurantName}">Restauracja Bella Italia</td>
+          <td th:text="${restaurant.formattedAddress}">ul. Włoska 5, Warszawa</td>
+          <td th:text="${restaurant.phone}">555-123-456</td>
+          <td th:text="${restaurant.email}">contact@bella-italia.pl</td>
         </tr>
         </tbody>
       </table>
+      <div th:if="${restaurants == null or #lists.isEmpty(restaurants)}">
+        <p>Brak restauracji.</p>
+      </div>
     </div>
   </div>
 
@@ -105,7 +97,7 @@
       Lista Zamówień
     </div>
     <div class="card-body">
-      <table class="table table-striped">
+      <table class="table table-striped" th:if="${orders != null and #lists.isNotEmpty(orders)}">
         <thead>
         <tr>
           <th>Numer zamówienia</th>
@@ -115,49 +107,43 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Przykładowe dane -->
-        <tr>
-          <td>ORD001</td>
-          <td>Jan Kowalski</td>
-          <td>Zrealizowane</td>
-          <td>50.00 PLN</td>
-        </tr>
-        <tr>
-          <td>ORD002</td>
-          <td>Anna Nowak</td>
-          <td>W realizacji</td>
-          <td>75.00 PLN</td>
+        <tr th:each="order : ${orders}">
+          <td th:text="${order.orderNumber}">ORD001</td>
+          <td th:text="${order.customerName}">Jan Kowalski</td>
+          <td th:text="${order.orderStatus}">Zrealizowane</td>
+          <td th:text="${order.totalAmount}">50.00 PLN</td>
         </tr>
         </tbody>
       </table>
+      <div th:if="${orders == null or #lists.isEmpty(orders)}">
+        <p>Brak zamówień.</p>
+      </div>
     </div>
   </div>
 
   <!-- Sekcja Raport Przychodowy -->
   <div class="card mb-4">
     <div class="card-header bg-info text-white">
-      Raport Przychodowy
+      Raport przychodowy
     </div>
     <div class="card-body">
-      <!-- Przykładowe dane raportu; w aplikacji dane będą dynamicznie pobierane -->
-      <p><strong>Okres:</strong> 2025-01-01 do 2025-01-31</p>
-      <p><strong>Łączny przychód:</strong> 10,000.00 PLN</p>
-      <p><strong>Łączna liczba zamówień:</strong> 200</p>
-      <p><strong>Średnia wartość zamówienia:</strong> 50.00 PLN</p>
+      <p><strong>Okres:</strong> <span th:text="${revenueReport.startDate}">2025-01-01 00:00:00</span> do <span th:text="${revenueReport.endDate}">2025-01-31 23:59:59</span></p>
+      <p><strong>Łączny przychód:</strong> <span th:text="${revenueReport.totalRevenue}">10,000.00 PLN</span></p>
+      <p><strong>Łączna liczba zamówień:</strong> <span th:text="${revenueReport.totalOrders}">200</span></p>
+      <p><strong>Średnia wartość zamówienia:</strong> <span th:text="${revenueReport.averageOrderValue}">50.00 PLN</span></p>
     </div>
   </div>
 
   <!-- Sekcja Status Dostaw -->
   <div class="card mb-4">
     <div class="card-header bg-secondary text-white">
-      Status Dostaw
+      Status dostaw
     </div>
     <div class="card-body">
-      <!-- Przykładowe dane statusu dostaw -->
-      <p><strong>Obszar dostawy:</strong> Centrum</p>
-      <p><strong>Łączna liczba dostaw:</strong> 150</p>
-      <p><strong>Średni czas dostawy:</strong> 30 minut</p>
-      <p><strong>Dostawy opóźnione:</strong> 10 (6.67%)</p>
+      <p><strong>Obszar dostawy:</strong> <span th:text="${deliveryStatusOverview.deliveryAreaName}">Centrum</span></p>
+      <p><strong>Łączna liczba dostaw:</strong> <span th:text="${deliveryStatusOverview.totalDeliveries}">150</span></p>
+      <p><strong>Średni czas dostawy:</strong> <span th:text="${deliveryStatusOverview.averageDeliveryTime}">30 minut</span></p>
+      <p><strong>Dostawy opóźnione:</strong> <span th:text="${deliveryStatusOverview.lateDeliveries}">10 (6.67%)</span></p>
     </div>
   </div>
 </div>
@@ -165,12 +151,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 <!--W tym przykładzie:
 
-Pasek nawigacyjny umożliwia administratorowi przechodzenie między sekcjami (klienci, restauracje, zamówienia, raport przychodowy, status dostaw).
+Pasek nawigacyjny umożliwia administratorowi przechodzenie między sekcjami (klienci, restauracje, zamówienia,
+raport przychodowy, status dostaw).
 
-Każda sekcja jest zamknięta w osobnej karcie (Bootstrap card), a dane są prezentowane w tabelach lub w formie listy informacji.
+Każda sekcja jest zamknięta w osobnej karcie (Bootstrap card), a dane są prezentowane w tabelach lub w formie
+listy informacji.
 
-W aplikacji dane te będą dynamicznie pobierane przez AdminController, który mapuje obiekty domenowe na odpowiednie DTO (np. CustomerDTO, RestaurantDTO, OrdersDTO, RevenueReportViewDTO, DeliveryStatusOverviewViewDTO).
+W aplikacji dane te będą dynamicznie pobierane przez AdminController, który mapuje obiekty domenowe na odpowiednie DTO
+(np. CustomerDTO, RestaurantDTO, OrdersDTO, RevenueReportViewDTO, DeliveryStatusOverviewViewDTO).
 
-Takie rozwiązanie daje administratorowi szybki i przejrzysty wgląd w kluczowe dane systemu Yummy. Możesz rozbudowywać ten szablon, dodając dodatkowe funkcjonalności, filtrowanie, paginację czy interaktywne wykresy, w zależności od potrzeb projektu.-->
+Takie rozwiązanie daje administratorowi szybki i przejrzysty wgląd w kluczowe dane systemu Yummy. Możesz rozbudowywać
+ten szablon, dodając dodatkowe funkcjonalności, filtrowanie, paginację czy interaktywne wykresy, w zależności
+od potrzeb projektu.-->

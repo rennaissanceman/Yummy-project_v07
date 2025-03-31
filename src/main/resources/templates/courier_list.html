@@ -1,62 +1,54 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista Kurierów | Yummy</title>
+    <title>Dostępni Kurierzy | Yummy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <!-- Pasek nawigacyjny -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Kurierzy</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/courier">Lista Kurierów</a></li>
-                <li class="nav-item"><a class="nav-link" href="/auth/login">Logowanie</a></li>
-            </ul>
-        </div>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
     </div>
 </nav>
 
-<!-- Lista kurierów -->
-<div class="container mt-4">
-    <h1>Lista Kurierów</h1>
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
-        <!-- Przykładowa karta kuriera -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="path/to/courier1.jpg" class="card-img-top" alt="Kurier 1">
-                <div class="card-body">
-                    <h5 class="card-title">Jan Nowak</h5>
-                    <p class="card-text">Numer kuriera: CR001</p>
-                    <p class="card-text">Pojazd: Motocykl</p>
-                    <p class="card-text">Średnia ocena: 4.8</p>
-                </div>
-                <div class="card-footer">
-                    <a href="/courier/details?courierNumber=CR001" class="btn btn-sm btn-primary">Szczegóły</a>
-                </div>
-            </div>
-        </div>
-        <!-- Kolejne karty kurierów -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="path/to/courier2.jpg" class="card-img-top" alt="Kurier 2">
-                <div class="card-body">
-                    <h5 class="card-title">Anna Kowalska</h5>
-                    <p class="card-text">Numer kuriera: CR002</p>
-                    <p class="card-text">Pojazd: Samochód</p>
-                    <p class="card-text">Średnia ocena: 4.5</p>
-                </div>
-                <div class="card-footer">
-                    <a href="/courier/details?courierNumber=CR002" class="btn btn-sm btn-primary">Szczegóły</a>
-                </div>
-            </div>
-        </div>
+<div class="container mt-5">
+    <h1>Dostępni Kurierzy</h1>
+    <table class="table table-striped" th:if="${couriers != null and !#lists.isEmpty(couriers)}">
+        <thead class="table-dark">
+        <tr>
+            <th>ID Kuriera</th>
+            <th>Numer Kuriera</th>
+            <th>Nazwa Kuriera</th>
+            <th>Status</th>
+            <th>Data Zatrudnienia</th>
+            <th>Typ Pojazdu</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="courier : ${couriers}">
+            <td th:text="${courier.courierId}">1</td>
+            <td th:text="${courier.courierNumber}">CR-001</td>
+            <td th:text="${courier.courierName}">Jan Nowak</td>
+            <td th:text="${courier.courierStatus}">AVAILABLE</td>
+            <td th:text="${#dates.format(courier.hireDate, 'yyyy-MM-dd')}">2025-01-01</td>
+            <td th:text="${courier.vehicleType}">Motocykl</td>
+            <td>
+                <a th:href="@{/courier/details(courierNumber=${courier.courierNumber})}" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${couriers == null or #lists.isEmpty(couriers)}">
+        <p>Brak dostępnych kurierów.</p>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<!--1. courier_list.html
+Widok wyświetlający listę dostępnych kurierów (endpoint GET /courier)-->

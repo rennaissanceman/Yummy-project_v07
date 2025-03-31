@@ -3,7 +3,7 @@ package pl.yummy.api.dto.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import pl.yummy.api.dto.CustomerProfileViewDTO;
+import pl.yummy.api.dto.CustomerDTO;
 import pl.yummy.domain.CustomerProfileView;
 
 import java.util.Collections;
@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
-public interface OrderDetailsViewMapper extends OffsetDateTimeMapper{
+public interface OrderDetailsViewMapper extends OffsetDateTimeMapper {
 
     @Mapping(source = "orderSummaries", target = "orderSummaries", qualifiedByName = "mapOrderSummariesToDTO")
     @Mapping(source = "ordersDateTime", target = "ordersDateTime", qualifiedByName = "mapOffsetDateTimeToString")
-    CustomerProfileViewDTO toDTO(CustomerProfileView profile);
+    CustomerDTO toDTO(CustomerProfileView profile);
 
     @Mapping(source = "orderSummaries", target = "orderSummaries", qualifiedByName = "mapOrderSummariesToDomain")
     @Mapping(source = "ordersDateTime", target = "ordersDateTime", qualifiedByName = "mapStringToOffsetDateTime")
-    CustomerProfileView toDomain(CustomerProfileViewDTO dto);
+    CustomerProfileView toDomain(CustomerDTO dto);
 
     @Named("mapOrderSummariesToDTO")
-    default List<CustomerProfileViewDTO.OrderSummaryView> mapOrderSummariesToDTO(List<CustomerProfileView.OrderSummaryView> orders) {
+    default List<CustomerDTO.OrderSummaryView> mapOrderSummariesToDTO(List<CustomerProfileView.OrderSummaryView> orders) {
         if (orders == null) {
             return Collections.emptyList();
         }
@@ -32,11 +32,11 @@ public interface OrderDetailsViewMapper extends OffsetDateTimeMapper{
     }
 
     @Named("mapOrderSummaryToDTO")
-    default CustomerProfileViewDTO.OrderSummaryView mapOrderSummaryToDTO(CustomerProfileView.OrderSummaryView order) {
+    default CustomerDTO.OrderSummaryView mapOrderSummaryToDTO(CustomerProfileView.OrderSummaryView order) {
         if (order == null) {
             return null;
         }
-        return CustomerProfileViewDTO.OrderSummaryView.builder()
+        return CustomerDTO.OrderSummaryView.builder()
                 .orderNumber(order.getOrderNumber())
                 .ordersDateTime(order.getOrdersDateTime())
                 .orderStatus(order.getOrderStatus())
@@ -44,7 +44,7 @@ public interface OrderDetailsViewMapper extends OffsetDateTimeMapper{
     }
 
     @Named("mapOrderSummariesToDomain")
-    default List<CustomerProfileView.OrderSummaryView> mapOrderSummariesToDomain(List<CustomerProfileViewDTO.OrderSummaryView> dtos) {
+    default List<CustomerProfileView.OrderSummaryView> mapOrderSummariesToDomain(List<CustomerDTO.OrderSummaryView> dtos) {
         if (dtos == null) {
             return Collections.emptyList();
         }
@@ -54,7 +54,7 @@ public interface OrderDetailsViewMapper extends OffsetDateTimeMapper{
     }
 
     @Named("mapOrderSummaryToDomain")
-    default CustomerProfileView.OrderSummaryView mapOrderSummaryToDomain(CustomerProfileViewDTO.OrderSummaryView dto) {
+    default CustomerProfileView.OrderSummaryView mapOrderSummaryToDomain(CustomerDTO.OrderSummaryView dto) {
         if (dto == null) {
             return null;
         }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard Klienta | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Opcjonalnie dodaj bibliotekę do wykresów, np. Chart.js -->
+</head>
+<body>
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/customer/profile}">Profil</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/order/place}">Złóż Zamówienie</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Dashboard Klienta</h1>
+    <!-- Zakładamy, że kontroler przekazuje osobne dane statystyczne, np. totalOrders, totalSpent -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Łączna liczba zamówień</h5>
+                    <p class="card-text" th:text="${totalOrders}">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Łączna kwota wydana</h5>
+                    <p class="card-text" th:text="${totalSpent}">0.00 PLN</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Średnia wartość zamówienia</h5>
+                    <p class="card-text" th:text="${averageOrderValue}">0.00 PLN</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Możesz dodać sekcję z wykresami lub listę ostatnich zamówień -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+>

@@ -11,10 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RestaurantDTO {
 
-//    Kluczowe dane restauracji
+    // Kluczowe dane restauracji
     Long restaurantId;
     String restaurantName;
-    OwnerDTO owner; //(lub tylko Long ownerId)
+    String restaurantIdentifier; // Dodane pole – unikalny identyfikator, np. slug lub kod
+    OwnerDTO owner; // (lub tylko Long ownerId)
     AddressDTO address;
     String phone;
     String email;
@@ -25,4 +26,9 @@ public class RestaurantDTO {
     Integer ratingCount;
     String description;
     String logoURL;
+
+    // Metoda pomocnicza delegująca do getFormattedAddress() z AddressDTO
+    public String getFormattedAddress() {
+        return (address != null) ? address.getFormattedAddress() : "";
+    }
 }

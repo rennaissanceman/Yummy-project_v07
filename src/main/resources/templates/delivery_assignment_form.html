@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Przypisz Kuriera | Yummy - Logistyka</title>
+    <title>Przypisz Dostawę | Yummy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<!-- Pasek nawigacyjny -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Logistyka Dostaw</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/delivery/list">Lista Dostaw</a></li>
-            </ul>
-        </div>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/delivery}">Powrót do listy</a></li>
+        </ul>
     </div>
 </nav>
 
-<!-- Formularz przypisania kuriera -->
+<!-- Formularz przypisania dostawy -->
 <div class="container mt-5">
-    <h1>Przypisz Kuriera</h1>
-    <form action="/delivery/assign" method="post" class="mt-4">
-        <!-- Zakładamy, że identyfikator dostawy jest przekazywany jako hidden -->
-        <input type="hidden" name="deliveryId" value="1">
+    <h1>Przypisz Dostawę do Kuriera</h1>
+    <form th:action="@{/delivery/assign}" method="post" th:object="${deliveryAssignment}">
         <div class="mb-3">
-            <label for="courierIdentifier" class="form-label">Numer Kuriera</label>
-            <input type="text" class="form-control" id="courierIdentifier" name="courierIdentifier" placeholder="Wpisz numer kuriera" required>
+            <label for="orderNumber" class="form-label">Numer Zamówienia</label>
+            <input type="text" id="orderNumber" class="form-control" th:field="*{orderNumber}" placeholder="Wprowadź numer zamówienia" required>
         </div>
         <div class="mb-3">
-            <label for="assignmentComment" class="form-label">Komentarz (opcjonalnie)</label>
-            <textarea class="form-control" id="assignmentComment" name="comment" rows="3" placeholder="Dodaj komentarz"></textarea>
+            <label for="courierId" class="form-label">ID Kuriera</label>
+            <input type="number" id="courierId" class="form-control" th:field="*{courierId}" placeholder="Wprowadź ID kuriera" required>
         </div>
-        <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Przypisz kuriera</button>
+        <div class="mb-3">
+            <label for="assignmentDate" class="form-label">Data Przypisania</label>
+            <input type="datetime-local" id="assignmentDate" class="form-control" th:field="*{assignmentDate}" required>
         </div>
+        <div class="mb-3">
+            <label for="comment" class="form-label">Komentarz</label>
+            <textarea id="comment" class="form-control" th:field="*{comment}" rows="3" placeholder="Opcjonalnie, komentarz"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Przypisz Dostawę</button>
     </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<!--12. delivery_assignment_form.html
+Formularz przypisania dostawy do kuriera.-->

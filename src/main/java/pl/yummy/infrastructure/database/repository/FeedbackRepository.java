@@ -8,6 +8,7 @@ import pl.yummy.infrastructure.database.repository.jpa.FeedbackJpaRepository;
 import pl.yummy.infrastructure.database.repository.mapper.FeedbackEntityMapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -53,5 +54,11 @@ public class FeedbackRepository implements FeedbackDAO {
         var entity = feedbackEntityMapper.mapToEntity(feedback);
         var savedEntity = feedbackJpaRepository.save(entity);
         return feedbackEntityMapper.mapFromEntity(savedEntity);
+    }
+
+    @Override
+    public Optional<Feedback> findById(Long feedbackId) {
+        return feedbackJpaRepository.findById(feedbackId)
+                .map(feedbackEntityMapper::mapFromEntity);
     }
 }

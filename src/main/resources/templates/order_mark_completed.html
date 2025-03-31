@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zamówienie Zakończone | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/customer/profile}">Profil</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/order/history}">Historia Zamówień</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Potwierdzenie zakończenia zamówienia -->
+<div class="container mt-5">
+    <h1>Zamówienie Zakończone</h1>
+    <div class="card">
+        <div class="card-header">
+            <h4>Numer zamówienia: <span th:text="${orderDTO.orderNumber}">ORD001</span></h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Data zakończenia:</strong> <span th:text="${#dates.format(orderDTO.completionDate, 'yyyy-MM-dd HH:mm')}">2025-02-15 20:00</span></p>
+            <p><strong>Status:</strong> <span th:text="${orderDTO.orderStatus}">Zakończone</span></p>
+            <p><strong>Łączna kwota:</strong> <span th:text="${orderDTO.totalAmount}">50.00 PLN</span></p>
+        </div>
+    </div>
+    <a th:href="@{/order/history}" class="btn btn-primary mt-4">Powrót do historii zamówień</a>
+</div>
+</body>
+</html>

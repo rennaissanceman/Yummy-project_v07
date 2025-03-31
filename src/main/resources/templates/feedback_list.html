@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista Opinii | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/feedback/create}">Dodaj Opinię</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Lista opinii -->
+<div class="container mt-5">
+    <h1>Lista Opinii</h1>
+    <table class="table table-hover" th:if="${feedbackList != null and !#lists.isEmpty(feedbackList)}">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Ocena</th>
+            <th>Opinia</th>
+            <th>Data</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fb : ${feedbackList}">
+            <td th:text="${fb.feedbackId}">1</td>
+            <td th:text="${fb.rating}">5</td>
+            <td th:text="${fb.comments}">Bardzo smaczne dania!</td>
+            <td th:text="${#dates.format(fb.date, 'yyyy-MM-dd HH:mm')}">2025-03-01 12:00</td>
+            <td>
+                <a th:href="@{/feedback/details(feedbackId=${fb.feedbackId})}" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+                <a th:href="@{/feedback/edit(feedbackId=${fb.feedbackId})}" class="btn btn-sm btn-outline-secondary">Edytuj</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${feedbackList == null or #lists.isEmpty(feedbackList)}">
+        <p>Brak opinii dla tej restauracji.</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

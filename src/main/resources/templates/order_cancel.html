@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anulowanie Zamówienia | Yummy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Pasek nawigacyjny -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" th:href="@{/order/history}">Historia Zamówień</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/customer/profile}">Profil</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Formularz anulowania zamówienia -->
+<div class="container mt-5">
+    <h1>Anulowanie Zamówienia</h1>
+    <form th:action="@{/order/cancel}" method="post" th:object="${cancelDTO}">
+        <div class="mb-3">
+            <label for="orderNumber" class="form-label">Numer Zamówienia</label>
+            <input type="text" class="form-control" id="orderNumber" th:field="*{orderNumber}" placeholder="Wprowadź numer zamówienia" required>
+        </div>
+        <div class="mb-3">
+            <label for="cancellationReason" class="form-label">Powód anulowania</label>
+            <textarea class="form-control" id="cancellationReason" th:field="*{cancellationReason}" rows="3" placeholder="Podaj powód anulowania"></textarea>
+        </div>
+        <button type="submit" class="btn btn-danger">Anuluj Zamówienie</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,41 +10,33 @@
 <!-- Pasek nawigacyjny -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">Yummy</a>
+        <a class="navbar-brand" th:href="@{/}">Yummy</a>
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/feedback/list">Opinie</a></li>
-            <li class="nav-item"><a class="nav-link" href="/customer/profile">Profil</a></li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/feedback/list}">Powrót do opinii</a>
+            </li>
         </ul>
     </div>
 </nav>
 
-<!-- Formularz dodawania opinii -->
+<!-- Formularz dodania opinii -->
 <div class="container mt-5">
-    <h1>Dodaj opinię</h1>
-    <form action="/feedback/save" method="post">
-        <div class="mb-3">
-            <label for="customerId" class="form-label">ID Klienta</label>
-            <input type="text" class="form-control" id="customerId" name="customerId" placeholder="Podaj ID klienta">
-        </div>
-        <div class="mb-3">
-            <label for="restaurantId" class="form-label">ID Restauracji</label>
-            <input type="text" class="form-control" id="restaurantId" name="restaurantId" placeholder="Podaj ID restauracji">
-        </div>
+    <h1>Dodaj Opinię</h1>
+    <form th:action="@{/feedback/save}" method="post" th:object="${feedbackForm}">
+        <!-- Ukryte pola dla customerId i restaurantId, jeśli opinia ma być powiązana -->
+        <input type="hidden" th:field="*{customerId}" />
+        <input type="hidden" th:field="*{restaurantId}" />
+
         <div class="mb-3">
             <label for="rating" class="form-label">Ocena</label>
-            <select class="form-select" id="rating" name="rating">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+            <input type="number" id="rating" class="form-control" th:field="*{rating}" min="1" max="5" required>
         </div>
         <div class="mb-3">
-            <label for="comments" class="form-label">Komentarz</label>
-            <textarea class="form-control" id="comments" name="comments" rows="3" placeholder="Twoja opinia"></textarea>
+            <label for="comments" class="form-label">Opinia</label>
+            <textarea id="comments" class="form-control" th:field="*{comments}" rows="4" placeholder="Wpisz swoją opinię" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Wyślij opinię</button>
+        <!-- Opcjonalnie: możesz dodać pole do wprowadzania daty, ale zwykle ustalana jest automatycznie w serwisie -->
+        <button type="submit" class="btn btn-primary">Zapisz opinię</button>
     </form>
 </div>
 

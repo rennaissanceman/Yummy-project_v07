@@ -121,7 +121,6 @@ public class CustomerService {
         customerDAO.saveCustomer(customer);
     }
 
-
     /*
      * Wyszukuje klienta na podstawie unikalnego numeru klienta.
      *
