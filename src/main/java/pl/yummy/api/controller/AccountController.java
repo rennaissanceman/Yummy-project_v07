@@ -23,7 +23,7 @@ public class AccountController {
     /**
      * POST – Resetuje hasło użytkownika.
      */
-    @PostMapping("/reset-password")
+    @PostMapping(RESET_PASSWORD)
     public ModelAndView resetPassword(@RequestParam Long userId, @RequestParam String newPassword) {
         accountManagementService.resetPassword(userId, newPassword);
         return new ModelAndView("account_reset_success", Map.of("message", "Hasło zostało zresetowane."));
@@ -32,7 +32,7 @@ public class AccountController {
     /**
      * GET – Sprawdza, czy podany email istnieje w systemie.
      */
-    @GetMapping("/check-email")
+    @GetMapping(CHECK_EMAIL)
     public ModelAndView checkEmail(@RequestParam String email) {
         boolean exists = accountManagementService.existsByEmail(email);
         return new ModelAndView("account_email_check", Map.of("exists", exists, "email", email));
