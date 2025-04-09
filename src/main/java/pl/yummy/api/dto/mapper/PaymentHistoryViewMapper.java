@@ -13,12 +13,11 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
 public interface PaymentHistoryViewMapper extends OffsetDateTimeMapper{
 
+    // Mapujemy tylko orderProcessingEvents – nie istnieje w OrderHistoryView właściwość payments.paymentDate
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDTO")
-    @Mapping(source = "payments.paymentDate", target = "payments.paymentDate", qualifiedByName = "mapOffsetDateTimeToString")
     OrderHistoryViewDTO toDTO(OrderHistoryView orderHistoryView);
 
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDomain")
-    @Mapping(source = "payments.paymentDate", target = "payments.paymentDate", qualifiedByName = "mapStringToOffsetDateTime")
     OrderHistoryView toDomain(OrderHistoryViewDTO dto);
 
     @Named("mapEventsToDTO")

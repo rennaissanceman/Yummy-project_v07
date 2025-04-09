@@ -24,5 +24,5 @@ public class CourierDTO {
     Double averageRatings;
     Integer deliveryCount;
     String courierStatus;
-    OffsetTime hireDate;
+    String hireDate;
 }

@@ -44,4 +44,10 @@ public class PaymentMethodEntity {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment_method")
     private PaymentEntity payment;
+
+    // Dodana metoda getMethod() zwracająca paymentMethodName,
+    // co umożliwia mapowanie przez metodę valueOf w mapperze.
+    public String getMethod() {
+        return this.paymentMethodName;
+    }
 }

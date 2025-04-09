@@ -20,7 +20,7 @@ public class OrdersDTO {
     String ordersNumber;
     CustomerDTO customer;
     Long menuId;
-    OffsetDateTime ordersDateTime;
+    String ordersDateTime;
     String ordersStatus;
     String ordersDescription;
     BigDecimal totalAmount;

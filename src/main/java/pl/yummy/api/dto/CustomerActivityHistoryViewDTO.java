@@ -33,7 +33,7 @@ public class CustomerActivityHistoryViewDTO {
     @Builder
     public static class RecentOrder {
         Integer orderId;
-        OffsetDateTime orderDate;
+        String orderDate;
         String status;
         BigDecimal amount;
     }

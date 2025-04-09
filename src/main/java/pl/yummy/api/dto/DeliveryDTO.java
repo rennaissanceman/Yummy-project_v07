@@ -19,10 +19,10 @@ public class DeliveryDTO {
     Long deliveryId;
     String deliveryNumber;
     String deliveryStatus;
-    OffsetDateTime starTime;
-    OffsetDateTime endTime;
-    OffsetDateTime estimatedDeliveryTime;
-    OffsetDateTime actualDeliveryDateTime;
+    String starTime;
+    String endTime;
+    String estimatedDeliveryTime;
+    String actualDeliveryDateTime;
     BigDecimal deliveryFee;
     String deliveryNotes;
 }

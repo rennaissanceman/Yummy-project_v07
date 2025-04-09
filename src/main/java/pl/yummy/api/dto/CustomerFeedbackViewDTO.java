@@ -23,7 +23,7 @@ public class CustomerFeedbackViewDTO {
     String restaurantName;
     Integer rating;
     String comments;
-    OffsetDateTime date;
+    String date;
 
     public boolean isPositiveFeedback() {
         return rating != null && rating >= 4;

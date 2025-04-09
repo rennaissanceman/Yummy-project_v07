@@ -21,7 +21,7 @@ public class PaymentDTO {
     BigDecimal amount;
     String paymentStatus;
     String transactionId;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
+    String createdAt;
+    String updatedAt;
     String comment; //(opcjonalnie)
 }

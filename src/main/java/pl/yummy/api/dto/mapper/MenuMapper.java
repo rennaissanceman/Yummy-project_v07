@@ -1,5 +1,6 @@
 package pl.yummy.api.dto.mapper;
 
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -22,21 +23,39 @@ public interface MenuMapper extends OffsetDateTimeMapper{
     @Mapping(source = "validTo", target = "validTo", qualifiedByName = "mapOffsetDateTimeToString")
     @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapOffsetDateTimeToString")
     @Mapping(source = "updatedAt", target = "updatedAt", qualifiedByName = "mapOffsetDateTimeToString")
+/*    @Mapping(source = "restaurant.restaurantId", target = "restaurantId")
+    // Usunięte kwalifikatory, gdyż pola w DTO są tego samego typu co w domain (OffsetDateTime)
+    @Mapping(source = "validFrom", target = "validFrom")
+    @Mapping(source = "validTo", target = "validTo")
+    @Mapping(source = "createdAt", target = "createdAt")
+    @Mapping(source = "updatedAt", target = "updatedAt")*/
     MenuDTO toDTO(Menu menu);
+
 
     /*
      * Metoda domyślna mapująca zbiór menuItems na listę MenuItemDTO.
      * Jeżeli przekazany zbiór jest null, zwraca pustą listę.
      * Elementy są sortowane według menuItemId.
      */
-    @Named("mapMenuItems")
-    default List<MenuItemDTO> mapMenuItems(Set<MenuItem> menuItems) {
+/*    @Named("mapMenuItems")
+    default List<MenuItemDTO> mapMenuItems(Set<MenuItem> menuItems, @Context MenuItemMapper menuItemMapper) {
         if (menuItems == null) {
             return Collections.emptyList();
         }
         return menuItems.stream()
                 .sorted(Comparator.comparing(MenuItem::getMenuItemId))
-                .map(this::toDTO)
+                .map(menuItemMapper::toDTO) // jawne wywołanie metody z MenuItemMapper
+                .collect(Collectors.toList());
+    }*/
+
+    @Named("mapMenuItems")
+    default List<MenuItemDTO> mapMenuItems(Set<MenuItem> menuItems, @org.mapstruct.Context MenuItemMapper menuItemMapper) {
+        if (menuItems == null) {
+            return Collections.emptyList();
+        }
+        return menuItems.stream()
+                .sorted(Comparator.comparing(MenuItem::getMenuItemId))
+                .map(menuItemMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -44,7 +63,8 @@ public interface MenuMapper extends OffsetDateTimeMapper{
      * Metoda mapująca pojedynczy obiekt MenuItem na MenuItemDTO.
      * Implementacja jest delegowana do MenuItemMapper (zgodnie z konfiguracją w 'uses').
      */
-    MenuItemDTO toDTO(MenuItem menuItem);
+/*    @Mapping(target = "menuId", ignore = true)
+    MenuItemDTO toDTO(MenuItem menuItem);*/
 }
 
     /*

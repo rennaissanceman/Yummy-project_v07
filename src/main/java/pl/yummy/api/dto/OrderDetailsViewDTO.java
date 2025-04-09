@@ -21,7 +21,7 @@ public class OrderDetailsViewDTO {
      */
 
     String orderNumber;
-    OffsetDateTime ordersDateTime;
+    String ordersDateTime;
     String customerName;
     String customerEmail;
     String customerPhone;

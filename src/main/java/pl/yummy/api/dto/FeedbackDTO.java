@@ -15,7 +15,7 @@ public class FeedbackDTO {
     private Long feedbackId;
     private Integer rating;
     private String comments;
-    private OffsetDateTime date;
+    private String date;
 
     // Powiązania z innymi obiektami DTO – jeśli chcesz przekazać pełne dane
     private CourierDTO courier;

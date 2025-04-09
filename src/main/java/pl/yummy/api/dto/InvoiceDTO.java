@@ -18,12 +18,12 @@ public class InvoiceDTO {
 
     Long invoiceId;
     String invoiceNumber;
-    OffsetDateTime issueDate;
-    OffsetDateTime saleDate;
+    String issueDate;
+    String saleDate;
     BigDecimal totalAmount;
     BigDecimal netAmount;
     BigDecimal taxAmount;
     BigDecimal taxRate;
-    OffsetDateTime dueDate; //(opcjonalnie)
+    String dueDate; //(opcjonalnie)
     String issuerSignature; //(opcjonalnie)
 }

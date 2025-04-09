@@ -35,7 +35,7 @@ public class CustomerDTO {
     @AllArgsConstructor
     public static class OrderSummaryView {
         String orderNumber;
-        OffsetDateTime ordersDateTime;
+        String ordersDateTime;
         String orderStatus;
     }
 }

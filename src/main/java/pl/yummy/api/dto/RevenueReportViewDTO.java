@@ -20,8 +20,8 @@ public class RevenueReportViewDTO {
      i prezentacji wyników działalności.
      */
     Long reportId;
-    OffsetDateTime startDate;
-    OffsetDateTime endDate;
+    String startDate;
+    String endDate;
     BigDecimal totalRevenue;
     Integer totalOrders;
     BigDecimal averageOrderValue;

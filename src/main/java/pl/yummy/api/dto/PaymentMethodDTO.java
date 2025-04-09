@@ -19,6 +19,6 @@ public class PaymentMethodDTO {
     String description;
     Boolean isActive;
     String paymentMethodStatus;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
+    String createdAt;
+    String updatedAt;
 }

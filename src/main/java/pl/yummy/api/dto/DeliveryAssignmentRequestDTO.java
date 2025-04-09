@@ -16,6 +16,6 @@ public class DeliveryAssignmentRequestDTO {
 //    Na podstawie RequestDeliveryAssignment
     String orderNumber;
     String courierIdentifier;
-    OffsetDateTime assignmentDateTime;
+    String assignmentDateTime;
     String comment;
 }

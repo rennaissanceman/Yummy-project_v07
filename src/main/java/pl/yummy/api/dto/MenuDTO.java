@@ -20,9 +20,10 @@ public class MenuDTO {
     Long restaurantId;
     String menuName;
     String description;
-    OffsetDateTime validFrom;
-    OffsetDateTime validTo;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
-    List<MenuItemDTO> menuItems; //(opcjonalnie)
+    String validFrom;
+    String validTo;
+    String createdAt;
+    String updatedAt;
+    List<MenuItemDTO> menuItems;
+
 }

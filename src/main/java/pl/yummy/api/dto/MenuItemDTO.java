@@ -29,6 +29,6 @@ public class MenuItemDTO {
     BigDecimal price;
     String imageURL;
     Integer displayOrder;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
+    String createdAt;
+    String updatedAt;
 }

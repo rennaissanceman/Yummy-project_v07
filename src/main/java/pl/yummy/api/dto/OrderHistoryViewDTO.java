@@ -31,8 +31,8 @@ public class OrderHistoryViewDTO {
     @ToString(of = {"eventNumber", "receivedDateTime", "completedDateTime", "customerComment"})
     public static class OrderProcessingEvent {
         String eventNumber;
-        OffsetDateTime receivedDateTime;
-        OffsetDateTime completedDateTime;
+        String receivedDateTime;
+        String completedDateTime;
         String customerName;
         String restaurantName;
         String menuName;

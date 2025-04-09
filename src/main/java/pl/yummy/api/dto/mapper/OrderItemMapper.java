@@ -6,9 +6,9 @@ import pl.yummy.api.dto.OrderItemDTO;
 import pl.yummy.domain.OrdersItem;
 
 @Mapper(componentModel = "spring")
-public interface OrderItemMapper {
+public interface OrderItemMapper extends OffsetDateTimeMapper{
 
-    @Mapping(source = "menuItem.menuItemId", target = "menuItemId", defaultValue = "0")
+    @Mapping(source = "menuItem.menuItemId", target = "menuItemId", defaultValue = "0L")
     OrderItemDTO toDTO(OrdersItem ordersItem);
 }
 

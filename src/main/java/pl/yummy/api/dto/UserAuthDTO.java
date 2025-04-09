@@ -17,6 +17,6 @@ public class UserAuthDTO {
     Long userAuthId;
     String phone;
     String email;
-    OffsetDateTime createdAt;
-    OffsetDateTime updatedAt;
+    String createdAt;
+    String updatedAt;
 }

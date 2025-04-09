@@ -6,6 +6,9 @@ import org.mapstruct.Named;
 import pl.yummy.api.dto.CustomerFeedbackViewDTO;
 import pl.yummy.domain.CustomerFeedbackView;
 
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
 public interface CustomerFeedbackViewMapper extends OffsetDateTimeMapper{
 
@@ -24,6 +27,11 @@ public interface CustomerFeedbackViewMapper extends OffsetDateTimeMapper{
     @Named("longToInteger")
     default Integer longToInteger(Long value) {
         return value == null ? null : value.intValue();
+    }
+
+    @Named("mapOffsetDateTimeToString")
+    public default String mapOffsetDateTimeToString(OffsetDateTime date) {
+        return date != null ? date.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME) : null;
     }
 }
 

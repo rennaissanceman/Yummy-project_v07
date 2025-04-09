@@ -25,7 +25,7 @@ public class PaymentHistoryViewDTO {
     @Value
     @Builder
     public static class PaymentHistoryItem {
-        OffsetDateTime paymentDate;
+        String paymentDate;
         BigDecimal amount;
         String paymentStatus;
         String transactionId;

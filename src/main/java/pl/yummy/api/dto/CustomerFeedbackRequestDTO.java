@@ -23,7 +23,7 @@ public class CustomerFeedbackRequestDTO {
     private String comments;
 
     // Opcjonalnie: data dodania opinii – zwykle ustalana w serwisie, ale można przyjąć też z formularza
-    private OffsetDateTime date;
+    private String date;
 
     // Metoda pomocnicza tworząca domyślny obiekt DTO – można ustawić domyślne wartości
     public static CustomerFeedbackRequestDTO buildDefault() {

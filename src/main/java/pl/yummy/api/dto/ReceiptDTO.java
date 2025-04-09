@@ -18,8 +18,8 @@ public class ReceiptDTO {
     Long receiptId;
     String receiptNumber;
     Long ordersId;
-    OffsetDateTime issueDate;
-    OffsetDateTime saleDate;
+    String issueDate;
+    String saleDate;
     BigDecimal totalAmount;
     BigDecimal netAmount;
     BigDecimal taxAmount;

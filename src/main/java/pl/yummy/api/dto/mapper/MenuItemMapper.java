@@ -7,6 +7,9 @@ import pl.yummy.api.dto.MenuItemDTO;
 import pl.yummy.domain.MenuItem;
 import pl.yummy.domain.enums.DietTypeEnumDomain;
 
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
 public interface MenuItemMapper extends OffsetDateTimeMapper{
 
@@ -14,12 +17,20 @@ public interface MenuItemMapper extends OffsetDateTimeMapper{
     @Mapping(source = "dietType", target = "dietType", qualifiedByName = "mapDietType")
     @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapOffsetDateTimeToString")
     @Mapping(source = "updatedAt", target = "updatedAt", qualifiedByName = "mapOffsetDateTimeToString")
+
     MenuItemDTO toDTO(MenuItem menuItem);
 
     @Named("mapDietType")
     default String mapDietType(DietTypeEnumDomain dietType) {
         return dietType == null ? null : dietType.name();
     }
+
+    @Named("mapOffsetDateTimeToString")
+    default String mapOffsetDateTimeToString(OffsetDateTime date) {
+        // Przykład: formatowanie daty
+        return date != null ? date.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME) : null;
+    }
+
 }
 
     /*
