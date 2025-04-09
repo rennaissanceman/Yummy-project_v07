@@ -38,7 +38,8 @@ public interface OrderDetailsViewMapper extends OffsetDateTimeMapper {
         }
         return CustomerDTO.OrderSummaryView.builder()
                 .orderNumber(order.getOrderNumber())
-                .ordersDateTime(order.getOrdersDateTime())
+                // Używamy mapOffsetDateTimeToString, aby przekonwertować OffsetDateTime na String
+                .ordersDateTime(mapOffsetDateTimeToString(order.getOrdersDateTime()))
                 .orderStatus(order.getOrderStatus())
                 .build();
     }
@@ -60,7 +61,8 @@ public interface OrderDetailsViewMapper extends OffsetDateTimeMapper {
         }
         return CustomerProfileView.OrderSummaryView.builder()
                 .orderNumber(dto.getOrderNumber())
-                .ordersDateTime(dto.getOrdersDateTime())
+                // Używamy mapStringToOffsetDateTime, aby przekonwertować String na OffsetDateTime
+                .ordersDateTime(mapStringToOffsetDateTime(dto.getOrdersDateTime()))
                 .orderStatus(dto.getOrderStatus())
                 .build();
     }

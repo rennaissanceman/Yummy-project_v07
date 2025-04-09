@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
 public interface PaymentHistoryViewMapper extends OffsetDateTimeMapper{
 
-    // Mapujemy tylko orderProcessingEvents – nie istnieje w OrderHistoryView właściwość payments.paymentDate
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDTO")
     OrderHistoryViewDTO toDTO(OrderHistoryView orderHistoryView);
 
@@ -36,8 +35,9 @@ public interface PaymentHistoryViewMapper extends OffsetDateTimeMapper{
         }
         return OrderHistoryViewDTO.OrderProcessingEvent.builder()
                 .eventNumber(event.getEventNumber())
-                .receivedDateTime(event.getReceivedDateTime())
-                .completedDateTime(event.getCompletedDateTime())
+                // Konwersja OffsetDateTime -> String
+                .receivedDateTime(mapOffsetDateTimeToString(event.getReceivedDateTime()))
+                .completedDateTime(mapOffsetDateTimeToString(event.getCompletedDateTime()))
                 .customerName(event.getCustomerName())
                 .restaurantName(event.getRestaurantName())
                 .menuName(event.getMenuName())
@@ -64,8 +64,9 @@ public interface PaymentHistoryViewMapper extends OffsetDateTimeMapper{
         }
         return OrderHistoryView.OrderProcessingEvent.builder()
                 .eventNumber(dto.getEventNumber())
-                .receivedDateTime(dto.getReceivedDateTime())
-                .completedDateTime(dto.getCompletedDateTime())
+                // Konwersja String -> OffsetDateTime
+                .receivedDateTime(mapStringToOffsetDateTime(dto.getReceivedDateTime()))
+                .completedDateTime(mapStringToOffsetDateTime(dto.getCompletedDateTime()))
                 .customerName(dto.getCustomerName())
                 .restaurantName(dto.getRestaurantName())
                 .menuName(dto.getMenuName())

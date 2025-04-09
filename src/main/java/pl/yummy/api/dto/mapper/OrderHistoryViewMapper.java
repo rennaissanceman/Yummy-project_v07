@@ -14,13 +14,9 @@ import java.util.stream.Collectors;
 public interface OrderHistoryViewMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDTO")
-    @Mapping(source = "orderProcessingEvents.receivedDateTime", target = "orderProcessingEvents.receivedDateTime", qualifiedByName = "mapOffsetDateTimeToString")
-    @Mapping(source = "orderProcessingEvents.completedDateTime", target = "orderProcessingEvents.completedDateTime", qualifiedByName = "mapOffsetDateTimeToString")
     OrderHistoryViewDTO toDTO(OrderHistoryView history);
 
     @Mapping(source = "orderProcessingEvents", target = "orderProcessingEvents", qualifiedByName = "mapEventsToDomain")
-    @Mapping(source = "orderProcessingEvents.receivedDateTime", target = "orderProcessingEvents.receivedDateTime", qualifiedByName = "mapStringToOffsetDateTime")
-    @Mapping(source = "orderProcessingEvents.completedDateTime", target = "orderProcessingEvents.completedDateTime", qualifiedByName = "mapStringToOffsetDateTime")
     OrderHistoryView toDomain(OrderHistoryViewDTO dto);
 
     @Named("mapEventsToDTO")
@@ -33,24 +29,16 @@ public interface OrderHistoryViewMapper extends OffsetDateTimeMapper{
                 .collect(Collectors.toList());
     }
 
-    @Named("mapEventsToDomain")
-    default List<OrderHistoryView.OrderProcessingEvent> mapEventsToDomain(List<OrderHistoryViewDTO.OrderProcessingEvent> dtos) {
-        if (dtos == null) {
-            return Collections.emptyList();
-        }
-        return dtos.stream()
-                .map(this::mapEventToDomain)
-                .collect(Collectors.toList());
-    }
-
+    @Named("mapEventToDTO")
     default OrderHistoryViewDTO.OrderProcessingEvent mapEventToDTO(OrderHistoryView.OrderProcessingEvent event) {
         if (event == null) {
             return null;
         }
         return OrderHistoryViewDTO.OrderProcessingEvent.builder()
                 .eventNumber(event.getEventNumber())
-                .receivedDateTime(event.getReceivedDateTime())
-                .completedDateTime(event.getCompletedDateTime())
+                // Konwersja OffsetDateTime -> String
+                .receivedDateTime(mapOffsetDateTimeToString(event.getReceivedDateTime()))
+                .completedDateTime(mapOffsetDateTimeToString(event.getCompletedDateTime()))
                 .customerName(event.getCustomerName())
                 .restaurantName(event.getRestaurantName())
                 .menuName(event.getMenuName())
@@ -61,14 +49,26 @@ public interface OrderHistoryViewMapper extends OffsetDateTimeMapper{
                 .build();
     }
 
+    @Named("mapEventsToDomain")
+    default List<OrderHistoryView.OrderProcessingEvent> mapEventsToDomain(List<OrderHistoryViewDTO.OrderProcessingEvent> dtos) {
+        if (dtos == null) {
+            return Collections.emptyList();
+        }
+        return dtos.stream()
+                .map(this::mapEventToDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Named("mapEventToDomain")
     default OrderHistoryView.OrderProcessingEvent mapEventToDomain(OrderHistoryViewDTO.OrderProcessingEvent dto) {
         if (dto == null) {
             return null;
         }
         return OrderHistoryView.OrderProcessingEvent.builder()
                 .eventNumber(dto.getEventNumber())
-                .receivedDateTime(dto.getReceivedDateTime())
-                .completedDateTime(dto.getCompletedDateTime())
+                // Konwersja String -> OffsetDateTime
+                .receivedDateTime(mapStringToOffsetDateTime(dto.getReceivedDateTime()))
+                .completedDateTime(mapStringToOffsetDateTime(dto.getCompletedDateTime()))
                 .customerName(dto.getCustomerName())
                 .restaurantName(dto.getRestaurantName())
                 .menuName(dto.getMenuName())

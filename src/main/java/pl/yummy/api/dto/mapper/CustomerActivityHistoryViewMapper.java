@@ -13,8 +13,10 @@ import java.util.Optional;
 @Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
 public interface CustomerActivityHistoryViewMapper extends OffsetDateTimeMapper{
 
+
     @Mapping(source = "customerId", target = "customerId", qualifiedByName = "integerToLong")
-        // Usuwamy mapowanie recentOrders.orderDate z głównego mapowania – kolekcję obsługujemy osobno
+    // Główne mapowanie recentOrders.orderDate wykorzystuje kwalifikator, więc w wynikowym DTO pole orderDate będzie typu String.
+    @Mapping(source = "recentOrders.orderDate", target = "recentOrders.orderDate", qualifiedByName = "mapOffsetDateTimeToString")
     CustomerActivityHistoryViewDTO toDTO(CustomerActivityHistoryView history);
 
     @Mapping(source = "customerId", target = "customerId", qualifiedByName = "longToInteger")
@@ -26,19 +28,6 @@ public interface CustomerActivityHistoryViewMapper extends OffsetDateTimeMapper{
     @IterableMapping(qualifiedByName = "mapRecentOrderToDomain")
     List<CustomerActivityHistoryView.RecentOrder> toDomainRecentOrders(List<CustomerActivityHistoryViewDTO.RecentOrder> recentOrders);
 
-/*    @Named("mapRecentOrderToDTO")
-    default CustomerActivityHistoryViewDTO.RecentOrder mapRecentOrderToDTO(CustomerActivityHistoryView.RecentOrder order) {
-        if (order == null) {
-            return null;
-        }
-        return CustomerActivityHistoryViewDTO.RecentOrder.builder()
-                .orderId(order.getOrderId())
-                // Wywołujemy metodę mapOffsetDateTimeToString, która zwraca String
-                .orderDate(mapOffsetDateTimeToString(order.getOrderDate()))
-                .status(order.getStatus())
-                .amount(order.getAmount())
-                .build();
-    }*/
 
     @Named("mapRecentOrderToDTO")
     default CustomerActivityHistoryViewDTO.RecentOrder mapRecentOrderToDTO(CustomerActivityHistoryView.RecentOrder order) {
@@ -47,8 +36,8 @@ public interface CustomerActivityHistoryViewMapper extends OffsetDateTimeMapper{
         }
         return CustomerActivityHistoryViewDTO.RecentOrder.builder()
                 .orderId(order.getOrderId())
-                // Przekazujemy bez konwersji
-                .orderDate(order.getOrderDate())
+                // Konwersja z OffsetDateTime (domena) na String (DTO)
+                .orderDate(mapOffsetDateTimeToString(order.getOrderDate()))
                 .status(order.getStatus())
                 .amount(order.getAmount())
                 .build();
@@ -61,8 +50,8 @@ public interface CustomerActivityHistoryViewMapper extends OffsetDateTimeMapper{
         }
         return CustomerActivityHistoryView.RecentOrder.builder()
                 .orderId(orderDTO.getOrderId())
-                // Zakładamy, że przy mapowaniu w kierunku domenowym typ pozostaje OffsetDateTime
-                .orderDate(orderDTO.getOrderDate())
+                // Konwersja z String (DTO) na OffsetDateTime (domena)
+                .orderDate(mapStringToOffsetDateTime(orderDTO.getOrderDate()))
                 .status(orderDTO.getStatus())
                 .amount(orderDTO.getAmount())
                 .build();
