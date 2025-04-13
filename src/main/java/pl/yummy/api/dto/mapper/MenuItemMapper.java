@@ -10,7 +10,7 @@ import pl.yummy.domain.enums.DietTypeEnumDomain;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+@Mapper(componentModel = "spring")
 public interface MenuItemMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "menu.menuId", target = "menuId")

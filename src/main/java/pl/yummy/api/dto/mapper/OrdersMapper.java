@@ -1,9 +1,6 @@
 package pl.yummy.api.dto.mapper;
 
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 import pl.yummy.api.dto.OrderItemDTO;
 import pl.yummy.api.dto.OrdersDTO;
 import pl.yummy.domain.AvailableDeliveryArea;
@@ -12,26 +9,39 @@ import pl.yummy.domain.Orders;
 import pl.yummy.domain.OrdersItem;
 import pl.yummy.domain.enums.OrdersStatusEnumDomain;
 
+import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("all")
 @Mapper(componentModel = "spring",
-        uses = {OffsetDateTimeMapper.class,
-                CustomerMapper.class,
-                PaymentMapper.class,
-                InvoiceMapper.class,
-                DeliveryMapper.class,
-                OrderItemMapper.class})
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {CustomerMapper.class, PaymentMapper.class, InvoiceMapper.class, DeliveryMapper.class, OrderItemMapper.class})
 public interface OrdersMapper extends OffsetDateTimeMapper{
+
+    // Nadpisujemy metody konwersji z OffsetDateTimeMapper z unikalnymi kwalifikatorami,
+    // aby MapStruct jednoznacznie wybierał nasze metody dla pola ordersDateTime.
+    @Override
+    @Named("ordersMapOffsetDateTimeToString")
+    default String mapOffsetDateTimeToString(OffsetDateTime offsetDateTime) {
+        return OffsetDateTimeMapper.super.mapOffsetDateTimeToString(offsetDateTime);
+    }
+
+    @Override
+    @Named("ordersMapStringToOffsetDateTime")
+    default OffsetDateTime mapStringToOffsetDateTime(String dateTimeString) {
+        return OffsetDateTimeMapper.super.mapStringToOffsetDateTime(dateTimeString);
+    }
 
     @Mapping(source = "menu.menuId", target = "menuId")
     @Mapping(source = "ordersStatus", target = "ordersStatus", qualifiedByName = "mapOrdersStatus")
-    @Mapping(source = "ordersDateTime", target = "ordersDateTime", qualifiedByName = "mapOffsetDateTimeToString")
+    @Mapping(source = "ordersDateTime", target = "ordersDateTime", qualifiedByName = "ordersMapOffsetDateTimeToString")
     @Mapping(source = "availableDeliveryAreaId", target = "availableDeliveryAreaId", qualifiedByName = "mapAvailableDeliveryAreaId")
     @Mapping(source = "customerAddressId", target = "customerAddressId", qualifiedByName = "mapCustomerAddressId")
     @Mapping(source = "ordersItems", target = "ordersItems", qualifiedByName = "mapOrdersItems")
+// Usuń mapping na "receipt" - jeśli OrdersDTO nie posiada tego pola, po prostu nie mapuj.
     OrdersDTO toDTO(Orders orders);
 
     @Named("mapOrdersStatus")
@@ -55,19 +65,39 @@ public interface OrdersMapper extends OffsetDateTimeMapper{
             return Collections.emptyList();
         }
         return ordersItems.stream()
-                // Przykładowe sortowanie po identyfikatorze – zakładając, że OrdersItem posiada metodę getOrdersItemId()
                 .sorted((o1, o2) -> Long.compare(o1.getOrdersItemId(), o2.getOrdersItemId()))
                 .map(this::toOrderItemDTO)
                 .collect(Collectors.toList());
     }
 
-    // Delegowana metoda mapująca pojedynczy OrdersItem, której implementacja zostanie wygenerowana przez OrderItemMapper
+    // Delegujemy mapowanie pojedynczego OrdersItem – implementacja zostanie wygenerowana przez OrderItemMapper.
+    @Mapping(source = "ordersItemId", target = "menuItemId")
     OrderItemDTO toOrderItemDTO(OrdersItem ordersItem);
 
-    // Metoda toDomain – mapowanie z OrdersDTO na Orders
+    // Mapowanie odwrotne z DTO (OrdersDTO) na domenę (Orders)
+    // @InheritInverseConfiguration odziedziczy konfigurację z toDTO, ale uzupełniamy mapowanie dla ordersDateTime.
     @InheritInverseConfiguration(name = "toDTO")
+    @Mapping(source = "ordersDateTime", target = "ordersDateTime", qualifiedByName = "ordersMapStringToOffsetDateTime")
     @Mapping(source = "ordersStatus", target = "ordersStatus", qualifiedByName = "mapOrdersStatusToEnum")
+    @Mapping(source = "availableDeliveryAreaId", target = "availableDeliveryAreaId", qualifiedByName = "mapAvailableDeliveryAreaIdInverse")
+    @Mapping(source = "customerAddressId", target = "customerAddressId", qualifiedByName = "mapCustomerAddressIdInverse")
+    @Mapping(target = "ordersItems", ignore = true)
+    @Mapping(target = "invoice", ignore = true)
+    @Mapping(target = "receipt", ignore = true)
+    @Mapping(target = "customer", ignore = true) // Ignorujemy zagnieżdżoną konwersję obiektu customer
     Orders toDomain(OrdersDTO ordersDTO);
+
+    @Named("mapAvailableDeliveryAreaIdInverse")
+    default AvailableDeliveryArea mapAvailableDeliveryAreaIdInverse(Long id) {
+        // W rzeczywistości należałoby pobrać obiekt AvailableDeliveryArea według identyfikatora; tutaj zwracamy null.
+        return null;
+    }
+
+    @Named("mapCustomerAddressIdInverse")
+    default CustomerAddress mapCustomerAddressIdInverse(Long id) {
+        // Analogicznie dla CustomerAddress.
+        return null;
+    }
 
     @Named("mapOrdersStatusToEnum")
     default OrdersStatusEnumDomain mapOrdersStatusToEnum(String status) {

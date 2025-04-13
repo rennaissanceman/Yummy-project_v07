@@ -11,7 +11,6 @@ import pl.yummy.domain.enums.PaymentMethodStatusEnumDomain;
 public interface PaymentMethodMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "paymentMethodStatus", target = "paymentMethodStatus", qualifiedByName = "mapPaymentMethodStatus")
-    @Mapping(source = "paymentMethodStatus", target = "paymentMethodStatus", qualifiedByName = "mapPaymentMethodStatus")
     @Mapping(source = "createdAt", target = "createdAt", qualifiedByName = "mapOffsetDateTimeToString")
     @Mapping(source = "updatedAt", target = "updatedAt", qualifiedByName = "mapOffsetDateTimeToString")
     PaymentMethodDTO toDTO(PaymentMethod paymentMethod);

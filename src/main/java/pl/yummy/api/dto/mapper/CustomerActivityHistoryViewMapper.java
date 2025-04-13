@@ -15,8 +15,7 @@ public interface CustomerActivityHistoryViewMapper extends OffsetDateTimeMapper{
 
 
     @Mapping(source = "customerId", target = "customerId", qualifiedByName = "integerToLong")
-    // Główne mapowanie recentOrders.orderDate wykorzystuje kwalifikator, więc w wynikowym DTO pole orderDate będzie typu String.
-    @Mapping(source = "recentOrders.orderDate", target = "recentOrders.orderDate", qualifiedByName = "mapOffsetDateTimeToString")
+        // Usunięto mapping "recentOrders.orderDate", bo mapping kolekcji wykonamy metodami iteracyjnymi
     CustomerActivityHistoryViewDTO toDTO(CustomerActivityHistoryView history);
 
     @Mapping(source = "customerId", target = "customerId", qualifiedByName = "longToInteger")
@@ -27,7 +26,6 @@ public interface CustomerActivityHistoryViewMapper extends OffsetDateTimeMapper{
 
     @IterableMapping(qualifiedByName = "mapRecentOrderToDomain")
     List<CustomerActivityHistoryView.RecentOrder> toDomainRecentOrders(List<CustomerActivityHistoryViewDTO.RecentOrder> recentOrders);
-
 
     @Named("mapRecentOrderToDTO")
     default CustomerActivityHistoryViewDTO.RecentOrder mapRecentOrderToDTO(CustomerActivityHistoryView.RecentOrder order) {

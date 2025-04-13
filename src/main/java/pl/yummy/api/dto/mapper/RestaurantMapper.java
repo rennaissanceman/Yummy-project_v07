@@ -10,6 +10,7 @@ import pl.yummy.domain.enums.CuisineTypeEnumDomain;
 @Mapper(componentModel = "spring", uses = {OwnerMapper.class, AddressMapper.class})
 public interface RestaurantMapper {
 
+    @Mapping(source = "restaurantId", target = "restaurantIdentifier")
     @Mapping(source = "cuisineType", target = "cuisineType", qualifiedByName = "mapCuisineType")
     RestaurantDTO toDTO(Restaurant restaurant);
 

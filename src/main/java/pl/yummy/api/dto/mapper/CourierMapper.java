@@ -8,14 +8,26 @@ import pl.yummy.domain.Courier;
 import pl.yummy.domain.enums.CourierStatusEnumDomain;
 
 @Mapper(componentModel = "spring")
-public interface CourierMapper {
+public interface CourierMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "courierStatus", target = "courierStatus", qualifiedByName = "mapCourierStatus")
-    CourierDTO toDTO(final Courier courier);
+    @Mapping(source = "hireDate", target = "hireDate", qualifiedByName = "mapOffsetDateTimeToString")
+    CourierDTO toDTO(Courier courier);
+
+    @Mapping(source = "courierStatus", target = "courierStatus", qualifiedByName = "mapStringToCourierStatus")
+    @Mapping(source = "hireDate", target = "hireDate", qualifiedByName = "mapStringToOffsetDateTime")
+    @Mapping(target = "userAuth", ignore = true)
+    @Mapping(target = "deliveries", ignore = true)
+    Courier toDomain(CourierDTO courierDTO);
 
     @Named("mapCourierStatus")
-    default String mapCourierStatus(final CourierStatusEnumDomain courierStatus) {
+    default String mapCourierStatus(CourierStatusEnumDomain courierStatus) {
         return courierStatus == null ? null : courierStatus.name();
+    }
+
+    @Named("mapStringToCourierStatus")
+    default CourierStatusEnumDomain mapStringToCourierStatus(String status) {
+        return status == null ? null : CourierStatusEnumDomain.valueOf(status);
     }
 }
 

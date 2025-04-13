@@ -2,7 +2,6 @@ package pl.yummy.api.dto;
 
 import lombok.*;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @Data

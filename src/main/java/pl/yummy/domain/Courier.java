@@ -3,7 +3,7 @@ package pl.yummy.domain;
 import lombok.*;
 import pl.yummy.domain.enums.CourierStatusEnumDomain;
 
-import java.time.OffsetTime;
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 @With
@@ -24,7 +24,7 @@ public class Courier {
     Double averageRatings;
     Integer deliveryCount;
     CourierStatusEnumDomain courierStatus;
-    OffsetTime hireDate;
+    OffsetDateTime hireDate;
     Set<Delivery> deliveries;
 
     public boolean isActiveCourier() {

@@ -7,9 +7,8 @@ import pl.yummy.api.dto.DeliveryDTO;
 import pl.yummy.domain.Delivery;
 import pl.yummy.domain.enums.DeliveryStatusEnumDomain;
 
-@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+@Mapper(componentModel = "spring")
 public interface DeliveryMapper extends OffsetDateTimeMapper {
-
 
     @Mapping(source = "deliveryStatus", target = "deliveryStatus", qualifiedByName = "mapDeliveryStatus")
     @Mapping(source = "starTime", target = "starTime", qualifiedByName = "mapOffsetDateTimeToString")
@@ -18,11 +17,10 @@ public interface DeliveryMapper extends OffsetDateTimeMapper {
     @Mapping(source = "actualDeliveryDateTime", target = "actualDeliveryDateTime", qualifiedByName = "mapOffsetDateTimeToString")
     DeliveryDTO toDTO(Delivery delivery);
 
-/*    @Mapping(source = "deliveryStatus", target = "deliveryStatus", qualifiedByName = "mapStringToDeliveryStatus")
     @Mapping(source = "starTime", target = "starTime", qualifiedByName = "mapStringToOffsetDateTime")
     @Mapping(source = "endTime", target = "endTime", qualifiedByName = "mapStringToOffsetDateTime")
     @Mapping(source = "estimatedDeliveryTime", target = "estimatedDeliveryTime", qualifiedByName = "mapStringToOffsetDateTime")
-    @Mapping(source = "actualDeliveryDateTime", target = "actualDeliveryDateTime", qualifiedByName = "mapStringToOffsetDateTime")*/
+    @Mapping(source = "actualDeliveryDateTime", target = "actualDeliveryDateTime", qualifiedByName = "mapStringToOffsetDateTime")
     @Mapping(target = "orders", ignore = true)
     @Mapping(target = "availableDeliveryArea", ignore = true)
     @Mapping(target = "courier", ignore = true)

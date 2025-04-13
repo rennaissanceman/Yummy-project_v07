@@ -9,7 +9,7 @@ import pl.yummy.domain.CustomerFeedbackView;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+@Mapper(componentModel = "spring")
 public interface CustomerFeedbackViewMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "feedbackId", target = "feedbackId", qualifiedByName = "integerToLong")
@@ -17,6 +17,7 @@ public interface CustomerFeedbackViewMapper extends OffsetDateTimeMapper{
     CustomerFeedbackViewDTO toDTO(CustomerFeedbackView feedback);
 
     @Mapping(source = "feedbackId", target = "feedbackId", qualifiedByName = "longToInteger")
+    @Mapping(source = "date", target = "date", qualifiedByName = "mapStringToOffsetDateTime")
     CustomerFeedbackView toDomain(CustomerFeedbackViewDTO dto);
 
     @Named("integerToLong")
@@ -27,11 +28,6 @@ public interface CustomerFeedbackViewMapper extends OffsetDateTimeMapper{
     @Named("longToInteger")
     default Integer longToInteger(Long value) {
         return value == null ? null : value.intValue();
-    }
-
-    @Named("mapOffsetDateTimeToString")
-    public default String mapOffsetDateTimeToString(OffsetDateTime date) {
-        return date != null ? date.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME) : null;
     }
 }
 

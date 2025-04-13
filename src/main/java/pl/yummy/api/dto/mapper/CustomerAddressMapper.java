@@ -12,14 +12,9 @@ public interface CustomerAddressMapper {
     @Mapping(source = "customerAddressId", target = "customerAddressId")
     @Mapping(source = "isDefault", target = "isDefault")
     @Mapping(source = "address", target = "address")
-    // Mapowanie dostępnego obszaru dostawy – wykorzystujemy metodę domyślną zabezpieczającą przed null
-    @Mapping(source = "this", target = "availableDeliveryAreaId", qualifiedByName = "mapAvailableDeliveryAreaId")
+    @Mapping(target = "availableDeliveryAreaId", expression = "java(mapAvailableDeliveryAreaId(customerAddress))")
     CustomerAddressDTO toDTO(final CustomerAddress customerAddress);
 
-    /*
-     * Metoda domyślna mapująca obiekt CustomerAddress na identyfikator availableDeliveryArea.
-     * Jeśli availableDeliveryArea jest null, zwraca null.
-     */
     @Named("mapAvailableDeliveryAreaId")
     default Long mapAvailableDeliveryAreaId(CustomerAddress customerAddress) {
         return customerAddress.getAvailableDeliveryArea() != null

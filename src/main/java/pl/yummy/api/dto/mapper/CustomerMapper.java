@@ -15,22 +15,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring", uses = {BillingInformationMapper.class, CustomerAddressMapper.class})
+@Mapper(componentModel = "spring",
+        uses = {BillingInformationMapper.class, CustomerAddressMapper.class},
+        unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface CustomerMapper {
 
 
 
+    // Mapujemy tylko pola, które istnieją – inne ignorujemy
     @Mapping(source = "userAuth.email", target = "email")
     @Mapping(source = "customerAddresses", target = "customerAddressDTOList")
+    @Mapping(target = "defaultAddress", ignore = true)
+    @Mapping(target = "phone", ignore = true)
+    @Mapping(target = "orderSummaries", ignore = true)
+    @Mapping(target = "vatNumber", ignore = true)
     CustomerDTO toDTO(final Customer customer);
 
-
-
-    /*
-     * Metoda domyślna mapująca zbiór adresów (Set) na listę CustomerAddressDTO.
-     * Jeśli przekazany zbiór jest null, zwraca pustą listę.
-     * Mapowanie zbioru adresów domenowych na listę DTO.
-     */
     default List<CustomerAddressDTO> mapCustomerAddresses(Set<CustomerAddress> addresses) {
         if (addresses == null) {
             return new ArrayList<>();
@@ -40,45 +40,18 @@ public interface CustomerMapper {
                 .collect(Collectors.toList());
     }
 
-
-
-    // Metoda mapująca pojedynczy obiekt CustomerAddress na CustomerAddressDTO.
-    // Implementacja tej metody zostanie wygenerowana przez MapStruct, korzystając z CustomerAddressMapper
+    // Implementacja tej metody zostanie wygenerowana przez MapStruct z CustomerAddressMapper
     CustomerAddressDTO toCustomerAddressDTO(CustomerAddress address);
 
-
-    /*
-     * Metoda mapująca obiekt CustomerDTO na obiekt domenowy Customer.
-     * Uwaga:
-     * - Pole email z DTO jest używane do stworzenia obiektu UserAuth.
-     * - Kolekcja adresów jest mapowana z listy (DTO) na zbiór (domena).
-     * - Pole orders nie występuje w DTO, dlatego jest ignorowane.
-
-
-    @Mapping(target = "userAuth", expression = "java(new UserAuth(customerDTO.getEmail()))")
-    @Mapping(target = "customerAddresses", source = "customerAddressDTOList")
-    @Mapping(target = "orders", ignore = true)
-    Customer toDomain(CustomerDTO customerDTO);
-    */
-    /*
-     * Nowa metoda mapująca RequestCustomerRegistrationDTO na obiekt domenowy Customer.
-     * Uwaga:
-     * - Zakładamy, że pole email z DTO jest wykorzystywane do utworzenia obiektu UserAuth.
-     * - Pola, które nie są dostępne podczas rejestracji (np. customerId, orders, billingInformation)
-     *   są ignorowane lub przypisywane domyślnie.
-     */
+    // Mapowanie z rejestracji – ignorujemy pola, których nie mamy w DTO lub ustawiamy domyślne
     @Mapping(target = "customerId", ignore = true)
     @Mapping(target = "customerNumber", ignore = true)
-    @Mapping(target = "userAuth", expression = "java(new UserAuth(registrationDTO.getEmail()))")
+    @Mapping(target = "userAuth", ignore = true)
     @Mapping(target = "billingInformation", ignore = true)
     @Mapping(target = "customerAddresses", ignore = true)
     @Mapping(target = "orders", ignore = true)
     Customer toDomain(CustomerRegistrationRequestDTO registrationDTO);
 
-    /*
-     * Dodatkowa metoda domyślna mapująca listę CustomerAddressDTO na zbiór CustomerAddress.
-     * Dzięki niej możliwa jest konwersja kolekcji między różnymi typami.
-     */
     default Set<CustomerAddress> mapCustomerAddressDTOList(List<CustomerAddressDTO> dtos) {
         if (dtos == null) {
             return new HashSet<>();
@@ -88,18 +61,20 @@ public interface CustomerMapper {
                 .collect(Collectors.toSet());
     }
 
-
-
-    // Metoda mapująca pojedynczy obiekt CustomerAddressDTO na CustomerAddress.
-    // Implementacja tej metody zostanie wygenerowana przez MapStruct przy użyciu CustomerAddressMapper.
+    // Mapowanie pojedynczego adresu – implementacja wygenerowana przez CustomerAddressMapper
     CustomerAddress toCustomerAddress(final CustomerAddressDTO dto);
 
-
-    // Metoda dla aktualizacji profilu:
+    // Mapowanie aktualizacji profilu – ignorujemy pola, których nie podajemy w aktualizacji
+    @Mapping(target = "customerId", ignore = true)
+    @Mapping(target = "userAuth", ignore = true)
+    @Mapping(target = "customerAddresses", ignore = true)
+    @Mapping(target = "orders", ignore = true)
     Customer toDomain(final CustomerUpdateRequestDTO updateDTO);
 
-
-    // Metodę konwertująca obiekt domenowy na DTO aktualizacji
+    // Mapowanie domeny na DTO aktualizacji – ignorujemy pola nieużywane w aktualizacji
+    @Mapping(target = "email", ignore = true)
+    @Mapping(target = "phone", ignore = true)
+    @Mapping(target = "customerAddressDTOList", ignore = true)
     CustomerUpdateRequestDTO toUpdateDTO(Customer customer);
 
 }

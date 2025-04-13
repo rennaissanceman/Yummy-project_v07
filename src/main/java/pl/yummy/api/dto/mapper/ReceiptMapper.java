@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import pl.yummy.api.dto.ReceiptDTO;
 import pl.yummy.domain.Receipt;
 
-@Mapper(componentModel = "spring", uses = {OffsetDateTimeMapper.class})
+@Mapper(componentModel = "spring")
 public interface ReceiptMapper extends OffsetDateTimeMapper{
 
     @Mapping(source = "orders.ordersId", target = "ordersId")
