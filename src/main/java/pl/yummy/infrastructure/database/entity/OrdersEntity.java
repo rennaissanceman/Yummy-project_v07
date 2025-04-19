@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "ordersId")
 @ToString(of = {"ordersId", "ordersNumber", "customer", "menu", "ordersDateTime", "ordersStatus", "ordersDescription",
-        "totalAmount", "ordersRating", "availableDeliveryAreaId", "customerAddressId"})
+        "totalAmount", "ordersRating", "availableDeliveryArea", "customerAddress"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -56,11 +56,11 @@ public class OrdersEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "available_delivery_area_id")
-    private AvailableDeliveryAreaEntity availableDeliveryAreaId;
+    private AvailableDeliveryAreaEntity availableDeliveryArea;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customerAddressId")
-    private CustomerAddressEntity customerAddressId;
+    private CustomerAddressEntity customerAddress;
 
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "orders", cascade = CascadeType.ALL)

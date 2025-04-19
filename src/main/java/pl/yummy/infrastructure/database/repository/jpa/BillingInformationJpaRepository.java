@@ -12,9 +12,12 @@ import java.util.List;
 public interface BillingInformationJpaRepository extends JpaRepository<BillingInformationEntity, Long> {
 
     // Niestandardowe metody (Spring Data JPA generuje zapytania na podstawie nazwy metody)
-    List<BillingInformationEntity> findByCustomerId(Long customerId);
+
+    List<BillingInformationEntity> findByCustomer_CustomerId(Long customerId);
     List<BillingInformationEntity> findByCompanyName(String companyName);
-    List<BillingInformationEntity> findByAddressId(Long addressId);
+
+    @Query("SELECT b FROM BillingInformationEntity b WHERE b.address.addressId = :addrId")
+    List<BillingInformationEntity> findByAddressId(@Param("addrId") Integer addrId);
     boolean existsByVatNumber(String vatNumber);
     boolean existsByCompanyName(String companyName);
 
@@ -23,6 +26,6 @@ public interface BillingInformationJpaRepository extends JpaRepository<BillingIn
     List<BillingInformationEntity> findBillingInformationByVatRange(@Param("startVat") String startVat, @Param("endVat") String endVat);
 
     // Zapytanie niestandardowe dla najnowszych informacji
-    @Query("SELECT b FROM BillingInformationEntity b ORDER BY b.creationDate DESC")
-    List<BillingInformationEntity> findRecentBillingInformations(@Param("limit") int limit);
+//    @Query("SELECT b FROM BillingInformationEntity b ORDER BY b.creationDate DESC")
+//    List<BillingInformationEntity> findRecentBillingInformations(@Param("limit") int limit);
 }

@@ -4,25 +4,24 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import pl.yummy.domain.Payment;
+import pl.yummy.domain.PaymentMethod;
 import pl.yummy.infrastructure.database.entity.PaymentEntity;
-import pl.yummy.infrastructure.database.entity.enums.PaymentStatusEnumEntity;
+import pl.yummy.infrastructure.database.entity.PaymentMethodEntity;
+import pl.yummy.infrastructure.database.repository.mapper.enums.PaymentMethodStatusEnumMapper;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(
+        componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = PaymentMethodStatusEnumMapper.class  // tylko ten mapper do enuma
+)
 public interface PaymentEntityMapper {
 
-    @Mapping(target = "orders", ignore = true) // Ignorujemy zamówienie
-    @Mapping(target = "paymentMethod", ignore = true) // Ignorujemy metodę płatności
-    @Mapping(target = "invoice", ignore = true) // Ignorujemy fakturę
-    @Mapping(target = "receipt", ignore = true) // Ignorujemy paragon
+    // wskazujemy dokładnie, skąd brać enum i do którego pola domeny:
+    @Mapping(source = "paymentMethod.paymentMethodStatus", target = "paymentMethod")
     Payment mapFromEntity(PaymentEntity entity);
 
-    @Mapping(target = "orders", ignore = true)
-    @Mapping(target = "paymentMethod", ignore = true)
-    @Mapping(target = "invoice", ignore = true)
-    @Mapping(target = "receipt", ignore = true)
+    // odwrotnie przy zapisie:
+    @Mapping(source = "paymentMethod",            // domenowy enum
+            target = "paymentMethod.paymentMethodStatus")
     PaymentEntity mapToEntity(Payment domain);
-
-    default Class<PaymentStatusEnumEntity> getPaymentStatusEntityClass() {
-        return PaymentStatusEnumEntity.class;
-    }
 }

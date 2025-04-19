@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface AvailableDeliveryAreaJpaRepository extends JpaRepository<AvailableDeliveryAreaEntity, Long> {
 
-    List<AvailableDeliveryAreaEntity> findByRestaurantId(Long restaurantId);
+
+    List<AvailableDeliveryAreaEntity> findByRestaurant_RestaurantId(Long restaurantId);
 }

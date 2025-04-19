@@ -71,7 +71,7 @@ public class MenuItemEntity {
     private OffsetDateTime updatedAt;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu_item")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "menuItem")
     private Set<OrdersItemEntity> ordersItems;
 
 }

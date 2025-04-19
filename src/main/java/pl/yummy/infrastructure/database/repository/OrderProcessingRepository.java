@@ -18,7 +18,9 @@ import pl.yummy.infrastructure.database.repository.mapper.CourierEntityMapper;
 import pl.yummy.infrastructure.database.repository.mapper.OrdersEntityMapper;
 import pl.yummy.infrastructure.database.repository.mapper.OrdersItemEntityMapper;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Repository
 @AllArgsConstructor
@@ -32,6 +34,7 @@ public class OrderProcessingRepository implements OrderProcessingDAO {
     private final OrdersEntityMapper ordersEntityMapper;
     private final CourierEntityMapper courierEntityMapper;
     private final OrdersItemEntityMapper ordersItemEntityMapper;
+    private final OrdersItemEntityMapper ordersItemMapper;
 
 
     /*
@@ -45,6 +48,13 @@ public class OrderProcessingRepository implements OrderProcessingDAO {
     */
 
 
+    public List<OrdersItem> getItemsForOrder(Long orderId) {
+        return ordersItemJpaRepository
+                .findByOrders_OrdersId(orderId)
+                .stream()
+                .map(ordersItemMapper::mapFromEntity)
+                .collect(Collectors.toList());
+    }
 
     @Override
     @Transactional

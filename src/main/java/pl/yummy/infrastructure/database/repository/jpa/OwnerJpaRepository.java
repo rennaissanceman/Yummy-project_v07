@@ -1,6 +1,8 @@
 package pl.yummy.infrastructure.database.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.yummy.infrastructure.database.entity.OwnerEntity;
 
@@ -16,6 +18,7 @@ public interface OwnerJpaRepository extends JpaRepository<OwnerEntity, Long> {
     // Find an owner by their name
     Optional<OwnerEntity> findByOwnerName(String ownerName);
 
-    // Find all owners who have more than a specified number of restaurants
-    List<OwnerEntity> findByRestaurants_SizeGreaterThanEqual(Long minimumRestaurants);
+
+    @Query("SELECT o FROM OwnerEntity o WHERE size(o.restaurants) >= :minCount")
+    List<OwnerEntity> findOwnersWithAtLeastRestaurants(@Param("minCount") Long minCount);
 }

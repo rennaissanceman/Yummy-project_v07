@@ -11,9 +11,27 @@ import java.util.Optional;
 @Repository
 public interface CustomerAddressJpaRepository extends JpaRepository<CustomerAddressEntity, Long> {
 
-    // Niestandardowe metody
-    Optional<CustomerAddressEntity> findByCustomerIdAndDefaultAddressTrue(Long customerId);
+    /**
+     * Znajdzie domyślny adres (isDefault = TRUE) dla danego klienta
+     */
+    Optional<CustomerAddressEntity>
+    findByCustomer_CustomerIdAndIsDefaultTrue(Long customerId);
 
-    @Query("SELECT CASE WHEN COUNT(c) > 0 THEN TRUE ELSE FALSE END FROM CustomerAddressEntity c WHERE c.customer.id = :customerId AND c.defaultAddress = TRUE")
-    boolean existsDefaultByCustomerId(@Param("customerId") Long customerId);
+    /**
+     * Sprawdzi, czy istnieje domyślny adres dla danego klienta
+     */
+    boolean existsByCustomer_CustomerIdAndIsDefaultTrue(Long customerId);
+
+    /**
+     * Ten sam check, ale jako ręczne zapytanie HQL.
+     * (opcjonalne – wygenerowana metoda existsBy… jest wystarczająca)
+     */
+    @Query("""
+        SELECT CASE WHEN COUNT(c) > 0 THEN TRUE ELSE FALSE END
+        FROM CustomerAddressEntity c
+        WHERE c.customer.customerId = :custId
+          AND c.isDefault = TRUE
+        """)
+    boolean existsDefaultByCustomerId(@Param("custId") Long customerId);
+
 }

@@ -36,7 +36,7 @@ public class BillingInformationEntity {
     private AddressEntity address;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "billing_information")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "billingInformation")
     private Set<InvoiceEntity> invoices;
 
 }

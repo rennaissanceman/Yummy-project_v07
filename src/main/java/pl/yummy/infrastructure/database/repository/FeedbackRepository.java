@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 @Repository
 @AllArgsConstructor
 public class FeedbackRepository implements FeedbackDAO {
+
     private final FeedbackJpaRepository feedbackJpaRepository;
     private final FeedbackEntityMapper feedbackEntityMapper;
 
     @Override
     public List<Feedback> findByRestaurantId(Long restaurantId) {
-        return feedbackJpaRepository.findByRestaurantId(restaurantId)
-                .stream()
+        return feedbackJpaRepository.findByRestaurant_RestaurantId(restaurantId).stream()
                 .map(feedbackEntityMapper::mapFromEntity)
                 .collect(Collectors.toList());
     }

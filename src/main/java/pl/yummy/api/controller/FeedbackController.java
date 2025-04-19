@@ -23,6 +23,7 @@ public class FeedbackController {
     private static final String FEEDBACK_LIST = "/feedback/list";
     private static final String FEEDBACK_CREATE = "/feedback/create";
     private static final String FEEDBACK_SAVE = "/feedback/save";
+    private static final String FEEDBACK_SAVE_CUSTOMER = "/feedback/save/customer";
 
     private final FeedbackService feedbackService;
     private final FeedbackMapper feedbackMapper;
@@ -54,7 +55,7 @@ public class FeedbackController {
         return new ModelAndView("redirect:" + FEEDBACK_LIST);
     }
 
-    @PostMapping(FEEDBACK_SAVE)
+    @PostMapping(FEEDBACK_SAVE_CUSTOMER)
     public ModelAndView saveFeedback(@ModelAttribute("feedbackForm") CustomerFeedbackRequestDTO feedbackDTO) {
         // Konwersja obiektu DTO na obiekt domenowy przy użyciu mappera
         Feedback feedback = feedbackMapper.toDomain(feedbackDTO);

@@ -32,7 +32,7 @@ public class OwnerRepository implements OwnerDAO {
 
     @Override
     public List<Owner> findByRestaurants_SizeGreaterThanEqual(Long minimumRestaurants) {
-        return ownerJpaRepository.findByRestaurants_SizeGreaterThanEqual(minimumRestaurants)
+        return ownerJpaRepository.findOwnersWithAtLeastRestaurants(minimumRestaurants)
                 .stream()
                 .map(ownerEntityMapper::mapFromEntity)
                 .collect(Collectors.toList());

@@ -19,6 +19,7 @@ public interface UserAuthJpaRepository extends JpaRepository<UserAuthEntity, Lon
     boolean existsByPhone(String phone);
 
     @Modifying
-    @Query("UPDATE UserAuthEntity u SET u.password = :newPassword WHERE u.id = :userAuthId")
-    int updatePassword(@Param("userAuthId") Long userAuthId, @Param("newPassword") String newPassword);
+    @Query("UPDATE UserAuthEntity u SET u.passwordHash = :newPassword WHERE u.userAuthId = :userAuthId")
+    int updatePassword(Long userAuthId, String newPassword);
+
 }

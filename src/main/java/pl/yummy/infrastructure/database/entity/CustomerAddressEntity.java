@@ -37,6 +37,6 @@ public class CustomerAddressEntity {
     private Boolean isDefault;
 
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer_address")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customerAddress")
     private Set<OrdersEntity> orders;
 }

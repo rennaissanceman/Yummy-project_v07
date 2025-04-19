@@ -29,12 +29,14 @@ public class AvailableDeliveryAreaEntity {
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "availableDeliveryArea")
     private Set<CustomerAddressEntity> customerAddresses;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "availableDeliveryArea")
     private Set<OrdersEntity> orders;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "available_delivery_area")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "availableDeliveryArea")
     private Set<DeliveryEntity> deliveries;
+
+
 }

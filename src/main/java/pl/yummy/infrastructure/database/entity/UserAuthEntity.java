@@ -40,16 +40,15 @@ public class UserAuthEntity {
 
     @Column(name = "updated_at")
     private OffsetDateTime updatedAt;
-    
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user_auth", cascade = CascadeType.ALL)
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "userAuth", cascade = CascadeType.ALL)
     private OwnerEntity owner;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user_auth", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "userAuth", cascade = CascadeType.ALL)
     private CustomerEntity customer;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user_auth", cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "userAuth", cascade = CascadeType.ALL)
     private CourierEntity courier;
-
 
 }

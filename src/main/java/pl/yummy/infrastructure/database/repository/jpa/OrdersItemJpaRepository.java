@@ -12,14 +12,22 @@ import java.util.List;
 @Repository
 public interface OrdersItemJpaRepository extends JpaRepository<OrdersItemEntity, Long> {
 
-    List<OrdersItemEntity> findByOrderId(Long ordersId);
-    List<OrdersItemEntity> findByMenuItemId(Long menuItemId);
+    List<OrdersItemEntity> findByMenuItem_MenuItemId(Long menuItemId);
 
-    @Query("SELECT o FROM OrdersItemEntity o WHERE o.price BETWEEN :minPrice AND :maxPrice")
-    List<OrdersItemEntity> findByPriceBetween(@Param("minPrice") BigDecimal minPrice, @Param("maxPrice") BigDecimal maxPrice);
 
-    long countByOrderId(Long ordersId);
+    @Query("SELECT o FROM OrdersItemEntity o WHERE o.unitPrice BETWEEN :minPrice AND :maxPrice")
+    List<OrdersItemEntity> findByUnitPriceBetween(@Param("minPrice") BigDecimal minPrice, @Param("maxPrice") BigDecimal maxPrice);
 
-    @Query("SELECT SUM(o.price) FROM OrdersItemEntity o WHERE o.order.id = :ordersId")
+
+    List<OrdersItemEntity> findByOrders_OrdersId(Long ordersId);
+
+    @Query("""
+        SELECT SUM(item.unitPrice * item.quantity)
+        FROM OrdersItemEntity item
+        WHERE item.orders.ordersId = :ordersId
+    """)
     BigDecimal calculateTotalPriceByOrderId(@Param("ordersId") Long ordersId);
+
+    long countByOrders_OrdersId(Long ordersId);
+
 }

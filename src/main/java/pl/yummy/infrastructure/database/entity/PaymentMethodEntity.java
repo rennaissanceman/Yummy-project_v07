@@ -42,7 +42,7 @@ public class PaymentMethodEntity {
     private OffsetDateTime updatedAt;
 
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment_method")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "paymentMethod")
     private PaymentEntity payment;
 
     // Dodana metoda getMethod() zwracająca paymentMethodName,

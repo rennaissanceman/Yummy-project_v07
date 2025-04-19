@@ -12,7 +12,7 @@ CREATE TABLE feedback (
             REFERENCES courier(courier_id) ON DELETE CASCADE,
     CONSTRAINT fk_feedback_orders
         FOREIGN KEY (orders_id)
-            REFERENCES orders(orders_id) ON DELETE CASCADE
+            REFERENCES orders(orders_id) ON DELETE CASCADE,
     CONSTRAINT fk_feedback_restaurant
         FOREIGN KEY (restaurant_id)
             REFERENCES restaurant(restaurant_id) ON DELETE CASCADE
